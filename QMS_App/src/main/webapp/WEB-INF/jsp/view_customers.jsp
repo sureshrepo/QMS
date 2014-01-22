@@ -7,6 +7,37 @@
 	<form name="grid"  action="" method="POST">
     	<table cellpadding="0" cellspacing="0" border="0" width="98%" class="margin_table">
       		<tr>
+      		<td>
+      		 <div>
+  <ul class="horizmenu">
+						
+							<li style=" float:left;margin-right:8px;text-transform:uppercase;">
+								<a href="addcustomer" class="<c:choose><c:when test="${true}">select</c:when><c:otherwise></c:otherwise></c:choose>">
+									<span>Add Customers</span>
+								</a>
+							</li>
+						
+				           <li style=" float:left;margin-right:8px;text-transform:uppercase;">
+				            	<a href="viewcustomers" class="<c:choose><c:when test="${true}">select</c:when><c:otherwise></c:otherwise></c:choose>" rel="ddsubmenu1">
+				            		<span>View Customers</span>
+				            	</a>
+				            </li>
+				            <li style=" float:left;margin-right:8px;text-transform:uppercase;">
+				            	<a href="addfeedback" class="<c:choose><c:when test="${true}">select</c:when><c:otherwise></c:otherwise></c:choose>" rel="ddsubmenu1">
+				            		<span>Add feedback</span>
+				            	</a>
+				            </li>
+				            <li style=" float:left;margin-right:8px;text-transform:uppercase;">
+				            	<a href="viewfeedback" class="<c:choose><c:when test="${true}">select</c:when><c:otherwise></c:otherwise></c:choose>" rel="ddsubmenu1">
+				            		<span>View feedback</span>
+				            	</a>
+				            </li>
+				            </ul>
+  </div>
+      		</td>
+      		</tr>
+      		
+      		<tr>
 				<td valign="top" align="left" style="padding:5px 0 10px 0;">
 					<div class="del_div">
 						<p><label style="padding: 0pt 20px 0pt 0pt;"><input type="submit" name="delete" value="" class="icon1" onclick="form.action='?do=deleteparticipant'" /></label></p>
@@ -61,9 +92,9 @@
 											<td valign="top" align="left" width="15%">${customers.fax}</td>
 											<td valign="top" align="left" width="15%">${customers.email_address}</td>
 											<td valign="top" align="left" width="15%">
-											<a href="editcustomer?cid=<c:out value="${customers.customer_id}"/>">Edit</a>
-											<a href="deletecustomer?cid=<c:out value="${customers.customer_id}"/>">Delete</a>
 											
+											<a href="#" title="" ><img src="resources/images/icons/icon_edit.png" alt="Edit" /></a><a href="<c:out value="editcustomer?cid=${customers.customer_id}"/>" style="padding-right:10px;">Edit</a>
+											<a href="#" title=""><img src="resources/images/icons/icon_delete.png" alt="Delete" /></a><a href="<c:out value="deletecustomer?cid=${customers.customer_id}"/>" onclick="return confirmation()">Remove</a>
 											</td>
 										</tr>
 							    	</c:forEach>

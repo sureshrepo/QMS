@@ -18,22 +18,29 @@ import java.util.logging.FileHandler;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.apache.http.HttpRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import qms.dao.CustomerFeedbackDAO;
 import qms.model.CustomerFeedback;
 import qms.forms.CustomerFeedbackForm;
+import qms.forms.MaintenanceForm;
 import qms.dao.FileHandlingDAO;
 
 @Controller
+@SessionAttributes({"feedback"})
 public class CustomerFeedbackController
 {
 	@Autowired
@@ -43,9 +50,10 @@ public class CustomerFeedbackController
 	FileHandlingDAO fileHandlingDAO;
 	
 	@RequestMapping(value={"/addfeedback"}, method = RequestMethod.GET)
-	public String add_customerfeedback(ModelMap model, Principal principal ) {
+	public String add_customerfeedback(HttpSession session, ModelMap model, Principal principal ) {
 		
 		model.addAttribute("status","false");
+		session.removeAttribute("feedback");
 		return "add_customerfeedback";
 	}
 	
@@ -108,7 +116,7 @@ public class CustomerFeedbackController
 	}
 	
 	@RequestMapping(value={"/insertfeedback"}, method = RequestMethod.POST)
-	public String insert_customerfeedback(HttpServletRequest request,ModelMap model, Principal principal,CustomerFeedback customerFeedback ) throws IOException {
+	public String insert_customerfeedback(HttpSession session,HttpServletRequest request,ModelMap model, Principal principal,@ModelAttribute("CustomerFeedback") @Valid CustomerFeedback customerFeedback,BindingResult result ) throws IOException {
 		System.err.println("-------------------------------------------");
 		byte[] buffer=null;// = new byte[10000];
 		try {
@@ -159,6 +167,15 @@ public class CustomerFeedbackController
 		} catch (Exception e) {
 			System.out.println(e.toString());
 			e.printStackTrace();
+		}
+		session.setAttribute("feedback",customerFeedback);
+		if (result.hasErrors())
+		{
+			CustomerFeedbackForm customerFeedbackForm=new CustomerFeedbackForm();
+			customerFeedbackForm.setCustomerFeedbacks(customerFeedbackDAO.getCustomersfeedbacks());
+			model.addAttribute("customerFeedbackForm",customerFeedbackForm);	
+			model.addAttribute("Success","true");
+	        return "add_customerfeedback";
 		}
 		
 		CustomerFeedbackForm customerFeedbackForm=new CustomerFeedbackForm();

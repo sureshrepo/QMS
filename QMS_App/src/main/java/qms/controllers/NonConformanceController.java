@@ -1,6 +1,12 @@
 package qms.controllers;
 
 import java.security.Principal;
+
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
+
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -11,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 
 import qms.dao.NonConformanceDAO;
+import qms.forms.MaintenanceForm;
 import qms.forms.NonConformanceForm;
 import qms.forms.ParticipantsDetailsForm;
 import qms.model.*;
@@ -19,7 +26,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Controller
-@SessionAttributes
+@SessionAttributes({"nonconformance"})
 public class NonConformanceController {
 	@Autowired
 	NonConformanceDAO nonConformanceDAO;
@@ -28,6 +35,7 @@ public class NonConformanceController {
 	
 	@RequestMapping(value = { "/view_nonconformance" }, method = RequestMethod.GET)
 	public String showNonconformance(ModelMap model, Principal principal) {
+		model.addAttribute("success","false");
 		NonConformanceForm nonConformanceForm = new NonConformanceForm();
 		nonConformanceForm.setNonconformance(nonConformanceDAO.get_nonconformance());
 		model.addAttribute("nonConformanceForm", nonConformanceForm);
@@ -35,15 +43,28 @@ public class NonConformanceController {
 	}
 
 	@RequestMapping(value = { "/add_nonconformance" }, method = RequestMethod.GET)
-	public String addNonconformance_get(ModelMap model, Principal principal) {
+	public String addNonconformance_get(HttpSession session,ModelMap model, Principal principal) {
 		model.addAttribute("id", nonConformanceDAO.get_maxid());
+		session.removeAttribute("nonconformance");
 		return "add_nonconformance";
 	}
 
 	@RequestMapping(value = "/add_nonconformance", method = RequestMethod.POST)
-	public String addNonconformance_post(NonConformance nonConformance) {
-
+	public String addNonconformance_post(HttpSession session,@ModelAttribute("Nonconformance") @Valid NonConformance nonConformance,BindingResult result, ModelMap model) {
+		session.setAttribute("nonconformance",nonConformance);
+         if (result.hasErrors())
+			{
+			
+				NonConformanceForm nonConformanceForm=new NonConformanceForm();
+				nonConformanceForm.setNonconformance(nonConformanceDAO.get_nonconformance());
+			    model.addAttribute("nonConformanceForm",nonConformanceForm);
+				model.addAttribute("Success","true");
+		        return "add_nonconformance";
+			}
 		nonConformanceDAO.insert_nonconformance(nonConformance);
+		NonConformanceForm nonConformanceForm=new NonConformanceForm();
+		nonConformanceForm.setNonconformance(nonConformanceDAO.get_nonconformance());
+	    model.addAttribute("nonConformanceForm",nonConformanceForm);
 		return "/view_nonconformance";
 	}
 

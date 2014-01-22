@@ -1,26 +1,41 @@
 package qms.model;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class Employee
 {
 	private String id;
+	@NotEmpty
 	private String name;
+	@NotEmpty
 	private String job_title;
+	@NotEmpty
 	private String date_hired;
+	@NotEmpty
 	private String attachments;
+	@NotEmpty
 	private String list_of_functions_needes;
+	@NotEmpty
 	private String documented_in;
-	private String qualified_in;
-    private String type_of_training;
-    private String trainer;
-    private String training_due_date;
-    private String training_completion_date;
-    private String training_effectiveness_review_due_date;
-    private String training_effectiveness_notes;
+	@NotEmpty
+	private String qualified_by;
+	@NotEmpty
+	private String type_of_training;
+	@NotEmpty
+	private String trainer;
+	@NotEmpty
+	private String training_due_date;
+	@NotEmpty
+	private String training_completion_date;
+	@NotEmpty
+	private String training_effectiveness_review_due_date;
+	@NotEmpty
+	private String training_effectiveness_notes;
     
 	public Employee(String id, String name, String job_title,
 			String date_hired, String attachments,
 			String list_of_functions_needes, String documented_in,
-			String qualified_in, String type_of_training, String trainer,
+			String qualified_by, String type_of_training, String trainer,
 			String training_due_date, String training_completion_date,
 			String training_effectiveness_review_due_date,
 			String training_effectiveness_notes) {
@@ -32,7 +47,7 @@ public class Employee
 		this.attachments = attachments;
 		this.list_of_functions_needes = list_of_functions_needes;
 		this.documented_in = documented_in;
-		this.qualified_in = qualified_in;
+		this.qualified_by = qualified_by;
 		this.type_of_training = type_of_training;
 		this.trainer = trainer;
 		this.training_due_date = training_due_date;
@@ -86,11 +101,11 @@ public class Employee
 	public void setDocumented_in(String documented_in) {
 		this.documented_in = documented_in;
 	}
-	public String getQualified_in() {
-		return qualified_in;
+	public String getQualified_by() {
+		return qualified_by;
 	}
-	public void setQualified_in(String qualified_in) {
-		this.qualified_in = qualified_in;
+	public void setQualified_by(String qualified_in) {
+		this.qualified_by = qualified_by;
 	}
 	public String getType_of_training() {
 		return type_of_training;

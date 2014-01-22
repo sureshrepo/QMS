@@ -7,6 +7,25 @@
 	<form name="grid"  action="" method="POST">
     	<table cellpadding="0" cellspacing="0" border="0" width="98%" class="margin_table">
       		<tr>
+      		<td>
+      		 <div>
+  <ul class="horizmenu">
+						
+							<li style=" float:left;margin-right:8px;text-transform:uppercase;">
+								<a href="addemployee" class="<c:choose><c:when test="${true}">select</c:when><c:otherwise></c:otherwise></c:choose>">
+									<span>Add Employees</span>
+								</a>
+							</li>
+						
+				           <li style=" float:left;margin-right:8px;text-transform:uppercase;">
+				            	<a href="viewemployees" class="<c:choose><c:when test="${true}">select</c:when><c:otherwise></c:otherwise></c:choose>" rel="ddsubmenu1">
+				            		<span>View Employees</span>
+				            	</a>
+				            </li>
+  </div>
+      		</td>
+      		</tr>
+      		<tr>
 				<td valign="top" align="left" style="padding:5px 0 10px 0;">
 					<div class="del_div">
 						<p><label style="padding: 0pt 20px 0pt 0pt;"><input type="submit" name="delete" value="" class="icon1" onclick="form.action='?do=deleteparticipant'" /></label></p>
@@ -36,12 +55,12 @@
 				        
 				        
 							<tr class="title">
-								<td valign="center" align="left" width="5%"><input type="checkbox" onclick="selectall(this.form)" value="" name="checkall"></td>
-         						<td valign="top" align="left" width="10%">Employee&nbsp;ID</td>
+								<td valign="top" align="left" width="10%">Employee&nbsp;ID</td>
 					         	<td valign="top" align="left" width="15%">Employee Name</td>
 					         	<td valign="top" align="left" width="10%">Job Title</td>
 								<td valign="top" align="left" width="10%">Date Hired</td>
           						<td valign="top" align="left" width="15%">Attachments</td>
+          						<td valign="top" align="left" width="15%">Actions</td>
           					</tr>
 						
 						
@@ -59,8 +78,11 @@
 											<td valign="top" align="left" width="10%">${employees.date_hired}</td>
 											<td valign="top" align="left" width="15%">${employees.attachments}</td>
 												<td valign="top" align="left" width="15%">
-											<a href="editemployee?empid=<c:out value="${employees.id}"/>">Edit</a>
-											<a href="deleteemployee?empid=<c:out value="${employees.id}"/>">Delete</a>
+												
+												
+											<a href="#" title="" ><img src="resources/images/icons/icon_edit.png" alt="Edit" /></a><a href="<c:out value="editemployee?empid=${employees.id}"/>" style="padding-right:10px;">Edit</a>
+											<a href="#" title=""><img src="resources/images/icons/icon_delete.png" alt="Delete" /></a><a href="<c:out value="deleteemployee?empid=${employees.id}"/>" onclick="return confirmation()">Remove</a>
+											
 											
 											</td>
 										</tr>

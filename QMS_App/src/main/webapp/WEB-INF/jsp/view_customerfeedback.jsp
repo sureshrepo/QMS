@@ -5,7 +5,37 @@
 	<form name="grid" onSubmit="return validate(this)" action="" method="POST">
     	<table cellpadding="0" cellspacing="0" border="0" width="98%" class="margin_table">
       		<tr>
-				<td valign="top" align="left" style="padding:5px 0 10px 0;">
+      		<td>
+      			 <div>
+  <ul class="horizmenu">
+						
+							<li style=" float:left;margin-right:8px;text-transform:uppercase;">
+								<a href="addcustomer" class="<c:choose><c:when test="${true}">select</c:when><c:otherwise></c:otherwise></c:choose>">
+									<span>Add Customers</span>
+								</a>
+							</li>
+						
+				           <li style=" float:left;margin-right:8px;text-transform:uppercase;">
+				            	<a href="viewcustomers" class="<c:choose><c:when test="${true}">select</c:when><c:otherwise></c:otherwise></c:choose>" rel="ddsubmenu1">
+				            		<span>View Customers</span>
+				            	</a>
+				            </li>
+				            <li style=" float:left;margin-right:8px;text-transform:uppercase;">
+				            	<a href="addfeedback" class="<c:choose><c:when test="${true}">select</c:when><c:otherwise></c:otherwise></c:choose>" rel="ddsubmenu1">
+				            		<span>Add feedback</span>
+				            	</a>
+				            </li>
+				            <li style=" float:left;margin-right:8px;text-transform:uppercase;">
+				            	<a href="viewfeedback" class="<c:choose><c:when test="${true}">select</c:when><c:otherwise></c:otherwise></c:choose>" rel="ddsubmenu1">
+				            		<span>View feedback</span>
+				            	</a>
+				            </li>
+				            </ul>
+  </div>
+      		</td>
+      		</tr>
+      		
+      		<tr>
 					<div class="del_div">
 						<p><label style="padding: 0pt 20px 0pt 0pt;"><input type="submit" name="delete" value="" class="icon1" onclick="form.action='?do=deleteparticipant'" /></label></p>
 	          		</div>
@@ -34,7 +64,7 @@
 				        
 				        
 							<tr class="title">
-								<td valign="center" align="left" width="5%"><input type="checkbox" onclick="selectall(this.form)" value="" name="checkall"></td>
+								<!-- <td valign="center" align="left" width="5%"><input type="checkbox" onclick="selectall(this.form)" value="" name="checkall"></td> -->
          						<td valign="top" align="left" width="15%">Date of Feedback</td>
 					         	<td valign="top" align="left" width="15%">Type of Feedback</td>
 					         	<td valign="top" align="left" width="20%">Feedback recorded by</td>
@@ -52,15 +82,16 @@
 							       			i=2;
 							       			else
 							       			i=1;%>
-							       		<tr class="row<%=i%>" onmouseover="mouse_event(this,"row_hover");" onmouseout="mouse_event(this,"row1");">
+							       		<%-- <tr class="row<%=i%>" onmouseover="mouse_event(this,"row_hover");" onmouseout="mouse_event(this,"row1");"> --%>
 								           	<td valign="top" align="left"  width="10%">${customerFeedbacks.date_of_feedback}</td>
 											<td valign="top" align="left" width="15%">${customerFeedbacks.type_of_feedback}</td>
 											<td valign="top" align="left" width="10%">${customerFeedbacks.feedback_recorded_by}</td>
 											<td valign="top" align="left" width="10%"><a href="download_attachment?fid=<c:out value="${customerFeedbacks.feedback_id}"/>">Download</a></td>
 											<td valign="top" align="left" width="15%">${customerFeedbacks.attachments}</td>
 									    	<td valign="top" align="left" width="15%">
-											<a href="editfeedback?fid=<c:out value="${customerFeedbacks.feedback_id}"/>">Edit</a>
-											<a href="deletefeedback?fid=<c:out value="${customerFeedbacks.feedback_id}"/>">Delete</a>
+											
+											<a href="#" title="" ><img src="resources/images/icons/icon_edit.png" alt="Edit" /></a><a href="<c:out value="editfeedback?fid=${customerFeedbacks.feedback_id}"/>" style="padding-right:10px;">Edit</a>
+											<a href="#" title=""><img src="resources/images/icons/icon_delete.png" alt="Delete" /></a><a href="<c:out value="deletefeedbackr?fid=${customersFeedbacks.feedback_id}"/>" onclick="return confirmation()">Remove</a>
 											
 											</td>
 										</tr>

@@ -107,8 +107,9 @@
 					</tr>
 				</table>
 			</div>
+			
 			<div class="clear"></div>
-			<div id="ddtopmenubar">
+			 <div id="ddtopmenubar">
 				<div class="menu_container">
 					<div class="menu_l"></div>
 					<div class="menu_c">
@@ -119,51 +120,88 @@
 		$rec=$obj->records[0]['previlages'];
 		$previ=explode(",",$rec);
 	<AJDF:output>/php</AJDF:output>	 Suresh-->
-						<ul class="menu">
-							<li>
+						<!-- <ul class="menu"> -->
+						<div>
+						  <ul class="menu">
+							<li >
+							
 								<a href="welcome" class="<c:choose><c:when test="${true}">select</c:when><c:otherwise></c:otherwise></c:choose>">
 									<span><img src="<c:url value="/resources/images/icon_01.png" />" alt="" style="padding:5px 5px 0 0;" />Dashboard</span>
 								</a>
 							</li>
-				            <li>
-				            	<a href="#" class="<c:choose><c:when test="${true}">select</c:when><c:otherwise></c:otherwise></c:choose>" rel="ddsubmenu1">
-				            		<span><img src="<c:url value="/resources/images/email.png" />" alt="" style="padding:5px 5px 0 0;" />Stream</span>
+							<hr width="90%"/>
+				            <li >
+				            	<a href="add_maintenance" class="<c:choose><c:when test="${true}">select</c:when><c:otherwise></c:otherwise></c:choose>">
+				            		<span><img src="<c:url value="/resources/images/email.png" />" alt="" style="padding:5px 5px 0 0;" />Maintenance & Calibration</span>
 				            	</a>
 				            </li>
+				            <hr width="90%"/>
 				            <li>
+				            	<a href="add_nonconformance" class="<c:choose><c:when test="${true}">select</c:when><c:otherwise></c:otherwise></c:choose>">
+				            		<span><img src="<c:url value="/resources/images/icon_03.png" />" alt="" style="padding:5px 5px 0 0;" />Non Conformance</span>
+				            	</a>
+				            </li>
+				            <hr width="90%"/>
+				            <li>
+				            	<a href="addcustomer" class="<c:choose><c:when test="${true}">select</c:when><c:otherwise></c:otherwise></c:choose>">
+				            		<span><img src="<c:url value="/resources/images/icon_06.png" />" alt="" style="padding:5px 5px 0 0;" />Customers</span>
+				            	</a>
+				            </li>
+				            <hr width="90%"/>
+				             <li>
+				            	<a href="addemployee" class="<c:choose><c:when test="${true}">select</c:when><c:otherwise></c:otherwise></c:choose>">
+				            		<span><img src="<c:url value="/resources/images/icon_06.png" />" alt="" style="padding:5px 5px 0 0;" />Employees</span>
+				            	</a>
+				            </li>
+				            <hr width="90%"/>
+				            <li>
+				            	<a href="adddocument" class="<c:choose><c:when test="${true}">select</c:when><c:otherwise></c:otherwise></c:choose>">
+				            		<span><img src="<c:url value="/resources/images/icon_07.png" />" alt="" style="padding:5px 5px 0 0;" />Document Control</span>
+				            	</a>
+				            </li>
+				            
+						</ul>  
+						</div>
+						<div>
+						
+						
+				            
+				          <%-- <li style=" float:left;margin-right:8px;text-transform:uppercase;">
 				            	<a href="#" class="<c:choose><c:when test="${true}">select</c:when><c:otherwise></c:otherwise></c:choose>" rel="ddsubmenu2">
 				            		<span><img src="<c:url value="/resources/images/icon_03.png" />" alt="" style="padding:5px 5px 0 0;" />Non Conformance</span>
 				            	</a>
 				            </li>
-				            <li>
+				            
+				           <li style=" float:left;margin-right:8px;text-transform:uppercase;">
 				            	<a href="#" class="<c:choose><c:when test="${true}">select</c:when><c:otherwise></c:otherwise></c:choose>" rel="ddsubmenu3">
 				            		<span><img src="<c:url value="/resources/images/icon_06.png" />" alt="" style="padding:5px 5px 0 0;" />Customers</span>
 				            	</a>
 				            </li>
-				             <li>
+				            
+				             <li style=" float:left;margin-right:8px;text-transform:uppercase;">
 				            	<a href="#" class="<c:choose><c:when test="${true}">select</c:when><c:otherwise></c:otherwise></c:choose>" rel="ddsubmenu5">
 				            		<span><img src="<c:url value="/resources/images/icon_06.png" />" alt="" style="padding:5px 5px 0 0;" />Employees</span>
 				            	</a>
 				            </li>
-				            <li>
+				            
+				            <li style=" float:left;margin-right:8px;text-transform:uppercase;">
 				            	<a href="#" class="<c:choose><c:when test="${true}">select</c:when><c:otherwise></c:otherwise></c:choose>" rel="ddsubmenu4">
 				            		<span><img src="<c:url value="/resources/images/icon_07.png" />" alt="" style="padding:5px 5px 0 0;" />Settings</span>
 				            	</a>
-				            </li>
+				            </li> --%>
 						</ul>
+						</div>
 						<div class="clear"></div>
 						<script type="text/javascript">
 							ddlevelsmenu.setup("ddtopmenubar", "topbar")
 						</script>
 						<ul id="ddsubmenu1" class="ddsubmenustyle">
-							<li><a href="createstream">Create Message Stream</a></li>
-							<li><a href="viewstream">View Stream</a></li>
-							<li><a href="broadcast">Send Stream</a></li>
-            				<li><a href="viewreports">Report</a></li>
-          				</ul>
+							<li ><a href="add_maintenance">Add Maintenance</a></li>
+							<li ><a href="maintenance_list">View Maintenance</a></li>
+					</ul>
 						<ul id="ddsubmenu2" class="ddsubmenustyle">
-							<li><a href="add_nonconformance">Add NonConformance</a></li>
-				            <li><a href="view_nonconformance">View Details</a></li>
+							<li ><a href="add_nonconformance">Add NonConformance</a></li>
+				            <li ><a href="view_nonconformance">View Details</a></li>
 				            <li><a href="showaddparticipantgroups">Add Participant Groups</a></li>
 							<li><a href="viewparticipantgroups">View Participant Groups</a></li>
 						</ul>

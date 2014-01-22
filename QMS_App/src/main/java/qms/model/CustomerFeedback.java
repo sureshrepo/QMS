@@ -1,14 +1,18 @@
 package qms.model;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 public class CustomerFeedback
 {
 	private String feedback_id;
 	
+	@NotEmpty
 	private String date_of_feedback;
 	private String type_of_feedback;
 	private String feedback_recorded_by;
+	
+	@NotEmpty
 	private String feedback_details;
 	private CommonsMultipartFile attachments;
 	private String attachment_name;	

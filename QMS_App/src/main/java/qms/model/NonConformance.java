@@ -1,22 +1,36 @@
 package qms.model;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class NonConformance
 {
 private String id;
 private String source_of_nonconformance;
+
+@NotEmpty
 private String external_id;
 private String type_of_nonconformance;
+@NotEmpty
 private String product_id;
+@NotEmpty
 private String quantity_suspect;
+@NotEmpty
 private String nature_of_nonconformance;
+@NotEmpty
 private String date_found;
+@NotEmpty
 private String reported_by;
+@NotEmpty
 private String temporary_action;
 private String corrective_action_required;
 private String disposition_required;
+@NotEmpty
 private String disposition;
+@NotEmpty
 private String disposition_complete_date;
+@NotEmpty
 private String name_of_disposition_responsibility;
+@NotEmpty
 private String cost_of_nonconformance;
 public NonConformance() {
 	super();

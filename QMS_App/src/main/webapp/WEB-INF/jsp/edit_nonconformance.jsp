@@ -5,6 +5,27 @@
 <form action="update_nonconformance" method="POST" name="update" id="update">
 
 <table cellpadding="0" cellspacing="0" border="0" width="98%" class="margin_table">
+     <tr>
+     <td>
+      <div>
+  <ul class="horizmenu">
+						
+							<li style=" float:left;margin-right:8px;text-transform:uppercase;">
+								<a href="add_nonconformance" class="<c:choose><c:when test="${true}">select</c:when><c:otherwise></c:otherwise></c:choose>">
+									<span>Add nonconformance</span>
+								</a>
+							</li>
+						
+				           <li style=" float:left;margin-right:8px;text-transform:uppercase;">
+				            	<a href="view_nonconformance" class="<c:choose><c:when test="${true}">select</c:when><c:otherwise></c:otherwise></c:choose>" rel="ddsubmenu1">
+				            		<span>View nonconformance</span>
+				            	</a>
+				            </li>
+				            </ul>
+  </div>
+     </td>
+     </tr>
+     
       <tr>
        <!--  <td valign="top" align="left" style="padding:5px 0 10px 0;">&nbsp;
 		<div class="status success" style="display: none;">

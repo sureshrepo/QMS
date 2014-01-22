@@ -2,19 +2,28 @@ package qms.controllers;
 
 import java.security.Principal;
 
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import qms.dao.CustomersDAO;
+import qms.forms.MaintenanceForm;
 import qms.forms.ParticipantsDetailsForm;
 import qms.model.Customers;
+import qms.model.Maintenance;
 import qms.forms.CustomersForm;
 
 @Controller
+@SessionAttributes({"customer"})
 public class CustomersController
 {
 	@Autowired
@@ -31,18 +40,32 @@ public class CustomersController
 	
 	
 	@RequestMapping(value={"/addcustomer"}, method = RequestMethod.GET)
-	public String add_customer(ModelMap model, Principal principal )
+	public String add_customer(HttpSession session,ModelMap model, Principal principal )
 	{
-     model.addAttribute("id",customersDAO.getMax_customerID());		
+     model.addAttribute("id",customersDAO.getMax_customerID());	
+     session.removeAttribute("customer");
 	return "add_customers";
  	}
 	
 
 	@RequestMapping(value={"/addcustomer"}, method = RequestMethod.POST)
-	public String insert_customer(ModelMap model, Principal principal,Customers customers)
+	public String insert_customer(HttpSession session,@ModelAttribute("Customers") @Valid Customers customers,BindingResult result,ModelMap model)
 	{
+		session.setAttribute("customer",customers);
+			if (result.hasErrors())
+			{
+				CustomersForm customersForm=new CustomersForm();
+				customersForm.setCustomers(customersDAO.getCustomers());
+				model.addAttribute("customersForm",customersForm);
+				model.addAttribute("Success","true");
+				model.addAttribute("id",customersDAO.getMax_customerID());	
+		        return "add_customers";
+			}
     // model.addAttribute("id",customersDAO.getMax_customerID());
     customersDAO.insert_customer(customers);
+    CustomersForm customersForm=new CustomersForm();
+	customersForm.setCustomers(customersDAO.getCustomers());
+	model.addAttribute("customersForm",customersForm);
 	return "add_customers";
  	}
 	

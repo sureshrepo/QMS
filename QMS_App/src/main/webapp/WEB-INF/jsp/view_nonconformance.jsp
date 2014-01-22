@@ -4,7 +4,25 @@
 	<form action="?do=viewparticipants" name="dashboard" method="POST">
 		<table cellpadding="0" cellspacing="0" border="0" width="98%"
 			class="margin_table">
-
+<tr>
+<td>
+ <div>
+  <ul class="horizmenu">
+						
+							<li style=" float:left;margin-right:8px;text-transform:uppercase;">
+								<a href="add_nonconformance" class="<c:choose><c:when test="${true}">select</c:when><c:otherwise></c:otherwise></c:choose>">
+									<span>Add nonconformance</span>
+								</a>
+							</li>
+						
+				           <li style=" float:left;margin-right:8px;text-transform:uppercase;">
+				            	<a href="view_nonconformance" class="<c:choose><c:when test="${true}">select</c:when><c:otherwise></c:otherwise></c:choose>" rel="ddsubmenu1">
+				            		<span>View nonconformance</span>
+				            	</a>
+				            </li>
+  </div>
+</td>
+</tr>
 			<tr>
 				<td valign="top" align="left"><div>
 						<div class="headings altheading">
@@ -17,9 +35,8 @@
 									<td valign="top" align="left" width="20%">Source of NonConformance</td>
 									<td valign="top" align="left" width="10%">External ID</td>
 									<td valign="top" align="left" width="20%">Type of Non Conformance</td>
-
-									<td valign="top" align="left" width="15%">Product Id</td>
-									<td valign="top" align="left" width="15%">Quantity Suspect</td>
+									<td valign="top" align="left" width="10%">Product Id</td>
+									<td valign="top" align="left" width="10%">Quantity Suspect</td>
 									<td valign="top" align="left" width="25%">Action</td>
 									
 									</tr>
@@ -37,12 +54,15 @@
 											<td valign="top" align="left" width="15%">${nonconformance.source_of_nonconformance}</td>
 											<td valign="top" align="left" width="10%">${nonconformance.external_id}</td>
 											<td valign="top" align="left" width="10%">${nonconformance.type_of_nonconformance}</td>
-											<td valign="top" align="left" width="15%">${nonconformance.product_id}</td>
+											<td valign="top" align="left" width="10%">${nonconformance.product_id}</td>
 											<td valign="top" align="left" width="15%">${nonconformance.quantity_suspect}</td>
 											<td valign="top" align="left" width="15%">
-											<a href="edit_nonconformance?id=<c:out value="${nonconformance.id}"/>">Edit</a>
-											<a href="delete_nonconformance?id=<c:out value="${nonconformance.id}"/>">Delete</a>
+											<a href="#" title="" ><img src="resources/images/icons/icon_edit.png" alt="Edit" /></a><a href="<c:out value="edit_nonconformance?id=${nonconformance.id}"/>" style="padding-right:10px;">Edit</a>
+											<a href="#" title=""><img src="resources/images/icons/icon_delete.png" alt="Delete" /></a><a href="<c:out value="delete_nonconformance?id=${nonconformance.id }"/>" onclick="return confirmation()">Remove</a>
 											
+											<%-- <a href="edit_nonconformance?id=<c:out value="${nonconformance.id}"/>">Edit</a>
+											<a href="delete_nonconformance?id=<c:out value="${nonconformance.id}"/>">Delete</a>
+											 --%>
 											</td>
 										</tr>
 							    	</c:forEach>

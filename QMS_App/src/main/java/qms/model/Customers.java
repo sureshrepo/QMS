@@ -1,18 +1,31 @@
 package qms.model;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class Customers
 {
 	private String customer_id;
+	@NotEmpty
 	private String customer_name;
+	@NotEmpty
 	private String address;
+	@NotEmpty
 	private String city;
+	@NotEmpty
 	private String state;
+	@NotEmpty
 	private String country;
+	@NotEmpty
 	private String zipcode;
+	@NotEmpty
 	private String website;
+	@NotEmpty
 	private String contact_name;
+	@NotEmpty
 	private String title_of_contact;
+	@NotEmpty
 	private String telephone;
+	
 	
 	public Customers(String customer_id, String customer_name, String address,
 			String city, String state, String country, String zipcode,
@@ -37,7 +50,10 @@ public class Customers
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	@NotEmpty
 	private String fax;
+	@NotEmpty
 	private String email_address;
 	public String getCustomer_id() {
 		return customer_id;
