@@ -4,7 +4,25 @@
 	<form action="?do=viewparticipants" name="dashboard" method="POST">
 		<table cellpadding="0" cellspacing="0" border="0" width="98%"
 			class="margin_table">
-
+<tr>
+<td>
+<div>
+  <ul class="horizmenu">
+						
+							<li style=" float:left;margin-right:8px;text-transform:uppercase;">
+								<a href="add_internalaudits" class="<c:choose><c:when test="${true}">select</c:when><c:otherwise></c:otherwise></c:choose>">
+									<span> Add Internal Audits</span>
+								</a>
+							</li>
+						
+				           <li style=" float:left;margin-right:8px;text-transform:uppercase;">
+				            	<a href="view_internalaudits" class="<c:choose><c:when test="${true}">select</c:when><c:otherwise></c:otherwise></c:choose>" rel="ddsubmenu1">
+				            		<span>View Internal Aidits</span>
+				            	</a>
+				            </li>
+  </div>
+</td>
+</tr>
 			<tr>
 				<td valign="top" align="left"><div>
 						<div class="headings altheading">

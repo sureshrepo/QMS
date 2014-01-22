@@ -132,7 +132,7 @@
 							<hr width="90%"/>
 				            <li >
 				            	<a href="add_maintenance" class="<c:choose><c:when test="${true}">select</c:when><c:otherwise></c:otherwise></c:choose>">
-				            		<span><img src="<c:url value="/resources/images/email.png" />" alt="" style="padding:5px 5px 0 0;" />Maintenance & Calibration</span>
+				            		<span><img src="<c:url value="/resources/images/icon_07.png" />" alt="" style="padding:5px 5px 0 0;" />Maintenance & Calibration</span>
 				            	</a>
 				            </li>
 				            <hr width="90%"/>
@@ -144,19 +144,25 @@
 				            <hr width="90%"/>
 				            <li>
 				            	<a href="addcustomer" class="<c:choose><c:when test="${true}">select</c:when><c:otherwise></c:otherwise></c:choose>">
-				            		<span><img src="<c:url value="/resources/images/icon_06.png" />" alt="" style="padding:5px 5px 0 0;" />Customers</span>
+				            		<span><img src="<c:url value="/resources/images/customer.png" />" alt="" style="padding:5px 5px 0 0;" />Customers</span>
 				            	</a>
 				            </li>
 				            <hr width="90%"/>
 				             <li>
 				            	<a href="addemployee" class="<c:choose><c:when test="${true}">select</c:when><c:otherwise></c:otherwise></c:choose>">
-				            		<span><img src="<c:url value="/resources/images/icon_06.png" />" alt="" style="padding:5px 5px 0 0;" />Employees</span>
+				            		<span><img src="<c:url value="/resources/images/emploee.png" />" alt="" style="padding:5px 5px 0 0;" />Employees</span>
 				            	</a>
 				            </li>
 				            <hr width="90%"/>
 				            <li>
 				            	<a href="adddocument" class="<c:choose><c:when test="${true}">select</c:when><c:otherwise></c:otherwise></c:choose>">
-				            		<span><img src="<c:url value="/resources/images/icon_07.png" />" alt="" style="padding:5px 5px 0 0;" />Document Control</span>
+				            		<span><img src="<c:url value="/resources/images/document.png" />" alt="" style="padding:5px 5px 0 0;" />Document Control</span>
+				            	</a>
+				            </li>
+				            <hr width="90%"/>
+				            <li>
+				            	<a href="addinternalaudits" class="<c:choose><c:when test="${true}">select</c:when><c:otherwise></c:otherwise></c:choose>">
+				            		<span><img src="<c:url value="/resources/images/document.png" />" alt="" style="padding:5px 5px 0 0;" />Internal Audits</span>
 				            	</a>
 				            </li>
 				            
