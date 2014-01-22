@@ -128,7 +128,9 @@ ul.login-list li p {
 	margin:auto;
 }
 #header {
-	height:120px;
+	height:100px;
+	background:#4D4D4D;
+	/* border:solid 2px red; */
 }
 /* New CSS */
 #right_content {
@@ -313,6 +315,8 @@ ul.pagination li.page a:hover {
 .logo {
 	float:left;
 	padding:0 10px;
+	margin:20px;
+	
 }
 .top_link {
 	float:right;
@@ -361,7 +365,7 @@ ul.pagination li.page a:hover {
 	height:800px;
 	overflow:hidden;
 	width:180px;
-	margin-top:65px;
+	margin-top:8px;
 }
 .horizmenu {
     margin:16px 0 0 10px; 
