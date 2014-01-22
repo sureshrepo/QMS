@@ -380,9 +380,8 @@ ul.pagination li.page a:hover {
  */	display:block;
 }
 .select span, .unselect:hover span, .login:hover span {
-	/* background:url(../images/menu-sel-right.gif) 100% 0 no-repeat;
-	 */
-	 background-color:	#4D4D4D;
+	/* background:url(../images/menu-sel-left.gif) 100% 0 no-repeat; */
+	 background-color:	#007CA6;
 	 color:#fff;
 	display:block;
 	line-height:30px;

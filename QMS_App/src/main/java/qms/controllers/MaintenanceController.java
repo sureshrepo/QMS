@@ -28,7 +28,7 @@ import org.slf4j.LoggerFactory;
 
 
 @Controller
-@SessionAttributes({"maintenance"})
+@SessionAttributes({"maintenances"})
 public class MaintenanceController {
 	@Autowired
 	MaintenanceDAO maintenanceDAO;
@@ -37,14 +37,14 @@ public class MaintenanceController {
 	@RequestMapping(value = { "/add_maintenance" }, method = RequestMethod.GET)
 	
 	public String addMaintenance(HttpSession session,ModelMap model, Principal principal) {
-		session.removeAttribute("maintenance");
+		session.removeAttribute("maintenances");
 		return "add_maintenance";
 	}
 	
 	@RequestMapping(value = "/add_maintenance", method = RequestMethod.POST)
 	public String postMaintenance(HttpSession session,@ModelAttribute("Maintenance") @Valid Maintenance maintenance,BindingResult result, ModelMap model) {
 
-		session.setAttribute("maintenance",maintenance);
+		session.setAttribute("maintenances",maintenance);
 			if (result.hasErrors())
 			{
 				MaintenanceForm maintenanceForm= new MaintenanceForm();
@@ -91,12 +91,12 @@ public class MaintenanceController {
 	
 	
 	@RequestMapping(value = "/update_maintenance", method = RequestMethod.POST)
-	public String editmaintenance_post(Maintenance maintenance,ModelMap model) {
+	public String update_maintenance(Maintenance maintenance,ModelMap model) {
 
 	    maintenanceDAO.update_maintenance(maintenance);
-	    MaintenanceForm maintenanceForm= new MaintenanceForm();
+	   /* MaintenanceForm maintenanceForm= new MaintenanceForm();
 		maintenanceForm.setMaintenance(maintenanceDAO.getmaintenance());
-		model.addAttribute("maintenanceForm",maintenanceForm);
+		model.addAttribute("maintenanceForm",maintenanceForm);*/
 	    return "edit_maintenance";
 	}
 	

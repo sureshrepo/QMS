@@ -219,7 +219,9 @@ public class MaintenanceDAO {
 			e1.printStackTrace();
 		}
 		try {
-			String cmd_update = "update tbl_maintenance set equipment_id='"+maintenance.getEquipment_id()+"',date_acquired='"+maintenance.getDate_acquired()+"',equipment_status='"+maintenance.getEquipment_status()+"',frequency_maintenance='"+maintenance.getFrequency_maintenance()+"',calibration='"+maintenance.getCalibration()+"',type_of_maintenance='"+maintenance.getType_of_maintenance()+"',maintenance_frequency='"+maintenance.getMaintenance_frequency()+"',reference='"+maintenance.getReference()+"',instructions='"+maintenance.getInstructions()+"',due_date='"+maintenance.getDue_date()+"',completion_date='"+maintenance.getCompletion_date()+"',completed_by='"+maintenance.getCompleted_by()+"',notes='"+maintenance.getNotes()+"' where auto_equip='"+maintenance.getAuto_equip()+"'";
+			
+			String cmd_update = "update tbl_maintenance set equipment_id='"+maintenance.getEquipment_id()+"',equipment_name='"+maintenance.getEquipment_name()+"',equipment_model='"+maintenance.getEquipment_model()+"',serial_number='"+maintenance.getSerial_number()+"',date_acquired='"+maintenance.getDate_acquired()+"',equipment_status='"+maintenance.getEquipment_status()+"',frequency_maintenance='"+maintenance.getFrequency_maintenance()+"',calibration='"+maintenance.getCalibration()+"',type_of_maintenance='"+maintenance.getType_of_maintenance()+"',maintenance_frequency='"+maintenance.getMaintenance_frequency()+"',reference='"+maintenance.getReference()+"',instructions='"+maintenance.getInstructions()+"',due_date='"+maintenance.getDue_date()+"',completion_date='"+maintenance.getCompletion_date()+"',completed_by='"+maintenance.getCompleted_by()+"',notes='"+maintenance.getNotes()+"' where auto_equip='"+maintenance.getAuto_equip()+"'";
+			
 			status = statement.execute(cmd_update);
 		} catch (Exception e) {
 			System.out.println(e.toString());

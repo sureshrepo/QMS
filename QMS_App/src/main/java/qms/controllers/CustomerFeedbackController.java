@@ -71,12 +71,18 @@ public class CustomerFeedbackController
 	}
 	
 	@RequestMapping(value={"/updatefeedback"}, method = RequestMethod.POST)
-	public String update_customerfeedback(CustomerFeedback customerFeedback,ModelMap model, Principal principal ) {
+	public String update_customerfeedback(CustomerFeedback customerFeedback,ModelMap model, Principal principal,BindingResult result ) {
 		
-		
+		/*if (result.hasErrors())
+		{
+			CustomerFeedbackForm customerFeedbackForm=new CustomerFeedbackForm();
+			customerFeedbackForm.setCustomerFeedbacks(customerFeedbackDAO.getParticular_Customersfeedbacks(fid));
+			model.addAttribute("customerFeedbackForm",customerFeedbackForm);	
+	
+	        return "edit_customerfeedback";
+		}*/
 		customerFeedbackDAO.update_customerfeedback(customerFeedback);
-		model.addAttribute("status","false");
-		return "edit_customerfeedback";
+		return "view_customerfeedback";
 	}
 	
 	@RequestMapping(value={"/deletefeedback"}, method = RequestMethod.GET)

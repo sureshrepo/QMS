@@ -34,7 +34,7 @@
             </div>
             <div class="contentbox">
             <c:choose>
-				<c:when test="${empty employee}">
+				<c:when test="${empty employees}">
               <table cellpadding="0" cellspacing="0" border="0" width="100%">
                 <tr class="row2">
                   <td valign="middle" align="right" class="input_txt" width="30%"><span class="err">*</span><label>Employee ID:</label></td>

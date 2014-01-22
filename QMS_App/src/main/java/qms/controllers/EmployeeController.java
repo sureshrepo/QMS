@@ -24,7 +24,7 @@ import qms.forms.EmployeeForm;
 import qms.forms.MaintenanceForm;
 
 @Controller
-@SessionAttributes({"employee"})
+@SessionAttributes({"employees"})
 public class EmployeeController
 {
 	@Autowired
@@ -34,7 +34,7 @@ public class EmployeeController
 	public String addEmployee(HttpSession session,ModelMap model,Principal principal)
 	{
 		model.addAttribute("id",employeeDAO.getMax_employeeID());
-		session.removeAttribute("employee");
+		session.removeAttribute("employees");
 		return "add_employee";
 	}
 	
@@ -42,7 +42,7 @@ public class EmployeeController
 	public String insertEmployee(HttpSession session, @ModelAttribute("Employee") @Valid Employee employee,BindingResult result, ModelMap model)
 	{
 
-		session.setAttribute("employee",employee);
+		session.setAttribute("employees",employee);
 			if (result.hasErrors())
 			{
 				EmployeeForm employeeForm=new EmployeeForm();

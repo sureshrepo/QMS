@@ -33,6 +33,7 @@
               <c:set value="${maintenanceForm.maintenance[0]}" var="maintenance"> </c:set>
                <tr class="row2">
                   <td valign="middle" align="right" class="input_txt" width="30%"><span class="err">*</span>Equipment Id :</td>
+                  <input type="hidden" class="input_txtbx1" id="inp_id" value="${maintenance.auto_equip}" name="auto_equip" />
                   <td valign="top" align="left" class="input_txt" width="70%"><input type="text" name="equipment_id" class="input_txtbx" id="equipment_id" onmouseover="showTooltip('tooltip_id','inp_id3');" onmouseout="hideTooltip('tooltip_id');" value="${maintenance.equipment_id}" /></br><span class="err"></span></td>
                 </tr>
                  <tr class="row1">
