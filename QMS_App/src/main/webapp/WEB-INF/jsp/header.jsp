@@ -125,7 +125,7 @@
 						  <ul class="menu">
 							<li >
 							
-								<a href="welcome" class="<c:choose><c:when test="${true}">select</c:when><c:otherwise></c:otherwise></c:choose>">
+								<a href="welcome" class="select">
 									<span><img src="<c:url value="/resources/images/icon_01.png" />" alt="" style="padding:5px 5px 0 0;" />Dashboard</span>
 								</a>
 							</li>

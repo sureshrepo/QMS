@@ -221,6 +221,65 @@ public class NonConformanceDAO {
 		return Max_id;
 	}
 
+	
+	public List<NonConformance> find_nonconformance(String nc_id,String type_of_nonconformance,String product_id ) {
+		Connection con = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
+		
+		List<NonConformance> nonConformances = new ArrayList<NonConformance>();
+
+		try {
+			con = dataSource.getConnection();
+			statement = con.createStatement();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		try {
+			String cmd_select = "select * from tbl_nonconformance where id='"+nc_id+"' or type_of_nonconformance='"+type_of_nonconformance+"' or product_id='"+product_id+"'";
+			resultSet = statement.executeQuery(cmd_select);
+			while (resultSet.next()) {
+				System.out.println("came");
+				nonConformances.add(new NonConformance(resultSet
+						.getString("id"), resultSet
+						.getString("source_of_nonconformance"), resultSet
+						.getString("external_id"), resultSet
+						.getString("type_of_nonconformance"), resultSet
+						.getString("product_id"), resultSet
+						.getString("quantity_suspect"), resultSet
+						.getString("nature_of_nonconformance"), resultSet
+						.getString("date_found"), resultSet
+						.getString("reported_by"), resultSet
+						.getString("temporary_action"), resultSet
+						.getString("corrective_action_required"), resultSet
+						.getString("disposition_required"), resultSet
+						.getString("disposition"), resultSet
+						.getString("disposition_complete_date"), resultSet
+						.getString("name_of_disposition_responsibility"),
+						resultSet.getString("cost_of_nonconformance")));
+
+			}
+
+		} catch (Exception e) {
+			System.out.println(e.toString());
+			releaseResultSet(resultSet);
+			releaseStatement(statement);
+			releaseConnection(con);
+		} finally {
+			releaseResultSet(resultSet);
+			releaseStatement(statement);
+			releaseConnection(con);
+		}
+		return nonConformances;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	public List<NonConformance> get_nonconformance() {
 		Connection con = null;
 		Statement statement = null;

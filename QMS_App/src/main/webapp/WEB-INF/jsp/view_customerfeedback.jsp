@@ -82,7 +82,7 @@
 							       			i=2;
 							       			else
 							       			i=1;%>
-							       		<%-- <tr class="row<%=i%>" onmouseover="mouse_event(this,"row_hover");" onmouseout="mouse_event(this,"row1");"> --%>
+							       		 <tr class="row<%=i%>" onmouseover="mouse_event(this,"row_hover");" onmouseout="mouse_event(this,"row1");"> 
 								           	<td valign="top" align="left"  width="10%">${customerFeedbacks.date_of_feedback}</td>
 											<td valign="top" align="left" width="15%">${customerFeedbacks.type_of_feedback}</td>
 											<td valign="top" align="left" width="10%">${customerFeedbacks.feedback_recorded_by}</td>

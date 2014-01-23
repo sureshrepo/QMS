@@ -22,6 +22,11 @@
 				            		<span>View maintenance</span>
 				            	</a>
 				            </li>
+				             <li style=" float:left;margin-right:8px;text-transform:uppercase;">
+				            	<a href="maintenance_list" class="<c:choose><c:when test="${true}">select</c:when><c:otherwise></c:otherwise></c:choose>" rel="ddsubmenu1">
+				            		<span>Reports</span>
+				            	</a>
+				            </li>
   </div>
       		</td>
       		</tr>

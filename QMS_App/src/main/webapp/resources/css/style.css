@@ -383,6 +383,11 @@ ul.pagination li.page a:hover {
 /* 	background:url(../images/menu-sel-left.gif) 0 0 no-repeat;
  */	display:block;
 }
+.select:hover
+{
+	color:red;
+	}
+
 .select span, .unselect:hover span, .login:hover span {
 	/* background:url(../images/menu-sel-left.gif) 100% 0 no-repeat; */
 	 background-color:	#4D4D4D;

@@ -269,7 +269,7 @@
               	</tr>
                 <tr class="row1">
                   <td valign="top" align="center">&nbsp;</td>
-                 <td valign="top" align="left"><input type="submit" value="Add Participant" class="submit_btn1"></td>
+                 <td valign="top" align="left"><input type="submit" class="submit_btn2" value="Add Non Conformance" class="submit_btn1"></td>
                   <!-- <td valign="top" align="left"><input type="submit" class="submit_btn2" value="Add Participant" onclick="update.submit()"></td> -->
                 </tr>
               </table>
