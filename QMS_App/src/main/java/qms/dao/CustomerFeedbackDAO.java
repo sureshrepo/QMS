@@ -1,5 +1,6 @@
 package qms.dao;
 
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,9 +10,7 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
-import qms.model.CustomerFeedback;
-import qms.model.Customers;
-import qms.model.NonConformance;
+import qms.model.*;
 
 public class CustomerFeedbackDAO
 {
@@ -179,7 +178,51 @@ public class CustomerFeedbackDAO
 
 	}
 	
-	
+	public List<CustomerFeedback> getfeedback_report(String type_of_feedback,String from_date,String to_date){
+		Connection con = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
+		try {
+			con = dataSource.getConnection();
+			statement = con.createStatement();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		
+		List<CustomerFeedback> customerFeedbacks = new ArrayList<CustomerFeedback>();
+	    try{
+	    	System.out.println("yes");
+	    	String cmd_sqlString="";
+	    	System.out.println(type_of_feedback);
+	    	if(type_of_feedback.equals("Complaint"))
+	    		cmd_sqlString="select * from tbl_customerfeedback where date_of_feedback BETWEEN '"+from_date+"' AND '"+to_date+"' AND type_of_feedback='Complaint'";
+	    	else
+	    		cmd_sqlString="select * from tbl_customerfeedback where date_of_feedback BETWEEN '"+from_date+"' AND '"+to_date+"' AND type_of_feedback='Suggestion'";
+		    	System.out.println(cmd_sqlString);
+			resultSet = statement.executeQuery(cmd_sqlString);
+			while(resultSet.next()){
+				customerFeedbacks.add(new CustomerFeedback(resultSet.getString("feedback_id"),resultSet.getString("date_of_feedback"), resultSet.getString("type_of_feedback"), resultSet.getString("feedback_recorded_by"), resultSet.getString("feedback_details"), resultSet.getString("attachment_name"),resultSet.getString("attachement_type"),resultSet.getString("attachment_referrence")));
+			}
+	   
+	    
+	    
+	    }
+	    catch(Exception e)
+	    {
+	    	System.out.println(e.toString());
+	    	releaseResultSet(resultSet);
+	    	releaseStatement(statement);
+	    	releaseConnection(con);
+	    }
+	    finally{
+	    	releaseResultSet(resultSet);
+	    	releaseStatement(statement);
+	    	releaseConnection(con);	    	
+	    }
+	    return customerFeedbacks;
+	    
+	    
+	    }
 	
 	
 	
