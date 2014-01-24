@@ -44,7 +44,7 @@
 			<tr>
         		<td valign="top" align="left">
 			        <div class="headings altheading">
-			          <h2>View Participants</h2>
+			          <h2>View Customer Feedbacks</h2>
 			        </div>
 			        <div class="contentbox">
 						<div style="border:#ccc 2px solid; padding:15px; margin-bottom:15px;">

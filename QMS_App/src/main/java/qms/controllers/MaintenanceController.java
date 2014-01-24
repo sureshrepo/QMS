@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.apache.http.HttpRequest;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -99,6 +100,22 @@ public class MaintenanceController {
 		model.addAttribute("maintenanceForm",maintenanceForm);*/
 	    return "edit_maintenance";
 	}
+	
+	@RequestMapping(value = "/maintenance_report", method = RequestMethod.GET)
+	public String view_maintenance_report(Maintenance maintenance,ModelMap model) {
+
+	    return "maintainence_report";
+	}
+	
+	@RequestMapping(value = "/maintanence_report", method = RequestMethod.POST)
+	public String getReport(HttpServletRequest request,ModelMap model) {
+
+		String type=request.getParameter("type_of_report");
+		String no_of_days=request.getParameter("number_of_days");
+		
+	    return "maintainence_report";
+	}
+	
 	
 	@RequestMapping(value = "/delete_maintenance", method = RequestMethod.GET)
 	public String deletemaintenance(@RequestParam("auto_equip") String auto_equip,Maintenance maintenance,ModelMap model) {
