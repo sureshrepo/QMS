@@ -70,10 +70,26 @@ public class CustomersController
  	}
 	
 	@RequestMapping(value={"/updatecustomer"}, method = RequestMethod.POST)
-	public String update_customer(ModelMap model, Principal principal,Customers customers)
+	public String update_customer(ModelMap model, Principal principal,@ModelAttribute("Customers") @Valid Customers customers,BindingResult result)
 	{
+		/*if (result.hasErrors())
+		{
+			
+			System.out.println("output");
+			CustomersForm customersForm=new CustomersForm();
+			customersForm.setCustomers(customersDAO.getCustomers_byid(customers.getCustomer_id()));
+			model.addAttribute("customersForm",customersForm);
+			model.addAttribute("Success","true");
+			model.addAttribute("id",customersDAO.getMax_customerID());	
+	        return "edit_customers";
+		}*/
     // model.addAttribute("id",customersDAO.getMax_customerID());
     customersDAO.update_customer(customers);
+    CustomersForm customersForm=new CustomersForm();
+	customersForm.setCustomers(customersDAO.getCustomers_byid(customers.getCustomer_id()));
+	model.addAttribute("customersForm",customersForm);
+	model.addAttribute("Success","true");
+
 	return "add_customers";
  	}
 	
@@ -81,7 +97,7 @@ public class CustomersController
 	@RequestMapping(value={"/deletecustomer"}, method = RequestMethod.GET)
 	public String delete_customer(@RequestParam("cid") String customer_id,ModelMap model, Principal principal )
 	{
-    
+		
 		customersDAO.delete_customer(customer_id);
 		return "add_customers";
  	}

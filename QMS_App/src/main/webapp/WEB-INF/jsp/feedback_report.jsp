@@ -4,17 +4,72 @@
 <link rel="stylesheet" href="resources/css/jquery-ui.css" type="text/css" />
 <script src="resources/js/jquery.min.js"></script>
 <script src="resources/js/jquery-ui.js"></script>
+<script src="resources/js/jquery-1.4.2.min.js"></script>
  
-  
+<script>
+$(function() {
+	  
+    $(window).load(function(){
+		/* alert("yes1");
+		alert("feedbackdate"+document.getElementById("feedbackdate").value); */
+	 if(document.getElementById("feedbackdate").value=="")
+
+            {  
+			/* alert("yes"); */
+			}
+		else
+			{
+			/* alert("no"); */
+			document.getElementById("reporttable").style.display="block";
+			} 
+	});
+	});
+</script>  
 
 <form method="post" action="feedback_report">
 <table cellpadding="0" cellspacing="0" border="0" width="98%" class="margin_table">
+ <tr>
+ <td>
+ <div>
+  <ul class="horizmenu">
+						
+							<li style=" float:left;margin-right:8px;text-transform:uppercase;">
+								<a href="addcustomer" class="<c:choose><c:when test="${true}">select</c:when><c:otherwise></c:otherwise></c:choose>">
+									<span>Add Customers</span>
+								</a>
+							</li>
+						
+				           <li style=" float:left;margin-right:8px;text-transform:uppercase;">
+				            	<a href="viewcustomers" class="<c:choose><c:when test="${true}">select</c:when><c:otherwise></c:otherwise></c:choose>" rel="ddsubmenu1">
+				            		<span>View Customers</span>
+				            	</a>
+				            </li>
+				            <li style=" float:left;margin-right:8px;text-transform:uppercase;">
+				            	<a href="addfeedback" class="<c:choose><c:when test="${true}">select</c:when><c:otherwise></c:otherwise></c:choose>" rel="ddsubmenu1">
+				            		<span>Add feedback</span>
+				            	</a>
+				            </li>
+				            <li style=" float:left;margin-right:8px;text-transform:uppercase;">
+				            	<a href="viewfeedback" class="<c:choose><c:when test="${true}">select</c:when><c:otherwise></c:otherwise></c:choose>" rel="ddsubmenu1">
+				            		<span>View feedback</span>
+				            	</a>
+				            </li>
+				             <li style=" float:left;margin-right:8px;text-transform:uppercase;">
+				            	<a href="feedback_report" class="<c:choose><c:when test="${true}">select</c:when><c:otherwise></c:otherwise></c:choose>" rel="ddsubmenu1">
+				            		<span>Feedback Report</span>
+				            	</a>
+				            </li>
+				            </ul>
+  </div>
+ </td>
+ </tr>
  <tr>
         <td valign="top" align="left"><div>
             <div class="headings altheading">
               <h2>Customer Feedback Report</h2>
             </div>
             <div class="contentbox">
+            <input  type="hidden" id="feedbackdate" value="${feedbackdate}"/> 
             <table cellpadding="0" cellspacing="0" border="0" width="100%">
                <tr class="row2">
                <td valign="middle" align="left" class="input_txt" width="30%"> Type of Feedback :<!-- </td> -->
@@ -37,7 +92,7 @@
                   <td valign="top" align="left"><input type="submit" value="Generate" class="submit_btn1" id="button" onClick="commit()"></td>                
 </tr>
 </table>
- <table cellpadding="0" cellspacing="0" border="0" width="100%" id="table">
+ <table cellpadding="0" cellspacing="0" border="0" width="100%" id="reporttable" style="display: none;">
 
 							<tr class="title">
 								
@@ -54,7 +109,7 @@
         							
         								<tr class="row2" onmouseover="mouse_event(this,"row_hover");" onmouseout="mouse_event(this,"row1");">
 								  
-        						<td valign="top" align="left"  width="10%">${customerFeedbacks.date_of_feedback}</td>
+        						<td valign="top" align="left"  width="10%"> ${customerFeedbacks.date_of_feedback}</td>
 											<td valign="top" align="left" width="15%">${customerFeedbacks.type_of_feedback}</td>
 											<td valign="top" align="left" width="10%">${customerFeedbacks.feedback_recorded_by}</td>
 											<td valign="top" align="left" width="10%">${customerFeedbacks.feedback_details }

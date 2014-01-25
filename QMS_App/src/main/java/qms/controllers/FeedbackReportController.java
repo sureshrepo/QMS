@@ -33,7 +33,9 @@ public class FeedbackReportController {
 @RequestMapping(value = { "/feedback_report" }, method = RequestMethod.GET)
 	
 	public String addFeedbackreport(HttpSession session,ModelMap model, Principal principal) {
-		
+		session.removeAttribute("fromdate");
+		session.removeAttribute("todate");
+		session.removeAttribute("feedback");
 		return "feedback_report";
 }
 
@@ -56,6 +58,7 @@ public String view_feedbackreport(HttpSession session,HttpServletRequest request
 	customerFeedbackForm.setCustomerFeedbacks(customerFeedbackDAO.getfeedback_report(customerFeedback.getType_of_feedback(),from_date,to_date));
 	System.out.println("type of report"+customerFeedback.getType_of_feedback());
 	model.addAttribute("customerFeedbackForm",customerFeedbackForm);
+	model.addAttribute("feedbackdate",customerFeedbackForm.getCustomerFeedbacks().get(0).getDate_of_feedback());
 	return "feedback_report";
 }
 }

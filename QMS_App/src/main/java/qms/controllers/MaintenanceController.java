@@ -95,9 +95,9 @@ public class MaintenanceController {
 	public String update_maintenance(Maintenance maintenance,ModelMap model) {
 
 	    maintenanceDAO.update_maintenance(maintenance);
-	   /* MaintenanceForm maintenanceForm= new MaintenanceForm();
+	   MaintenanceForm maintenanceForm= new MaintenanceForm();
 		maintenanceForm.setMaintenance(maintenanceDAO.getmaintenance());
-		model.addAttribute("maintenanceForm",maintenanceForm);*/
+		model.addAttribute("maintenanceForm",maintenanceForm);
 	    return "edit_maintenance";
 	}
 	

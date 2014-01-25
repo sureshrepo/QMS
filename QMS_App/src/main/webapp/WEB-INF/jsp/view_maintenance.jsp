@@ -38,7 +38,8 @@
               <table cellpadding="0" cellspacing="0" border="0" width="100%">
                <c:set value="${maintenanceForm.maintenance[0]}" var="maintenance"> </c:set>
                <tr class="row2">
-                  <td valign="middle" align="left" class="input_txt" width="20%">Equipment Id :</td>
+                  <td valign="middle" align="left" class="input_txt" width="10%">Equipment Id </td>
+                  <td valign="middle" align="left" class="input_txt" width="1%">:</td>
                   <td valign="top" align="left" class="input_txt" width="70%">${maintenance.equipment_id}</br><span class="err"></span></td>
                 </tr>
                  <tr class="row1">
