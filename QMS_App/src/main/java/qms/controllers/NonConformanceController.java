@@ -18,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 
+import qms.dao.FileHandlingDAO;
 import qms.dao.NonConformanceDAO;
 import qms.forms.MaintenanceForm;
 import qms.forms.NonConformanceForm;
@@ -32,6 +33,9 @@ import org.slf4j.LoggerFactory;
 public class NonConformanceController {
 	@Autowired
 	NonConformanceDAO nonConformanceDAO;
+	
+	@Autowired
+	FileHandlingDAO fileHandlingDAO;
 	private static final Logger logger = LoggerFactory.getLogger(MainController.class); // Logger
 
 	
@@ -131,9 +135,15 @@ public class NonConformanceController {
 	
 	}
 	
+	@RequestMapping(value = { "/corrective" }, method = RequestMethod.GET)
+	public String add_corrective(HttpSession session,ModelMap model, Principal principal) {
+		
+		return "corrective";
+	}
+
+	}
 	
 	
 	
 	
-	
-}
+

@@ -37,7 +37,7 @@
                   <td valign="top" align="left"><input type="submit" value="Generate" class="submit_btn1" id="button" ></td>                
 </tr>
 </table>
- <table cellpadding="0" cellspacing="0" border="0" width="100%" id="table">
+ <table cellpadding="0" cellspacing="0" border="0" width="100%" id="feedbacktable" styel="display:none" >
 
 							<tr class="title">
 								

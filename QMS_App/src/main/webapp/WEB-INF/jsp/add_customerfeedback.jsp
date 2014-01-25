@@ -43,6 +43,11 @@
 				            		<span>View feedback</span>
 				            	</a>
 				            </li>
+				            <li style=" float:left;margin-right:8px;text-transform:uppercase;">
+				            	<a href="feedback_report" class="<c:choose><c:when test="${true}">select</c:when><c:otherwise></c:otherwise></c:choose>" rel="ddsubmenu1">
+				            		<span>Feedback Report</span>
+				            	</a>
+				            </li>
 				            </ul>
   </div>
 </td>
