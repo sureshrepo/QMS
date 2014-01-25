@@ -5,19 +5,14 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class Customers
 {
 	private String customer_id;
-	
 	@NotEmpty
 	private String customer_name;
-	
 	@NotEmpty
 	private String address;
-	
 	@NotEmpty
 	private String city;
-	
 	@NotEmpty
 	private String state;
-	
 	@NotEmpty
 	private String country;
 	@NotEmpty

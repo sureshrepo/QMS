@@ -1,6 +1,7 @@
 package qms.controllers;
 
 import java.security.Principal;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -117,6 +119,21 @@ public class NonConformanceController {
 		return "view_nonconformance";
 		
 	}
+	
+	
+	@RequestMapping(value ={ "/nonconformanceexport" }, method = RequestMethod.GET)
+	  public ModelAndView getExcel_view() {
+	java.util.List<NonConformance> nonConformances=new ArrayList<NonConformance>();
+	
+	nonConformances=nonConformanceDAO.get_nonconformance();
+	
+	return new ModelAndView("nonconformanceDAO","nonConformances",nonConformances);
+	
+	}
+	
+	
+	
+	
 	
 	
 }

@@ -1,7 +1,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <jsp:include page="header.jsp"></jsp:include>
 <div id="right_content">
-	<form action="?do=viewparticipants" name="dashboard" method="POST">
+	
 		<table cellpadding="0" cellspacing="0" border="0" width="98%"
 			class="margin_table">
 <tr>
@@ -28,7 +28,24 @@
 						<div class="headings altheading">
 							<h2>Non Conformance</h2>
 						</div>
+						
 						<div class="contentbox">
+							<div style="border:#ccc 2px solid; padding:15px; margin-bottom:15px;">
+							<form action="findnonconformance" method="get">
+							<table width="100%" border="0" cellspacing="0" cellpadding="0">
+							  <tr>
+							    <td align="left" valign="middle" width="10%"> NC ID:</td>
+							    <td align="left" valign="middle" width="10%"><input type="text" name="nc_id" class="input_txtbx1" id="nc_id"></td>
+							    <td align="left" valign="middle" width="20%">&nbsp;&nbsp;&nbsp;&nbsp;Type of Non Conformance:</td>
+							    <td align="left" valign="middle" width="10%"><input type="text" name="type_of_non_conformance" id="type_of_non_conformance" class="input_txtbx1"></td>
+							    <td align="left" valign="middle" width="8%">&nbsp;&nbsp;Product Id:</td>
+							    <td align="left" valign="middle" width="10%"><input type="text" name="product_id" id="product_id" class="input_txtbx1"></td>
+							    <td align="center" valign="middle" width="38%"><input type="submit" class="submit_btn" value="Find"></td>
+							  </tr>
+							</table>
+							</form>
+						</div>
+				<form action="?do=viewparticipants" name="dashboard" method="POST">			
 							<table cellpadding="0" cellspacing="0" border="0" width="100%">
 								<tr class="title">
 									<td valign="top" align="left" width="5%">Id</td>

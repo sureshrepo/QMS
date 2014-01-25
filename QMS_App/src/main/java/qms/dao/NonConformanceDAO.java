@@ -6,13 +6,66 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.springframework.web.servlet.view.document.AbstractExcelView;
+
+import qms.model.InternalAudits;
 import qms.model.NonConformance;
 
-public class NonConformanceDAO {
+public class NonConformanceDAO extends AbstractExcelView {
 	private DataSource dataSource;
 
+	/**
+	 * Excel Sheet Generation
+	 */
+	
+	@Override
+	protected void buildExcelDocument(Map model, HSSFWorkbook workbook,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+
+		HSSFSheet excelSheet = workbook.createSheet("Animal List");
+		setExcelHeader(excelSheet);
+		
+		List<NonConformance> nonConformances = (List<NonConformance>) model.get("nonConformances");
+		setExcelRows(excelSheet,nonConformances);
+		
+	}
+	
+	
+	public void setExcelHeader(HSSFSheet excelSheet) {
+		HSSFRow excelHeader = excelSheet.createRow(0);
+		excelHeader.createCell(0).setCellValue("Id");
+		excelHeader.createCell(1).setCellValue("Name");
+		excelHeader.createCell(2).setCellValue("Type");
+		excelHeader.createCell(3).setCellValue("Aggressive");
+		excelHeader.createCell(4).setCellValue("Weight");
+	}
+	
+	
+	//End
+	
+	
+	public void setExcelRows(HSSFSheet excelSheet, List<NonConformance> nonConformances){
+		int record = 1;
+		for (NonConformance nonConformance:nonConformances) {
+			HSSFRow excelRow = excelSheet.createRow(record++);
+			excelRow.createCell(0).setCellValue(nonConformance.getExternal_id());
+			excelRow.createCell(1).setCellValue(nonConformance.getName_of_disposition_responsibility());
+			excelRow.createCell(2).setCellValue(nonConformance.getDisposition());
+			excelRow.createCell(3).setCellValue(nonConformance.getNature_of_nonconformance());
+			excelRow.createCell(4).setCellValue(nonConformance.getProduct_id());
+		}
+	}
+	
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
 	}

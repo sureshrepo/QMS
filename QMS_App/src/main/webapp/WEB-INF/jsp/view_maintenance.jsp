@@ -22,7 +22,7 @@
 				            	</a>
 				            </li>
 				            <li style=" float:left;margin-right:8px;text-transform:uppercase;">
-				            	<a href="maintenance_list" class="<c:choose><c:when test="${true}">select</c:when><c:otherwise></c:otherwise></c:choose>" rel="ddsubmenu1">
+				            	<a href="maintenance_report" class="<c:choose><c:when test="${true}">select</c:when><c:otherwise></c:otherwise></c:choose>" rel="ddsubmenu1">
 				            		<span>Reports</span>
 				            	</a>
 				            </li>
@@ -38,8 +38,7 @@
               <table cellpadding="0" cellspacing="0" border="0" width="100%">
                <c:set value="${maintenanceForm.maintenance[0]}" var="maintenance"> </c:set>
                <tr class="row2">
-                  <td valign="middle" align="left" class="input_txt" width="10%">Equipment Id </td>
-                  <td valign="middle" align="left" class="input_txt" width="1%">:</td>
+                  <td valign="middle" align="left" class="input_txt" width="20%">Equipment Id :</td>
                   <td valign="top" align="left" class="input_txt" width="70%">${maintenance.equipment_id}</br><span class="err"></span></td>
                 </tr>
                  <tr class="row1">

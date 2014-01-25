@@ -95,15 +95,16 @@ public class MaintenanceController {
 	public String update_maintenance(Maintenance maintenance,ModelMap model) {
 
 	    maintenanceDAO.update_maintenance(maintenance);
-	   MaintenanceForm maintenanceForm= new MaintenanceForm();
+	   /* MaintenanceForm maintenanceForm= new MaintenanceForm();
 		maintenanceForm.setMaintenance(maintenanceDAO.getmaintenance());
-		model.addAttribute("maintenanceForm",maintenanceForm);
+		model.addAttribute("maintenanceForm",maintenanceForm);*/
 	    return "edit_maintenance";
 	}
 	
 	@RequestMapping(value = "/maintenance_report", method = RequestMethod.GET)
 	public String view_maintenance_report(Maintenance maintenance,ModelMap model) {
 
+		model.addAttribute("report_table","no");
 	    return "maintainence_report";
 	}
 	
@@ -113,6 +114,11 @@ public class MaintenanceController {
 		String type=request.getParameter("type_of_report");
 		String no_of_days=request.getParameter("number_of_days");
 		
+		MaintenanceForm maintenanceForm= new MaintenanceForm();
+		maintenanceForm.setMaintenance(maintenanceDAO.generate_report(type, no_of_days));
+		model.addAttribute("maintenanceForm",maintenanceForm);
+		
+		model.addAttribute("report_table","yes");
 	    return "maintainence_report";
 	}
 	

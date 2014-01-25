@@ -12,7 +12,7 @@
   <ul class="horizmenu">
 						
 							<li style=" float:left;margin-right:8px;text-transform:uppercase;">
-								<a href="add_internalaudits" class="<c:choose><c:when test="${true}">select</c:when><c:otherwise></c:otherwise></c:choose>">
+								<a href="addinternalaudits" class="<c:choose><c:when test="${true}">select</c:when><c:otherwise></c:otherwise></c:choose>">
 									<span> Add Internal Audits</span>
 								</a>
 							</li>
@@ -22,13 +22,20 @@
 				            		<span>View Internal Aidits</span>
 				            	</a>
 				            </li>
+				             <li style=" float:left;margin-right:8px;text-transform:uppercase;">
+				            	<a href="internalaudit_report" class="<c:choose><c:when test="${true}">select</c:when><c:otherwise></c:otherwise></c:choose>" rel="ddsubmenu1">
+				            		<span>Reports</span>
+				            	</a>
+				            </li>
+				            
+				            
   </div>
        </td>
       </tr>
       <tr>
         <td valign="top" align="left"><div>
             <div class="headings altheading">
-              <h2>Add InternalAudits</h2>
+              <h2>Add Internal Audits</h2>
             </div>
             <div class="contentbox">
               <table cellpadding="0" cellspacing="0" border="0" width="100%">

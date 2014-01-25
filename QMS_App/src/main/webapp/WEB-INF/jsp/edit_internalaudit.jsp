@@ -21,6 +21,12 @@
 				            		<span>View Internal Aidits</span>
 				            	</a>
 				            </li>
+				             <li style=" float:left;margin-right:8px;text-transform:uppercase;">
+				            	<a href="internalaudit_report" class="<c:choose><c:when test="${true}">select</c:when><c:otherwise></c:otherwise></c:choose>" rel="ddsubmenu1">
+				            		<span>Reports</span>
+				            	</a>
+				            </li>
+				            
   </div>
       </td>
       </tr>
@@ -32,15 +38,14 @@
       </tr>-->
       <tr> 
         <td valign="top" align="left">
-        	<div>
-	            <div class="headings altheading">
+        	<div class="headings altheading">
 	              <h2>Internal Audits</h2>
 	            </div>
             <div class="contentbox">
             <c:set value="${internalAuditsForm.internalAudits[0]}" var="internalaudits"></c:set>
               <table cellpadding="0" cellspacing="0" border="0" width="100%">
   				<tr>
-    				<td align="left" valign="top" width="50%" style="padding-right:25px;">
+    				<td align="left" valign="top" width="100%" style="padding-right:25px;">
     					<h2 class="quck-txt">Quick Info</h2>
     						<table cellpadding="0" cellspacing="0" border="0" width="100%">
                         		<tr class="row1">
@@ -94,7 +99,7 @@
 				                  		<select name="finding" class="input_cmbbx1">
 						                    <option <c:if test="${internalaudits.finding eq 'ok'}"><c:out value="Selected"/></c:if> value="ok" >Ok</option>
 											<option <c:if test="${internalaudits.finding eq 'area of improvement'}"><c:out value="Selected"/></c:if> value="area of improvement">Area Of Improvement </option>
-											<option  <c:if test="${internalaudits.finding eq 'nonconformance'}"><c:out value="Selected"/></c:if> value="nonconformance">NonConformance</option>
+											<option  <c:if test="${internalaudits.finding eq 'non conformance'}"><c:out value="Selected"/></c:if> value="non conformance">NonConformance</option>
 				                   	
 				                   		</select>
 				                   	</td>	</br><font color="Red" size="+1"></font></td>
@@ -119,7 +124,7 @@
                   <td valign="top" align="center">&nbsp;</td>
                   <td valign="top" align="left"><input type="submit" class="submit_btn2" value="Update Participant" onclick="update.submit()"></td>
                 </tr>
-              </table>
+              </table></div>
          	</td>
   		</tr>
  	</table>

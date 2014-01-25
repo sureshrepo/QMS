@@ -266,6 +266,71 @@ public class MaintenanceDAO {
 		return status;
 
 	}
+	
+	public List<Maintenance> generate_report(String type,String no_of_days){
+		Connection con = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
+		try {
+			con = dataSource.getConnection();
+			statement = con.createStatement();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		
+		List<Maintenance> maintenance = new ArrayList<Maintenance>();
+	    try{
+	    	
+	   if(type.equals("maintain_for_30"))
+			resultSet = statement.executeQuery("select * from tbl_maintenance where due_date between now() and DATE_ADD(NOW(), INTERVAL 30 DAY)" );
+	   else if(type.equals("maintain_for_ndays"))
+			resultSet = statement.executeQuery("select * from tbl_maintenance where due_date between now() and DATE_ADD(NOW(), INTERVAL '"+Integer.parseInt(no_of_days)+"' DAY)" );
+	   else if(type.equals("past_due_maintenance"))
+			resultSet = statement.executeQuery("select * from tbl_maintenance where due_date<now()");
+	   else if(type.equals("past_due_calibration"))
+			resultSet = statement.executeQuery("select * from tbl_maintenance where due_date<now() and calibration='yes'" );
+	   else
+			resultSet = statement.executeQuery("select * from tbl_maintenance where due_date between now() and DATE_ADD(NOW(), INTERVAL '"+Integer.parseInt(no_of_days)+"' DAY)" );
+		 
+		   
+	   while(resultSet.next()){
+				maintenance.add(new Maintenance(resultSet
+						.getString("auto_equip"),resultSet
+						.getString("equipment_id"), resultSet
+						.getString("equipment_name"), resultSet
+						.getString("equipment_model"), resultSet
+						.getString("serial_number"), resultSet
+						.getString("date_acquired"), resultSet
+						.getString("equipment_status"), resultSet
+						.getString("frequency_maintenance"), resultSet
+						.getString("calibration"), resultSet
+						.getString("equipmentid"), resultSet
+						.getString("type_of_maintenance"), resultSet
+						.getString("maintenance_frequency"), resultSet
+						.getString("reference"), resultSet
+						.getString("instructions"), resultSet
+						.getString("due_date"), resultSet
+						.getString("completion_date"),resultSet
+						.getString("completed_by"),
+						resultSet.getString("notes")));
+
+			}
+			
+	    }catch(Exception e){
+	    	System.out.println(e.toString());
+	    	releaseResultSet(resultSet);
+	    	releaseStatement(statement);
+	    	releaseConnection(con);
+	    }finally{
+	    	releaseResultSet(resultSet);
+	    	releaseStatement(statement);
+	    	releaseConnection(con);	    	
+	    }
+	    return maintenance;
+		
+	}
+	
+	
 	public void releaseConnection(Connection con) {
 		try {
 			if (con != null)

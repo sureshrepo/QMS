@@ -10,7 +10,7 @@
   <ul class="horizmenu">
 						
 							<li style=" float:left;margin-right:8px;text-transform:uppercase;">
-								<a href="add_internalaudits" class="<c:choose><c:when test="${true}">select</c:when><c:otherwise></c:otherwise></c:choose>">
+								<a href="addinternalaudits" class="<c:choose><c:when test="${true}">select</c:when><c:otherwise></c:otherwise></c:choose>">
 									<span> Add Internal Audits</span>
 								</a>
 							</li>
@@ -20,27 +20,30 @@
 				            		<span>View Internal Aidits</span>
 				            	</a>
 				            </li>
+				             <li style=" float:left;margin-right:8px;text-transform:uppercase;">
+				            	<a href="internalaudit_report" class="<c:choose><c:when test="${true}">select</c:when><c:otherwise></c:otherwise></c:choose>" rel="ddsubmenu1">
+				            		<span>Reports</span>
+				            	</a>
+				            </li>
   </div>
 </td>
 </tr>
 			<tr>
 				<td valign="top" align="left"><div>
 						<div class="headings altheading">
-							<h2>Internal Audits</h2>
+							<h2>View Internal Audits</h2>
 						</div>
 						<div class="contentbox">
 							<table cellpadding="0" cellspacing="0" border="0" width="100%">
 								<tr class="title">
-									<td valign="top" align="left" width="5%">Id</td>
-									<td valign="top" align="left" width="5%">Process</td>
-									<td valign="top" align="left" width="10%">Audit Due Date</td>
+									<td valign="top" align="left" width="5%">Audit Id</td>
+									<td valign="top" align="left" width="10%">Process</td>
+									<td valign="top" align="left" width="15%">Audit Due Date</td>
 									<td valign="top" align="left" width="15%">Audit Start Date</td>
-									<td valign="top" align="left" width="5%">Auditor</td>
-									<td valign="top" align="left" width="10%">Auditor Notes</td>
-									<td valign="top" align="left" width="5%">Finding</td>
-									<td valign="top" align="left" width="10%">Completion Date</td>
-									<td valign="top" align="left" width="10%">Auditor's Initial'</td>
-									<td valign="top" align="left" width="10%">Auditee Name</td>
+									<td valign="top" align="left" width="10%">Auditor</td>									
+									<td valign="top" align="left" width="15%">Finding</td>
+									<td valign="top" align="left" width="15%">Completion Date</td>
+									<td valign="top" align="left" width="10%">Actions</td>
 									</tr>
 
 								<!-- Display Admin Userd here  Suresh--> 
@@ -53,15 +56,12 @@
 							       			i=1;%>
 							       		<tr class="row<%=i%>" onmouseover="mouse_event(this,"row_hover");" onmouseout="mouse_event(this,"row1");">
 								           	<td valign="top" align="left"  width="10%">${internalAudits.id}</td>
-											<td valign="top" align="left" width="15%">${internalAudits.process}</td>
+											<td valign="top" align="left" width="10%">${internalAudits.process}</td>
 											<td valign="top" align="left" width="10%">${internalAudits.audit_due_date}</td>
 											<td valign="top" align="left" width="10%">${internalAudits.audit_start_date}</td>
-											<td valign="top" align="left" width="15%">${internalAudits.auditor}</td>
-											<td valign="top" align="left" width="15%">${internalAudits.auditor_notes}</td>
-											<td valign="top" align="left" width="10%">${internalAudits.finding}</td>
-											<td valign="top" align="left" width="10%">${internalAudits.completion_date}</td>
-											<td valign="top" align="left" width="15%">${internalAudits.auditors_initials}</td>
-											<td valign="top" align="left" width="15%">${internalAudits.auditee_name}</td>
+											<td valign="top" align="left" width="10%">${internalAudits.auditor}</td>
+											<td valign="top" align="left" width="15%">${internalAudits.finding}</td>
+											<td valign="top" align="left" width="15%">${internalAudits.completion_date}</td>
 											
 											
 											<td valign="top" align="left" width="15%">
