@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import qms.dao.EmployeeDAO;
 import qms.model.Employee;
 import qms.model.Maintenance;
+import qms.forms.CustomersForm;
 import qms.forms.EmployeeForm;
 import qms.forms.MaintenanceForm;
 
@@ -90,13 +91,22 @@ public class EmployeeController
 	
 	
 	@RequestMapping(value={"/updateemployee"}, method = RequestMethod.POST)
-	public String update_customer(Employee employee,ModelMap model, Principal principal)
+	public String update_customer(ModelMap model, @ModelAttribute("Employee") @Valid Employee employee, BindingResult result)
 	{
+
+		if (result.hasErrors())
+		{
+			System.out.println("output");
+			EmployeeForm employeeForm=new EmployeeForm();
+			employeeForm.setEmployees(employeeDAO.getEmployeess_byid(employee.getId()));
+			model.addAttribute("employeeForm",employeeForm);
+	        return "edit_employee";
+		}
     	employeeDAO.update_employee(employee);
     	EmployeeForm employeeForm=new EmployeeForm();
 		employeeForm.setEmployees(employeeDAO.getEmployees());
 		model.addAttribute("employeeForm",employeeForm);
-		return "edit_employee";
+		return "view_employees";
  	}
 
 }

@@ -1,5 +1,6 @@
 package qms.controllers;
 
+import java.io.IOException;
 import java.security.Principal;
 
 import javax.servlet.http.HttpServletRequest;
@@ -92,13 +93,23 @@ public class MaintenanceController {
 	
 	
 	@RequestMapping(value = "/update_maintenance", method = RequestMethod.POST)
-	public String update_maintenance(Maintenance maintenance,ModelMap model) {
+	public String update_maintenance(ModelMap model,@ModelAttribute("Maintenance") @Valid Maintenance maintenance,BindingResult result) throws IOException {
 
-	    maintenanceDAO.update_maintenance(maintenance);
+		if (result.hasErrors())
+		{
+			
+			MaintenanceForm maintenanceForm= new MaintenanceForm();
+			maintenanceForm.setMaintenance(maintenanceDAO.getmaintenance(maintenance.getAuto_equip()));
+			model.addAttribute("maintenanceForm",maintenanceForm);
+            return "edit_maintenance";
+		}
+		
+		
+		maintenanceDAO.update_maintenance(maintenance);
 	   /* MaintenanceForm maintenanceForm= new MaintenanceForm();
 		maintenanceForm.setMaintenance(maintenanceDAO.getmaintenance());
 		model.addAttribute("maintenanceForm",maintenanceForm);*/
-	    return "edit_maintenance";
+	    return "view_maintenance";
 	}
 	
 	@RequestMapping(value = "/maintenance_report", method = RequestMethod.GET)

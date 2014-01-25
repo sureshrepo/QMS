@@ -53,7 +53,11 @@
 		<tr class="row2">
                   <td valign="middle" align="right" class="input_txt" width="30%"> Address :</td>
                	<td><textarea class="input_txtbx1" id="inp_address" name="address" onmouseover="showTooltip('tooltip_id','inp_id3');" onmouseout="hideTooltip('tooltip_id');"  style="width: 177px; height: 89px;">
+
+					<c:out value="${customers.address }"/>	</textarea><br/><span class="err"><form:errors path="Customers.address"></form:errors></span></td>
+
 					<c:out value="${customers.address }"/>	</textarea><br/><font color="Red" size="+1"></font></td>
+
 									  </tr>
                 <tr class="row1">
                   <td valign="middle" align="right" class="input_txt" width="30%"> City :</td>

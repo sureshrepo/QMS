@@ -34,7 +34,7 @@
                    <td width="30%"><span class="err">*</span>To Date:
                   <input type="text" name="to_date" class="input_txtbx1" id="datepicker1" value="${todate}" /></br><span class="err"></span></td>
                   <td  valign="top" align="right">&nbsp;</td>
-                  <td valign="top" align="left"><input type="submit" value="Generate" class="submit_btn1" id="button" onClick="commit()"></td>                
+                  <td valign="top" align="left"><input type="submit" value="Generate" class="submit_btn1" id="button" ></td>                
 </tr>
 </table>
  <table cellpadding="0" cellspacing="0" border="0" width="100%" id="table">
@@ -72,7 +72,7 @@
         					
 <tr class="row1">
                   <td valign="top" align="right">&nbsp;</td>
-                  <td valign="top" align="right"  colspan="3"><input type="submit" value="Download" class="submit_btn1" ></td>
+                  <td valign="top" align="right"  colspan="3"><a href="./feedbackexport?type=${type}">Export</a></td>
                 </tr>
 </table> 
 
@@ -94,20 +94,4 @@
            $( "#datepicker1" ).datepicker();
          });
  
-</script>
-<script type="text/javascript">
-$(document).ready(function()
-{
-    $("#table").hide();
-    $("#button").click(function()
-    {
-        $("#table").show();
-    });
-
-});
-</script>
-<script>
-function commit(){         
-    $("#historylist").toggle();
-}
 </script>

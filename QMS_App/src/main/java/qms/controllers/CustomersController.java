@@ -1,5 +1,6 @@
 package qms.controllers;
 
+import java.io.IOException;
 import java.security.Principal;
 
 import javax.servlet.http.HttpSession;
@@ -70,11 +71,29 @@ public class CustomersController
  	}
 	
 	@RequestMapping(value={"/updatecustomer"}, method = RequestMethod.POST)
-	public String update_customer(ModelMap model, Principal principal,Customers customers)
-	{
+
+	public String update_customer(ModelMap model,@ModelAttribute("Customers") @Valid Customers customers,BindingResult result) throws IOException{
+
+		if (result.hasErrors())
+		{
+			
+			System.out.println("output");
+			CustomersForm customersForm=new CustomersForm();
+			customersForm.setCustomers(customersDAO.getCustomers_byid(customers.getCustomer_id()));
+			model.addAttribute("customersForm",customersForm);	
+	        return "edit_customers";
+		}
+
     // model.addAttribute("id",customersDAO.getMax_customerID());
     customersDAO.update_customer(customers);
-	return "add_customers";
+
+    CustomersForm customersForm=new CustomersForm();
+    customersForm.setCustomers(customersDAO.getCustomers());
+    model.addAttribute("customerForm",customersForm);
+	return "view_customers";
+
+	
+
  	}
 	
 	

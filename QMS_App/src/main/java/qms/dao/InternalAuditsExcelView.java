@@ -20,7 +20,7 @@ public class InternalAuditsExcelView extends AbstractExcelView {
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 
-		workbook.createName("InternalAudit_Report");
+		/*workbook.createName("InternalAudit_Report");*/
 		HSSFSheet excelSheet = workbook.createSheet("Animal List");
 		setExcelHeader(excelSheet);
 		

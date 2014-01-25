@@ -67,13 +67,14 @@
 				        
 				        
 							<tr class="title">
-								<td valign="center" align="left" width="5%"><input type="checkbox" onclick="selectall(this.form)" value="" name="checkall"></td>
+								<!-- <td valign="center" align="left" width="5%"><input type="checkbox" onclick="selectall(this.form)" value="" name="checkall"></td> -->
          						<td valign="top" align="left" width="10%">Customer&nbsp;ID</td>
 					         	<td valign="top" align="left" width="15%">Customer Name</td>
 					         	<td valign="top" align="left" width="10%">Website</td>
 								<td valign="top" align="left" width="10%">Telephone</td>
           						<td valign="top" align="left" width="15%">Fax</td>
-          						<td valign="top" align="left" width="25%">Email Address</td>
+          						<td valign="top" align="left" width="15%">Email Address</td>
+          						<td valign="top" align="left" width="15%">Actions</td>
         					</tr>
 						
 						

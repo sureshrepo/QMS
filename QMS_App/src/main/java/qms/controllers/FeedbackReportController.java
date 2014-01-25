@@ -1,6 +1,7 @@
 package qms.controllers;
 
 import java.security.Principal;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
 
 import qms.dao.CustomerFeedbackDAO;
 import qms.forms.*;
@@ -58,6 +60,17 @@ public String view_feedbackreport(HttpSession session,HttpServletRequest request
 	model.addAttribute("customerFeedbackForm",customerFeedbackForm);
 	return "feedback_report";
 }
+
+@RequestMapping(value ={ "/feedbackexport" }, method = RequestMethod.GET)
+public ModelAndView getExcel_view() {
+java.util.List<CustomerFeedback> customerFeedbacks=new ArrayList<CustomerFeedback>();
+
+customerFeedbacks=customerFeedbackDAO.getCustomersfeedbacks();
+
+return new ModelAndView("customerfeedbackDAO","customerFeedbacks",customerFeedbacks);
+
+}
+
 }
 
 
