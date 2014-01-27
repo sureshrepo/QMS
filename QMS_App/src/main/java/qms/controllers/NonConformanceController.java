@@ -1,8 +1,10 @@
 package qms.controllers;
 
+import java.io.IOException;
 import java.security.Principal;
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -20,6 +22,7 @@ import org.springframework.ui.ModelMap;
 
 import qms.dao.FileHandlingDAO;
 import qms.dao.NonConformanceDAO;
+import qms.forms.CorrectiveAndPreventiveActionsForm;
 import qms.forms.MaintenanceForm;
 import qms.forms.NonConformanceForm;
 import qms.forms.ParticipantsDetailsForm;
@@ -143,10 +146,36 @@ public class NonConformanceController {
 	
 	}
 	
-	@RequestMapping(value = { "/corrective" }, method = RequestMethod.GET)
-	public String add_corrective(HttpSession session,ModelMap model, Principal principal) {
+	@RequestMapping(value = { "/edit_correctiveactions" }, method = RequestMethod.GET)
+	public String add_corrective(@RequestParam("nc_id") String nc_id,HttpSession session,ModelMap model, Principal principal) {
 		
-		return "corrective";
+		CorrectiveAndPreventiveActionsForm correctiveAndPreventiveActionsForm = new CorrectiveAndPreventiveActionsForm();
+		correctiveAndPreventiveActionsForm.setCorrectiveAndPreventiveActions(nonConformanceDAO.edit_corrective(nc_id));
+		model.addAttribute("correctiveAndPreventiveActionsForm", correctiveAndPreventiveActionsForm);
+		return "edit_correctiveactions";
+	}
+	
+	@RequestMapping(value = "/update_corrective", method = RequestMethod.POST)
+	public String update_corrective(ModelMap model,CorrectiveAndPreventiveActions correctiveAndPreventiveActions) {
+
+		
+		nonConformanceDAO.update_corrective(correctiveAndPreventiveActions);
+	   /* MaintenanceForm maintenanceForm= new MaintenanceForm();
+		maintenanceForm.setMaintenance(maintenanceDAO.getmaintenance());
+		model.addAttribute("maintenanceForm",maintenanceForm);*/
+	    return "view_correctiveactions";
+	}
+	
+	
+
+	@RequestMapping(value="/view_correctiveactions", method=RequestMethod.GET)
+	public String viewcorrective(HttpServletRequest request,ModelMap model, Principal principal) {
+		 
+		model.addAttribute("success","false");
+		CorrectiveAndPreventiveActionsForm correctiveAndPreventiveActionsForm = new CorrectiveAndPreventiveActionsForm();
+		correctiveAndPreventiveActionsForm.setCorrectiveAndPreventiveActions(nonConformanceDAO.get_corrective());
+		model.addAttribute("correctiveAndPreventiveActionsForm", correctiveAndPreventiveActionsForm);
+		return "view_correctiveactions";
 	}
 
 	}

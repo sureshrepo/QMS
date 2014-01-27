@@ -15,6 +15,7 @@ import javax.sql.DataSource;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.servlet.view.document.AbstractExcelView;
 
 import qms.model.InternalAudits;
@@ -389,6 +390,143 @@ public class NonConformanceDAO extends AbstractExcelView {
 		}
 		return nonConformances;
 	}
+	
+	public List<CorrectiveAndPreventiveActions> get_corrective() {
+		Connection con = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
+		boolean status = false;
+		List<CorrectiveAndPreventiveActions> correctiveAndPreventiveActions = new ArrayList<CorrectiveAndPreventiveActions>();
+
+		try {
+			con = dataSource.getConnection();
+			statement = con.createStatement();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		try {
+			String cmd_select = "select * from tbl_corrective_and_preventive_actions";
+			resultSet = statement.executeQuery(cmd_select);
+			while (resultSet.next()) {
+				System.out.println("correct");
+				correctiveAndPreventiveActions.add(new CorrectiveAndPreventiveActions (resultSet
+						.getString("capa_id"),resultSet
+						.getString("nc_id"), resultSet
+						.getString("capa_requestor"), resultSet
+						.getString("request_date"), resultSet
+						.getString("capa_due_date"), resultSet
+						.getString("assigned_team_leader"), resultSet
+						.getString("team_members"), resultSet
+						.getString("root_cause_analysis_file"), resultSet
+						.getString("use_5_why_in_system"), resultSet
+						.getString("why"), resultSet
+						.getString("root_cause_statement"), resultSet
+						.getString("upload_external_analysis"), resultSet
+						.getString("action"), resultSet
+						.getString("responsibility"), resultSet
+						.getString("due_date"),resultSet
+						.getString("completion_date"),resultSet
+						.getString("verified_by"),
+						resultSet.getString("verification_date")));
+
+			}
+
+		} catch (Exception e) {
+			System.out.println(e.toString());
+			releaseResultSet(resultSet);
+			releaseStatement(statement);
+			releaseConnection(con);
+		} finally {
+			releaseResultSet(resultSet);
+			releaseStatement(statement);
+			releaseConnection(con);
+		}
+		return correctiveAndPreventiveActions;
+	}
+	
+	public List<CorrectiveAndPreventiveActions> edit_corrective(String nc_id) {
+		Connection con = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
+		boolean status = false;
+		List<CorrectiveAndPreventiveActions> correctiveAndPreventiveActions = new ArrayList<CorrectiveAndPreventiveActions>();
+
+		try {
+			con = dataSource.getConnection();
+			statement = con.createStatement();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		try {
+			String cmd_select = "select * from tbl_corrective_and_preventive_actions where nc_id='"+nc_id+"'";
+			resultSet = statement.executeQuery(cmd_select);
+			while (resultSet.next()) {
+				System.out.println("came");
+				correctiveAndPreventiveActions.add(new CorrectiveAndPreventiveActions (resultSet
+						.getString("capa_id"),resultSet
+						.getString("nc_id"), resultSet
+						.getString("capa_requestor"), resultSet
+						.getString("request_date"), resultSet
+						.getString("capa_due_date"), resultSet
+						.getString("assigned_team_leader"), resultSet
+						.getString("team_members"), resultSet
+						.getString("root_cause_analysis_file"), resultSet
+						.getString("use_5_why_in_system"), resultSet
+						.getString("why"), resultSet
+						.getString("root_cause_statement"), resultSet
+						.getString("upload_external_analysis"), resultSet
+						.getString("action"), resultSet
+						.getString("responsibility"), resultSet
+						.getString("due_date"),resultSet
+						.getString("completion_date"),resultSet
+						.getString("verified_by"),
+						resultSet.getString("verification_date")));
+
+			}
+
+		} catch (Exception e) {
+			System.out.println(e.toString());
+			releaseResultSet(resultSet);
+			releaseStatement(statement);
+			releaseConnection(con);
+		} finally {
+			releaseResultSet(resultSet);
+			releaseStatement(statement);
+			releaseConnection(con);
+		}
+		return correctiveAndPreventiveActions;
+	}
+	
+	
+	public boolean update_corrective(CorrectiveAndPreventiveActions correctiveAndPreventiveActions) {
+		Connection con = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
+		boolean status = false;
+		try {
+			con = dataSource.getConnection();
+			statement = con.createStatement();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		try {
+			String cmd_update = "update tbl_corrective_and_preventive_actions set nc_id='"+correctiveAndPreventiveActions.getNc_id()+"',capa_requestor='"+correctiveAndPreventiveActions.getCapa_requestor()+"',request_date='"+correctiveAndPreventiveActions.getRequest_date()+"',capa_due_date='"+correctiveAndPreventiveActions.getCapa_due_date()+"',assigned_team_leader='"+correctiveAndPreventiveActions.getAssigned_team_leader()+"',team_members='"+correctiveAndPreventiveActions.getTeam_members()+"',root_cause_analysis_file='"+correctiveAndPreventiveActions.getRoot_cause_analysis_file()+"',use_5_why_in_system='"+correctiveAndPreventiveActions.getUse_5_why_in_system()+"',why='"+correctiveAndPreventiveActions.getWhy()+"',root_cause_statement='"+correctiveAndPreventiveActions.getRoot_cause_statement()+"',upload_external_analysis='"+correctiveAndPreventiveActions.getUpload_external_analysis()+"',action='"+correctiveAndPreventiveActions.getAction()+"',responsibility='"+correctiveAndPreventiveActions.getResponsibility()+"',due_date='"+correctiveAndPreventiveActions.getDue_date()+"',completion_date='"+correctiveAndPreventiveActions.getCompletion_date()+"',verified_by='"+correctiveAndPreventiveActions.getVerified_by()+"',verification_date='"+correctiveAndPreventiveActions.getVerification_date()+"' where nc_id='"+correctiveAndPreventiveActions.getNc_id()+"'";
+			status = statement.execute(cmd_update);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+			releaseResultSet(resultSet);
+			releaseStatement(statement);
+			releaseConnection(con);
+		} finally {
+			releaseResultSet(resultSet);
+			releaseStatement(statement);
+			releaseConnection(con);
+		}
+		return status;
+
+	}
+	
+
 
 	public void releaseConnection(Connection con) {
 		try {

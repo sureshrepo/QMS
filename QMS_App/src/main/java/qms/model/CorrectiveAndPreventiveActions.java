@@ -4,6 +4,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 public class CorrectiveAndPreventiveActions
 {
+	private String capa_id;
 	private String nc_id;
 	private String source_of_nonconformance;
 	private String external_id;
@@ -27,10 +28,8 @@ public class CorrectiveAndPreventiveActions
 	private String completion_date;
 	private String verified_by;
 	private String verification_date;
-	public CorrectiveAndPreventiveActions(String nc_id,
-			String source_of_nonconformance, String external_id,
-			String type_of_nonconformance, String date_found,
-			String temporary_action, String capa_requestor,
+	public CorrectiveAndPreventiveActions(String capa_id,String nc_id,
+			 String capa_requestor,
 			String request_date, String capa_due_date,
 			String assigned_team_leader, String team_members,
 			String root_cause_analysis_file, String use_5_why_in_system,
@@ -39,12 +38,8 @@ public class CorrectiveAndPreventiveActions
 			String responsibility, String due_date, String completion_date,
 			String verified_by, String verification_date) {
 		super();
+		this.capa_id=capa_id;
 		this.nc_id = nc_id;
-		this.source_of_nonconformance = source_of_nonconformance;
-		this.external_id = external_id;
-		this.type_of_nonconformance = type_of_nonconformance;
-		this.date_found = date_found;
-		this.temporary_action = temporary_action;
 		this.capa_requestor = capa_requestor;
 		this.request_date = request_date;
 		this.capa_due_date = capa_due_date;
@@ -70,6 +65,12 @@ public class CorrectiveAndPreventiveActions
 	}
 	public String getNc_id() {
 		return nc_id;
+	}
+	public String getCapa_id() {
+		return capa_id;
+	}
+	public void setCapa_id(String capa_id) {
+		this.capa_id = capa_id;
 	}
 	public void setNc_id(String nc_id) {
 		this.nc_id = nc_id;

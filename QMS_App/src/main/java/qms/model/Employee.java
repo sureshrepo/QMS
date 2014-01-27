@@ -17,7 +17,7 @@ public class Employee
 	private String list_of_functions_needes;
 	@NotEmpty
 	private String documented_in;
-	@NotEmpty
+	/*@NotEmpty*/
 	private String qualified_by;
 	@NotEmpty
 	private String type_of_training;
