@@ -60,14 +60,14 @@ public class CustomersController
 				model.addAttribute("customersForm",customersForm);
 				model.addAttribute("Success","true");
 				model.addAttribute("id",customersDAO.getMax_customerID());	
-		        return "add_customers";
+		        return "view_customers";
 			}
     // model.addAttribute("id",customersDAO.getMax_customerID());
     customersDAO.insert_customer(customers);
     CustomersForm customersForm=new CustomersForm();
 	customersForm.setCustomers(customersDAO.getCustomers());
 	model.addAttribute("customersForm",customersForm);
-	return "add_customers";
+	return "edit_customers";
  	}
 	
 	@RequestMapping(value={"/updatecustomer"}, method = RequestMethod.POST)
