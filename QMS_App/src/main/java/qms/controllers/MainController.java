@@ -123,6 +123,6 @@ public class MainController {
 	@RequestMapping(value="/textmsgsettings", method=RequestMethod.GET)
 	public String textMsgSettings(ModelMap model) {
 		
-		return "textmsg";
+		return "sample_modal";
 	}
   }

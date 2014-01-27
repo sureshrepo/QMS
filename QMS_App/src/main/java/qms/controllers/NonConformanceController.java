@@ -56,18 +56,26 @@ public class NonConformanceController {
 	}
 
 	@RequestMapping(value = "/add_nonconformance", method = RequestMethod.POST)
-	public String addNonconformance_post(HttpSession session,@ModelAttribute("Nonconformance") @Valid NonConformance nonConformance,BindingResult result, ModelMap model) {
+	public String addNonconformance_post(HttpSession session,@ModelAttribute("Nonconformance") @Valid NonConformance nonConformance,BindingResult result,@ModelAttribute("CorrectiveAndPreventiveActions") @Valid CorrectiveAndPreventiveActions correctiveAndPreventiveActions,BindingResult result2,ModelMap model) {
 		session.setAttribute("nonconformance",nonConformance);
-         if (result.hasErrors())
+       System.out.println(nonConformance.getCost_of_nonconformance());
+       System.out.println(correctiveAndPreventiveActions.getAssigned_team_leader());
+		
+       if(nonConformance.getCorrective_action_required()=="1")
+       {
+		if (result.hasErrors()||result2.hasErrors())
 			{
 			
-				NonConformanceForm nonConformanceForm=new NonConformanceForm();
-				nonConformanceForm.setNonconformance(nonConformanceDAO.get_nonconformance());
-			    model.addAttribute("nonConformanceForm",nonConformanceForm);
-				model.addAttribute("Success","true");
-		        return "add_nonconformance";
+			model.addAttribute("id",nonConformanceDAO.get_maxid());
+				return "add_nonconformance";
 			}
-		nonConformanceDAO.insert_nonconformance(nonConformance);
+       }
+       else if(result.hasErrors())
+       {
+    	   model.addAttribute("id",nonConformanceDAO.get_maxid());
+			return "add_nonconformance"; 
+       }
+		nonConformanceDAO.insert_nonconformance(nonConformance,correctiveAndPreventiveActions);
 		NonConformanceForm nonConformanceForm=new NonConformanceForm();
 		nonConformanceForm.setNonconformance(nonConformanceDAO.get_nonconformance());
 	    model.addAttribute("nonConformanceForm",nonConformanceForm);

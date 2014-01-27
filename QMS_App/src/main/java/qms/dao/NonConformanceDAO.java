@@ -19,6 +19,7 @@ import org.springframework.web.servlet.view.document.AbstractExcelView;
 
 import qms.model.InternalAudits;
 import qms.model.NonConformance;
+import qms.model.CorrectiveAndPreventiveActions;
 
 public class NonConformanceDAO extends AbstractExcelView {
 	private DataSource dataSource;
@@ -70,7 +71,7 @@ public class NonConformanceDAO extends AbstractExcelView {
 		this.dataSource = dataSource;
 	}
 
-	public boolean insert_nonconformance(NonConformance nonConformance) {
+	public boolean insert_nonconformance(NonConformance nonConformance,CorrectiveAndPreventiveActions correctiveAndPreventiveActions) {
 		Connection con = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
@@ -82,7 +83,7 @@ public class NonConformanceDAO extends AbstractExcelView {
 			e1.printStackTrace();
 		}
 		try {
-			String cmd_insert = "insert into tbl_nonconformance(id,source_of_nonconformance,external_id,type_of_nonconformance,product_id,quantity_suspect,nature_of_nonconformance,date_found,reported_by,temporary_action,corrective_action_required,disposition_required,disposition,disposition_complete_date,name_of_disposition_responsibility,cost_of_nonconformance) values('"
+			String cmd_insert_nonconformance = "insert into tbl_nonconformance(id,source_of_nonconformance,external_id,type_of_nonconformance,product_id,quantity_suspect,nature_of_nonconformance,date_found,reported_by,temporary_action,corrective_action_required,disposition_required,disposition,disposition_complete_date,name_of_disposition_responsibility,cost_of_nonconformance) values('"
 					+ nonConformance.getId()
 					+ "','"
 					+ nonConformance.getSource_of_nonconformance()
@@ -114,7 +115,12 @@ public class NonConformanceDAO extends AbstractExcelView {
 					+ nonConformance.getNature_of_nonconformance()
 					+ "','"
 					+ nonConformance.getCost_of_nonconformance() + "')";
-			status = statement.execute(cmd_insert);
+			status = statement.execute(cmd_insert_nonconformance);
+			String cmd_insert_corrective="INSERT INTO tbl_corrective_and_preventive_actions(nc_id,capa_requestor,request_date,capa_due_date,assigned_team_leader,team_members,root_cause_analysis_file,use_5_why_in_system,why,root_cause_statement,upload_external_analysis,action,responsibility,due_date,completion_date,verified_by,verification_date) values('"+nonConformance.getId()+"','"+correctiveAndPreventiveActions.getCapa_requestor()+"','"+correctiveAndPreventiveActions.getRequest_date()+"','"+correctiveAndPreventiveActions.getCapa_due_date()+"','"+correctiveAndPreventiveActions.getAssigned_team_leader()+"','"+correctiveAndPreventiveActions.getTeam_members()+"','"+correctiveAndPreventiveActions.getRoot_cause_analysis_file()+"','"+correctiveAndPreventiveActions.getUse_5_why_in_system()+"','"+correctiveAndPreventiveActions.getWhy()+"','"+correctiveAndPreventiveActions.getRoot_cause_statement()+"','"+correctiveAndPreventiveActions.getUpload_external_analysis()+"','"+correctiveAndPreventiveActions.getAction()+"','"+correctiveAndPreventiveActions.getResponsibility()+"','"+correctiveAndPreventiveActions.getDue_date()+"','"+correctiveAndPreventiveActions.getCompletion_date()+"','"+correctiveAndPreventiveActions.getVerified_by()+"','"+correctiveAndPreventiveActions.getVerification_date()+"')";
+			status=statement.execute(cmd_insert_corrective);
+			
+				
+		
 		} catch (Exception e) {
 			System.out.println(e.toString());
 			releaseResultSet(resultSet);

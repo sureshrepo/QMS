@@ -20,10 +20,6 @@
                <td valign="top" align="left" class="input_txt1" width="20%"><input type="text" name="customer_id" class="input_txtbx1" style="width:200px;" value="<c:out value="${id }"/>"/><c:out value="${id }"/><br/><span class="err"></span></td>
                <td valign="middle" align="right" class="input_txt" width="20%"><span class="err">*</span>Media Type:</td>
                <td valign="top" align="left" class="input_txt" width="20%">
-               <!-- <select name="media_type" class="input_cmbbx1" onchange="">
-               <option onclick="toggle2(this.value);" value="Hard Copy">Hard Copy</option>
-               <option onclick="toggle2(this.value);" value="Electronic">Electronic</option>
-               </select> -->
                 <input type="radio" name="mediatype" onchange="toggle2(this.value);" value="0"   id="id_hardcopy"  checked/>Hard Copy&nbsp;&nbsp;&nbsp;<input type="radio" name="mediatype" onchange="toggle2(this.value);" value="1"  id="id_electronic" onchange="toggle2(this.value);" />Electronic&nbsp;&nbsp;&nbsp;<br/><span class="err"></span>
              
                

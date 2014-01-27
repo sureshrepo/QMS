@@ -18,6 +18,10 @@
  <bean id="employeeDAO" class="qms.dao.EmployeeDAO">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
+	<bean id="correctiveAndPreventiveActionsDAO" class="qms.dao.CorrectiveAndPreventiveActionsDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
 	<bean id="documentcontrolDAO" class="qms.dao.DocumentControlDAO">
 		<property name="dataSource" ref="dataSource" />
 	</bean>

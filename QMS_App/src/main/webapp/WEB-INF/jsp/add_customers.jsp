@@ -43,7 +43,7 @@
       <tr>
         <td valign="top" align="left"><div>
             <div class="headings altheading">
-              <h2>Add Customer</h2>
+              <h2>Add Customers</h2>
             </div>
             <div class="contentbox">
              <c:choose>
