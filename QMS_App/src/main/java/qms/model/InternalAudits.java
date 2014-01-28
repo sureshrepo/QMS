@@ -16,15 +16,18 @@ public class InternalAudits{
 	private String audit_due_date;
 	
 	private String auditor;
-	
+	@NotEmpty
 	private String auditor_notes;
 	
 	private String finding;
 	
+	@NotEmpty
 	private String completion_date;
 	
+	@NotEmpty
 	private String auditors_initials;
 	
+	@NotEmpty
 	private String auditee_name;
 	
 	

@@ -1,4 +1,4 @@
-<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <jsp:include page="header.jsp"></jsp:include>
 <div id="right_content">
@@ -70,7 +70,7 @@
 						         </tr> 
 								<tr class="row1">
 				                	<td valign="middle" align="left" class="input_txt">External ID :</td>
-				                  	<td valign="top" align="left" class="input_txt"><input type="text" value="<c:out value="${nonconformance.external_id}"/>"  class="input_txtbx1" id="inp_external_id" onmouseover="showTooltip('tooltip_id','inp_id3');" onmouseout="hideTooltip('tooltip_id');"  name="external_id" /></br><font color="Red" size="+1"></font></td>
+				                  	<td valign="top" align="left" class="input_txt"><input type="text" value="<c:out value="${nonconformance.external_id}"/>"  class="input_txtbx1" id="inp_external_id" onmouseover="showTooltip('tooltip_id','inp_id3');" onmouseout="hideTooltip('tooltip_id');"  name="external_id" /></br><span class="err"><form:errors path="Nonconformance.external_id"></form:errors></span></td>
 				                </tr> 
 								<tr class="row2">
 				                  	<td valign="middle" align="left" class="input_txt"> Type of NonConformance :</td>
@@ -85,26 +85,26 @@
 				                   	</td> </tr>	
 								<tr class="row1">
 					            	<td valign="middle" align="left" class="input_txt"> Product ID :</td>
-					                      	<td valign="top" align="left" class="input_txt"><input type="text" value="${nonconformance.product_id}" class="input_txtbx1" id="inp_product_id" onmouseover="showTooltip('tooltip_id','inp_id3');" onmouseout="hideTooltip('tooltip_id');"  name="product_id" /></br><font color="Red" size="+1"></font></td>
+					                      	<td valign="top" align="left" class="input_txt"><input type="text" value="${nonconformance.product_id}" class="input_txtbx1" id="inp_product_id" onmouseover="showTooltip('tooltip_id','inp_id3');" onmouseout="hideTooltip('tooltip_id');"  name="product_id" /></br><span class="err"><form:errors path="Nonconformance.product_id"></form:errors></span></td>
 				           
 					                  </tr>
 								<tr class="row2">
 				                 	<td valign="middle" align="left" class="input_txt"> Quantity Suspect :</td>
-				                                     	<td valign="top" align="left" class="input_txt"><input type="text" value="${nonconformance.quantity_suspect}" class="input_txtbx1" id="inp_quantity_suspect" onmouseover="showTooltip('tooltip_id','inp_id3');" onmouseout="hideTooltip('tooltip_id');"  name="quantity_suspect" /></br><font color="Red" size="+1"></font></td>
+				                                     	<td valign="top" align="left" class="input_txt"><input type="text" value="${nonconformance.quantity_suspect}" class="input_txtbx1" id="inp_quantity_suspect" onmouseover="showTooltip('tooltip_id','inp_id3');" onmouseout="hideTooltip('tooltip_id');"  name="quantity_suspect" /></br><span class="err"><form:errors path="Nonconformance.quantity_suspect"></form:errors></span></td>
 				    	</tr>
 						
 				                <tr class="row1">
 				                  	<td valign="middle" align="left" class="input_txt"> Nature of Non conformance :</td>
-				                  	<td valign="top" align="left" class="input_txt"><input type="text" value="${nonconformance.nature_of_nonconformance}" class="input_txtbx1" id="inp_nature_of_nonconformance" onmouseover="showTooltip('tooltip_id','inp_id3');" onmouseout="hideTooltip('tooltip_id');" name="nature_of_nonconformance"/></br><font color="Red" size="+1"></font></td>
+				                  	<td valign="top" align="left" class="input_txt"><input type="text" value="${nonconformance.nature_of_nonconformance}" class="input_txtbx1" id="inp_nature_of_nonconformance" onmouseover="showTooltip('tooltip_id','inp_id3');" onmouseout="hideTooltip('tooltip_id');" name="nature_of_nonconformance"/></br><span class="err"><form:errors path="Nonconformance.nature_of_nonconformance"></form:errors></span></td>
 				                </tr>
 								 <tr class="row2">
 				                 	<td valign="middle" align="left" class="input_txt"> Date Found :</td>
-				                  	                        	<td valign="top" align="left" class="input_txt"><input type="text" value="${nonconformance.date_found}" class="input_txtbx1" id="inp_date_found" onmouseover="showTooltip('tooltip_id','inp_id3');" onmouseout="hideTooltip('tooltip_id');"  name="date_found" /></br><font color="Red" size="+1"></font></td>
+				                  	                        	<td valign="top" align="left" class="input_txt"><input type="text" value="${nonconformance.date_found}" class="input_txtbx1" id="inp_date_found" onmouseover="showTooltip('tooltip_id','inp_id3');" onmouseout="hideTooltip('tooltip_id');"  name="date_found" /></br><span class="err"><form:errors path="Nonconformance.date_found"></form:errors></span></td>
 				  
 				                </tr>
 								<tr class="row1">
 				                	<td valign="top" align="left" class="input_txt">Reported By :</td>
-				                  	<td valign="top" align="left" class="input_txt"><input type="text" value="${nonconformance.reported_by}"  class="input_txtbx1" id="inp_reported_by" onmouseover="showTooltip('tooltip_id','inp_id3');" onmouseout="hideTooltip('tooltip_id');"  name="reported_by" /></br><font color="Red" size="+1"></font></td>
+				                  	<td valign="top" align="left" class="input_txt"><input type="text" value="${nonconformance.reported_by}"  class="input_txtbx1" id="inp_reported_by" onmouseover="showTooltip('tooltip_id','inp_id3');" onmouseout="hideTooltip('tooltip_id');"  name="reported_by" /></br><span class="err"><form:errors path="Nonconformance.reported_by"></form:errors></span></td>
 				       	</tr>
 						                 
               				</table>
@@ -114,7 +114,7 @@
 							  <tr class="row1"></tr>
 			                <tr class="row1">
 			                  <td valign="top" align="left" class="input_txt">Temporary Action(Memo):&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-			                  	<td valign="top" align="left" class="input_txt"><input type="text" value="${nonconformance.temporary_action}" class="input_txtbx1" id="inp_temporary_action" onmouseover="showTooltip('tooltip_id','inp_id3');" onmouseout="hideTooltip('tooltip_id');"  name="temporary_action" /></br><font color="Red" size="+1"></font></td>
+			                  	<td valign="top" align="left" class="input_txt"><input type="text" value="${nonconformance.temporary_action}" class="input_txtbx1" id="inp_temporary_action" onmouseover="showTooltip('tooltip_id','inp_id3');" onmouseout="hideTooltip('tooltip_id');"  name="temporary_action" /></br><span class="err"><form:errors path="Nonconformance.temporary_action"></form:errors></span></td>
 				   <font color="Red" size="+1"></font></td>
 			                </tr>
 		  					<tr class="row2">
@@ -139,15 +139,15 @@
 				                   	</td> </tr>	
 			            	<tr class="row1">
 			                  <td valign="top" align="left" class="input_txt"> Disposition Complete Date:</td>
-			                                	<td valign="top" align="left" class="input_txt"><input type="text" value="${nonconformance.disposition_complete_date}" class="input_txtbx1" id="inp_id" onmouseover="showTooltip('tooltip_id','inp_id3');" onmouseout="hideTooltip('tooltip_id');"  name="disposition_complete_date" /></br><font color="Red" size="+1"></font></td>
+			                                	<td valign="top" align="left" class="input_txt"><input type="text" value="${nonconformance.disposition_complete_date}" class="input_txtbx1" id="inp_id" onmouseover="showTooltip('tooltip_id','inp_id3');" onmouseout="hideTooltip('tooltip_id');"  name="disposition_complete_date" /></br><span class="err"><form:errors path="Nonconformance.disposition_complete_date"></form:errors></span></td>
 				      </tr>
 			          		<tr class="row2">
 			                  <td valign="top" align="left" class="input_txt"> Name of Disposition Responsibility:</td>
-			                             	<td valign="top" align="left" class="input_txt"><input type="text" value="${nonconformance.name_of_disposition_responsibility}" class="input_txtbx1" id="inp_id" onmouseover="showTooltip('tooltip_id','inp_id3');" onmouseout="hideTooltip('tooltip_id');"  name="name_of_disposition_responsibility" /></br><font color="Red" size="+1"></font></td>
+			                             	<td valign="top" align="left" class="input_txt"><input type="text" value="${nonconformance.name_of_disposition_responsibility}" class="input_txtbx1" id="inp_id" onmouseover="showTooltip('tooltip_id','inp_id3');" onmouseout="hideTooltip('tooltip_id');"  name="name_of_disposition_responsibility" /></br><span class="err"><form:errors path="Nonconformance.name_of_disposition_responsibility"></form:errors></span></td>
 				        </tr>
 			        		<tr class="row1">
 			                  <td valign="top" align="left" class="input_txt"> Cost of NonConformance:</td>
-			                            	<td valign="top" align="left" class="input_txt"><input type="text" value="${nonconformance.cost_of_nonconformance}" class="input_txtbx1" id="inp_id" onmouseover="showTooltip('tooltip_id','inp_id3');" onmouseout="hideTooltip('tooltip_id');"  name="cost_of_nonconformance" /></br><font color="Red" size="+1"></font></td>
+			                            	<td valign="top" align="left" class="input_txt"><input type="text" value="${nonconformance.cost_of_nonconformance}" class="input_txtbx1" id="inp_id" onmouseover="showTooltip('tooltip_id','inp_id3');" onmouseout="hideTooltip('tooltip_id');"  name="cost_of_nonconformance" /></br><span class="err"><form:errors path="Nonconformance.cost_of_nonconformance"></form:errors></span></td>
 				          </tr>
 			         	</table>
 			    	</td>

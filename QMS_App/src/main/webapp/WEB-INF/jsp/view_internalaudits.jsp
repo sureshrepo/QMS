@@ -65,8 +65,8 @@
 											
 											
 											<td valign="top" align="left" width="15%">
-											<a href="edit_internalaudit?id=<c:out value="${internalAudits.id}"/>">Edit</a>
-											<a href="delete_internalaudit?id=<c:out value="${internalAudits.id}"/>">Delete</a>
+											<a href="#" title="" ><img src="resources/images/icons/icon_edit.png" alt="Edit" /></a><a href="edit_internalaudit?id=<c:out value="${internalAudits.id}"/>">Edit</a>
+											<a href="#" title=""><img src="resources/images/icons/icon_delete.png" alt="Delete" /></a><a href="delete_internalaudit?id=<c:out value="${internalAudits.id}"/>" onclick="return confirmation()">Delete</a>
 											
 											</td>
 										</tr>
@@ -93,4 +93,17 @@
 							</table>
 							</form>
 						</div>
+						
+						
+<script>
+function confirmation(val) {
+	var answer = confirm("Are you Sure You Want to Internal Audits ?")
+	if (answer){
+		window.location = "?do=deleteparticipant&id="+val;
+	}
+	else{
+		
+	}
+}
+</script>
 <jsp:include page="footer.jsp"></jsp:include>

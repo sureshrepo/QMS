@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import qms.dao.InternalAuditsDAO;
 
+import qms.forms.CustomersForm;
 import qms.forms.InternalAuditsForm;
 
 import qms.model.InternalAudits;
@@ -42,8 +43,7 @@ public class InternalAuditsController {
 
 	// inserting audit
 	@RequestMapping(value = "/add_internalaudits", method = RequestMethod.POST)
-	public String insert_internalaudits(
-			HttpSession session,
+	public String insert_internalaudits(HttpSession session,
 			@ModelAttribute("InternalAudits") @Valid InternalAudits internalAudits,
 			BindingResult result, ModelMap model, Principal principal) {
 
@@ -74,8 +74,7 @@ public class InternalAuditsController {
 			ModelMap model, Principal principal) {
 		InternalAuditsForm internalAuditsForm = new InternalAuditsForm();
 
-		internalAuditsForm.setInternalAudits(internalAuditsDAO
-				.edit_internalaudit(id));
+		internalAuditsForm.setInternalAudits(internalAuditsDAO.edit_internalaudit(id));
 
 		model.addAttribute("internalAuditsForm", internalAuditsForm);
 
@@ -83,8 +82,19 @@ public class InternalAuditsController {
 	}
 
 	@RequestMapping(value = "/updateinternalaudits", method = RequestMethod.POST)
-	public String update_internalaudits(ModelMap model, Principal principal,
-			InternalAudits internalAudits) {
+	public String update_internalaudits(ModelMap model, Principal principal,@ModelAttribute("InternalAudits") @Valid InternalAudits internalAudits,
+			BindingResult result) {
+		
+		if (result.hasErrors())
+		{
+			
+			System.out.println("output");
+			InternalAuditsForm internalAuditsForm = new InternalAuditsForm();
+			internalAuditsForm.setInternalAudits(internalAuditsDAO.edit_internalaudit(internalAudits.getId()));
+			model.addAttribute("internalAuditsForm", internalAuditsForm);
+	        return "edit_internalaudit";
+		}
+		
 		internalAuditsDAO.update_internalaudits(internalAudits);
 
 		return "view_internalaudits";
@@ -107,7 +117,7 @@ public class InternalAuditsController {
 			ModelMap model, Principal principal) {
 
 		internalAuditsDAO.delete_internalAudits(id);
-		return "add_internalaudits";
+		return "view_internalaudits";
 	}
 
 	

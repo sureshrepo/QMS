@@ -1,5 +1,8 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<link rel="stylesheet" href="resources/css/jquery-ui.css" type="text/css" />
+<script src="resources/js/jquery.min.js"></script>
+ <script src="resources/js/jquery-ui.js"></script>
 
 <jsp:include page="header.jsp"></jsp:include>
 
@@ -58,11 +61,11 @@
 								
                 <tr class="row2">
                   <td valign="middle" align="right" class="input_txt" width="30%"><span class="err">*</span>Audit Start Date :</td>
-                  <td valign="top" align="left" class="input_txt" width="70%"><input type="text" name="audit_start_date" class="input_txtbx" id="inp_audit_start_date" onmouseover="showTooltip('tooltip_id','inp_id3');" onmouseout="hideTooltip('tooltip_id');" value='<c:out value="${internalaudits.audit_start_date}"></c:out>' /><br/><span class="err"><form:errors path="InternalAudits.audit_start_date"></form:errors></span></td>
+                  <td valign="top" align="left" class="input_txt" width="70%"><input type="text" name="audit_start_date" class="input_txtbx" id="datepicker" onmouseover="showTooltip('tooltip_id','inp_id3');" onmouseout="hideTooltip('tooltip_id');" value='<c:out value="${internalaudits.audit_start_date}"></c:out>' /><br/><span class="err"><form:errors path="InternalAudits.audit_start_date"></form:errors></span></td>
                 </tr>
                  <tr class="row1">
                   <td valign="middle" align="right" class="input_txt" width="30%"><span class="err">*</span>Audit Due Date :</td>
-                  <td valign="top" align="left" class="input_txt" width="70%"><input type="text" name="audit_due_date" class="input_txtbx" id="inp_audit_due_date" onmouseover="showTooltip('tooltip_id','inp_id3');" onmouseout="hideTooltip('tooltip_id');" value="" /><br/><span class="err"><form:errors path="InternalAudits.audit_due_date"></form:errors></span></td>
+                  <td valign="top" align="left" class="input_txt" width="70%"><input type="text" name="audit_due_date" class="input_txtbx" id="datepicker1" onmouseover="showTooltip('tooltip_id','inp_id3');" onmouseout="hideTooltip('tooltip_id');" value="" /><br/><span class="err"><form:errors path="InternalAudits.audit_due_date"></form:errors></span></td>
                 </tr>
 		<tr class="row2">
 						         	<td valign="middle" align="right" class="input_txt"> Auditor :</td>
@@ -77,7 +80,7 @@
 								
                       <tr class="row1">
                   <td valign="middle" align="right" class="input_txt" width="30%"> Auditor Notes :</td>
-                  <td valign="top" align="left" class="input_txt" width="70%"><input type="text" name="auditor_notes" class="input_txtbx" id="inp_auditor_notes" onmouseover="showTooltip('tooltip_id','inp_id3');" onmouseout="hideTooltip('tooltip_id');" value="" /></br><span class="err"></span></td>
+                  <td valign="top" align="left" class="input_txt" width="70%"><input type="text" name="auditor_notes" class="input_txtbx" id="inp_auditor_notes" onmouseover="showTooltip('tooltip_id','inp_id3');" onmouseout="hideTooltip('tooltip_id');" value="" /></br><span class="err"><form:errors path="InternalAudits.auditor_notes"></form:errors></span></td>
                 </tr>
                  <tr class="row2">
 						         	<td valign="middle" align="right" class="input_txt"> Finding :</td>
@@ -92,15 +95,15 @@
 				
                 <tr class="row1">
                   <td valign="middle" align="right" class="input_txt" width="30%"> Completion Date :</td>
-                  <td valign="top" align="left" class="input_txt" width="70%"><input type="text" name="completion_date" class="input_txtbx" id="inp_completion_date" onmouseover="showTooltip('tooltip_id','inp_id3');" onmouseout="hideTooltip('tooltip_id');" value="" /></br><span class="err"></span></td>
+                  <td valign="top" align="left" class="input_txt" width="70%"><input type="text" name="completion_date" class="input_txtbx" id="datepicker2" onmouseover="showTooltip('tooltip_id','inp_id3');" onmouseout="hideTooltip('tooltip_id');" value="" /></br><span class="err"><form:errors path="InternalAudits.completion_date"></form:errors></span></td>
                 </tr>
                 <tr class="row2">
                   <td valign="middle" align="right" class="input_txt" width="30%"> Auditor's Initials :</td>
-                  <td valign="top" align="left" class="input_txt" width="70%"><input type="text" name="auditors_initials" class="input_txtbx" id="inp_auditors_initials" onmouseover="showTooltip('tooltip_id','inp_id3');" onmouseout="hideTooltip('tooltip_id');" value="" /></br><span class="err"></span></td>
+                  <td valign="top" align="left" class="input_txt" width="70%"><input type="text" name="auditors_initials" class="input_txtbx" id="inp_auditors_initials" onmouseover="showTooltip('tooltip_id','inp_id3');" onmouseout="hideTooltip('tooltip_id');" value="" /></br><span class="err"><form:errors path="InternalAudits.auditors_initials"></form:errors></span></td>
                 </tr>
                 <tr class="row1">
                   <td valign="middle" align="right" class="input_txt" width="30%"> Auditee Name :</td>
-                  <td valign="top" align="left" class="input_txt" width="70%"><input type="text" name="auditee_name" class="input_txtbx" id="inp_auditee_name" onmouseover="showTooltip('tooltip_id','inp_id3');" onmouseout="hideTooltip('tooltip_id');" value="" /></br><span class="err"></span></td>
+                  <td valign="top" align="left" class="input_txt" width="70%"><input type="text" name="auditee_name" class="input_txtbx" id="inp_auditee_name" onmouseover="showTooltip('tooltip_id','inp_id3');" onmouseout="hideTooltip('tooltip_id');" value="" /></br><span class="err"><form:errors path="InternalAudits.auditee_name"></form:errors></span></td>
                 </tr>
                  <tr class="row2">
                  <td valign="middle" align="right" class="input_txt" width="30%"></td>
@@ -118,4 +121,22 @@
       </div>
       
 </form>
+   <script>
+ $(function() {
+           $( "#datepicker" ).datepicker();
+         });
+ 
+</script>
+   <script>
+ $(function() {
+           $( "#datepicker1" ).datepicker();
+         });
+ 
+</script>
+   <script>
+ $(function() {
+           $( "#datepicker2" ).datepicker();
+         });
+ 
+</script>
       <jsp:include page="footer.jsp"></jsp:include>

@@ -2,10 +2,24 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <jsp:include page="header.jsp"></jsp:include>
 
-<form method="post" action="edit_correctiveactions">
+<form method="post" action="update_corrective">
 
   <table cellpadding="0" cellspacing="0" border="0" width="98%" class="margin_table">
   <tr>
+  <td>
+  <div>
+  <ul class="horizmenu">
+  <li style=" float:left;margin-right:8px;text-transform:uppercase;">
+	<a href="view_correctiveactions" class="<c:choose><c:when test="${true}">select</c:when><c:otherwise></c:otherwise></c:choose>">
+	 <span>View Corrective Action </span>
+</a>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+<tr>
+
         <td valign="top" align="left"><div>
             <div class="headings altheading">
               <h2>Corrective and Preventive Actions</h2>
@@ -19,6 +33,10 @@
 												<table cellpadding="0" cellspacing="0" border="0" width="100%" >
 												 <c:set value="${correctiveAndPreventiveActionsForm.correctiveAndPreventiveActions[0]}" var="corrective"> </c:set>
 													<tr class="row2">
+													<input
+															type="hidden" class="input_txtbx1"
+															id="inp_nc_id"
+															name="nc_id" value="${corrective.nc_id}"/>
 														<td valign="middle" align="left" class="input_txt">
 															 CAPA Requester:</td>
 														<td valign="top" align="left" class="input_txt">
@@ -239,7 +257,7 @@
 														</td>
 													</tr>
 													 </tr>
-                 <tr>
+                 <tr >
                   <td valign="top" align="left">&nbsp;</td>
                   <td valign="top" align="left"><input type="submit" value="Submit" class="submit_btn1"></td>
                 </tr>

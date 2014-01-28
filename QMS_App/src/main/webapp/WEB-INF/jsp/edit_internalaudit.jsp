@@ -1,4 +1,4 @@
-<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <jsp:include page="header.jsp"></jsp:include>
 <div id="right_content">
@@ -70,12 +70,12 @@
 						         </tr> 
 								<tr class="row1">
 				                	<td valign="middle" align="left" class="input_txt">Audit Start Date :</td>
-				                  	<td valign="top" align="left" class="input_txt"><input type="text" value="<c:out value="${internalaudits.audit_start_date}"/>"  class="input_txtbx1" id="inp_external_id" onmouseover="showTooltip('tooltip_id','inp_id3');" onmouseout="hideTooltip('tooltip_id');"  name="audit_start_date" /></br><font color="Red" size="+1"></font></td>
+				                  	<td valign="top" align="left" class="input_txt"><input type="text" value="<c:out value="${internalaudits.audit_start_date}"/>"  class="input_txtbx1" id="inp_external_id" onmouseover="showTooltip('tooltip_id','inp_id3');" onmouseout="hideTooltip('tooltip_id');"  name="audit_start_date" /></br><span class="err"><form:errors path="InternalAudits.audit_start_date"></form:errors></span></td>
 				                </tr> 
 								<tr class="row2">
 				                  	<td valign="middle" align="left" class="input_txt"> Audit Due Date :</td>
 				                  	<td valign="top" align="left" class="input_txt">
-				                  	<input type="text" value="<c:out value="${internalaudits.audit_due_date}"/>"  class="input_txtbx1" id="inp_external_id" onmouseover="showTooltip('tooltip_id','inp_id3');" onmouseout="hideTooltip('tooltip_id');"  name="audit_due_date" /></br><font color="Red" size="+1"></font></td>
+				                  	<input type="text" value="<c:out value="${internalaudits.audit_due_date}"/>"  class="input_txtbx1" id="inp_external_id" onmouseover="showTooltip('tooltip_id','inp_id3');" onmouseout="hideTooltip('tooltip_id');"  name="audit_due_date" /></br><span class="err"><form:errors path="InternalAudits.audit_due_date"></form:errors></span></td>
 				                </tr> 
 				                  <tr class="row1">
 						         	<td valign="middle" align="left" class="input_txt"> auditor :</td>
@@ -91,7 +91,7 @@
 				       <tr class="row2">
 				                  	<td valign="middle" align="left" class="input_txt"> Audit Notes :</td>
 				                  	<td valign="top" align="left" class="input_txt">
-				                  	<input type="text" value="<c:out value="${internalaudits.auditor_notes}"/>"  class="input_txtbx1" id="inp_auditor_notes" onmouseover="showTooltip('tooltip_id','inp_id3');" onmouseout="hideTooltip('tooltip_id');"  name="auditor_notes" /></br><font color="Red" size="+1"></font></td>
+				                  	<input type="text" value="<c:out value="${internalaudits.auditor_notes}"/>"  class="input_txtbx1" id="inp_auditor_notes" onmouseover="showTooltip('tooltip_id','inp_id3');" onmouseout="hideTooltip('tooltip_id');"  name="auditor_notes" /></br><span class="err"><form:errors path="InternalAudits.auditor_notes"></form:errors></span></td>
 				                </tr>
 				                <tr class="row1">
 						         	<td valign="middle" align="centre" class="input_txt"> Finding :</td>
@@ -107,15 +107,15 @@
 				              
 			            	<tr class="row2">
 			                  <td valign="top" align="left" class="input_txt"> Completion Date:</td>
-			                                	<td valign="top" align="left" class="input_txt"><input type="text" value="${internalaudits.completion_date}" class="input_txtbx1" id="inp_id" onmouseover="showTooltip('tooltip_id','inp_id3');" onmouseout="hideTooltip('tooltip_id');"  name="completion_date" /></br><font color="Red" size="+1"></font></td>
+			                                	<td valign="top" align="left" class="input_txt"><input type="text" value="${internalaudits.completion_date}" class="input_txtbx1" id="inp_id" onmouseover="showTooltip('tooltip_id','inp_id3');" onmouseout="hideTooltip('tooltip_id');"  name="completion_date" /></br><span class="err"><form:errors path="InternalAudits.completion_date"></form:errors></span></td>
 				      </tr>
 			          		<tr class="row2">
 			                  <td valign="top" align="left" class="input_txt">Auditors Initials:</td>
-			                             	<td valign="top" align="left" class="input_txt"><input type="text" value="${internalaudits.auditors_initials}" class="input_txtbx1" id="inp_id" onmouseover="showTooltip('tooltip_id','inp_id3');" onmouseout="hideTooltip('tooltip_id');"  name="auditors_initials" /></br><font color="Red" size="+1"></font></td>
+			                             	<td valign="top" align="left" class="input_txt"><input type="text" value="${internalaudits.auditors_initials}" class="input_txtbx1" id="inp_id" onmouseover="showTooltip('tooltip_id','inp_id3');" onmouseout="hideTooltip('tooltip_id');"  name="auditors_initials" /></br><span class="err"><form:errors path="InternalAudits.auditors_initials"></form:errors></span></td>
 				        </tr>
 			        		<tr class="row1">
 			                  <td valign="top" align="left" class="input_txt">Auditee Name:</td>
-			                            	<td valign="top" align="left" class="input_txt"><input type="text" value="${internalaudits.auditee_name}" class="input_txtbx1" id="inp_id" onmouseover="showTooltip('tooltip_id','inp_id3');" onmouseout="hideTooltip('tooltip_id');"  name="auditee_name" /></br><font color="Red" size="+1"></font></td>
+			                            	<td valign="top" align="left" class="input_txt"><input type="text" value="${internalaudits.auditee_name}" class="input_txtbx1" id="inp_id" onmouseover="showTooltip('tooltip_id','inp_id3');" onmouseout="hideTooltip('tooltip_id');"  name="auditee_name" /></br><span class="err"><form:errors path="InternalAudits.auditee_name"></form:errors></span></td>
 				          </tr>
 			         	</table>
 			    	</td>

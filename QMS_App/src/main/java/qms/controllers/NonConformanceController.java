@@ -23,6 +23,7 @@ import org.springframework.ui.ModelMap;
 import qms.dao.FileHandlingDAO;
 import qms.dao.NonConformanceDAO;
 import qms.forms.CorrectiveAndPreventiveActionsForm;
+import qms.forms.CustomersForm;
 import qms.forms.MaintenanceForm;
 import qms.forms.NonConformanceForm;
 import qms.forms.ParticipantsDetailsForm;
@@ -107,10 +108,21 @@ public class NonConformanceController {
 	
 	
 	@RequestMapping(value = "/update_nonconformance", method = RequestMethod.POST)
-	public String editNonconformance_post(NonConformance nonConformance,ModelMap model) {
+	public String editNonconformance_post(ModelMap model,@ModelAttribute("Nonconformance") @Valid NonConformance nonConformance,BindingResult result) {
 
-	    nonConformanceDAO.update_nonconformance(nonConformance);
-		return "/edit_nonconformance";
+		if (result.hasErrors())
+		{
+			
+			System.out.println("output");
+			NonConformanceForm nonConformanceForm=new NonConformanceForm();
+			nonConformanceForm.setNonconformance(nonConformanceDAO.edit_nonconformance(nonConformance.getId()));
+			model.addAttribute("nonConformanceForm",nonConformanceForm);	
+	        return "edit_nonconformance";
+		}
+		
+		
+		nonConformanceDAO.update_nonconformance(nonConformance);
+		return "view_nonconformance";
 	}
 
 	
@@ -163,7 +175,7 @@ public class NonConformanceController {
 	   /* MaintenanceForm maintenanceForm= new MaintenanceForm();
 		maintenanceForm.setMaintenance(maintenanceDAO.getmaintenance());
 		model.addAttribute("maintenanceForm",maintenanceForm);*/
-	    return "view_correctiveactions";
+	    return "edit_correctiveactions";
 	}
 	
 	

@@ -166,6 +166,12 @@
 				            		<span><img src="<c:url value="/resources/images/document.png" />" alt="" style="padding:5px 5px 0 0;" />Internal Audits</span>
 				            	</a>
 				            </li>
+				              <hr width="90%"/>
+				             <li>
+				            	<a href="view_correctiveactions" class="<c:choose><c:when test="${true}">select</c:when><c:otherwise></c:otherwise></c:choose>">
+				            		<span><img src="<c:url value="/resources/images/document.png" />" alt="" style="padding:5px 5px 0 0;" />Corrective And Preventive Actions</span>
+				            	</a>
+				            </li>
 				            
 						</ul>  
 						</div>
