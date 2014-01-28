@@ -1,7 +1,8 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <jsp:include page="header.jsp"></jsp:include>
 <div id="right_content">
-	<form action="?do=viewparticipants" name="dashboard" method="POST">
+
+	
 		<table cellpadding="0" cellspacing="0" border="0" width="98%"
 			class="margin_table">
 <tr>
@@ -34,6 +35,23 @@
 							<h2>View Internal Audits</h2>
 						</div>
 						<div class="contentbox">
+						<form action="search_audits" name="dashboard" method="GET">
+<div style="border:#ccc 2px solid; padding:15px; margin-bottom:15px;">
+							<table width="100%" border="0" cellspacing="0" cellpadding="0">
+							  <tr>
+							    <td align="left" valign="middle" width="10%">Audit ID:</td>
+							    <td align="left" valign="middle" width="10%"><input type="text" name="id" class="input_txtbx1" id="id"></td>
+							    <td align="left" valign="middle" width="15%">&nbsp;Process:</td>
+							    <td align="left" valign="middle" width="10%"><input type="text" name="process" class="input_txtbx1" id="process"></td>
+							    <td align="left" valign="middle" width="15%">&nbsp;Auditee name:</td>
+							    <td align="left" valign="middle" width="10%"><input type="text" name="auditee_name" id="auditee_name" class="input_txtbx1"></td>
+							    <td align="center" valign="middle" width="38%">
+							  <input type="submit" class="submit_btn" name="search" id="id_submit" onmouseover="showTooltip('tooltip_id','inp_id3');" /></td>
+							  </tr>
+							</table>
+						</div>
+</form>
+					<form action="?do=viewparticipants" name="dashboard" method="POST">
 							<table cellpadding="0" cellspacing="0" border="0" width="100%">
 								<tr class="title">
 									<td valign="top" align="left" width="5%">Audit Id</td>

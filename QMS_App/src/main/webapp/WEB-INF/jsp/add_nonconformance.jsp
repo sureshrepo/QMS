@@ -198,9 +198,12 @@
 																</table>
 															</td>
 															<td align="left" valign="top">
-																<h2 class="quck-txt"></h2>
+																
 																<table cellpadding="0" cellspacing="0" border="0"
 																	width="100%">
+																	<h2 class="quck-txt"></h2>
+																	<tr></tr>
+																	<br/>
 																	<tr class="row1">
 																	<td colspan="2"></td></tr>
 																	<tr class="row1">

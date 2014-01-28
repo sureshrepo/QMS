@@ -165,6 +165,20 @@ public class InternalAuditsController {
 		return "internalaudit_report";
 	}
 	
+   @RequestMapping(value={"/search_audits"}, method = RequestMethod.GET)
 	
+	public String search_internalaudits(@RequestParam("id") String id,@RequestParam("process") String process,@RequestParam("auditee_name") String auditee_name,ModelMap model, Principal principal)
+{
+	System.out.println(id);
+	
+InternalAuditsForm internalAuditsForm= new InternalAuditsForm();
+	
+	internalAuditsForm.setInternalAudits(internalAuditsDAO.search_internalaudit(id,process,auditee_name));
+	
+	model.addAttribute("internalAuditsForm",internalAuditsForm);
+	
+    return "view_internalaudits";
+
+}
 	
 }
