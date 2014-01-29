@@ -653,6 +653,12 @@ ul.prev li{margin-right:50px; float:left; margin-bottom:20px;}
 	background:#f8fbfd;
 	border:1px solid #9fb7cd;
 }
+.input_cmbbx2 {
+	width:60px;
+	padding:3px;
+	
+}
+
 .input_cmbbx_big {
 	width:250px;
 	padding:3px;

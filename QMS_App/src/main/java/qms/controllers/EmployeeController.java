@@ -24,6 +24,7 @@ import qms.forms.CustomersForm;
 import qms.forms.EmployeeForm;
 import qms.forms.MaintenanceForm;
 
+import qms.dao.JobDAO;
 @Controller
 @SessionAttributes({"employees"})
 public class EmployeeController
@@ -31,10 +32,14 @@ public class EmployeeController
 	@Autowired
 	EmployeeDAO employeeDAO;
 	
+	@Autowired
+	JobDAO jobDAO;
+	
 	@RequestMapping(value={"/addemployee"},method=RequestMethod.GET)
 	public String addEmployee(HttpSession session,ModelMap model,Principal principal)
 	{
 		model.addAttribute("id",employeeDAO.getMax_employeeID());
+		model.addAttribute("job_id",jobDAO.get_maxid());
 		session.removeAttribute("employees");
 		return "add_employee";
 	}

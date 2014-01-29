@@ -15,9 +15,16 @@
 	<bean id="customerfeedbackDAO" class="qms.dao.CustomerFeedbackDAO">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
+	<bean id="processDAO" class="qms.dao.ProcessDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
  <bean id="employeeDAO" class="qms.dao.EmployeeDAO">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
+	<bean id="jobDAO" class="qms.dao.JobDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
 	<bean id="correctiveAndPreventiveActionsDAO" class="qms.dao.CorrectiveAndPreventiveActionsDAO">
 		<property name="dataSource" ref="dataSource" />
 	</bean>

@@ -565,7 +565,9 @@
 									
 					 <script>
  $(function() {
+	 var format="yy-mm-dd";
            $( "#datepicker" ).datepicker();
+           
          });
  
  $(function() {

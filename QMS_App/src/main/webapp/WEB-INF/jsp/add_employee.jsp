@@ -5,6 +5,76 @@
 <script src="resources/js/jquery.min.js"></script>
  <script src="resources/js/jquery-ui.js"></script>
 
+<!-- Modal -->
+
+<script src="resources/js/modal.js"></script>
+<script src="resources/js/popover.js"></script>
+<script src="resources/js/transition.js"></script>
+<script src="resources/js/jquery-1.7.2.min.js"></script>
+<link rel="stylesheet" url="resources/js/jquery.js" />
+
+
+<!-- Modal Ends -->
+
+<!-- Ajax -->
+<script type="text/javascript">
+$(window).load
+(
+		function()
+		{
+		$.ajax
+		(
+		{
+			type : "POST", url: "/QMS_App/ajax_getjob",
+        success: function(response)
+  	      {
+    		   $('#job_titles').html(response);
+   		  }
+		}
+		);
+}
+		);
+</script>
+
+
+<script type="text/javascript">
+
+function doAjaxPost() {
+		// get the form values  
+		alert("hit");
+		var job_id = $('#add_job_id').val();
+		var job_title=$('#add_job_title').val();
+		var job_desc=$('#add_job_desc').val();
+		/*   var education = $('#education').val();	 */		
+		$.ajax({
+			type : "POST",
+			url : "/QMS_App/ajax_addjob",
+			data : "job_id=" + job_id +"&job_title="+job_title+"&job_desc="+job_desc,
+			success : function(response) {
+				// we have the response  
+				$('#job_titles').html(response);
+			//document.getElementById("newjob").style.display="none";
+				//  $('#education').val(''); */
+			},
+			error : function(e) {
+				alert('Error: ' + e);
+			}
+		});
+	}
+</script>
+	<!-- End Ajax -->
+
+
+
+
+
+
+
+
+
+
+
+
 <form method="post" action="addemployee">
   <div id="right_content">
     <table cellpadding="0" cellspacing="0" border="0" width="98%" class="margin_table">
@@ -30,7 +100,7 @@
       <tr>
         <td valign="top" align="left"><div>
             <div class="headings altheading">
-              <h2>Add Employee</h2>
+              <h2>Add Employee</h2><div id="info"></div>
             </div>
             <div class="contentbox">
             <c:choose>
@@ -46,7 +116,7 @@
                 </tr>
 		<tr class="row2">
                   <td valign="middle" align="right" class="input_txt" width="30%"><span class="err">*</span> Job Title :</td>
-               	<td valign="top" align="left" class="input_txt" width="70%"><input type="text" name="job_title" class="input_txtbx" id="inp_name" onmouseover="showTooltip('tooltip_id','inp_id3');" onmouseout="hideTooltip('tooltip_id');" value="" /></br><span class="err"><form:errors path="Employee.job_title"></form:errors></span></td>
+               	<td valign="top" align="left" class="input_txt" width="70%"><span id="job_titles"></span>&nbsp;&nbsp;<a href="#newjob" data-toggle="modal">Add New Job</a><br/><span class="err"><form:errors path="Employee.job_title"></form:errors></span></td>
    
 									  </tr>
                 <tr class="row1">
@@ -158,6 +228,43 @@
               </c:otherwise>
               </c:choose>
               
+              
+              
+              <div id="newjob" class="modal hide fade" style="display: none; " >
+              <div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">×</button>
+		<h2>Add New Job</h2>
+		</div>
+		<table cellpadding="0" cellspacing="0" border="0" width="100%">
+                <tr class="row2">
+                  <td valign="middle" align="right" class="input_txt" width="30%"><span class="err">*</span><label>Job ID:</label></td>
+                  <td valign="top" align="left" class="input_txt" width="70%"><input type="hidden" name="add_job_id" id="add_job_id" value="<c:out value="${job_id}"/>"/><c:out value="${job_id }"/><br/><span class="err"></span></td>
+                </tr>
+                <tr class="row1">
+                  <td valign="middle" align="right" class="input_txt" width="30%"><span class="err">*</span>Job Name :</td>
+                  <td valign="top" align="left" class="input_txt" width="70%"><input type="text" name="add_job_title" id="add_job_title" class="input_txtbx" id="inp_name" onmouseover="showTooltip('tooltip_id','inp_id3');" onmouseout="hideTooltip('tooltip_id');" value="${employee.name}" /></br><span class="err"><form:errors path="Employee.name"></form:errors></span></td>
+                </tr>
+		<tr class="row2">
+                  <td valign="middle" align="right" class="input_txt" width="30%"><span class="err">*</span> Job Description:</td>
+               	<td valign="top" align="left" class="input_txt" width="70%"><input type="text" name="job_description" id="add_job_desc" class="input_txtbx" id="inp_name" onmouseover="showTooltip('tooltip_id','inp_id3');" onmouseout="hideTooltip('tooltip_id');" value="${employee.job_title}" /></br><span class="err"><form:errors path="Employee.job_title"></form:errors></span></td>
+   
+									  </tr>
+                <tr class="row1">
+                  <td valign="middle" align="right" class="input_txt" width="30%"></td>
+                  <td valign="top" align="left" class="input_txt" width="70%"><input type="button" class="submit_btn1" value="Submit" onclick="doAjaxPost()" data-dismiss="modal" /><form:errors path="Employee.date_hired"></form:errors></span></td>
+                </tr>
+                <tr class="row2">
+                  <td valign="middle" align="right" class="input_txt" width="30%"></td>
+                  <td valign="top" align="left" class="input_txt" width="70%"></td>
+                </tr>
+                </table>
+              </div>             
+              
+              
+              
+              
+              
+              
             </div>
           </div></td>
       </tr>
@@ -181,6 +288,8 @@
  $(function() {
            $( "#datepicker2" ).datepicker();
          });
+ 
+
  
 </script>
                <script>

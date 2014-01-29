@@ -155,7 +155,7 @@ public class DocumentControlDAO
 	}
 	
 	
-	public boolean insert_document(DocumentMain documentMain,ExternalDocument externalDocument)
+	public boolean insert_document(DocumentMain documentMain,List<ExternalDocument> externalDocument)
 	{
 		Connection con = null;
 		Statement statement = null;
@@ -169,10 +169,16 @@ public class DocumentControlDAO
 				e1.printStackTrace();
 		}
 		  try{
-			  String cmd_insert1="insert into tbl_doccontrol_main(document_id,document_title,media_type,location,external) values('"+documentMain.getDocument_id()+"','"+documentMain.getDocument_title()+"','"+documentMain.getMedia_type()+"','"+documentMain.getLocation()+"','"+documentMain.getExternal()+"')";
-			  String cmd_insert2="insert into tbl_doccontrol_external(document_id,issuer,revision_level,date,approver1,approver2,approver3,comments,status) values('"+externalDocument.getEdocument_id()+"','"+externalDocument.getIssuer()+"','"+externalDocument.getRevision_level()+"','"+externalDocument.getDate()+"','"+externalDocument.getApprover1()+"','"+externalDocument.getApprover2()+"','"+externalDocument.getApprover3()+"','"+externalDocument.getComments()+"','"+externalDocument.getStatus()+"')";
+			  String cmd_insert1="insert into tbl_doccontrol_main(document_id,document_title,media_type,location,external,attachment_name,attachment_type,attachment_referrence) values('"+documentMain.getDocument_id()+"','"+documentMain.getDocument_title()+"','"+documentMain.getMedia_type()+"','"+documentMain.getLocation()+"','"+documentMain.getExternal()+"','"+documentMain.getAttachment_name()+"','"+documentMain.getAttachment_type()+"','"+documentMain.getAttachment_referrence()+"')";
 			  statement.execute(cmd_insert1);
-			  statement.execute(cmd_insert2);
+			  
+			  String cmd_insert2="";
+			  for (ExternalDocument externalDocument2 : externalDocument) {
+				 cmd_insert2="insert into tbl_doccontrol_external(document_id,issuer,revision_level,date,approver1,approver2,approver3,comments,status) values('"+documentMain.getDocument_id()+"','"+externalDocument2.getIssuer()+"','"+externalDocument2.getRevision_level()+"','"+externalDocument2.getDate()+"','"+externalDocument2.getApprover1()+"','"+externalDocument2.getApprover2()+"','"+externalDocument2.getApprover3()+"','"+externalDocument2.getComments()+"','"+externalDocument2.getStatus()+"')";
+				 statement.execute(cmd_insert2);
+			}
+			 
+			 
 		  }catch(Exception e){
 	    	System.out.println(e.toString());
 	    	releaseResultSet(resultSet);
