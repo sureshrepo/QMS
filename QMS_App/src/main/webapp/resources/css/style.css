@@ -389,18 +389,17 @@ ul.pagination li.page a:hover {
 
 
 
-.select, .unselect:hover, .login:hover {
+/* .select, .unselect:hover, .login:hover {
 	background:url(../images/menu-sel-left.gif) 0 0 no-repeat;
 	display:block;
 }
-<<<<<<< .mine
+
 .select:hover
 {
 	background-color:red;
 	color:red;
 	}
-=======
->>>>>>> .r31
+ */
 
 
 .select span, .unselect:hover span, .login:hover span,.select:hover span {
