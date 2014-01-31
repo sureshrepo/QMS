@@ -50,38 +50,10 @@ public class DocumentController {
 
 	@Autowired
 	EmployeeDAO employeeDAO;
-<<<<<<< .mine
-
+	
 	@Autowired
 	FileHandlingDAO fileHandlingDAO;
 
-	@RequestMapping(value = { "/adddocument" }, method = RequestMethod.GET)
-	public String add_document(HttpSession session, ModelMap model,
-			Principal principal) {
-
-		List<ExternalDocument> tempDocuments = new ArrayList<ExternalDocument>();
-		session.setAttribute("temp_list", tempDocuments);
-		/*
-		 * To generate process drop down
-		 */
-		ProcessForm processForm = new ProcessForm();
-		processForm.setProcesses(processDAO.getProcess());
-		model.addAttribute("processForm", processForm);
-
-		/*
-		 * Load Employee list
-		 */
-
-		EmployeeForm employeeForm = new EmployeeForm();
-		employeeForm.setEmployees(employeeDAO.getEmployees());
-		model.addAttribute("employeeForm", employeeForm);
-
-		model.addAttribute("id", "1001");
-		return "add_documents";
-	}
-
-=======
-	
 	@RequestMapping(value={"/adddocument"}, method = RequestMethod.GET)
 	public String add_document(HttpSession session,ModelMap model, Principal principal )
 	{
@@ -106,8 +78,7 @@ session.setAttribute("temp_list",tempDocuments);
     model.addAttribute("menu","document");
     return "add_documents";
  	}
-	
->>>>>>> .r31
+
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = { "/insert_documents" }, method = RequestMethod.POST)
 	public String insert_document(HttpSession session,
@@ -196,17 +167,9 @@ session.setAttribute("temp_list",tempDocuments);
 		}
 		else
 			return "add_documents";
-	}
-<<<<<<< .mine
-
-=======
-	
-	model.addAttribute("id","1001");
-	model.addAttribute("menu","document");
-    return "add_documents";
  	}
 	
->>>>>>> .r31
+
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = { "/addexternaldoc" }, method = RequestMethod.POST)
 	public @ResponseBody
