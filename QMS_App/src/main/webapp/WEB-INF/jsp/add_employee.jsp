@@ -99,6 +99,7 @@ function doAjaxPost() {
 							</li>
 						
 				           </ul>
+				            </ul>
   </div>
         </td>
       </tr>

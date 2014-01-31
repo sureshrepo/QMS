@@ -10,8 +10,9 @@
 * {
 	margin:0;
 	padding:0;
-	font-family:Arial, Helvetica, sans-serif, "Myriad Pro", Calibri;
+	font-family:Calibri;
 	font-size:12px;
+	
 }
 .clear {
 	clear:both;
@@ -193,10 +194,10 @@ ul.login-list li p {
 .row1 td {
 	background:#fff;
 	padding:5px 10px;
-	font-size:11px;
+	font-size:19px;
 	line-height:16px;
 	border-bottom:1px solid #e5e5e5;
-	font-size:12px;
+	font-size:13px;
 }
 .row2 td {
    background:#f5f5f5;	 
@@ -205,7 +206,7 @@ ul.login-list li p {
 	font-size:11px;
 	line-height:16px;
 	border-bottom:1px solid #e5e5e5;
-	font-size:12px;
+	font-size:13px;
 }
 .row1 td a, .row2 td a, .row_hover td a {
 	color:#1175c9;
@@ -380,10 +381,26 @@ ul.pagination li.page a:hover {
  	margin-right:8px;
 	text-transform:uppercase;
 }
+
+.menu li .select
+{
+	color:blue;
+	}
+
+
+
 .select, .unselect:hover, .login:hover {
-/* 	background:url(../images/menu-sel-left.gif) 0 0 no-repeat;
- */	display:block;
+	background:url(../images/menu-sel-left.gif) 0 0 no-repeat;
+	display:block;
 }
+<<<<<<< .mine
+.select:hover
+{
+	background-color:red;
+	color:red;
+	}
+=======
+>>>>>>> .r31
 
 
 .select span, .unselect:hover span, .login:hover span,.select:hover span {
@@ -585,6 +602,8 @@ ul.pagination li.page a:hover {
 }
 .success {
 	border: 3px solid #8EA534;
+	margin-left:190px;
+	margin-top:20px;
 	background: #CBDA8F url(../images/bg_fade_green_med.png) repeat-x top;
 }
 .success span {

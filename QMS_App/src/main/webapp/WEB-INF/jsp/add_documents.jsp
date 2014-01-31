@@ -1,108 +1,54 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <jsp:include page="header.jsp"></jsp:include>
 	<script src="/QMS_App/resources/js/jquery.js"></script>
-<script type="text/javascript">
- $(window).load(function(){
-var oldValue = "";
-$("#save_exdocument").click(function() {
-	alert("java");
-	var issuer = $('#issuer').val();
-	var document_id=$('#document_type').val()+'-'+$('#document_id').val();;
-	var approver1=$('#approver1').val();
-	var approver2=$('#approver2').val();
-	var approver3=$('#approver3').val();
-	var revision_level=$('#revision_level').val();
-	var date=$('#date').val();
-	var comments=$('#comments').val();
-	var status=$('#status').val();
-	$.ajax({
-		type : "POST",
-		url : "/QMS_App/addexternaldoc",
-		data : "issuer="+issuer+"&document_id="+document_id+"&approver1="+approver1+"&approver2="+approver2+"&approver3="+approver3+"&revision_level="+revision_level+"&date="+date+"&comments="+comments+"&status="+status,
-		success : function(response) {
-			// we have the response  
-			$('#document_table').html(response);
-			  var e = document.getElementById('external_doc_table');
-		      // var e1=document.getElementById('employee');
-		if(value==0)
-		       {
-			e.style.display="none";
-		       }
-		else
-		       {
-			e.style.display="block";
-		       }
-			/*     $('#education').val(''); */
-		},
-		error : function(e) {
-			alert('Error: ' + e);
-		}
-	});
-})
-$("#remove").click(function() {
-	alert("java");
-	var issuer = $('#issuer').val();
-	var document_id=$('#document_type').val()+'-'+$('#document_id').val();;
-	var approver1=$('#approver1').val();
-	var approver2=$('#approver2').val();
-	var approver3=$('#approver3').val();
-	var revision_level=$('#revision_level').val();
-	var date=$('#date').val();
-	var comments=$('#comments').val();
-	var status=$('#status').val();
-	$.ajax({
-		type : "POST",
-		url : "/QMS_App/addexternaldoc",
-		data : "issuer="+issuer+"&document_id="+document_id+"&approver1="+approver1+"&approver2="+approver2+"&approver3="+approver3+"&revision_level="+revision_level+"&date="+date+"&comments="+comments+"&status="+status,
-		success : function(response) {
-			// we have the response  
-			$('#document_table').html(response);
-			  var e = document.getElementById('external_doc_table');
-		      // var e1=document.getElementById('employee');
-		if(value==0)
-		       {
-			e.style.display="none";
-		       }
-		else
-		       {
-			e.style.display="block";
-		       }
-			/*     $('#education').val(''); */
-		},
-		error : function(e) {
-			alert('Error: ' + e);
-		}
-	});
-})
-});
-
- 
- 
-</script>
  <form method="post" enctype="multipart/form-data" action="insert_documents">
+ 
   <div id="right_content">
     <table cellpadding="0" cellspacing="0" border="0" width="98%" class="margin_table">
-      <tr>
-        <td valign="top" align="left" style="padding:5px 0 10px 0;"></td>
+     <tr>
+        <td>
+        <div>
+  <ul class="horizmenu">
+						
+							<li style=" float:left;margin-right:8px;text-transform:uppercase;">
+								<a href="adddocument" class="select">
+									<span>Add Documents</span>
+								</a>
+							</li>
+						
+				           <li style=" float:left;margin-right:8px;text-transform:uppercase;">
+				            	<a href="viewdocuments" class="select">
+				            		<span>View Documents</span>
+				            	</a>
+				            </li>
+				             <li style=" float:left;margin-right:8px;text-transform:uppercase;">
+				            	<a href="document_report" class="select">
+				            		<span>Reports</span>
+				            	</a>
+				            </li>
+				            </ul>
+  </div>
+        </td>
       </tr>
+     
       <tr>
-        <td valign="top" align="left"><div>
+        <td valign="top" align="left">
             <div class="headings altheading">
               <h2>&nbsp;&nbsp;Add Document</h2>
             </div>
             <div class="contentbox">
-            <center>
+            
               <table cellpadding="0" cellspacing="0" border="0" width="100%">
              <tr class="row1">
                <td valign="middle" align="right" class="input_txt" width="15%"><span class="err">*</span>Document ID:</td>
-               <td valign="top" align="left" class="input_txt1" width="15%"><select name="document_type" id="document_type" class="input_cmbbx1" style="width:57px;">
+               <td valign="top" align="left" class="input_txt1" width="15%"><select name="document_type" id="document_type" class="input_cmbbx1" style="width:57px;border:none;">
                <option value="PM">PM</option>
                <option value="QSP">QSP</option>
                <option value="WI">WI</option>
                <option value="SD">SD</option>
                <option value="GR">GR</option>
                <option value="SP">SP</option>
-               </select><input type="hidden" name="document_id_hidden"  class="input_txtbx1" style="width:200px;" value="<c:out value="${id }"/>"/>&nbsp;-&nbsp;<input type="text" value="" id="document_id" class="input_txtbx1" style="height:25px;width:50px;" name="document_id"/><br/><span class="err"></span></td>
+               </select><input type="hidden" name="document_id_hidden"  class="input_txtbx1" style="width:200px;" value="<c:out value="${id }"/>"/><input type="text" value="" id="document_id" class="input_txtbx1" style="height:25px;width:50px;border:none;" name="document_id"/><br/><span class="err"></span></td>
                <td valign="middle" align="right" class="input_txt" width="20%"><span class="err">*</span>Media Type:</td>
                <td valign="top" align="left" class="input_txt" width="20%">
                <!-- <select name="media_type" class="input_cmbbx1" onchange="">
@@ -157,7 +103,7 @@ $("#remove").click(function() {
                
                <select name="process" id="id_inpprocess" class="input_cmbbx1" style="width:200px;">
                <c:forEach items="${processForm.processes}" var="processes" varStatus="true">
-               <option value="<c:out value="good"/>"><c:out value="${processes.process_name}"/></option>
+               <option value="<c:out value="${processes.process_name}"/>"><c:out value="${processes.process_name}"/></option>
                </c:forEach>
                
                
@@ -176,40 +122,15 @@ $("#remove").click(function() {
                <td valign="middle" align="right" class="input_txt" width="20%"><span class="err">*</span>External Document(Y/N):</td>
                <td valign="top" align="left" class="input_txt" width="25%">
                
-              <input type="radio" name="external" value="1" onchange="toggle3(this.value);"  id="id_yesforexternal">Yes&nbsp;&nbsp;&nbsp;<input type="radio" name="external" value="0" id="id_noforexternal" onchange="toggle3(this.value);"  checked>No&nbsp;&nbsp;&nbsp;<br/><span class="err"></span>
+              <input type="radio" name="external" value="1"  id="id_yesforexternal">Yes&nbsp;&nbsp;&nbsp;<input type="radio" name="external" value="0" id="id_noforexternal"  checked>No&nbsp;&nbsp;&nbsp;<br/><span class="err"></span>
                
                </td>
             <td valign="top" align="left" class="input_txt" width="20%"><span class="err"></span></td>
               
              </tr>  
              
-              
-            
-             <tr>
-             <td colspan="5" style="padding:5px 0px 5px 0px;">
-              <table cellpadding="0" cellspacing="0" border="0" width="100%" id="document_table">
-		    	</table>
-		    	</td>
-		    	</tr>
-		    	<tr>
-             <td colspan="5">
-             
-             
-             <div id="external_doc_table" style="display:none;padding:5px;">
-            
-             <table cellpadding="0" cellspacing="0"  width="100%" style="border:solid 2px gainsboro;">
-             <tr class="row1">
-         <td colspan="5">
-         <h2>Add External Document</h2>
-         </td>
-             </tr>  
-          	<tr>
-						<td >
-            <table cellpadding="0" cellspacing="0" border="0" width="100%">
-             <tr class="row2" style="border:none;">
-            <!--     <td valign="middle" align="right" class="input_txt" width="25%"><span class="err">*</span></td>
-               <td valign="top" align="left" class="input_txt" width="20%"></td>
-            -->
+		      <tr class="row1" style="border:none;">
+           
             <td valign="middle" align="right" class="input_txt" width="25%"><span class="err">*</span>Issuer:</td>
                <td valign="top" align="left" class="input_txt" width="20%">
                
@@ -236,7 +157,7 @@ $("#remove").click(function() {
                </td>
               <td valign="top" align="left" class="input_txt" width="20%"><span class="err"></span></td>
                  </tr>  
-              <tr class="row1" style="border:none;">
+              <tr class="row2" style="border:none;">
               
                 <td valign="middle" align="right" class="input_txt" width="25%"><span class="err">*</span>Revision Level:</td>
                <td valign="top" align="left" class="input_txt" width="20%"><input type="text" id="revision_level" name="revision_level" class="input_txtbx1" style="width:200px;" value=""/><br/><span class="err"></span></td>
@@ -253,7 +174,7 @@ $("#remove").click(function() {
                <br/><span class="err"></span></td>
             <td valign="top" align="left" class="input_txt" width="20%"><span class="err"></span></td>
              </tr>
-             <tr class="row2" style="border:none;">
+             <tr class="row1" style="border:none;">
               
                <td valign="middle" align="right" class="input_txt" width="25%"><span class="err">*</span>Date:</td>
                <td valign="top" align="left" class="input_txt" width="20%"><input type="text" id="date" name="date" class="input_txtbx1" style="width:200px;" value=""/><br/><span class="err"></span></td>
@@ -274,7 +195,7 @@ $("#remove").click(function() {
                <br/><span class="err"></span></td>
            <td valign="top" align="left" class="input_txt" width="20%"><span class="err"></span></td>
              </tr>  
-              <tr class="row1" style="border:none;">
+              <tr class="row2" style="border:none;">
                  <td valign="middle" align="right" class="input_txt"><span class="err">*</span>Comments:</td>
                <td valign="top" align="left"><textarea class="input_txtbx1" id="comments"  name="comments"  style="width:100%; height: 89px;" ></textarea><br/><span class="err"></span></td>
          
@@ -290,64 +211,23 @@ $("#remove").click(function() {
                <br/><span class="err"></span></td>
             <td valign="top" align="left" class="input_txt" width="20%"><span class="err"></span></td>
              </tr>
-              <tr class="row2">
-              
-               <td valign="middle" align="left" colspan="2"><input type="button" id="save_exdocument" name="save_exdocument" value="Add" class="submit_btn"></td>
              
-             </tr>
-             <!-- <tr class="row1">
-                  <td valign="top" align="right">&nbsp;</td>
-                  <td valign="top" align="right"  colspan="3"><input type="button" name="save_exdocument" value="One More Document" class="submit_btn2"></td>
-                </tr> --></table>
-                 </td></tr>
-             </table></div>
-             
-             
-             </td>
-             </tr>
              
              <tr class="row1" >
              <td colspan="2" align="right">
-             <input type="submit" id="save_exdocument"  name="save_exdocument" value="Submit" class="submit_btn"></td>
+             <input type="submit" id="export"  name="export" value="Submit" class="submit_btn"></td>
              <td colspan="3">
-            <input type="reset" id="save_exdocument" name="save_exdocument" value="Reset" class="submit_btn"></td>
+            <input type="reset" id="reset_export" name="reset_export" value="Reset" class="submit_btn"></td>
             
              </tr>
-             
-             
-             
+            
                      
               </table>
-              
-             </center> 
-            </div>
-          </div></td>
-      </tr>
-      </table>
-    
-      </div>
+           
+           
+      </div></td></tr></table></div>
       
 </form>
- <script type="text/javascript">
-function toggle3(value){
-     
-       var e = document.getElementById('external_doc_table');
-       var e1=document.getElementById("document_table");
-      // var e1=document.getElementById('employee');
-if(value==0)
-       {
-	e.style.display="none";
-	e1.style.display="none";
-       }
-else
-       {
-	e.style.display="block";
-	e1.style.display="block";
-       }
-       
-}
-</script>
-
 <script type="text/javascript">
 function toggle2(value){
   

@@ -6,20 +6,96 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
+
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFCellStyle;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.hssf.util.HSSFColor;
+import org.springframework.web.servlet.view.document.AbstractExcelView;
 
 import qms.model.DocumentMain;
 import qms.model.Employee;
 import qms.model.ExternalDocument;
+import qms.model.NonConformance;
 
-public class DocumentControlDAO
+public class DocumentControlDAO extends AbstractExcelView
 {
 	private DataSource dataSource;
 	 
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
 	}
+	
+	/**
+	 * Excel Sheet Generation
+	 */
+	
+	@Override
+	protected void buildExcelDocument(Map model, HSSFWorkbook workbook,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+
+		HSSFSheet excelSheet = workbook.createSheet("Animal List");
+		setExcelHeader(excelSheet);
+		
+		@SuppressWarnings("unchecked")
+		List<DocumentMain> documentMains = (List<DocumentMain>) model.get("documentMains");
+		String[] fields=(String[])model.get("fields");
+		setExcelRows(excelSheet,documentMains,fields);
+		
+	}
+	
+	
+	public void setExcelHeader(HSSFSheet excelSheet) {
+		HSSFRow excelHeader = excelSheet.createRow(0);
+		excelHeader.createCell(0).setCellValue("ID");
+		excelHeader.createCell(1).setCellValue("Name");
+		excelHeader.createCell(2).setCellValue("Type");
+		excelHeader.createCell(3).setCellValue("Aggressive");
+		excelHeader.createCell(4).setCellValue("Weight");
+	}
+	
+	
+	//End
+	
+	
+	public void setExcelRows(HSSFSheet excelSheet, List<DocumentMain> documentMains,String[] fields){
+		int record = 1;
+		for (DocumentMain documentMain:documentMains){	
+			HSSFRow excelRow = excelSheet.createRow(record++);
+			for(String field:fields)
+			{
+				if (field.equals("document_id")) 
+				{
+					excelRow.createCell(0).setCellValue(
+							documentMain.getDocument_id());
+				}
+				else if (field.equals("document_title")) {
+					excelRow.createCell(1).setCellValue(
+							documentMain.getDocument_title());
+				} else if (field.equals("document_type")) {
+					excelRow.createCell(2).setCellValue(
+							documentMain.getDocument_type());
+				} else if (field.equals("media_type")) {
+					excelRow.createCell(3).setCellValue(
+							documentMain.getMedia_type());
+				} else if (field.equals("process")) {
+					excelRow.createCell(4).setCellValue(
+							documentMain.getProcess());
+				}
+				
+			}
+		}
+	}
+	
+	
 	
 	public String getMax_employeeID(){
 		Connection con = null;
@@ -155,7 +231,7 @@ public class DocumentControlDAO
 	}
 	
 	
-	public boolean insert_document(DocumentMain documentMain,List<ExternalDocument> externalDocument)
+	public boolean insert_document(DocumentMain documentMain)
 	{
 		Connection con = null;
 		Statement statement = null;
@@ -169,49 +245,18 @@ public class DocumentControlDAO
 				e1.printStackTrace();
 		}
 		  try{
-			  String cmd_insert1="insert into tbl_doccontrol_main(document_id,document_title,media_type,location,external,attachment_name,attachment_type,attachment_referrence) values('"+documentMain.getDocument_id()+"','"+documentMain.getDocument_title()+"','"+documentMain.getMedia_type()+"','"+documentMain.getLocation()+"','"+documentMain.getExternal()+"','"+documentMain.getAttachment_name()+"','"+documentMain.getAttachment_type()+"','"+documentMain.getAttachment_referrence()+"')";
+			  String cmd_insert1="insert into tbl_doccontrol_main(document_id,document_title,document_type,media_type,location,process,external,attachment_name,attachment_type,attachment_referrence) values('"+documentMain.getDocument_id()+"','"+documentMain.getDocument_title()+"','"+documentMain.getDocument_type()+"','"+documentMain.getMedia_type()+"','"+documentMain.getLocation()+"','"+documentMain.getProcess()+"','"+documentMain.getExternal()+"','"+documentMain.getAttachment_name()+"','"+documentMain.getAttachment_type()+"','"+documentMain.getAttachment_referrence()+"')";
 			  statement.execute(cmd_insert1);
 			  
-			  String cmd_insert2="";
-			  for (ExternalDocument externalDocument2 : externalDocument) {
-				 cmd_insert2="insert into tbl_doccontrol_external(document_id,issuer,revision_level,date,approver1,approver2,approver3,comments,status) values('"+documentMain.getDocument_id()+"','"+externalDocument2.getIssuer()+"','"+externalDocument2.getRevision_level()+"','"+externalDocument2.getDate()+"','"+externalDocument2.getApprover1()+"','"+externalDocument2.getApprover2()+"','"+externalDocument2.getApprover3()+"','"+externalDocument2.getComments()+"','"+externalDocument2.getStatus()+"')";
+			  String cmd_insert2="";	
+				 cmd_insert2="insert into tbl_doccontrol_external(document_id,issuer,revision_level,date,approver1,approver2,approver3,comments,status) values('"+documentMain.getDocument_id()+"','"+documentMain.getIssuer()+"','"+documentMain.getRevision_level()+"','"+documentMain.getDate()+"','"+documentMain.getApprover1()+"','"+documentMain.getApprover2()+"','"+documentMain.getApprover3()+"','"+documentMain.getComments()+"','"+documentMain.getStatus()+"')";
 				 statement.execute(cmd_insert2);
-			}
-			 
-			 
-		  }catch(Exception e){
-	    	System.out.println(e.toString());
-	    	releaseResultSet(resultSet);
-	    	releaseStatement(statement);
-	    	releaseConnection(con);
-	    }finally{
-	    	releaseResultSet(resultSet);
-	    	releaseStatement(statement);
-	    	releaseConnection(con);	    	
-	    }
-		    return status;
-	}
-	
-	/*public boolean insert_external_document(DocumentMain documentMain,ExternalDocument externalDocument)
-	{
-		Connection con = null;
-		Statement statement = null;
-		ResultSet resultSet = null;
-		boolean status=false;
 		
-		try {
-			con = dataSource.getConnection();
-			statement = con.createStatement();
-		} catch (SQLException e1) {
-				e1.printStackTrace();
-		}
-		  try{
-			  String cmd_insert1="insert into tbl_doccontrol_main(document_id,document_title,media_type,location,external) values('"+documentMain.getDocument_id()+"','"+documentMain.getDocument_title()+"','"+documentMain.getMedia_type()+"','"+documentMain.getLocation()+"','"+documentMain.getExternal()+"')";
-			  String cmd_insert2="insert into tbl_doccontrol_external(document_id,issuer,revision_level,date,approver1,approver2,approver3,comments,status) values('"+externalDocument.getEdocument_id()+"','"+externalDocument.getIssuer()+"','"+externalDocument.getRevision_level()+"','"+externalDocument.getDate()+"','"+externalDocument.getApprover1()+"','"+externalDocument.getApprover2()+"','"+externalDocument.getApprover3()+"','"+externalDocument.getComments()+"','"+externalDocument.getStatus()+"')";
-			  statement.execute(cmd_insert1);
-			  statement.execute(cmd_insert2);
+			 status=true;
+			 
 		  }catch(Exception e){
 	    	System.out.println(e.toString());
+	    	status=false;
 	    	releaseResultSet(resultSet);
 	    	releaseStatement(statement);
 	    	releaseConnection(con);
@@ -223,8 +268,8 @@ public class DocumentControlDAO
 		    return status;
 	}
 	
-	*/
-	public List<Employee> getEmployees(){
+	
+	public List<DocumentMain> getDocuments(){
 		Connection con = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
@@ -234,13 +279,13 @@ public class DocumentControlDAO
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
-		List<Employee> employees = new ArrayList<Employee>();
+		List<DocumentMain> documentMains = new ArrayList<DocumentMain>();
 	    try{
-			resultSet = statement.executeQuery("select * from tbl_employee as t1 join tbl_employee_desc as t2 on t1.employee_id=t2.employee_id;");
+			resultSet = statement.executeQuery("select * from tbl_doccontrol_main");
 			System.out.println("came");
 			while(resultSet.next()){
 				System.out.println("count");
-				employees.add(new Employee(resultSet.getString("employee_id"),resultSet.getString("name"), resultSet.getString("job_title"), resultSet.getString("date_hired"), resultSet.getString("attachments"), resultSet.getString("list_of_functions_needes"),resultSet.getString("documented_in"), resultSet.getString("qualified_by"),resultSet.getString("type_of_training"),resultSet.getString("trainer"), resultSet.getString("training_due_date"),resultSet.getString("training_completion_date"),resultSet.getString("training_effectiveness_review_due_date"),resultSet.getString("training_effectiveness_notes")));
+				documentMains.add(new DocumentMain(resultSet.getString("document_id"),resultSet.getString("document_title"),resultSet.getString("document_type"),resultSet.getString("media_type"),resultSet.getString("location"),resultSet.getString("process"),resultSet.getString("external"), resultSet.getString("attachment_name"),resultSet.getString("attachment_type"),resultSet.getString("attachment_referrence")));
 			}
 	    }catch(Exception e){
 	    	System.out.println(e.toString());
@@ -252,10 +297,133 @@ public class DocumentControlDAO
 	    	releaseStatement(statement);
 	    	releaseConnection(con);	    	
 	    }
-	    return employees;
+	    return documentMains;
+		
+	}
+	public List<DocumentMain> getDocuments(String id){
+		Connection con = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
+		try {
+			con = dataSource.getConnection();
+			statement = con.createStatement();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		List<DocumentMain> documentMains = new ArrayList<DocumentMain>();
+	    try{
+			resultSet = statement.executeQuery("select * from tbl_doccontrol_main where document_id='"+id+"'");
+			System.out.println("came");
+			while(resultSet.next()){
+				System.out.println("count");
+				documentMains.add(new DocumentMain(resultSet.getString("document_id"),resultSet.getString("document_title"),resultSet.getString("document_type"),resultSet.getString("media_type"),resultSet.getString("location"),resultSet.getString("process"),resultSet.getString("external"), resultSet.getString("attachment_name"),resultSet.getString("attachment_type"),resultSet.getString("attachment_referrence")));
+			}
+	    }catch(Exception e){
+	    	System.out.println(e.toString());
+	    	releaseResultSet(resultSet);
+	    	releaseStatement(statement);
+	    	releaseConnection(con);
+	    }finally{
+	    	releaseResultSet(resultSet);
+	    	releaseStatement(statement);
+	    	releaseConnection(con);	    	
+	    }
+	    return documentMains;
+		
+	}
+	public List<DocumentMain> getDocuments_bytype(String type){
+		Connection con = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
+		try {
+			con = dataSource.getConnection();
+			statement = con.createStatement();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		List<DocumentMain> documentMains = new ArrayList<DocumentMain>();
+	    try{
+			resultSet = statement.executeQuery("select t1.*,t2.* from tbl_doccontrol_main as t1 join tbl_doccontrol_external as t2 on t1.document_id=t2.document_id where document_type='"+type+"'");
+			System.out.println("came");
+			while(resultSet.next()){
+								documentMains.add(new DocumentMain(resultSet.getString("document_id"), resultSet.getString("document_title"), resultSet.getString("document_type"),resultSet.getString("media_type"),resultSet.getString("location"), resultSet.getString("process"), resultSet.getString("issuer"),resultSet.getString("revision_level"),resultSet.getString("date"), resultSet.getString("approver1"),resultSet.getString("approver2"),resultSet.getString("approver3"),resultSet.getString("comments"),resultSet.getString("status"),resultSet.getString("external"),resultSet.getString("attachment_name"),resultSet.getString("attachment_type"),resultSet.getString("attachment_referrence")));
+			}
+	    }catch(Exception e){
+	    	System.out.println(e.toString());
+	    	releaseResultSet(resultSet);
+	    	releaseStatement(statement);
+	    	releaseConnection(con);
+	    }finally{
+	    	releaseResultSet(resultSet);
+	    	releaseStatement(statement);
+	    	releaseConnection(con);	    	
+	    }
+	    return documentMains;
 		
 	}
 	
+	public List<DocumentMain> getDocuments_byExternal(){
+		Connection con = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
+		try {
+			con = dataSource.getConnection();
+			statement = con.createStatement();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		List<DocumentMain> documentMains = new ArrayList<DocumentMain>();
+	    try{
+			resultSet = statement.executeQuery("select t1.*,t2.* from tbl_doccontrol_main as t1 join tbl_doccontrol_external as t2 on t1.document_id=t2.document_id where external=1");
+			System.out.println("came");
+			while(resultSet.next()){
+								documentMains.add(new DocumentMain(resultSet.getString("document_id"), resultSet.getString("document_title"), resultSet.getString("document_type"),resultSet.getString("media_type"),resultSet.getString("location"), resultSet.getString("process"), resultSet.getString("issuer"),resultSet.getString("revision_level"),resultSet.getString("date"), resultSet.getString("approver1"),resultSet.getString("approver2"),resultSet.getString("approver3"),resultSet.getString("comments"),resultSet.getString("status"),resultSet.getString("external"),resultSet.getString("attachment_name"),resultSet.getString("attachment_type"),resultSet.getString("attachment_referrence")));
+			}
+	    }catch(Exception e){
+	    	System.out.println(e.toString());
+	    	releaseResultSet(resultSet);
+	    	releaseStatement(statement);
+	    	releaseConnection(con);
+	    }finally{
+	    	releaseResultSet(resultSet);
+	    	releaseStatement(statement);
+	    	releaseConnection(con);	    	
+	    }
+	    return documentMains;
+		
+	}
+	
+	public List<DocumentMain> findDocuments(String search_document_id,String search_document_title,String search_process){
+		Connection con = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
+		try {
+			con = dataSource.getConnection();
+			statement = con.createStatement();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		List<DocumentMain> documentMains = new ArrayList<DocumentMain>();
+	    try{
+			resultSet = statement.executeQuery("select * from tbl_doccontrol_main where document_id='"+search_document_id+"' or document_title='"+search_document_title+"' or process='"+search_process+"'");
+			System.out.println("came");
+			while(resultSet.next()){
+				System.out.println("count");
+				documentMains.add(new DocumentMain(resultSet.getString("document_id"),resultSet.getString("document_title"),resultSet.getString("document_type"),resultSet.getString("media_type"),resultSet.getString("location"),resultSet.getString("process"),resultSet.getString("external"), resultSet.getString("attachment_name"),resultSet.getString("attachment_type"),resultSet.getString("attachment_referrence")));
+			}
+	    }catch(Exception e){
+	    	System.out.println(e.toString());
+	    	releaseResultSet(resultSet);
+	    	releaseStatement(statement);
+	    	releaseConnection(con);
+	    }finally{
+	    	releaseResultSet(resultSet);
+	    	releaseStatement(statement);
+	    	releaseConnection(con);	    	
+	    }
+	    return documentMains;
+		
+	}
 	public void releaseConnection(Connection con){
 		try{if(con != null)
 			con.close();

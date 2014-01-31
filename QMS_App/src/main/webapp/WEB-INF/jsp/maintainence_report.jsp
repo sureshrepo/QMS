@@ -5,8 +5,7 @@
 <link rel="stylesheet" href="resources/css/jquery-ui.css" type="text/css" />
 <script src="resources/js/jquery.min.js"></script>
 <script src="resources/js/jquery-ui.js"></script>
- <div id="right_content">
-	
+
     	<table cellpadding="0" cellspacing="0" border="0" width="98%" class="margin_table">
       		<tr>
       		<td>
@@ -33,6 +32,7 @@
 								</a>
 							</li>
 							</ul>
+				            </ul>
   </div>
       		</td>
       		</tr>
@@ -46,9 +46,9 @@
           </div>
       </tr>
    </c:if>
-   </tr></table>
-
-<form method="post" action="maintanence_report">
+   </tr>
+  </table>
+   <form method="post" action="maintanence_report">
 <table cellpadding="0" cellspacing="0" border="0" width="98%" class="margin_table">
  <tr>
         <td valign="top" align="left"><div>
