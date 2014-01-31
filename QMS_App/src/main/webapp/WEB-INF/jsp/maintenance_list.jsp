@@ -11,22 +11,26 @@
       		 <div>
   <ul class="horizmenu">
 						
-							<li style=" float:left;margin-right:8px;text-transform:uppercase;">
-								<a href="add_maintenance" class="<c:choose><c:when test="${true}">select</c:when><c:otherwise></c:otherwise></c:choose>">
-									<span>Add maintenance</span>
+							<li  style=" float:left;margin-right:8px;text-transform:uppercase;">
+								<a href="add_maintenance" class="<c:choose>
+								<c:when test="${menu==''}">select</c:when><c:otherwise>unselect</c:otherwise></c:choose>">
+									<span>Add Maintenance</span>
+									
 								</a>
 							</li>
-						
-				           <li style=" float:left;margin-right:8px;text-transform:uppercase;">
-				            	<a href="maintenance_list" class="<c:choose><c:when test="${true}">select</c:when><c:otherwise></c:otherwise></c:choose>" rel="ddsubmenu1">
-				            		<span>View maintenance</span>
-				            	</a>
-				            </li>
-				             <li style=" float:left;margin-right:8px;text-transform:uppercase;">
-				            	<a href="maintenance_report" class="<c:choose><c:when test="${true}">select</c:when><c:otherwise></c:otherwise></c:choose>" rel="ddsubmenu1">
-				            		<span>Reports</span>
-				            	</a>
-				            </li>
+						<li  style=" float:left;margin-right:8px;text-transform:uppercase;">
+								<a href="maintenance_list" class="<c:choose>
+								<c:when test="${menu=='maintenance'}">select</c:when><c:otherwise>unselect</c:otherwise></c:choose>">
+									<span>View Maintenance</span>
+								</a>
+							</li>
+				           <li  style=" float:left;margin-right:8px;text-transform:uppercase;">
+								<a href="maintenance_report" class="<c:choose>
+								<c:when test="${menu==''}">select</c:when><c:otherwise>unselect</c:otherwise></c:choose>">
+									<span>Reports</span>
+								</a>
+							</li>
+							</ul>
   </div>
       		</td>
       		</tr>

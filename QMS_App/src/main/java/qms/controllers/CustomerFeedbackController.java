@@ -54,6 +54,7 @@ public class CustomerFeedbackController
 		
 		model.addAttribute("status","false");
 		session.removeAttribute("feedback");
+		model.addAttribute("menu","customer");
 		return "add_customerfeedback";
 	}
 	
@@ -67,6 +68,7 @@ public class CustomerFeedbackController
 		
 		
 		//model.addAttribute("status","false");
+		model.addAttribute("menu","customer");
 		return "edit_customerfeedback";
 	}
 	
@@ -82,6 +84,7 @@ public class CustomerFeedbackController
 	        return "edit_customerfeedback";
 		}*/
 		customerFeedbackDAO.update_customerfeedback(customerFeedback);
+		model.addAttribute("menu","customer");
 		return "view_customerfeedback";
 	}
 	
@@ -101,7 +104,7 @@ public class CustomerFeedbackController
 		CustomerFeedbackForm customerFeedbackForm=new CustomerFeedbackForm();
 		customerFeedbackForm.setCustomerFeedbacks(customerFeedbackDAO.getCustomersfeedbacks());
 		model.addAttribute("customerFeedbackForm",customerFeedbackForm);
-		
+		model.addAttribute("menu","customer");
 		return "view_customerfeedback";
 	}
 	
@@ -187,6 +190,7 @@ public class CustomerFeedbackController
 		CustomerFeedbackForm customerFeedbackForm=new CustomerFeedbackForm();
 		customerFeedbackForm.setCustomerFeedbacks(customerFeedbackDAO.getCustomersfeedbacks());
 		model.addAttribute("customerFeedbackForm",customerFeedbackForm);		
+		model.addAttribute("menu","customer");
 		return "/view_customerfeedback";
 	}
 	

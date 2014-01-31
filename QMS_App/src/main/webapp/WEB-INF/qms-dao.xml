@@ -39,6 +39,13 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 	
+	<bean id="supplierPerformanceDAO" class="qms.dao.SupplierPerformanceDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<bean id="childSupplierDAO" class="qms.dao.ChildSupplierDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
  <bean id="filehandlingDAO" class="qms.dao.FileHandlingDAO">
 	</bean>
 </beans>

@@ -68,6 +68,7 @@ session.setAttribute("temp_list",tempDocuments);
 	model.addAttribute("employeeForm",employeeForm);
 	
     model.addAttribute("id","1001");
+    model.addAttribute("menu","document");
     return "add_documents";
  	}
 	
@@ -134,6 +135,7 @@ session.setAttribute("temp_list",tempDocuments);
 	}
 	
 	model.addAttribute("id","1001");
+	model.addAttribute("menu","document");
     return "add_documents";
  	}
 	

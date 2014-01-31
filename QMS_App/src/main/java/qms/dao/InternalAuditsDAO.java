@@ -47,7 +47,7 @@ public class InternalAuditsDAO{
 			resultSet = statement.executeQuery(cmd_select);
 			if (resultSet.next()) {
 				if (!resultSet.getString("auto_id").equals("null"))
-					Max_id = "AI"+ (Integer.parseInt(resultSet.getString("auto_id")) + 1001);
+					Max_id = "IA"+ (Integer.parseInt(resultSet.getString("auto_id")) + 1001);
 
 			}
 

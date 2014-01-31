@@ -9,11 +9,12 @@
   <td>
   <div>
   <ul class="horizmenu">
-  <li style=" float:left;margin-right:8px;text-transform:uppercase;">
-	<a href="view_correctiveactions" class="<c:choose><c:when test="${true}">select</c:when><c:otherwise></c:otherwise></c:choose>">
-	 <span>View Corrective Action </span>
-</a>
-</li>
+  <li  style=" float:left;margin-right:8px;text-transform:uppercase;">
+								<a href="view_correctiveactions" class="<c:choose>
+								<c:when test="${menu=='corrective'}">select</c:when><c:otherwise>unselect</c:otherwise></c:choose>">
+									<span>View Corrective And Preventive actions</span>
+								</a>
+							</li>
 </ul>
 </div>
 </td>

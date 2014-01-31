@@ -124,54 +124,71 @@
 						<!-- <ul class="menu"> -->
 						<div>
 						  <ul class="menu">
-							<li >
-							
-								<a href="welcome" class="select">
+						  <li>
+								<a href="welcome" class="<c:choose>
+								<c:when test="${menu=='dashboard'}">select</c:when><c:otherwise>unselect</c:otherwise></c:choose>">
 									<span><img src="<c:url value="/resources/images/icon_01.png" />" alt="" style="padding:5px 5px 0 0;" />Dashboard</span>
 								</a>
 							</li>
-							<hr width="90%"/>
-				            <li >
-				            	<a href="add_maintenance" class="<c:choose><c:when test="${true}">select</c:when><c:otherwise></c:otherwise></c:choose>">
-				            		<span><img src="<c:url value="/resources/images/icon_07.png" />" alt="" style="padding:5px 5px 0 0;" />Maintenance & Calibration</span>
-				            	</a>
-				            </li>
-				            <hr width="90%"/>
+							<hr width="100%"/>
+							<li>
+								<a href="add_maintenance" class="<c:choose>
+								<c:when test="${menu=='maintenance'}">select</c:when><c:otherwise>unselect</c:otherwise></c:choose>">
+									<span><img src="<c:url value="/resources/images/icon_07.png" />" alt="" style="padding:5px 5px 0 0;" />Maintenance & Calibration</span>
+								</a>
+							</li>
+				            <hr width="100%"/>
 				            <li>
-				            	<a href="add_nonconformance" class="<c:choose><c:when test="${true}">select</c:when><c:otherwise></c:otherwise></c:choose>">
-				            		<span><img src="<c:url value="/resources/images/icon_03.png" />" alt="" style="padding:5px 5px 0 0;" />Non Conformance</span>
-				            	</a>
-				            </li>
-				            <hr width="90%"/>
-				            <li>
-				            	<a href="addcustomer" class="<c:choose><c:when test="${true}">select</c:when><c:otherwise></c:otherwise></c:choose>">
-				            		<span><img src="<c:url value="/resources/images/customer.png" />" alt="" style="padding:5px 5px 0 0;" />Customers</span>
-				            	</a>
-				            </li>
-				            <hr width="90%"/>
+								<a href="add_nonconformance" class="<c:choose>
+								<c:when test="${menu=='nonconformance'}">select</c:when><c:otherwise>unselect</c:otherwise></c:choose>">
+									<span><img src="<c:url value="/resources/images/icon_03.png" />" alt="" style="padding:5px 5px 0 0;" />Non Conformance</span>
+								</a>
+							</li>
+				            <hr width="100%"/>
 				             <li>
-				            	<a href="addemployee" class="<c:choose><c:when test="${true}">select</c:when><c:otherwise></c:otherwise></c:choose>">
-				            		<span><img src="<c:url value="/resources/images/emploee.png" />" alt="" style="padding:5px 5px 0 0;" />Employees</span>
-				            	</a>
-				            </li>
-				            <hr width="90%"/>
-				            <li>
-				            	<a href="adddocument" class="<c:choose><c:when test="${true}">select</c:when><c:otherwise></c:otherwise></c:choose>">
-				            		<span><img src="<c:url value="/resources/images/document.png" />" alt="" style="padding:5px 5px 0 0;" />Document Control</span>
-				            	</a>
-				            </li>
-				            <hr width="90%"/>
-				            <li>
-				            	<a href="addinternalaudits" class="<c:choose><c:when test="${true}">select</c:when><c:otherwise></c:otherwise></c:choose>">
-				            		<span><img src="<c:url value="/resources/images/document.png" />" alt="" style="padding:5px 5px 0 0;" />Internal Audits</span>
-				            	</a>
-				            </li>
-				              <hr width="90%"/>
+								<a href="addcustomer" class="<c:choose>
+								<c:when test="${menu=='customer'}">select</c:when><c:otherwise>unselect</c:otherwise></c:choose>">
+									<span><img src="<c:url value="/resources/images/customer.png" />" alt="" style="padding:5px 5px 0 0;" />Customers</span>
+								</a>
+							</li>
+				           
+				            <hr width="100%"/>
 				             <li>
-				            	<a href="view_correctiveactions" class="<c:choose><c:when test="${true}">select</c:when><c:otherwise></c:otherwise></c:choose>">
-				            		<span><img src="<c:url value="/resources/images/document.png" />" alt="" style="padding:5px 5px 0 0;" />Corrective And Preventive Actions</span>
-				            	</a>
-				            </li>
+								<a href="addemployee" class="<c:choose>
+								<c:when test="${menu=='employee'}">select</c:when><c:otherwise>unselect</c:otherwise></c:choose>">
+									<span><img src="<c:url value="/resources/images/emploee.png" />" alt="" style="padding:5px 5px 0 0;" />Employees</span>
+								</a>
+							</li>
+				            <hr width="100%"/>
+				            <li>
+								<a href="adddocument" class="<c:choose>
+								<c:when test="${menu=='document'}">select</c:when><c:otherwise>unselect</c:otherwise></c:choose>">
+									<span><img src="<c:url value="/resources/images/document.png" />" alt="" style="padding:5px 5px 0 0;" />Document Control</span>
+								</a>
+							</li>
+				           
+				            <hr width="100%"/>
+				            <li>
+								<a href="addinternalaudits" class="<c:choose>
+								<c:when test="${menu=='audits'}">select</c:when><c:otherwise>unselect</c:otherwise></c:choose>">
+									<span><img src="<c:url value="/resources/images/document.png" />" alt="" style="padding:5px 5px 0 0;" />Internal Audits</span>
+								</a>
+							</li>
+				           
+				              <hr width="100%"/>
+				              <li>
+								<a href="view_correctiveactions" class="<c:choose>
+								<c:when test="${menu=='corrective'}">select</c:when><c:otherwise>unselect</c:otherwise></c:choose>">
+									<span><img src="<c:url value="/resources/images/document.png" />" alt="" style="padding:5px 5px 0 0;" />Corrective And Preventive Actions</span>
+								</a>
+							</li>
+				            <hr width="100%"/>
+				            <li>
+								<a href="add_supplierperformance" class="<c:choose>
+								<c:when test="${menu=='supplier'}">select</c:when><c:otherwise>unselect</c:otherwise></c:choose>">
+									<span><img src="<c:url value="/resources/images/document.png" />" alt="" style="padding:5px 5px 0 0;" />Supplier Performance</span>
+								</a>
+							</li>
 				            
 						</ul>  
 						</div>

@@ -199,8 +199,8 @@ ul.login-list li p {
 	font-size:12px;
 }
 .row2 td {
-    /* background:#f5f5f5;	 */
-    background:#F5FAFF;
+   background:#f5f5f5;	 
+ /*    background:#F5FAFF; */
 	 padding:5px 10px;
 	font-size:11px;
 	line-height:16px;
@@ -231,6 +231,7 @@ ul.login-list li p {
 	border-radius:10px;
 	-moz-border-radius:10px;
 	margin-top:10px;
+	
 }
 .extrabottom ul {
 	float: left;
@@ -364,14 +365,14 @@ ul.pagination li.page a:hover {
     margin:16px 0 0 10px; 
 	height:800px;
 	overflow:hidden;
-	width:180px;
+	width:190px;
 	margin-top:8px;
 }
 .horizmenu {
     margin:16px 0 0 10px; 
 	height:33px;
 	overflow:hidden;
-	margin-left:185px;
+	margin-left:180px;
 	margin-top:7px;
 }
 .menu li {
@@ -383,27 +384,34 @@ ul.pagination li.page a:hover {
 /* 	background:url(../images/menu-sel-left.gif) 0 0 no-repeat;
  */	display:block;
 }
-.select:hover
-{
-	color:red;
-	}
 
-.select span, .unselect:hover span, .login:hover span {
+
+.select span, .unselect:hover span, .login:hover span,.select:hover span {
 	/* background:url(../images/menu-sel-left.gif) 100% 0 no-repeat; */
-	 background-color:	#4D4D4D;
-	 color:#fff;
+	/*  background-color:	#e5e5e5;
+	 color:#003D99; */
+	 background-color:#cccccc;
+	 color:#003D99; 
 	display:block;
 	line-height:30px;
 	padding:0 10px;
 	font-weight:bold;
 }
+.select:hover span{
+	background-color:#cccccc;
+	 color:#003D99; 
+}
 .unselect {
-	background:url(../images/menu-unsel-left.gif) 0 0 no-repeat;
+	/* background:url(../images/menu-unsel-left.gif) 0 0 no-repeat; */
+	background-color:#e5e5e5;
+	color:#003D99;
 	display:block;
 }
 .unselect span {
 	/* background:url(../images/menu-unsel-right.gif) 100% 0 no-repeat;
-	 */color:#fff;
+	 */
+    background-color:#e5e5e5;
+	color:#003D99;
 	display:block;
 	line-height:30px;
 	padding:0 10px;

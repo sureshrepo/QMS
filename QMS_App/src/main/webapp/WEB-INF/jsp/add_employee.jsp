@@ -82,18 +82,23 @@ function doAjaxPost() {
         <td>
         <div>
   <ul class="horizmenu">
-						
-							<li style=" float:left;margin-right:8px;text-transform:uppercase;">
-								<a href="addemployee" class="<c:choose><c:when test="${true}">select</c:when><c:otherwise></c:otherwise></c:choose>">
+  <li  style=" float:left;margin-right:8px;text-transform:uppercase;">
+								<a href="addemployee" class="<c:choose>
+								<c:when test="${menu=='employee'}">select</c:when><c:otherwise>unselect</c:otherwise></c:choose>">
 									<span>Add Employees</span>
+									
 								</a>
 							</li>
 						
-				           <li style=" float:left;margin-right:8px;text-transform:uppercase;">
-				            	<a href="viewemployees" class="<c:choose><c:when test="${true}">select</c:when><c:otherwise></c:otherwise></c:choose>" rel="ddsubmenu1">
-				            		<span>View Employees</span>
-				            	</a>
-				            </li>
+							<li  style=" float:left;margin-right:8px;text-transform:uppercase;">
+								<a href="viewemployees" class="<c:choose>
+								<c:when test="${menu==''}">select</c:when><c:otherwise>unselect</c:otherwise></c:choose>">
+									<span>View Employees</span>
+									
+								</a>
+							</li>
+						
+				           </ul>
   </div>
         </td>
       </tr>

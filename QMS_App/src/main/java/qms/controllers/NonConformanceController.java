@@ -49,6 +49,7 @@ public class NonConformanceController {
 		NonConformanceForm nonConformanceForm = new NonConformanceForm();
 		nonConformanceForm.setNonconformance(nonConformanceDAO.get_nonconformance());
 		model.addAttribute("nonConformanceForm", nonConformanceForm);
+		model.addAttribute("menu","nonconformance");
 		return "view_nonconformance";
 	}
 
@@ -56,6 +57,7 @@ public class NonConformanceController {
 	public String addNonconformance_get(HttpSession session,ModelMap model, Principal principal) {
 		model.addAttribute("id", nonConformanceDAO.get_maxid());
 		session.removeAttribute("nonconformance");
+		model.addAttribute("menu","nonconformance");
 		return "add_nonconformance";
 	}
 
@@ -83,14 +85,16 @@ public class NonConformanceController {
 		NonConformanceForm nonConformanceForm=new NonConformanceForm();
 		nonConformanceForm.setNonconformance(nonConformanceDAO.get_nonconformance());
 	    model.addAttribute("nonConformanceForm",nonConformanceForm);
+	    model.addAttribute("menu","nonconformance");
 		return "/view_nonconformance";
 	}
 
 	@RequestMapping(value = "/delete_nonconformance", method = RequestMethod.GET)
 	public String deleteNonconformance_get(@RequestParam("id") String id,
-			NonConformance nonConformance) {
+			NonConformance nonConformance,ModelMap model) {
 
 		nonConformanceDAO.delete_nonconformance(id);
+		model.addAttribute("menu","nonconformance");
 		return "/view_nonconformance";
 	}
 	
@@ -102,7 +106,7 @@ public class NonConformanceController {
 		nonConformanceForm.setNonconformance(nonConformanceDAO.edit_nonconformance(id));
 	    model.addAttribute("nonConformanceForm",nonConformanceForm);
 		
-		
+	    model.addAttribute("menu","nonconformance");
 	    return "/edit_nonconformance";
 	}
 	
@@ -122,6 +126,7 @@ public class NonConformanceController {
 		
 		
 		nonConformanceDAO.update_nonconformance(nonConformance);
+		model.addAttribute("menu","nonconformance");
 		return "view_nonconformance";
 	}
 
@@ -164,6 +169,7 @@ public class NonConformanceController {
 		CorrectiveAndPreventiveActionsForm correctiveAndPreventiveActionsForm = new CorrectiveAndPreventiveActionsForm();
 		correctiveAndPreventiveActionsForm.setCorrectiveAndPreventiveActions(nonConformanceDAO.edit_corrective(nc_id));
 		model.addAttribute("correctiveAndPreventiveActionsForm", correctiveAndPreventiveActionsForm);
+		model.addAttribute("menu","corrective");
 		return "edit_correctiveactions";
 	}
 	
@@ -175,6 +181,7 @@ public class NonConformanceController {
 	   /* MaintenanceForm maintenanceForm= new MaintenanceForm();
 		maintenanceForm.setMaintenance(maintenanceDAO.getmaintenance());
 		model.addAttribute("maintenanceForm",maintenanceForm);*/
+		model.addAttribute("menu","corrective");
 	    return "edit_correctiveactions";
 	}
 	
@@ -187,6 +194,7 @@ public class NonConformanceController {
 		CorrectiveAndPreventiveActionsForm correctiveAndPreventiveActionsForm = new CorrectiveAndPreventiveActionsForm();
 		correctiveAndPreventiveActionsForm.setCorrectiveAndPreventiveActions(nonConformanceDAO.get_corrective());
 		model.addAttribute("correctiveAndPreventiveActionsForm", correctiveAndPreventiveActionsForm);
+		model.addAttribute("menu","corrective");
 		return "view_correctiveactions";
 	}
 

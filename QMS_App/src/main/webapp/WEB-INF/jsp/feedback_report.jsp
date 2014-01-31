@@ -5,11 +5,57 @@
 <script src="resources/js/jquery.min.js"></script>
 <script src="resources/js/jquery-ui.js"></script>
  
-  
+ 
 
 <form method="post" action="feedback_report">
+ <div id="right_content">
 <table cellpadding="0" cellspacing="0" border="0" width="98%" class="margin_table">
  <tr>
+ <td>
+         <div>
+  <ul class="horizmenu">
+						<li  style=" float:left;margin-right:8px;text-transform:uppercase;">
+								<a href="addcustomer" class="<c:choose>
+								<c:when test="${menu==''}">select</c:when><c:otherwise>unselect</c:otherwise></c:choose>">
+									<span>Add Customers</span>
+									
+								</a>
+							</li>
+							<li  style=" float:left;margin-right:8px;text-transform:uppercase;">
+								<a href="viewcustomers" class="<c:choose>
+								<c:when test="${menu==''}">select</c:when><c:otherwise>unselect</c:otherwise></c:choose>">
+									<span>View Customers</span>
+									
+								</a>
+							</li>
+						
+				          <li  style=" float:left;margin-right:8px;text-transform:uppercase;">
+								<a href="addfeedback" class="<c:choose>
+								<c:when test="${menu==''}">select</c:when><c:otherwise>unselect</c:otherwise></c:choose>">
+									<span>Add Feedback</span>
+									
+								</a>
+							</li>
+				           <li  style=" float:left;margin-right:8px;text-transform:uppercase;">
+								<a href="viewfeedback" class="<c:choose>
+								<c:when test="${menu==''}">select</c:when><c:otherwise>unselect</c:otherwise></c:choose>">
+									<span>View feedback</span>
+									
+								</a>
+							</li>
+				           <li  style=" float:left;margin-right:8px;text-transform:uppercase;">
+								<a href="feedback_report" class="<c:choose>
+								<c:when test="${menu=='customer'}">select</c:when><c:otherwise>unselect</c:otherwise></c:choose>">
+									<span>Feedback Report</span>
+									
+								</a>
+							</li>
+				             
+				            </ul>
+  </div>
+  </td>
+  </tr>
+  <tr>
         <td valign="top" align="left"><div>
             <div class="headings altheading">
               <h2>Customer Feedback Report</h2>

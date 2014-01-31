@@ -40,6 +40,7 @@ public class MaintenanceController {
 	
 	public String addMaintenance(HttpSession session,ModelMap model, Principal principal) {
 		session.removeAttribute("maintenances");
+		model.addAttribute("menu","maintenance");
 		return "add_maintenance";
 	}
 	
@@ -60,6 +61,7 @@ public class MaintenanceController {
 		MaintenanceForm maintenanceForm= new MaintenanceForm();
 		maintenanceForm.setMaintenance(maintenanceDAO.getmaintenance());
 		model.addAttribute("maintenanceForm",maintenanceForm);
+		model.addAttribute("menu","maintenance");
 		return "maintenance_list";
 	}
 	
@@ -70,6 +72,7 @@ public class MaintenanceController {
 		MaintenanceForm maintenanceForm= new MaintenanceForm();
 		maintenanceForm.setMaintenance(maintenanceDAO.getmaintenance());
 		model.addAttribute("maintenanceForm",maintenanceForm);
+		model.addAttribute("menu","maintenance");
 		return "maintenance_list";
 	}
 	
@@ -79,6 +82,7 @@ public class MaintenanceController {
 		MaintenanceForm maintenanceForm= new MaintenanceForm();
 		maintenanceForm.setMaintenance(maintenanceDAO.getmaintenance(auto_equip));
 		model.addAttribute("maintenanceForm",maintenanceForm);
+		model.addAttribute("menu","maintenance");
 		return "view_maintenance";
 	}
 	
@@ -88,6 +92,7 @@ public class MaintenanceController {
 		MaintenanceForm maintenanceForm= new MaintenanceForm();
 		maintenanceForm.setMaintenance(maintenanceDAO.getmaintenance(auto_equip));
 		model.addAttribute("maintenanceForm",maintenanceForm);
+		model.addAttribute("menu","maintenance");
 	    return "edit_maintenance";
 	}
 	
@@ -109,6 +114,7 @@ public class MaintenanceController {
 	   /* MaintenanceForm maintenanceForm= new MaintenanceForm();
 		maintenanceForm.setMaintenance(maintenanceDAO.getmaintenance());
 		model.addAttribute("maintenanceForm",maintenanceForm);*/
+		model.addAttribute("menu","maintenance");
 	    return "view_maintenance";
 	}
 	
@@ -116,6 +122,7 @@ public class MaintenanceController {
 	public String view_maintenance_report(Maintenance maintenance,ModelMap model) {
 
 		model.addAttribute("report_table","no");
+		model.addAttribute("menu","maintenance");
 	    return "maintainence_report";
 	}
 	
@@ -130,6 +137,7 @@ public class MaintenanceController {
 		model.addAttribute("maintenanceForm",maintenanceForm);
 		
 		model.addAttribute("report_table","yes");
+		model.addAttribute("menu","maintenance");
 	    return "maintainence_report";
 	}
 	
@@ -141,6 +149,7 @@ public class MaintenanceController {
 		MaintenanceForm maintenanceForm= new MaintenanceForm();
 		maintenanceForm.setMaintenance(maintenanceDAO.getmaintenance());
 		model.addAttribute("maintenanceForm",maintenanceForm);
+		model.addAttribute("menu","maintenance");
 		return "/maintenance_list";
 	}
 }

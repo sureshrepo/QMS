@@ -41,6 +41,7 @@ public class MainController {
 		ParticipantsDetailsForm participantsDetailsForm = new ParticipantsDetailsForm();
 		participantsDetailsForm.setParticipantsDetails(mainDAO.getParticipants());
         model.addAttribute("participantsDetailsForm", participantsDetailsForm);
+        model.addAttribute("menu","dashboard");
 		return "dashboard";
  
 	}

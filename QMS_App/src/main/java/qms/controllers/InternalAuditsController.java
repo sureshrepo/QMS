@@ -37,6 +37,7 @@ public class InternalAuditsController {
 	@RequestMapping(value = { "/addinternalaudits" }, method = RequestMethod.GET)
 	public String add_internalaudits(ModelMap model, Principal principal) {
 		model.addAttribute("id", internalAuditsDAO.get_maxid());
+		model.addAttribute("menu","audits");
 		return "add_internalaudits";
 
 	}
@@ -66,6 +67,7 @@ public class InternalAuditsController {
 			}
 
 		}
+		model.addAttribute("menu","audits");
 		return "view_internalaudits";
 	}
 
@@ -77,7 +79,7 @@ public class InternalAuditsController {
 		internalAuditsForm.setInternalAudits(internalAuditsDAO.edit_internalaudit(id));
 
 		model.addAttribute("internalAuditsForm", internalAuditsForm);
-
+		model.addAttribute("menu","audits");
 		return "edit_internalaudit";
 	}
 
@@ -96,7 +98,7 @@ public class InternalAuditsController {
 		}
 		
 		internalAuditsDAO.update_internalaudits(internalAudits);
-
+		model.addAttribute("menu","audits");
 		return "view_internalaudits";
 	}
 
@@ -108,7 +110,7 @@ public class InternalAuditsController {
 		internalAuditsForm.setInternalAudits(internalAuditsDAO.get_internalaudits());
 
 		model.addAttribute("internalAuditsForm", internalAuditsForm);
-
+		model.addAttribute("menu","audits");
 		return "view_internalaudits";
 	}
 
@@ -131,6 +133,7 @@ public class InternalAuditsController {
 		model.addAttribute("internalAuditsForm", internalAuditsForm);
 		model.addAttribute("type",type);		
 		model.addAttribute("report_table","yes");
+		model.addAttribute("menu","audits");
 		return "internalaudit_report";
 	}
 	
@@ -162,6 +165,7 @@ public class InternalAuditsController {
 	public String get_internalaudits_report(ModelMap model, Principal principal) 
 	{
 		model.addAttribute("report_table","no");
+		model.addAttribute("menu","audits");
 		return "internalaudit_report";
 	}
 	

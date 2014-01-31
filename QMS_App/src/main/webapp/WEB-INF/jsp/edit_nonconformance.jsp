@@ -10,17 +10,21 @@
       <div>
   <ul class="horizmenu">
 						
-							<li style=" float:left;margin-right:8px;text-transform:uppercase;">
-								<a href="add_nonconformance" class="<c:choose><c:when test="${true}">select</c:when><c:otherwise></c:otherwise></c:choose>">
-									<span>Add nonconformance</span>
+						<li  style=" float:left;margin-right:8px;text-transform:uppercase;">
+								<a href="add_nonconformance" class="<c:choose>
+								<c:when test="${menu==''}">select</c:when><c:otherwise>unselect</c:otherwise></c:choose>">
+									<span>Add Nonconformance</span>
+									
 								</a>
 							</li>
-						
-				           <li style=" float:left;margin-right:8px;text-transform:uppercase;">
-				            	<a href="view_nonconformance" class="<c:choose><c:when test="${true}">select</c:when><c:otherwise></c:otherwise></c:choose>" rel="ddsubmenu1">
-				            		<span>View nonconformance</span>
-				            	</a>
-				            </li>
+
+							<li  style=" float:left;margin-right:8px;text-transform:uppercase;">
+								<a href="view_nonconformance" class="<c:choose>
+								<c:when test="${menu=='nonconformance'}">select</c:when><c:otherwise>unselect</c:otherwise></c:choose>">
+									<span>View Nonconformance</span>
+									
+								</a>
+							</li>
 				            </ul>
   </div>
      </td>

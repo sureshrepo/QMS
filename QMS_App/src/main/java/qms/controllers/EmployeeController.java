@@ -41,6 +41,7 @@ public class EmployeeController
 		model.addAttribute("id",employeeDAO.getMax_employeeID());
 		model.addAttribute("job_id",jobDAO.get_maxid());
 		session.removeAttribute("employees");
+		model.addAttribute("menu","employee");
 		return "add_employee";
 	}
 	
@@ -64,6 +65,7 @@ public class EmployeeController
 		EmployeeForm employeeForm=new EmployeeForm();
 		employeeForm.setEmployees(employeeDAO.getEmployees());
 		model.addAttribute("employeeForm",employeeForm);
+		model.addAttribute("menu","employee");
 		return "add_employee";
 	}
 	
@@ -73,6 +75,7 @@ public class EmployeeController
 		EmployeeForm employeeForm=new EmployeeForm();
 		employeeForm.setEmployees(employeeDAO.getEmployees());
 		model.addAttribute("employeeForm",employeeForm);
+		model.addAttribute("menu","employee");
 		return "view_employees";
 	}
 	
@@ -90,6 +93,7 @@ public class EmployeeController
     	EmployeeForm employeeForm=new EmployeeForm();
 		employeeForm.setEmployees(employeeDAO.getEmployeess_byid(employee_id));
 		model.addAttribute("employeeForm",employeeForm);
+		model.addAttribute("menu","employee");
 		return "edit_employee";
  	}
 	
@@ -110,6 +114,7 @@ public class EmployeeController
     	EmployeeForm employeeForm=new EmployeeForm();
 		employeeForm.setEmployees(employeeDAO.getEmployees());
 		model.addAttribute("employeeForm",employeeForm);
+		model.addAttribute("menu","employee");
 		return "view_employees";
  	}
 

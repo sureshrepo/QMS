@@ -13,22 +13,30 @@
       		 <div>
   <ul class="horizmenu">
 						
-							<li style=" float:left;margin-right:8px;text-transform:uppercase;">
-								<a href="addinternalaudits" class="<c:choose><c:when test="${true}">select</c:when><c:otherwise></c:otherwise></c:choose>">
-									<span> Add Internal Audits</span>
+							<li  style=" float:left;margin-right:8px;text-transform:uppercase;">
+								<a href="addinternalaudits" class="<c:choose>
+								<c:when test="${menu==''}">select</c:when><c:otherwise>unselect</c:otherwise></c:choose>">
+									<span>Add Internal Audits</span>
+									
+								</a>
+							</li>
+							
+							<li  style=" float:left;margin-right:8px;text-transform:uppercase;">
+								<a href="view_internalaudits" class="<c:choose>
+								<c:when test="${menu==''}">select</c:when><c:otherwise>unselect</c:otherwise></c:choose>">
+									<span>View Internal Audits </span>
+									
 								</a>
 							</li>
 						
-				           <li style=" float:left;margin-right:8px;text-transform:uppercase;">
-				            	<a href="view_internalaudits" class="<c:choose><c:when test="${true}">select</c:when><c:otherwise></c:otherwise></c:choose>" rel="ddsubmenu1">
-				            		<span>View Internal Aidits</span>
-				            	</a>
-				            </li>
-				             <li style=" float:left;margin-right:8px;text-transform:uppercase;">
-				            	<a href="internalaudit_report" class="<c:choose><c:when test="${true}">select</c:when><c:otherwise></c:otherwise></c:choose>" rel="ddsubmenu1">
-				            		<span>Reports</span>
-				            	</a>
-				            </li>
+				         <li  style=" float:left;margin-right:8px;text-transform:uppercase;">
+								<a href="internalaudit_report" class="<c:choose>
+								<c:when test="${menu=='audits'}">select</c:when><c:otherwise>unselect</c:otherwise></c:choose>">
+									<span>Reports</span>
+									
+								</a>
+							</li>
+							</ul>
 				            
   </div>
       		</td>

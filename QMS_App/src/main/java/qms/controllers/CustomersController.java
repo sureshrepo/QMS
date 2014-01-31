@@ -36,6 +36,7 @@ public class CustomersController
     CustomersForm customersForm=new CustomersForm();
     customersForm.setCustomers(customersDAO.getCustomers());
     model.addAttribute("customerForm",customersForm);
+    model.addAttribute("menu","customer");
 	return "view_customers";
  	}
 	
@@ -45,6 +46,7 @@ public class CustomersController
 	{
      model.addAttribute("id",customersDAO.getMax_customerID());	
      session.removeAttribute("customer");
+     model.addAttribute("menu","customer");
 	return "add_customers";
  	}
 	
@@ -67,6 +69,7 @@ public class CustomersController
     CustomersForm customersForm=new CustomersForm();
 	customersForm.setCustomers(customersDAO.getCustomers());
 	model.addAttribute("customersForm",customersForm);
+	model.addAttribute("menu","customer");
 	return "edit_customers";
  	}
 	
@@ -90,6 +93,7 @@ public class CustomersController
     CustomersForm customersForm=new CustomersForm();
     customersForm.setCustomers(customersDAO.getCustomers());
     model.addAttribute("customerForm",customersForm);
+    model.addAttribute("menu","customer");
 	return "view_customers";
 
 	
@@ -102,6 +106,7 @@ public class CustomersController
 	{
     
 		customersDAO.delete_customer(customer_id);
+		model.addAttribute("menu","customer");
 		return "add_customers";
  	}
 	
@@ -112,6 +117,7 @@ public class CustomersController
 		CustomersForm customersForm=new CustomersForm();
 		customersForm.setCustomers(customersDAO.getCustomers_byid(customer_id));
 		model.addAttribute("customersForm",customersForm);
+		model.addAttribute("menu","customer");
 		return "edit_customers";
  	}
 	
