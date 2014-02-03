@@ -13,22 +13,49 @@
         <div>
   <ul class="horizmenu">
 						
-							<li style=" float:left;margin-right:8px;text-transform:uppercase;">
-								<a href="addform" class="select">
-									<span>Add Documents</span>
+							<li  style=" float:left;margin-right:8px;text-transform:uppercase;">
+								<a href="add_documents" class="<c:choose>
+								<c:when test="${menu==''}">select</c:when><c:otherwise>unselect</c:otherwise></c:choose>">
+									<span>Add Document</span>
+									
 								</a>
 							</li>
 						
-				           <li style=" float:left;margin-right:8px;text-transform:uppercase;">
-				            	<a href="viewform" class="select">
-				            		<span>View Documents</span>
-				            	</a>
-				            </li>
-				             <li style=" float:left;margin-right:8px;text-transform:uppercase;">
-				            	<a href="form_report" class="select">
-				            		<span>Reports</span>
-				            	</a>
-				            </li>
+				          <li  style=" float:left;margin-right:8px;text-transform:uppercase;">
+								<a href="viewdocuments" class="<c:choose>
+								<c:when test="${menu==''}">select</c:when><c:otherwise>unselect</c:otherwise></c:choose>">
+									<span>View Document</span>
+									
+								</a>
+							</li>
+				            <li  style=" float:left;margin-right:8px;text-transform:uppercase;">
+								<a href="document_report" class="<c:choose>
+								<c:when test="${menu==''}">select</c:when><c:otherwise>unselect</c:otherwise></c:choose>">
+									<span>Document report</span>
+									
+								</a>
+							</li>
+				             <li  style=" float:left;margin-right:8px;text-transform:uppercase;">
+								<a href="addform" class="<c:choose>
+								<c:when test="${menu=='document'}">select</c:when><c:otherwise>unselect</c:otherwise></c:choose>">
+									<span>Add Form</span>
+									
+								</a>
+							</li>
+				            <li  style=" float:left;margin-right:8px;text-transform:uppercase;">
+								<a href="view_form" class="<c:choose>
+								<c:when test="${menu==''}">select</c:when><c:otherwise>unselect</c:otherwise></c:choose>">
+									<span>View Form</span>
+									
+								</a>
+							</li>
+				            <li  style=" float:left;margin-right:8px;text-transform:uppercase;">
+								<a href="formreport" class="<c:choose>
+								<c:when test="${menu==''}">select</c:when><c:otherwise>unselect</c:otherwise></c:choose>">
+									<span>Form Report</span>
+									
+								</a>
+							</li>
 				            </ul>
   </div>
         </td>

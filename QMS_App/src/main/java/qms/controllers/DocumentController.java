@@ -65,6 +65,7 @@ public class DocumentController {
 
 		session.removeAttribute("documentMain");
 		load_document_page_dropdowns(model);
+		  model.addAttribute("menu","document");
 		return "add_documents";
 	}
 
@@ -76,7 +77,7 @@ public class DocumentController {
 		DocumentMainForm documentMainForm = new DocumentMainForm();
 		documentMainForm.setDocumentMains(documentControlDAO.getDocuments());
 		model.addAttribute("documentMainForm", documentMainForm);
-	
+		  model.addAttribute("menu","document");
 		return "view_documents";
 		
 	}
@@ -90,7 +91,7 @@ public class DocumentController {
 		documentMainForm.setDocumentMains(documentControlDAO.getDocument_byid(document_id));
 		model.addAttribute("documentMainForm",documentMainForm);
 		
-		
+		  model.addAttribute("menu","document");
 		documentControlDAO.getDocument_byid(document_id);
 		
 		return "edit_documents";
@@ -182,7 +183,7 @@ public class DocumentController {
 				DocumentMainForm documentMainForm = new DocumentMainForm();
 				documentMainForm.setDocumentMains(documentControlDAO.getDocuments());
 				model.addAttribute("documentMainForm", documentMainForm);
-				
+				  model.addAttribute("menu","document");
 				return "view_documents";
 			
 			}
@@ -281,7 +282,7 @@ public class DocumentController {
 			DocumentMainForm documentMainForm = new DocumentMainForm();
 			documentMainForm.setDocumentMains(documentControlDAO.getDocuments());
 			model.addAttribute("documentMainForm", documentMainForm);
-			
+			  model.addAttribute("menu","document");
 			return "view_documents";
 		}
 		else
@@ -316,6 +317,7 @@ public class DocumentController {
 		DocumentMainForm documentMainForm = new DocumentMainForm();
 		documentMainForm.setDocumentMains(documentControlDAO.getDocuments());
 		model.addAttribute("documentMainForm", documentMainForm);
+		  model.addAttribute("menu","document");
 		return "view_documents";
 
 	}
@@ -356,7 +358,7 @@ public class DocumentController {
 
 	@RequestMapping(value = "/document_report", method = RequestMethod.GET)
 	public String reportDocument(ModelMap model) {
-
+		  model.addAttribute("menu","document");
 		return "report_document";
 
 	}

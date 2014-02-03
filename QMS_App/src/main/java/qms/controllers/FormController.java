@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import qms.dao.FormDAO;
+import qms.model.Employee;
 import qms.model.Form;
+import qms.forms.EmployeeForm;
 import qms.forms.FormForm;
 
 @Controller
@@ -48,6 +50,7 @@ public class FormController
 	{
 		session.removeAttribute("form");
 		model.addAttribute("id", formDAO.get_maxid());
+		  model.addAttribute("menu","document");
         return "add_form";
  	}
 	
@@ -62,6 +65,7 @@ public class FormController
 		model.put("form", form);
 		model.addAttribute("form",form);
 		model.addAttribute("menu","form");
+		  model.addAttribute("menu","document");
 		return "add_form";
  	}
 	
@@ -79,7 +83,7 @@ public class FormController
 		model.addAttribute("success","true");
 		model.addAttribute("menu","form");*/
 		
-		
+		  model.addAttribute("menu","document");
 		return "edit_form";
  	}
 	
@@ -93,10 +97,20 @@ public class FormController
 	    formForm.setForm(formDAO.getform());
 	    model.addAttribute("formForm",formForm);
 
-		
+	    model.addAttribute("menu","document");
 		return "view_form";
 		
  	}
+	
+	@RequestMapping(value={"/view_form"},method=RequestMethod.GET)
+	public String viewEmployees(ModelMap model,Principal principal,Employee employee)
+	{
+		FormForm formForm=new FormForm();
+	    formForm.setForm(formDAO.getform());
+	    model.addAttribute("formForm",formForm);
+	    model.addAttribute("menu","document");
+		return "view_form";
+	}
 	
 	@RequestMapping(value={"/edit_form"}, method = RequestMethod.GET)
 	public String edit_form(@RequestParam("auto_no") String auto_no,Form form,ModelMap model)
@@ -105,13 +119,12 @@ public class FormController
 		FormForm formForm=new FormForm();
 		formForm.setForm(formDAO.getform(auto_no));
 		model.addAttribute("formForm",formForm);
-		
+		  model.addAttribute("menu","document");
 		return "edit_form";
  	}
-}
 	
-	/*@RequestMapping(value="/findform",method=RequestMethod.GET)		
-	public String findform(HttpServletRequest request,HttpSession session,@RequestParam("form_or_record_title") String recordtitle,@RequestParam("form_media_type") String mediatype,@RequestParam("retention_time") String retentiontime,ModelMap model)
+	@RequestMapping(value="/searchform",method=RequestMethod.GET)		
+	public String searchform(HttpServletRequest request,HttpSession session,@RequestParam("form_or_rec_title") String recordtitle,@RequestParam("form_media_type") String mediatype,@RequestParam("retention_time") String retentiontime,ModelMap model)
 
 	{
 		
@@ -143,4 +156,3 @@ public class FormController
 		}
 }
 
-*/

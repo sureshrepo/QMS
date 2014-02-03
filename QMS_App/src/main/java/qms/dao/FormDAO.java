@@ -274,7 +274,7 @@ public class FormDAO {
 	}catch(Exception e){}
 	}
 		
-	/*public List<Form> getform(String recordtitle,
+	public List<Form> getform(String recordtitle,
 			String mediatype, String retentiontime) {
 		Connection con = null;
 		Statement statement = null;
@@ -291,11 +291,11 @@ public class FormDAO {
 			
 			String cmd="";
 			
-			cmd = "select * from tbl_form where form_or_record_title='"+ recordtitle +"' or form_media_type='"+ mediatype +"' or retention_time='"+ retentiontime +"'";
+			cmd = "select * from tbl_form as t1 join tbl_form_child as t2 on t1.auto_id=t2.auto_id where t1.form_or_rec_title='"+ recordtitle +"' or t1.form_media_type='"+ mediatype +"' or t1.retention_time='"+ retentiontime +"'";
 			
 			resultSet = statement.executeQuery(cmd);
 		while (resultSet.next()) {
-			form.add(new Form(resultSet.getString("form_or_record_id"),resultSet.getString("form_or_record_title"),resultSet.getString("form_yes_or_no"),resultSet.getString("form_media_type"),resultSet.getString("responsibility"),resultSet.getString("process"),resultSet.getString("retention_time"),resultSet.getString("issuer"),resultSet.getString("effective_date"),resultSet.getString("approver1"),resultSet.getString("comments")));
+			form.add(new Form(resultSet.getString("auto_number"), resultSet.getString("location"), resultSet.getString("form_or_rec_id"),resultSet.getString("responsibility"),resultSet.getString("form_or_rec_title"), resultSet.getString("process"), resultSet.getString("media_type"),resultSet.getString("retention_time"),resultSet.getString("form"), resultSet.getString("auto_no"),resultSet.getString("effective_date"),resultSet.getString("document_id"),resultSet.getString("approver1"),resultSet.getString("issuer"),resultSet.getString("comments")));
 				}
 		} catch (Exception e) {
 			//logger.info(e.toString());
@@ -310,7 +310,7 @@ public class FormDAO {
 		}
 		return form;
 
-	}*/
+	}
 
 
 }

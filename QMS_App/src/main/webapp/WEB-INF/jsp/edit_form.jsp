@@ -12,13 +12,13 @@
 						
 							<li style=" float:left;margin-right:8px;text-transform:uppercase;">
 								<a href="addform" class="select">
-									<span>Add Documents</span>
+									<span>Add Form</span>
 								</a>
 							</li>
 						
 				           <li style=" float:left;margin-right:8px;text-transform:uppercase;">
 				            	<a href="viewform" class="select">
-				            		<span>View Documents</span>
+				            		<span>View Form</span>
 				            	</a>
 				            </li>
 				             <li style=" float:left;margin-right:8px;text-transform:uppercase;">
@@ -186,7 +186,7 @@
 																		              <td valign="middle" align="left" class="input_txt"><span
 																			class="err">*</span>Effective Date :</td>
 																		<td valign="top" align="left" class="input_txt"><input
-																			type="text" class="input_txtbx1" id="inp_external_id"
+																			type="text" class="input_txtbx1" id="datepicker"
 																			onmouseover="showTooltip('tooltip_id','inp_id3');"
 																			onmouseout="hideTooltip('tooltip_id');"
 																			name="effective_date"
