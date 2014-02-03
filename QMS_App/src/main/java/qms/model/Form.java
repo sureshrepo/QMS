@@ -5,148 +5,292 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class Form {
 	
 
-	private String form_or_record_id;
+	private String auto_number;
 
 	@NotEmpty
-	private String form_or_record_title;
+	private String location;
 	
 	@NotEmpty
-	private String form_yes_or_no;
-
-	@NotEmpty
-	private String form_media_type;
+	private String form_or_rec_id;
 
 	@NotEmpty
 	private String responsibility;
 
 	@NotEmpty
+	private String form_or_rec_title;
+
+	@NotEmpty
 	private String process;
+	
+	@NotEmpty
+	private String media_type;
 	
 	@NotEmpty
 	private String retention_time;
 	
 	@NotEmpty
-	private String issuer;
+	private String form;
+	
+	@NotEmpty
+	private String auto_no;
 	
 	@NotEmpty
 	private String effective_date;
 	
 	@NotEmpty
+	private String document_id;
+	
+	@NotEmpty
 	private String approver1;
+	
+	@NotEmpty
+	private String issuer;
 	
 	@NotEmpty
 	private String comments;
 
-	public String getForm_or_record_id() {
-		return form_or_record_id;
+	
+
+	
+	public Form() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
-	public void setForm_or_record_id(String form_or_record_id) {
-		this.form_or_record_id = form_or_record_id;
+
+
+
+	public Form(String auto_number, String location, String form_or_rec_id,
+			String responsibility, String form_or_rec_title, String process,
+			String media_type, String retention_time, String form,
+			String auto_no, String effective_date, String document_id,
+			String approver1, String issuer, String comments) {
+		super();
+		this.auto_number = auto_number;
+		this.location = location;
+		this.form_or_rec_id = form_or_rec_id;
+		this.responsibility = responsibility;
+		this.form_or_rec_title = form_or_rec_title;
+		this.process = process;
+		this.media_type = media_type;
+		this.retention_time = retention_time;
+		this.form = form;
+		this.auto_no = auto_no;
+		this.effective_date = effective_date;
+		this.document_id = document_id;
+		this.approver1 = approver1;
+		this.issuer = issuer;
+		this.comments = comments;
 	}
 
-	public String getForm_or_record_title() {
-		return form_or_record_title;
+
+
+
+	public String getAuto_number() {
+		return auto_number;
 	}
 
-	public void setForm_or_record_title(String form_or_record_title) {
-		this.form_or_record_title = form_or_record_title;
+
+
+
+	public void setAuto_number(String auto_number) {
+		this.auto_number = auto_number;
 	}
 
-	public String getForm_yes_or_no() {
-		return form_yes_or_no;
+
+
+
+	public String getLocation() {
+		return location;
 	}
 
-	public void setForm_yes_or_no(String form_yes_or_no) {
-		this.form_yes_or_no = form_yes_or_no;
+
+
+
+	public void setLocation(String location) {
+		this.location = location;
 	}
 
-	public String getForm_media_type() {
-		return form_media_type;
+
+
+
+	public String getForm_or_rec_id() {
+		return form_or_rec_id;
 	}
 
-	public void setForm_media_type(String form_media_type) {
-		this.form_media_type = form_media_type;
+
+
+
+	public void setForm_or_rec_id(String form_or_rec_id) {
+		this.form_or_rec_id = form_or_rec_id;
 	}
+
+
+
 
 	public String getResponsibility() {
 		return responsibility;
 	}
 
+
+
+
 	public void setResponsibility(String responsibility) {
 		this.responsibility = responsibility;
 	}
+
+
+
+
+	public String getForm_or_rec_title() {
+		return form_or_rec_title;
+	}
+
+
+
+
+	public void setForm_or_rec_title(String form_or_rec_title) {
+		this.form_or_rec_title = form_or_rec_title;
+	}
+
+
+
 
 	public String getProcess() {
 		return process;
 	}
 
+
+
+
 	public void setProcess(String process) {
 		this.process = process;
 	}
+
+
+
+
+	public String getMedia_type() {
+		return media_type;
+	}
+
+
+
+
+	public void setMedia_type(String media_type) {
+		this.media_type = media_type;
+	}
+
+
+
 
 	public String getRetention_time() {
 		return retention_time;
 	}
 
+
+
+
 	public void setRetention_time(String retention_time) {
 		this.retention_time = retention_time;
 	}
 
-	public String getIssuer() {
-		return issuer;
+
+
+
+	public String getForm() {
+		return form;
 	}
 
-	public void setIssuer(String issuer) {
-		this.issuer = issuer;
+
+
+
+	public void setForm(String form) {
+		this.form = form;
 	}
+
+
+
+
+	public String getAuto_no() {
+		return auto_no;
+	}
+
+
+
+
+	public void setAuto_no(String auto_no) {
+		this.auto_no = auto_no;
+	}
+
+
+
 
 	public String getEffective_date() {
 		return effective_date;
 	}
 
+
+
+
 	public void setEffective_date(String effective_date) {
 		this.effective_date = effective_date;
 	}
+
+
+
+
+	public String getDocument_id() {
+		return document_id;
+	}
+
+
+
+
+	public void setDocument_id(String document_id) {
+		this.document_id = document_id;
+	}
+
+
+
 
 	public String getApprover1() {
 		return approver1;
 	}
 
+
+
+
 	public void setApprover1(String approver1) {
 		this.approver1 = approver1;
 	}
+
+
+
+
+	public String getIssuer() {
+		return issuer;
+	}
+
+
+
+
+	public void setIssuer(String issuer) {
+		this.issuer = issuer;
+	}
+
+
+
 
 	public String getComments() {
 		return comments;
 	}
 
+
+
+
 	public void setComments(String comments) {
 		this.comments = comments;
-	}
-
-	public Form(String form_or_record_id, String form_or_record_title,
-			String form_yes_or_no, String form_media_type,
-			String responsibility, String process, String retention_time,
-			String issuer, String effective_date, String approver1,
-			String comments) {
-		super();
-		this.form_or_record_id = form_or_record_id;
-		this.form_or_record_title = form_or_record_title;
-		this.form_yes_or_no = form_yes_or_no;
-		this.form_media_type = form_media_type;
-		this.responsibility = responsibility;
-		this.process = process;
-		this.retention_time = retention_time;
-		this.issuer = issuer;
-		this.effective_date = effective_date;
-		this.approver1 = approver1;
-		this.comments = comments;
-	}
-
-	public Form() {
-		super();
-		// TODO Auto-generated constructor stub
 	}
 	
 	

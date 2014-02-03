@@ -25,7 +25,7 @@ import qms.forms.FormForm;
 
 @Controller
 //@SessionAttributes({"audit_id","audit_process","audit_start_date","audit_due_date","auditor","audit_notes","audit_finding","audit_completion_date","auditors_initials","auditee_name"})
-@SessionAttributes({"form"})
+/*@SessionAttributes({"form"})*/
 public class FormController
 {
 	@Autowired
@@ -33,14 +33,14 @@ public class FormController
 	
 	
 	
-	@RequestMapping(value={"/viewform"}, method = RequestMethod.GET)
+	/*@RequestMapping(value={"/viewform"}, method = RequestMethod.GET)
 	public String show_form(HttpSession session,HttpServletRequest request, ModelMap model, Principal principal )
 	{
     FormForm formForm=new FormForm();
     formForm.setForm(formDAO.getform());
     model.addAttribute("formForm",formForm);
 	return "view_form";
- 	}
+ 	}*/
 	
 	
 	@RequestMapping(value={"/addform"}, method = RequestMethod.GET)
@@ -53,60 +53,42 @@ public class FormController
 	
 
 	@RequestMapping(value={"/addform"}, method = RequestMethod.POST)
-	public String insert_form(HttpSession session, @ModelAttribute("Form") @Valid Form form, BindingResult result, ModelMap model, Principal principal)
+	public String insert_form(HttpSession session,ModelMap model, @ModelAttribute("Form") @Valid Form form, BindingResult result, Principal principal)
 
 	{	
 		
 		System.out.println("came");
-		session.setAttribute("form",form);
-		if(result.hasErrors())
-		{
-			
-			System.out.println("going to return");
-			return "add_form";
-			
-		}
-		
 		formDAO.insert_form(form);
-		
-		
-		
 		model.put("form", form);
 		model.addAttribute("form",form);
 		model.addAttribute("menu","form");
-		
-		 
-		
-		return "view_form";
+		return "add_form";
  	}
 	
 	
 	@RequestMapping(value={"/updateform"}, method = RequestMethod.POST)
-	public String update_form(HttpSession session,@ModelAttribute("form") @Valid Form form,BindingResult result,@RequestParam("audit_process") String process,@RequestParam("audit_start_date") String startdate,ModelMap model, Principal principal)
+	public String update_form(HttpSession session,@ModelAttribute("form") @Valid Form form,BindingResult result,ModelMap model, Principal principal)
 	{
-		session.setAttribute("form",form);
-		if(result.hasErrors())
-		{
-			return "edit_form";
-		}	
+		/*session.setAttribute("form",form);*/
+		
 		formDAO.update_form(form);
 		
 				
-		FormForm formForm = new FormForm();
+		/*FormForm formForm = new FormForm();
 		model.addAttribute("formForm", formForm);
 		model.addAttribute("success","true");
-		model.addAttribute("menu","form");
+		model.addAttribute("menu","form");*/
 		
 		
-		return "view_form";
+		return "edit_form";
  	}
 	
 	
 	@RequestMapping(value={"/deleteform"}, method = RequestMethod.GET)
-	public String delete_form(@RequestParam("fid") String form_or_record_id,ModelMap model, Principal principal )
+	public String delete_form(@RequestParam("auto_no") String auto_no,ModelMap model, Principal principal )
 	{
 		
-		formDAO.delete_form(form_or_record_id);
+		formDAO.delete_form(auto_no);
 		FormForm formForm=new FormForm();
 	    formForm.setForm(formDAO.getform());
 	    model.addAttribute("formForm",formForm);
@@ -116,18 +98,19 @@ public class FormController
 		
  	}
 	
-	@RequestMapping(value={"/editform"}, method = RequestMethod.GET)
-	public String edit_form(@RequestParam("fid") String form_or_record_id,ModelMap model, Principal principal )
+	@RequestMapping(value={"/edit_form"}, method = RequestMethod.GET)
+	public String edit_form(@RequestParam("auto_no") String auto_no,Form form,ModelMap model)
 	{
     
 		FormForm formForm=new FormForm();
-		formForm.setForm(formDAO.getform_byid(form_or_record_id));
+		formForm.setForm(formDAO.getform(auto_no));
 		model.addAttribute("formForm",formForm);
 		
 		return "edit_form";
  	}
+}
 	
-	@RequestMapping(value="/findform",method=RequestMethod.GET)		
+	/*@RequestMapping(value="/findform",method=RequestMethod.GET)		
 	public String findform(HttpServletRequest request,HttpSession session,@RequestParam("form_or_record_title") String recordtitle,@RequestParam("form_media_type") String mediatype,@RequestParam("retention_time") String retentiontime,ModelMap model)
 
 	{
@@ -160,3 +143,4 @@ public class FormController
 		}
 }
 
+*/

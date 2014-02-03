@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.sql.DataSource;
 
+import qms.model.DocumentMain;
 import qms.model.Form;
 
 public class FormDAO {
@@ -69,7 +70,7 @@ public class FormDAO {
 	}
 
 	
-	public boolean delete_form(String form_or_record_id)
+	public boolean delete_form(String auto_no)
 	{
 		Connection con = null;
 		Statement statement = null;
@@ -86,8 +87,10 @@ public class FormDAO {
 		}
 		try
 		{
-			String cmd_delete = "delete from tbl_form where form_or_record_id ='"+form_or_record_id+"'";
-			status = statement.execute(cmd_delete);
+			String cmd_delete1 = "delete from tbl_form where auto_no ='"+auto_no+"'";
+			status = statement.execute(cmd_delete1);
+			String cmd_delete2 = "delete from tbl_form_child where auto_no ='"+auto_no+"'";
+			status = statement.execute(cmd_delete2);
 		}
 		catch(Exception e)
 		{
@@ -105,7 +108,7 @@ public class FormDAO {
 		return status;
 	}
 	
-	public List<Form> getform_byid(String form_or_record_id)
+	public List<Form> getform()
 	{
 		Connection con = null;
 		Statement statement = null;
@@ -122,10 +125,10 @@ public class FormDAO {
 		List<Form> form = new ArrayList<Form>();
 		try
 		{
-			resultSet = statement.executeQuery("select * from tbl_form where form_or_record_id = '"+form_or_record_id+"'");
+			resultSet = statement.executeQuery("select t1.*,t2.* from tbl_form as t1 join tbl_form_child as t2 on t1.auto_number=t2.auto_no");
 			while(resultSet.next())
 			{
-			form.add(new Form(resultSet.getString("form_or_record_id"),resultSet.getString("form_or_record_title"),resultSet.getString("form_yes_or_no"),resultSet.getString("form_media_type"),resultSet.getString("responsibility"),resultSet.getString("process"),resultSet.getString("retention_time"),resultSet.getString("issuer"),resultSet.getString("effective_date"),resultSet.getString("approver1"),resultSet.getString("comments")));
+			form.add(new Form(resultSet.getString("auto_number"), resultSet.getString("location"), resultSet.getString("form_or_rec_id"),resultSet.getString("responsibility"),resultSet.getString("form_or_rec_title"), resultSet.getString("process"), resultSet.getString("media_type"),resultSet.getString("retention_time"),resultSet.getString("form"), resultSet.getString("auto_no"),resultSet.getString("effective_date"),resultSet.getString("document_id"),resultSet.getString("approver1"),resultSet.getString("issuer"),resultSet.getString("comments")));
 			}
 		}
 			catch(Exception e)
@@ -162,8 +165,10 @@ public class FormDAO {
 		}
 		try
 		{
-			String cmd_insert = "update tbl_form set form_or_record_id='"+form.getForm_or_record_id()+"',form_or_record_title='"+form.getForm_or_record_title()+"',form_yes_or_no='"+form.getForm_yes_or_no()+"',form_media_type='"+form.getForm_media_type()+"',responsibility='"+form.getResponsibility()+"',process='"+form.getProcess()+"',retention_time='"+form.getRetention_time()+"'";
-			statement.executeQuery(cmd_insert);
+			String cmd_update1 = "update tbl_form set auto_number='"+form.getAuto_number()+"',location='"+form.getLocation()+"',form_or_rec_id='"+form.getForm_or_rec_id()+"',responsibility='"+form.getResponsibility()+"',form_or_rec_title='"+form.getForm_or_rec_title()+"',process='"+form.getProcess()+"',media_type='"+form.getMedia_type()+"',retention_time='"+form.getRetention_time()+"',form='"+form.getForm()+"'";
+			statement.execute(cmd_update1);
+			String cmd_update2="update tbl_form_child set auto_no='"+form.getAuto_no()+"',effective_date='"+form.getEffective_date()+"',document_id='"+form.getDocument_id()+"',approver1='"+form.getApprover1()+"',issuer='"+form.getIssuer()+"',comments='"+form.getComments()+"'";
+		    statement.execute(cmd_update2);
 		}
 		catch(Exception e)
 		{
@@ -196,8 +201,17 @@ public class FormDAO {
 		}
 		  try{
 			  
-			  String cmd_insert="insert into tbl_form(form_or_record_id,form_or_record_title,form_yes_or_no,form_media_type,responsibility,process,retention_time) values('"+form.getForm_or_record_id()+"','"+form.getForm_or_record_title()+"','"+form.getForm_yes_or_no()+"','"+form.getForm_media_type()+"','"+form.getResponsibility()+"','"+form.getProcess()+"','"+form.getRetention_time()+"')"; 
-			  statement.execute(cmd_insert);
+			  String cmd_insert1="insert into tbl_form(auto_number,location,form_or_rec_id,responsibility,form_or_rec_title,process,media_type,retention_time,form) values('"+form.getAuto_number()+"','"+form.getLocation()+"','"+form.getForm_or_rec_id()+"','"+form.getResponsibility()+"','"+form.getForm_or_rec_title()+"','"+form.getProcess()+"','"+form.getMedia_type()+"','"+form.getRetention_time()+"','"+form.getForm()+"')"; 
+			  statement.execute(cmd_insert1);
+			  
+			  /*String cmd_insert1="insert into tbl_doccontrol_main(document_id,document_title,document_type,media_type,location,process,external,attachment_name,attachment_type,attachment_referrence) values('"+documentMain.getDocument_id()+"','"+documentMain.getDocument_title()+"','"+documentMain.getDocument_type()+"','"+documentMain.getMedia_type()+"','"+documentMain.getLocation()+"','"+documentMain.getProcess()+"','"+documentMain.getExternal()+"','"+documentMain.getAttachment_name()+"','"+documentMain.getAttachment_type()+"','"+documentMain.getAttachment_referrence()+"')";
+			  statement.execute(cmd_insert1);*/
+			  
+			  String cmd_insert2="";	
+				 cmd_insert2="insert into tbl_form_child(auto_no,effective_date,document_id,approver1,issuer,comments) values('"+form.getAuto_no()+"','"+form.getEffective_date()+"','"+form.getDocument_id()+"','"+form.getApprover1()+"','"+form.getIssuer()+"','"+form.getComments()+"')";
+				 statement.execute(cmd_insert2);
+		
+			 status=true;
 		  }catch(Exception e){
 	    	System.out.println(e.toString());
 	    	releaseResultSet(resultSet);
@@ -213,7 +227,7 @@ public class FormDAO {
 	
 	
 	
-	public List<Form> getform(){
+	public List<Form> getform(String auto_no){
 		Connection con = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
@@ -225,12 +239,11 @@ public class FormDAO {
 		}
 		List<Form> form = new ArrayList<Form>();
 	    try{
-			resultSet = statement.executeQuery("select * from tbl_form");
+	    	resultSet = statement.executeQuery("select t1.*,t2.* from tbl_form as t1 join tbl_form_child as t2 on t1.auto_number=t2.auto_no where t1.auto_number='"+auto_no+"'");
 			System.out.println("came");
 			while(resultSet.next()){
-				System.out.println("count");
-				form.add(new Form(resultSet.getString("form_or_record_id"),resultSet.getString("form_or_record_title"),resultSet.getString("form_yes_or_no"),resultSet.getString("form_media_type"),resultSet.getString("responsibility"),resultSet.getString("process"),resultSet.getString("retention_time"),resultSet.getString("issuer"),resultSet.getString("effective_date"),resultSet.getString("approver1"),resultSet.getString("comments")));
-					}
+								form.add(new Form(resultSet.getString("auto_number"), resultSet.getString("location"), resultSet.getString("form_or_rec_id"),resultSet.getString("responsibility"),resultSet.getString("form_or_rec_title"), resultSet.getString("process"), resultSet.getString("media_type"),resultSet.getString("retention_time"),resultSet.getString("form"), resultSet.getString("auto_no"),resultSet.getString("effective_date"),resultSet.getString("document_id"),resultSet.getString("approver1"),resultSet.getString("issuer"),resultSet.getString("comments")));
+			}
 	    }catch(Exception e){
 	    	System.out.println(e.toString());
 	    	releaseResultSet(resultSet);
@@ -261,7 +274,7 @@ public class FormDAO {
 	}catch(Exception e){}
 	}
 		
-	public List<Form> getform(String recordtitle,
+	/*public List<Form> getform(String recordtitle,
 			String mediatype, String retentiontime) {
 		Connection con = null;
 		Statement statement = null;
@@ -297,7 +310,7 @@ public class FormDAO {
 		}
 		return form;
 
-	}
+	}*/
 
 
 }
