@@ -40,6 +40,7 @@ import qms.forms.EmployeeForm;
 import qms.forms.ProcessForm;
 import qms.dao.EmployeeDAO;
 import qms.forms.DocumentMainForm;
+import qms.model.Employee;
 
 @Controller
 @SessionAttributes({ "temp_list","documentMain" })
@@ -298,7 +299,10 @@ public class DocumentController {
 	String insert_external_document(HttpSession session,
 			HttpServletRequest request, ModelMap model, Principal principal) {
 
-		employeeDAO.filterEmployees(request.getParameter("filter_val"));
+		EmployeeForm employeeForm=new EmployeeForm();
+		employeeForm.setEmployees(employeeDAO.filterEmployees(request.getParameter("filter_val")));
+		
+		String resultHTML="";
 		
 		
 		return resultHTML;
