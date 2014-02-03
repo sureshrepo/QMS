@@ -14,10 +14,13 @@ import javax.sql.DataSource;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
+import org.apache.poi.hssf.usermodel.HSSFFont;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.HSSFColor;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.Font;
 import org.springframework.web.servlet.view.document.AbstractExcelView;
 
 import qms.model.DocumentMain;
@@ -42,56 +45,239 @@ public class DocumentControlDAO extends AbstractExcelView
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 
-		HSSFSheet excelSheet = workbook.createSheet("Animal List");
-		setExcelHeader(excelSheet);
+		HSSFSheet excelSheet = workbook.createSheet("Document Report");
+		excelSheet.setDefaultColumnWidth(20);
+		  
+		//Style 1
+		CellStyle style = workbook.createCellStyle();
+	        Font font = workbook.createFont();
+	        font.setFontName("Arial");
+	        style.setFillForegroundColor(HSSFColor.BROWN.index);
+	        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
+	        style.setWrapText(true);
+	        font.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
+	        font.setColor(HSSFColor.WHITE.index);
+	        style.setFont(font);
+		
+	    //Style2
+	        CellStyle style2 = workbook.createCellStyle();
+	        Font font2 = workbook.createFont();
+	        font2.setFontName("Arial");
+	        style2.setFillForegroundColor(HSSFColor.YELLOW.index);
+	        style2.setFillPattern(CellStyle.SOLID_FOREGROUND);
+	        style2.setWrapText(true);
+	        font2.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
+	        font2.setColor(HSSFColor.WHITE.index);
+	        style2.setFont(font2); 
 		
 		@SuppressWarnings("unchecked")
 		List<DocumentMain> documentMains = (List<DocumentMain>) model.get("documentMains");
 		String[] fields=(String[])model.get("fields");
-		setExcelRows(excelSheet,documentMains,fields);
+		
+
+        setExcelHeader(excelSheet,style,fields);
+		
+		setExcelRows(excelSheet,documentMains,fields,style2);
 		
 	}
 	
 	
-	public void setExcelHeader(HSSFSheet excelSheet) {
-		HSSFRow excelHeader = excelSheet.createRow(0);
-		excelHeader.createCell(0).setCellValue("ID");
-		excelHeader.createCell(1).setCellValue("Name");
-		excelHeader.createCell(2).setCellValue("Type");
-		excelHeader.createCell(3).setCellValue("Aggressive");
-		excelHeader.createCell(4).setCellValue("Weight");
+	public void setExcelHeader(HSSFSheet excelSheet,CellStyle style,String[] fields) {
+		HSSFRow excelHeader = excelSheet.createRow(0);	
+	//	String[] fields={"document_id","document_title","document_type","media_type","location","process","external","issuer","revision_level","date","approver1","approver2","approver3","status","comments"};
+		int i=0;
+		for (String field : fields) {
+			
+			if(field.equals("document_id"))
+			{
+				excelHeader.createCell(i).setCellValue("ID");
+				excelHeader.getCell(i).setCellStyle(style);
+				i++;
+			}
+			else if(field.equals("document_title"))
+			{
+				excelHeader.createCell(i).setCellValue("Document Title");
+				excelHeader.getCell(i).setCellStyle(style);
+				i++;
+			}
+			else if(field.equals("document_type"))
+			{
+				excelHeader.createCell(i).setCellValue("Document Type");
+				excelHeader.getCell(i).setCellStyle(style);
+				i++;
+			}
+			else if(field.equals("media_type"))	
+			{
+				excelHeader.createCell(i).setCellValue("Media Type");
+				excelHeader.getCell(i).setCellStyle(style);
+				i++;
+			}else if(field.equals("location"))	
+			{
+				excelHeader.createCell(i).setCellValue("Location");
+				excelHeader.getCell(i).setCellStyle(style);
+				i++;
+			}else if(field.equals("process"))	
+			{
+				excelHeader.createCell(i).setCellValue("Process");
+				excelHeader.getCell(i).setCellStyle(style);
+				i++;
+			}else if(field.equals("external"))
+			{
+				excelHeader.createCell(i).setCellValue("External");
+				excelHeader.getCell(i).setCellStyle(style);
+				i++;
+			}else if(field.equals("issuer"))	
+			{
+				excelHeader.createCell(i).setCellValue("Issuer");
+				excelHeader.getCell(i).setCellStyle(style);
+				i++;
+			}else if(field.equals("revision_level"))	
+			{
+				excelHeader.createCell(i).setCellValue("Revision Level");
+				excelHeader.getCell(i).setCellStyle(style);
+				i++;
+			}else if(field.equals("date"))	
+			{
+				excelHeader.createCell(i).setCellValue("Date");
+				excelHeader.getCell(i).setCellStyle(style);
+				i++;
+			}else if(field.equals("approver1"))	
+			{
+				excelHeader.createCell(i).setCellValue("Approver 1");
+				excelHeader.getCell(i).setCellStyle(style);
+				i++;
+			}else if(field.equals("approver2"))	
+			{
+				excelHeader.createCell(i).setCellValue("Approver 2");
+				excelHeader.getCell(i).setCellStyle(style);
+				i++;
+			}else if(field.equals("approver3"))	
+			{
+				excelHeader.createCell(i).setCellValue("Approver 3");
+				excelHeader.getCell(i).setCellStyle(style);
+				i++;
+			}else if(field.equals("status"))	
+			{
+				excelHeader.createCell(i).setCellValue("Status");
+				excelHeader.getCell(i).setCellStyle(style);
+				i++;
+			}else if(field.equals("comments"))	
+			{
+				excelHeader.createCell(i).setCellValue("Comments");
+				excelHeader.getCell(i).setCellStyle(style);
+				i++;
+			}
+			
+		}
+	
 	}
 	
 	
 	//End
 	
 	
-	public void setExcelRows(HSSFSheet excelSheet, List<DocumentMain> documentMains,String[] fields){
+	public void setExcelRows(HSSFSheet excelSheet, List<DocumentMain> documentMains,String[] fields,CellStyle style2){
 		int record = 1;
+		int i=0;
 		for (DocumentMain documentMain:documentMains){	
 			HSSFRow excelRow = excelSheet.createRow(record++);
-			for(String field:fields)
-			{
-				if (field.equals("document_id")) 
-				{
-					excelRow.createCell(0).setCellValue(
-							documentMain.getDocument_id());
-				}
-				else if (field.equals("document_title")) {
-					excelRow.createCell(1).setCellValue(
-							documentMain.getDocument_title());
-				} else if (field.equals("document_type")) {
-					excelRow.createCell(2).setCellValue(
-							documentMain.getDocument_type());
-				} else if (field.equals("media_type")) {
-					excelRow.createCell(3).setCellValue(
-							documentMain.getMedia_type());
-				} else if (field.equals("process")) {
-					excelRow.createCell(4).setCellValue(
-							documentMain.getProcess());
+	//		excelRow.setRowStyle((HSSFCellStyle) style2);
+		i=0;
+				for (String field : fields) {
+					
+					if(field.equals("document_id"))
+					{
+						excelRow.createCell(i).setCellValue(
+								documentMain.getDocument_id());
+							i++;
+					}
+					else if(field.equals("document_title"))
+					{
+						excelRow.createCell(i).setCellValue(
+								documentMain.getDocument_title());
+
+						i++;
+					}
+					else if(field.equals("document_type"))
+					{
+						excelRow.createCell(i).setCellValue(
+								documentMain.getDocument_type()
+								);	i++;
+					}
+					else if(field.equals("media_type"))	
+					{
+						excelRow.createCell(i).setCellValue(
+								documentMain.getMedia_type());
+						i++;
+					}else if(field.equals("location"))	
+					{
+						excelRow.createCell(i).setCellValue(
+								documentMain.getLocation());
+						i++;
+					}else if(field.equals("process"))	
+					{
+						excelRow.createCell(i).setCellValue(
+								documentMain.getProcess());
+						i++;
+					}else if(field.equals("external"))
+					{
+						if(documentMain.getExternal().equals("1"))
+						excelRow.createCell(i).setCellValue("Yes");
+						else
+							excelRow.createCell(i).setCellValue("No");
+						i++;
+					}else if(field.equals("issuer"))	
+					{
+						excelRow.createCell(i).setCellValue(
+								documentMain.getIssuer());
+						i++;
+					}else if(field.equals("revision_level"))	
+					{
+						excelRow.createCell(i).setCellValue(
+								documentMain.getRevision_level());
+						i++;
+					}else if(field.equals("date"))	
+					{
+						excelRow.createCell(i).setCellValue(
+								documentMain.getDate());
+						i++;
+					}else if(field.equals("approver1"))	
+					{
+						excelRow.createCell(i).setCellValue(
+								documentMain.getApprover1());
+						i++;
+					}else if(field.equals("approver2"))	
+					{
+						excelRow.createCell(i).setCellValue(
+								documentMain.getApprover2());
+						i++;
+					}else if(field.equals("approver3"))	
+					{
+						excelRow.createCell(i).setCellValue(
+								documentMain.getApprover3());
+						i++;
+					}else if(field.equals("status"))	
+					{
+						excelRow.createCell(i).setCellValue(
+								documentMain.getStatus());
+						i++;
+					}else if(field.equals("comments"))	
+					{
+						excelRow.createCell(i).setCellValue(
+								documentMain.getComments());
+						i++;
+					}
+					
 				}
 				
-			}
+				
+				
+				
+				
+				
+				
+				
+				
 		}
 	}
 	
@@ -133,7 +319,7 @@ public class DocumentControlDAO extends AbstractExcelView
 	}
 	
 	
-	public boolean delete_employee(String employee_id){
+	public boolean delete_document(String document_id){
 		Connection con = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
@@ -145,8 +331,8 @@ public class DocumentControlDAO extends AbstractExcelView
 				e1.printStackTrace();
 		}
 		  try{
-			  String cmd_delete1="delete from tbl_employee where employee_id='"+employee_id+"'";
-			  String cmd_delete2="delete from tbl_employee_desc where employee_id='"+employee_id+"'";
+			  String cmd_delete1="delete from tbl_doccontrol_main where document_id='"+document_id+"'";
+			  String cmd_delete2="delete from tbl_doccontrol_external where document_id='"+document_id+"'";
 				 
 			  status=statement.execute(cmd_delete1);
 			  status=statement.execute(cmd_delete2);
@@ -166,7 +352,7 @@ public class DocumentControlDAO extends AbstractExcelView
 		
 	}
 	
-	public List<Employee> getEmployeess_byid(String employee_id){
+	public List<DocumentMain> getDocument_byid(String document_id){
 		Connection con = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
@@ -176,13 +362,16 @@ public class DocumentControlDAO extends AbstractExcelView
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
-		List<Employee> employees = new ArrayList<Employee>();
+		List<DocumentMain> documentMains=new ArrayList<DocumentMain>();
+		
 	    try{
-			resultSet = statement.executeQuery("select * from tbl_employee as t1 join tbl_employee_desc as t2 on t1.employee_id=t2.employee_id where t1.employee_id='"+employee_id+"'");
+	    	System.out.println("Edit:"+document_id);
+			resultSet = statement.executeQuery("SELECT t1.*,t2.* FROM tbl_doccontrol_main  as t1 join tbl_doccontrol_external as t2 on t1.document_id=t2.document_id where t1.document_id='"+document_id+"'");
 			while(resultSet.next())
 			{
-				System.out.println("count");
-				employees.add(new Employee(resultSet.getString("employee_id"),resultSet.getString("name"), resultSet.getString("job_title"), resultSet.getString("date_hired"), resultSet.getString("attachments"), resultSet.getString("list_of_functions_needes"),resultSet.getString("documented_in"), resultSet.getString("qualified_by"),resultSet.getString("type_of_training"),resultSet.getString("trainer"), resultSet.getString("training_due_date"),resultSet.getString("training_completion_date"),resultSet.getString("training_effectiveness_review_due_date"),resultSet.getString("training_effectiveness_notes")));
+				documentMains.add(new DocumentMain(resultSet.getString("document_id"),resultSet.getString("document_title"),resultSet.getString("document_type"),resultSet.getString("media_type"),resultSet.getString("location"),resultSet.getString("process"),resultSet.getString("issuer"),resultSet.getString("revision_level"),resultSet.getString("date"),resultSet.getString("approver1"),resultSet.getString("approver2"),resultSet.getString("approver3"),resultSet.getString("comments"),resultSet.getString("status"),resultSet.getString("external"),resultSet.getString("attachment_name"),resultSet.getString("attachment_type"),resultSet.getString("attachment_referrence")));
+				System.out.println("Got It!!!!");
+				
 		    }
 	    }catch(Exception e){
 	    	System.out.println(e.toString());
@@ -194,12 +383,12 @@ public class DocumentControlDAO extends AbstractExcelView
 	    	releaseStatement(statement);
 	    	releaseConnection(con);	    	
 	    }
-	    return employees;
+	    return documentMains;
 		
 	}
 	
 
-	public boolean update_employee(Employee employee)
+	public boolean update_document(DocumentMain documentMain)
 	{
 		Connection con = null;
 		Statement statement = null;
@@ -213,10 +402,11 @@ public class DocumentControlDAO extends AbstractExcelView
 				e1.printStackTrace();
 		}
 		  try{
-			  String cmd_update1="update tbl_employee set name='"+employee.getName()+"',job_title='"+employee.getJob_title()+"',date_hired='"+employee.getDate_hired()+"',attachments='"+employee.getAttachments()+"' where employee_id='"+employee.getId()+"'";
-			  String cmd_update2="update tbl_employee_desc set list_of_functions_needes='"+employee.getList_of_functions_needes()+"',documented_in='"+employee.getDocumented_in()+"',qualified_by='"+employee.getQualified_by()+"',type_of_training='"+employee.getType_of_training()+"',trainer='"+employee.getTrainer()+"',training_due_date='"+employee.getTraining_due_date()+"',training_completion_date='"+employee.getTraining_completion_date()+"',training_effectiveness_review_due_date='"+employee.getTraining_effectiveness_review_due_date()+"',training_effectiveness_notes='"+employee.getTraining_effectiveness_notes()+"' where employee_id='"+employee.getId()+"'";
+			  String cmd_update1="update tbl_doccontrol_main set document_title='"+documentMain.getDocument_title()+"',document_type='"+documentMain.getDocument_type()+"',media_type='"+documentMain.getMedia_type()+"',location='"+documentMain.getLocation()+"',process='"+documentMain.getProcess()+"',external='"+documentMain.getExternal()+"',attachment_name='"+documentMain.getAttachment_name()+"',attachment_type='"+documentMain.getAttachment_type()+"',attachment_referrence='"+documentMain.getAttachment_referrence()+"' where document_id='"+documentMain.getDocument_id()+"'";
+			  String cmd_update2="update tbl_doccontrol_external set issuer='"+documentMain.getIssuer()+"',revision_level='"+documentMain.getRevision_level()+"',date='"+documentMain.getDate()+"',approver1='"+documentMain.getApprover1()+"',approver2='"+documentMain.getApprover2()+"',approver3='"+documentMain.getApprover3()+"',comments='"+documentMain.getComments()+"',status='"+documentMain.getStatus()+"' where document_id='"+documentMain.getDocument_id()+"'";
 			statement.execute(cmd_update1);
 			statement.execute(cmd_update2);
+			status=true;
 		  }catch(Exception e){
 	    	System.out.println(e.toString());
 	    	releaseResultSet(resultSet);

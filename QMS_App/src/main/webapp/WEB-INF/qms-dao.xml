@@ -24,6 +24,9 @@
 	<bean id="jobDAO" class="qms.dao.JobDAO">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
+	<bean id="formDAO" class="qms.dao.FormDAO">
+		<property name="datasource" ref="dataSource" />
+	</bean>
 	
 	<bean id="correctiveAndPreventiveActionsDAO" class="qms.dao.CorrectiveAndPreventiveActionsDAO">
 		<property name="dataSource" ref="dataSource" />

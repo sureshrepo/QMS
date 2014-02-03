@@ -12,6 +12,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.apache.http.HttpRequest;
 import org.apache.velocity.runtime.directive.Foreach;
@@ -19,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -40,7 +42,7 @@ import qms.dao.EmployeeDAO;
 import qms.forms.DocumentMainForm;
 
 @Controller
-@SessionAttributes({ "temp_list" })
+@SessionAttributes({ "temp_list","documentMain" })
 public class DocumentController {
 	@Autowired
 	DocumentControlDAO documentControlDAO;
@@ -60,42 +62,152 @@ public class DocumentController {
 	public String add_document(HttpSession session, ModelMap model,
 			Principal principal) {
 
-		List<ExternalDocument> tempDocuments = new ArrayList<ExternalDocument>();
-		session.setAttribute("temp_list", tempDocuments);
-		/*
-		 * To generate process drop down
-		 */
-		ProcessForm processForm = new ProcessForm();
-		processForm.setProcesses(processDAO.getProcess());
-		model.addAttribute("processForm", processForm);
-
-		/*
-		 * Load Employee list
-		 */
-
-		EmployeeForm employeeForm = new EmployeeForm();
-		employeeForm.setEmployees(employeeDAO.getEmployees());
-		model.addAttribute("employeeForm", employeeForm);
-
-		model.addAttribute("id", "1001");
+		session.removeAttribute("documentMain");
+		load_document_page_dropdowns(model);
 		return "add_documents";
 	}
 
+	@RequestMapping(value = { "/deletedocument" }, method = RequestMethod.GET)
+	public String delete_document(@RequestParam("doc_id") String doc_id,ModelMap model,
+			Principal principal) {
 
+		documentControlDAO.delete_document(doc_id);
+		DocumentMainForm documentMainForm = new DocumentMainForm();
+		documentMainForm.setDocumentMains(documentControlDAO.getDocuments());
+		model.addAttribute("documentMainForm", documentMainForm);
 	
+		return "view_documents";
+		
+	}
+	
+	@RequestMapping(value = { "/edit_document" }, method = RequestMethod.GET)
+	public String edit_document(@RequestParam("doc_id") String document_id,HttpSession session, ModelMap model,Principal principal) {
 
+		session.removeAttribute("documentMain");
+		load_document_page_dropdowns(model);
+		DocumentMainForm documentMainForm=new DocumentMainForm();
+		documentMainForm.setDocumentMains(documentControlDAO.getDocument_byid(document_id));
+		model.addAttribute("documentMainForm",documentMainForm);
+		
+		
+		documentControlDAO.getDocument_byid(document_id);
+		
+		return "edit_documents";
+	}
+	@RequestMapping(value = { "/update_documents" }, method = RequestMethod.POST)
+	public String update_document(@ModelAttribute("DocumentMain") @Valid DocumentMain documentMain,BindingResult result,HttpSession session, ModelMap model,Principal principal) {
 
+		int flag = 0;
+		session.setAttribute("documentMain",documentMain);
+		if(result.hasErrors())
+		{
+			
+			load_document_page_dropdowns(model);
+			return "edit_documents";
+		}
+		else
+		{
+
+			byte[] buffer;
+			try {
+				MultipartFile file = documentMain.getAttachments();
+				String orginal_fileName = null;
+				String duplicate_fileName = null;
+				InputStream inputStream = null;
+				OutputStream outputStream = null;
+				if (file != null) {
+					if (file.getSize() > 0) {
+						inputStream = file.getInputStream();
+						if (file.getSize() > 100000) {
+							System.out.println("File Size:::" + file.getSize());
+							return "/add_document";
+						}
+						orginal_fileName = "D:/Projects/Upload/DocumentControl/"
+								+ file.getOriginalFilename();
+						duplicate_fileName = orginal_fileName;
+						File create_file = new File(orginal_fileName);
+						int i = 1;
+						while (create_file.exists()) {
+							duplicate_fileName = "D:/Projects/Upload/DocumentControl/"
+									+ file.getOriginalFilename().substring(
+											0,
+											file.getOriginalFilename().lastIndexOf(
+													'.'))
+									+ i
+									+ file.getOriginalFilename().substring(
+											file.getOriginalFilename().lastIndexOf(
+													'.'));
+							create_file = new File(duplicate_fileName);
+							i++;
+						}
+						outputStream = new FileOutputStream(duplicate_fileName);
+						System.out
+								.println("fileName:" + file.getOriginalFilename());
+
+						// ------Lines to changes------//
+
+						documentMain.setAttachment_type(file.getContentType());
+						documentMain.setAttachment_name(file.getOriginalFilename());
+						documentMain.setAttachment_referrence(duplicate_fileName);
+
+						// ----End Lines to changed----//
+
+						int readBytes = 0;
+						buffer = new byte[(int) file.getSize()];
+						while ((readBytes = inputStream.read(buffer, 0,
+								(int) file.getSize())) != -1) {
+							outputStream.write(buffer, 0, readBytes);
+						}
+						outputStream.close();
+						inputStream.close();
+
+					}
+				}
+				if (documentControlDAO.update_document(documentMain)) {
+					model.addAttribute("success", "true");
+					model.addAttribute("success_message", "Updated Successfully");
+					flag = 1;
+				}
+
+			} catch (Exception e) {
+				System.out.println(e.toString());
+				e.printStackTrace();
+			}
+
+			model.addAttribute("id", "1001");
+			if (flag == 1)
+			{
+				;
+				DocumentMainForm documentMainForm = new DocumentMainForm();
+				documentMainForm.setDocumentMains(documentControlDAO.getDocuments());
+				model.addAttribute("documentMainForm", documentMainForm);
+				
+				return "view_documents";
+			
+			}
+			else
+				return "add_documents";
+			}
+			
+		}
+	
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = { "/insert_documents" }, method = RequestMethod.POST)
 	public String insert_document(HttpSession session,
 			HttpServletRequest request, ModelMap model, Principal principal,
-			DocumentMain documentMain, BindingResult result) throws IOException {
+			@ModelAttribute("DocumentMain") @Valid DocumentMain documentMain, BindingResult result) throws IOException {
 		int flag = 0;
-		documentMain.setDocument_id(request.getParameter("document_type") + '-'
-				+ documentMain.getDocument_id());
-
+		documentMain.setDocument_id(request.getParameter("document_type_id") + '-'	+ documentMain.getDocument_id());
 		System.out.println("Started Inserting documents");
+		session.setAttribute("documentMain",documentMain);
 		// Started to handle upload document
+		if(result.hasErrors())
+		{
+			load_document_page_dropdowns(model);
+			return "add_documents";
+		}
+		else
+		{
 		byte[] buffer;
 		try {
 			MultipartFile file = documentMain.getAttachments();
@@ -173,7 +285,7 @@ public class DocumentController {
 		}
 		else
 			return "add_documents";
-
+		}
 	}
 
 
@@ -181,77 +293,14 @@ public class DocumentController {
 	
 
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value = { "/addexternaldoc" }, method = RequestMethod.POST)
+	@RequestMapping(value = { "/ajax_getissuer" }, method = RequestMethod.POST)
 	public @ResponseBody
 	String insert_external_document(HttpSession session,
 			HttpServletRequest request, ModelMap model, Principal principal) {
 
-		// temp_list.add(externalDocument);
-		String issuer = request.getParameter("issuer");
-		String edocument_id = request.getParameter("document_id");
-		String approver1 = request.getParameter("approver1");
-		String approver2 = request.getParameter("approver2");
-		String approver3 = request.getParameter("approver3");
-		String revision_level = request.getParameter("revision_level");
-		String date = request.getParameter("date");
-		String comments = request.getParameter("comments");
-		String status = request.getParameter("status");
-		ExternalDocument externalDocument = new ExternalDocument(edocument_id,
-				issuer, revision_level, date, approver1, approver2, approver3,
-				comments, status);
-		List<ExternalDocument> temp_list = new ArrayList<ExternalDocument>();
-
-		temp_list = (List<ExternalDocument>) session.getAttribute("temp_list");
-		temp_list.add(externalDocument);
-		session.setAttribute("temp_list", temp_list);
-		String resultHTML = "";
-		int i = 0;
-
-		resultHTML += "<tr class='row1' style='font-weight:bold;color:brown;'>"
-				+ "<td valign='top' align='center' width='15%' >S.no</td>"
-				+ "<td valign='top' align='center' width='10%'>Issuer</td>"
-				+ "<td valign='top' align='center' width='12%'>Revision Level</td>"
-				+ "<td valign='top' align='center' width='10%'>Date</td>"
-				+ "<td valign='top' align='center' width='15%'>Approver1</td>"
-				+ "<td valign='top' align='center' width=15%'>Approver2</td>"
-				+ "<td valign='top' align='center' width='15%'>Approver3</td>"
-				+ "<td valign='top' align='center' width='20%'>Action</td>"
-				+ "</tr>";
-
-		for (ExternalDocument externalDoc : temp_list) {
-			i = i + 1;
-			if (i % 2 == 0)
-				resultHTML += "<tr id='document_list' class='row1'>";
-			else
-				resultHTML += "<tr id='document_list' class='row2'>";
-			resultHTML += "<td valign='top' align='center'  width='15%'>"
-					+ i
-					+ "</td>"
-					+ "<td valign='top' align='center'  width='10%'>"
-					+ externalDoc.getIssuer()
-					+ "</td>"
-					+ "<td valign='top' align='center'  width='12%'>"
-					+ externalDoc.getRevision_level()
-					+ "</td>"
-					+ "<td valign='top' align='center'  width='10%'>"
-					+ externalDoc.getDate()
-					+ "</td>"
-					+ "<td valign='top' align='center'  width='15%'>"
-					+ externalDoc.getApprover1()
-					+ "</td>"
-					+ "<td valign='top' align='center'  width='15%'>"
-					+ externalDoc.getApprover2()
-					+ "</td>"
-					+ "<td valign='top' align='center'  width='15 %'>"
-					+ externalDoc.getApprover3()
-					+ "</td>"
-					+ "<td valign='top' align='center' width='25%'><a href='#'>Remove</a></td></tr>";
-
-		}
-
-		System.out.println(temp_list.get(0).getIssuer());
-		System.out.println(issuer);
-		System.out.println(date);
+		employeeDAO.filterEmployees(request.getParameter("filter_val"));
+		
+		
 		return resultHTML;
 	}
 
@@ -309,13 +358,15 @@ public class DocumentController {
 	}
 	
 	@RequestMapping(value = "/generate_doc_report", method = RequestMethod.POST)
-	public ModelAndView generateDocument_Report(HttpServletRequest request,ModelMap model) {
+	public ModelAndView generateDocument_Report(HttpServletRequest request,ModelMap model, HttpServletResponse response) {
 		
+		String[] fields={"document_id","document_title","document_type","media_type","location","process","external","issuer","revision_level","date","approver1","approver2","approver3","status","comments"};
 		System.out.println(request.getParameter("type_of_report"));
 		java.util.List<DocumentMain> documentMains=new ArrayList<DocumentMain>();
+		
 		if(request.getParameter("type_of_report").equals("document_list_by_type"))
 		{
-		  switch(Integer.parseInt(request.getParameter("doc_type")))
+			switch(Integer.parseInt(request.getParameter("doc_type")))
 				  {
 		  case 0:
 			  documentMains=documentControlDAO.getDocuments_bytype("Manual");
@@ -335,10 +386,10 @@ public class DocumentController {
 		  case 5:
 			  documentMains=documentControlDAO.getDocuments_bytype("Specification");
 			  break;
-		  default:break;
-				  }
-			
-			
+		  default:
+			  break;
+				  
+		}		
 		}
 		else
 		{
@@ -347,24 +398,41 @@ public class DocumentController {
 		
 		if(Integer.parseInt(request.getParameter("report_type"))==1)
 		{
-			//if(request.getParameterValues("report_field[]"))
-			/*
-			for (String field : request.getParameterValues("report_field[]")) {
-				
-			}*/
-		}
 		
-		System.out.println("coming............");
-	//	documentMains=documentControlDAO.getDocuments();
+				System.out.println("now ok::::");
+				 response.setHeader("Content-Disposition","attachment;filename='"+request.getParameter("document_name")+"'");
+					
+				fields=request.getParameterValues("report_field[]");
+			
+		}
+		else
+			 response.setHeader("Content-Disposition","attachment;filename='Document_Report'");
+		
 		
 		ModelAndView modelAndView=new ModelAndView("documentcontrolDAO","documentMains",documentMains);
 		
-		modelAndView.addObject("fields",request.getParameterValues("report_field[]"));
+		modelAndView.addObject("fields",fields);
 		
+	
 		return modelAndView ;
-		
-
 	}
 	
-	
+public void load_document_page_dropdowns(ModelMap model)
+{
+	System.out.println("load");
+	/*
+	 * To generate process drop down
+	 */
+	ProcessForm processForm = new ProcessForm();
+	processForm.setProcesses(processDAO.getProcess());
+	model.addAttribute("processForm", processForm);
+
+	/*
+	 * Load Employee list
+	 */
+
+	EmployeeForm employeeForm = new EmployeeForm();
+	employeeForm.setEmployees(employeeDAO.filterEmployees("A"));
+	model.addAttribute("employeeForm", employeeForm);
+}
 }

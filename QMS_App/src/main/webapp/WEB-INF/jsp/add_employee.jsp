@@ -124,7 +124,27 @@ function doAjaxPost() {
                   <td valign="middle" align="right" class="input_txt" width="30%"><span class="err">*</span> Job Title :</td>
                	<td valign="top" align="left" class="input_txt" width="70%"><span id="job_titles"></span>&nbsp;&nbsp;<a href="#newjob" data-toggle="modal">Add New Job</a><br/><span class="err"><form:errors path="Employee.job_title"></form:errors></span></td>
    
-									  </tr>
+		</tr>
+		
+				<tr class="row1">
+                  <td valign="middle" align="right" class="input_txt" width="30%"><span class="err">*</span>Working as :</td>
+                  <td valign="top" align="left" class="input_txt" width="70%">
+                  
+                  <input type="checkbox" name="process_owner" onchange="toggle2(this)" value="yes" id="id_field_document_id"/>&nbsp;Process Owner                 
+                  
+                  <label id="process_name_label" style="display:none;">&nbsp;&nbsp;&nbsp;Process Name:</label>
+                  <input type="text" name="process_name" id="process_name" style="display: none;" class="input_txtbx1"  onmouseover="showTooltip('tooltip_id','inp_id3');" onmouseout="hideTooltip('tooltip_id');" value="" /><br/><br/>
+                  <input type="checkbox" name="report_field[]" value="document_id" id="id_field_document_id"/>&nbsp;Document Control<br/><br/>
+                  <input type="checkbox" name="report_field[]" value="document_id" id="id_field_document_id"/>&nbsp;Management Representative<br/>
+                  
+                  
+                  
+                  <span class="err"><form:errors path="Employee.name"></form:errors></span>
+                  
+                  </td>
+                </tr>
+		
+		
                 <tr class="row1">
                   <td valign="middle" align="right" class="input_txt" width="30%"> <span class="err">*</span>Date Hired:</td>
                   <td valign="top" align="left" class="input_txt" width="70%"><input type="text" name="date_hired" class="input_txtbx" id="datepicker" onmouseover="showTooltip('tooltip_id','inp_id3');" onmouseout="hideTooltip('tooltip_id');" value="" /></br><span class="err"><form:errors path="Employee.date_hired"></form:errors></span></td>
@@ -302,7 +322,16 @@ function doAjaxPost() {
  $(function() {
            $( "#datepicker3" ).datepicker();
          });
- 
+ function toggle2(sender){
+
+	    var e3=document.getElementById("process_name");
+	    var e4=document.getElementById("process_name_label");
+	    
+	    
+	e3.style.display=sender.checked?'inline':'none';
+	e4.style.display=sender.checked?'inline':'none';
+	    
+	}
 </script>
             
       <jsp:include page="footer.jsp"></jsp:include>

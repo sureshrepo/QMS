@@ -1,12 +1,25 @@
 package qms.model;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 
 public class DocumentMain
 {
+	@NotEmpty
 	private String document_id;
 	
+	
+	private String document_type_id;
+	
+	public String getDocument_type_id() {
+		return document_type_id;
+	}
+
+	public void setDocument_type_id(String document_type_id) {
+		this.document_type_id = document_type_id;
+	}
+
 	public DocumentMain(String document_id, String document_title,
 			String document_type, String media_type, String location,
 			String external, String attachment_name, String attachment_type,
@@ -23,32 +36,46 @@ public class DocumentMain
 		this.attachment_referrence = attachment_referrence;
 	}
 
+	@NotEmpty
 	private String document_title;
 	
+	@NotEmpty
 	private String document_type;
 	
+	@NotEmpty
 	private String media_type;
 	
+	@NotEmpty
 	private String location;
 	
+	@NotEmpty
 	private String process;
 	
-private String issuer;
+	@NotEmpty
+	private String issuer;
 	
+	@NotEmpty
 	private String revision_level;
 	
+	@NotEmpty
 	private String date;
 	
+	@NotEmpty
 	private String approver1;
 	
+	@NotEmpty
 	private String approver2;
 	
+	@NotEmpty
 	private String approver3;
 	
+	@NotEmpty
 	private String comments;
 	
+	@NotEmpty
 	private String status;
 
+	
 	public DocumentMain(String document_id, String document_title,
 			String document_type, String media_type, String location,
 			String process, String issuer, String revision_level, String date,

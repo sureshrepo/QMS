@@ -187,7 +187,40 @@ public class EmployeeDAO {
 		    return status;
 	}
 	
-	
+	public List<Employee> filterEmployees(String filter){
+		Connection con = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
+		try {
+			con = dataSource.getConnection();
+			statement = con.createStatement();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		List<Employee> employees = new ArrayList<Employee>();
+	    try{
+	    	String cmd="select * from tbl_employee as t1 join tbl_employee_desc as t2 on t1.employee_id=t2.employee_id where t1.name like '"+filter+"%'";
+			resultSet = statement.executeQuery(cmd);
+			System.out.println(cmd);
+			//System.out.println("came");
+			while(resultSet.next()){
+				System.out.println("count");
+				employees.add(new Employee(resultSet.getString("employee_id"),resultSet.getString("name"), resultSet.getString("job_title"), resultSet.getString("date_hired"), resultSet.getString("attachments"), resultSet.getString("list_of_functions_needes"),resultSet.getString("documented_in"), resultSet.getString("qualified_by"),resultSet.getString("type_of_training"),resultSet.getString("trainer"), resultSet.getString("training_due_date"),resultSet.getString("training_completion_date"),resultSet.getString("training_effectiveness_review_due_date"),resultSet.getString("training_effectiveness_notes")));
+			}
+	    }catch(Exception e){
+	    	System.out.println(e.toString());
+	    	releaseResultSet(resultSet);
+	    	releaseStatement(statement);
+	    	releaseConnection(con);
+	    }finally{
+	    	releaseResultSet(resultSet);
+	    	releaseStatement(statement);
+	    	releaseConnection(con);	    	
+	    }
+	    return employees;
+		
+	}
+		
 	
 	public List<Employee> getEmployees(){
 		Connection con = null;

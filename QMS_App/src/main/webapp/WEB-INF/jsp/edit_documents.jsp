@@ -3,32 +3,27 @@
 <script type='text/javascript' src='//code.jquery.com/jquery-1.10.1.js'></script>
   
 <script type="text/javascript">
-function doAjaxPost() {
-	// get the form values  
-	alert("hit");
-	var filer_value = $('#filter').val();
-	/*   var education = $('#education').val();	 */		
-	$.ajax({
-		type : "POST",
-		url : "/QMS_App/ajax_getissuer",
-		data : "filter_val=" + filer_value,
-		success : function(response) {
-			// we have the response  
-			$('#issuer_generate').html(response);
-		//document.getElementById("newjob").style.display="none";
-			//  $('#education').val(''); */
-		},
-		error : function(e) {
-			alert('Error: ' + e);
-		}
+$(window).load(function(){
+	//alert("yes");
+	   $(document).on("click", "label.mytxt", function () {
+		   alert("ok");
+	        var txt = $(".mytxt").text();
+	        $(".mytxt").replaceWith("<input class='mytxt'/>");
+	        $(".mytxt").val(txt);
+	    });
+	    $(document).on("blur", "input.mytxt", function () {
+	        var txt = $(this).val();
+	        $(this).replaceWith("<label class='mytxt'></label>");
+	        $(".mytxt").text(txt);
+	    });
+
 	});
-}
 
     </script>   
  
 <jsp:include page="header.jsp"></jsp:include>
 	<script src="/QMS_App/resources/js/jquery.js"></script>
- <form method="post" enctype="multipart/form-data" action="insert_documents">
+ <form method="post" enctype="multipart/form-data" action="update_documents">
  
   <div id="right_content">
     <table cellpadding="0" cellspacing="0" border="0" width="98%" class="margin_table">
@@ -50,22 +45,7 @@ function doAjaxPost() {
 				            </li>
 				             <li style=" float:left;margin-right:8px;text-transform:uppercase;">
 				            	<a href="document_report" class="select">
-				            		<span>Document Reports</span>
-				            	</a>
-				            </li>
-				             <li style=" float:left;margin-right:8px;text-transform:uppercase;">
-				            	<a href="addform" class="select">
-				            		<span>Add Forms</span>
-				            	</a>
-				            </li>
-				             <li style=" float:left;margin-right:8px;text-transform:uppercase;">
-				            	<a href="viewform" class="select">
-				            		<span>View Forms</span>
-				            	</a>
-				            </li>
-				             <li style=" float:left;margin-right:8px;text-transform:uppercase;">
-				            	<a href="formreport" class="select">
-				            		<span>Form Reports</span>
+				            		<span>Reports</span>
 				            	</a>
 				            </li>
 				            </ul>
@@ -76,25 +56,23 @@ function doAjaxPost() {
       <tr>
         <td valign="top" align="left">
             <div class="headings altheading">
-              <h2>&nbsp;&nbsp;Add Document</h2>
+              <h2>&nbsp;&nbsp;Update Document</h2>
             </div>
             <div class="contentbox">
-            
+            <c:set value="${documentMainForm.documentMains[0]}" var="documentMain"></c:set>
               <table cellpadding="0" cellspacing="0" border="0" width="100%">
              <tr class="row1">
              
                <td valign="middle" align="right" class="input_txt" width="15%"><span class="err">*</span>Document ID:</td>
-               <td valign="top" align="left" class="input_txt1" width="15%"><select name="document_type_id" id="document_type_id" class="input_cmbbx1" style="width:57px;border:none;background-color:lightgrey;">
-               <option value="PM">PM</option>
-               <option value="QSP">QSP</option>
-               <option value="WI">WI</option>
-               <option value="SD">SD</option>
-               <option value="GR">GR</option>
-               <option value="SP">SP</option>
-               </select><input type="hidden" name="document_id_hidden"  class="input_txtbx1" style="width:200px;" value="<c:out value="${id }"/>"/><input type="text" value="" id="document_id" class="input_txtbx145" style="height:22px;background-color:lightgrey;width:50px;border:none;" name="document_id"/><br/><span class="err"></span></td>
+               <td valign="top" align="left" class="input_txt1" width="15%">
+               <c:out value="${documentMain.document_id}"></c:out>
+               <input type="hidden" value="${documentMain.document_id}" id="document_id" class="input_txtbx145" style="height:22px;background-color:lightgrey;width:50px;border:none;" name="document_id"/><br/><span class="err"></span></td>
                <td valign="middle" align="right" class="input_txt" width="20%"><span class="err">*</span>Media Type:</td>
                <td valign="top" align="left" class="input_txt" width="20%">
-               
+               <!-- <select name="media_type" class="input_cmbbx1" onchange="">
+               <option onclick="toggle2(this.value);" value="Hard Copy">Hard Copy</option>
+               <option onclick="toggle2(this.value);" value="Electronic">Electronic</option>
+               </select> -->
                 <input type="radio" name="media_type" onchange="toggle2(this.value);" value="0"   id="id_hardcopy"  checked/>Hard Copy&nbsp;&nbsp;&nbsp;<input type="radio" name="media_type" onchange="toggle2(this.value);" value="1"  id="id_electronic" onchange="toggle2(this.value);" />Electronic&nbsp;&nbsp;&nbsp;<br/><span class="err"></span>
                     
                </td>
@@ -177,47 +155,13 @@ function doAjaxPost() {
            
             <td valign="middle" align="right" class="input_txt" width="25%"><span class="err">*</span>Issuer:</td>
                <td valign="top" align="left" class="input_txt" width="20%">
-               <select name="filter" id="filter_value" class="input_cmbbx1" onchange="doAjaxPost();" style="width:80px;">
-               <option value="">--Select--</option>
-               <option value="A">A</option>
-              <option value="B">B</option>
-              <option value="C">C</option>
-              <option value="D">D</option>
-              <option value="E">E</option>
-              <option value="F">F</option>
-              <option value="G">G</option>
-              <option value="H">H</option>
-              <option value="I">I</option>
-              <option value="J">J</option>
-              <option value="K">K</option>
-              <option value="L">L</option>
-              <option value="M">M</option>
-              <option value="N">N</option>
-              <option value="O">O</option>
-              <option value="P">P</option>
-              <option value="Q">Q</option>
-              <option value="R">R</option>
-              <option value="S">S</option>
-              <option value="T">T</option>
-              <option value="U">U</option>
-              <option value="V">V</option>
-              <option value="W">W</option>
-              <option value="X">X</option>
-              <option value="Y">Y</option>
-              <option value="Z">Z</option>
-              
-               </select>
-               
-               <select name="issuer" id="issuer" class="input_cmbbx1" style="width:120px;">
-               <span id="issuer_generate">
                
                
-               </span>
-              <%--  <c:forEach items="${employeeForm.employees}" var="employees" varStatus="true">
+               <select name="issuer" id="issuer" class="input_cmbbx1" style="width:200px;">
+               <option value="">--Select--</option> 
+               <c:forEach items="${employeeForm.employees}" var="employees" varStatus="true">
                <option value="<c:out value="${employees.name}"/>"><c:out value="${employees.name}"/></option>
-               </c:forEach> --%> 
-              
-                            
+               </c:forEach>              
                </select>
                
                
