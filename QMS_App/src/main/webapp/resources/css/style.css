@@ -130,8 +130,10 @@ ul.login-list li p {
 }
 #header {
 	height:100px;
-	background:#4D4D4D;
-	/* border:solid 2px red; */
+	background:#eaeaea url(../images/bg.jpg) repeat-x;
+	
+	/* background:#4D4D4D;
+	/* border:solid 2px red; */ */
 }
 /* New CSS */
 #right_content {
