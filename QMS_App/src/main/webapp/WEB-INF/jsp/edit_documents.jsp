@@ -160,7 +160,7 @@ $(window).load(function(){
                <select name="issuer" id="issuer" class="input_cmbbx1" style="width:200px;">
                <option value="">--Select--</option> 
                <c:forEach items="${employeeForm.employees}" var="employees" varStatus="true">
-               <option value="<c:out value="${employees.name}"/>"><c:out value="${employees.name}"/></option>
+               <option value="<c:out value="${employees.name}"/>" <c:if test="${documentMain.issuer==employees.name}"><c:out value="Selected"/></c:if>><c:out value="${employees.name}"/></option>
                </c:forEach>              
                </select>
                
@@ -169,12 +169,14 @@ $(window).load(function(){
             
                 <td valign="middle" align="right" class="input_txt" width="20%"><span class="err">*</span>Approver 1(Process Owner):</td>
                <td valign="top" align="left" class="input_txt" width="25%">
-               <select name="approver1" id="approver1" class="input_cmbbx1" style="width:200px;">
+               <!-- <select name="approver1" id="approver1" class="input_cmbbx1" style="width:200px;">
                <option value="">--Select--</option>
                <option value="Apporver name1">Approver name 1</option>
                <option value="Approver name2">Approver name 2</option>
                <option value="Approver name3">Approver name 3</option>
-               </select>               
+               </select>    -->   
+               
+               <c:out value="${documentMain.issuer}"></c:out>         
                <br/><span class="err"><form:errors path="DocumentMain.approver1"></form:errors></span>
                
                
@@ -191,9 +193,17 @@ $(window).load(function(){
                
  				<select name="approver2" class="input_cmbbx1" id="approver2" style="width:200px;">
              	  <option value="">--Select--</option>
-            	   <option value="Apporver name1">Approver name 1</option>
-            	   <option value="Approver name2">Approver name 2</option>
-            	   <option value="Approver name3">Approver name 3</option>
+            	<!--   <option value="Apporver name1">Approver name 1</option>
+               <option value="Approver name2">Approver name 2</option>
+               <option value="Approver name3">Approver name 3</option>
+               
+               
+               
+              -->
+              <c:forEach items="${employeeForm1.employees}" var="employees" varStatus="true">
+               <option value="<c:out value="${employees.name}"/>" <c:if test="${documentMain.approver2==employees.name}"><c:out value="Selected"/></c:if>><c:out value="${employees.name}"/></option>
+               </c:forEach>    
+               
                </select>
                
                <br/><span class="err"><form:errors path="DocumentMain.approver2"></form:errors></span></td>
@@ -213,10 +223,20 @@ $(window).load(function(){
                
                <select name="approver3" id="approver3" class="input_cmbbx1" style="width:200px;">
                <option value="">--Select--</option>
-               <option value="Apporver name1">Approver name 1</option>
+             <!--   <option value="Apporver name1">Approver name 1</option>
                <option value="Approver name2">Approver name 2</option>
                <option value="Approver name3">Approver name 3</option>
-               </select>
+               
+               
+               
+              -->
+              <c:forEach items="${employeeForm2.employees}" var="employees" varStatus="true">
+               <option value="<c:out value="${employees.name}"/> <c:if test="${documentMain.approver3==employees.name}"><c:out value="Selected"/></c:if>"><c:out value="${employees.name}"/></option>
+               </c:forEach>
+              
+              
+              
+                </select>
                
                <br/><span class="err"><form:errors path="DocumentMain.approver3"></form:errors></span></td>
            <td valign="top" align="left" class="input_txt" width="20%"><span class="err"></span></td>

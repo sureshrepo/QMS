@@ -1,33 +1,9 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<script type='text/javascript' src='//code.jquery.com/jquery-1.10.1.js'></script>
-  
-<script type="text/javascript">
-function doAjaxPost() {
-	// get the form values  
-	alert("hit");
-	var filer_value = $('#filter').val();
-	/*   var education = $('#education').val();	 */		
-	$.ajax({
-		type : "POST",
-		url : "/QMS_App/ajax_getissuer",
-		data : "filter_val=" + filer_value,
-		success : function(response) {
-			// we have the response  
-			$('#issuer_generate').html(response);
-		//document.getElementById("newjob").style.display="none";
-			//  $('#education').val(''); */
-		},
-		error : function(e) {
-			alert('Error: ' + e);
-		}
-	});
-}
-
-    </script>   
- 
 <jsp:include page="header.jsp"></jsp:include>
-	<script src="/QMS_App/resources/js/jquery.js"></script>
+<link rel="stylesheet" href="resources/css/jquery-ui.css" type="text/css" />
+<script src="resources/js/jquery.min.js"></script>
+ <script src="resources/js/jquery-ui.js"></script>
  <form method="post" enctype="multipart/form-data" action="insert_documents">
  
   <div id="right_content">
@@ -96,14 +72,29 @@ function doAjaxPost() {
              <tr class="row1">
              
                <td valign="middle" align="right" class="input_txt" width="15%"><span class="err">*</span>Document ID:</td>
-               <td valign="top" align="left" class="input_txt1" width="15%"><select name="document_type_id" id="document_type_id" class="input_cmbbx1" style="width:57px;border:none;background-color:lightgrey;">
+              
+               <td valign="top" align="left" class="input_txt1" width="15%" id="lable_td" style="display:none;">
+               <label id="document_id_full_lbl"></label><a href="#" style="text-decoration: none;" onclick="show_edit()">&nbsp;&nbsp;Change</a>            
+               <br/>
+               </td>          
+              
+               <td valign="top" align="left" id="edit_td" class="input_txt1" width="15%"><select name="document_type_id" id="document_type_id" class="input_cmbbx1" style="width:57px;border:none;background-color:lightgrey;">
                <option value="PM">PM</option>
                <option value="QSP">QSP</option>
                <option value="WI">WI</option>
                <option value="SD">SD</option>
                <option value="GR">GR</option>
                <option value="SP">SP</option>
-               </select><input type="hidden" name="document_id_hidden"  class="input_txtbx1" style="width:200px;" value="<c:out value="${id }"/>"/><input type="text" value="" id="document_id" class="input_txtbx145" style="height:22px;background-color:lightgrey;width:50px;border:none;" name="document_id"/><br/><span class="err"></span></td>
+               </select><input type="hidden" name="document_id_hidden" id="generated_id" class="input_txtbx1" style="width:200px;" value=""/><input type="text" value="" id="document_id" class="input_txtbx145" style="height:22px;background-color:lightgrey;width:50px;border:none;" name="document_id" onblur="change_to_label();"/>
+               <a href="#" style="text-decoration: none;" onclick="show_userdefined()">&nbsp;&nbsp;User defined</a><br/><span class="err"></span>
+               </td>
+              
+              <td valign="top" align="left" class="input_txt1" width="15%" id="user_defined_td" style="display:none;">
+               <input type="text" id="user_def_document_id" class="input_txtbx1" value="" style="width:150px;" onblur="show_lable();"/><a href="#" style="text-decoration: none;" onclick="hide_userdefined()">&nbsp;&nbsp;Cancel</a>           
+               <br/>
+               </td> 
+              
+              
                <td valign="middle" align="right" class="input_txt" width="20%"><span class="err">*</span>Media Type:</td>
                <td valign="top" align="left" class="input_txt" width="20%">
                
@@ -112,7 +103,13 @@ function doAjaxPost() {
                </td>
            <td valign="top" align="left" class="input_txt" width="20%"></td>
               
-             </tr>  
+             </tr> 
+             
+             
+            
+             
+             
+              
               <tr class="row2">
               
                <td valign="middle" align="right" class="input_txt" width="25%"><span class="err">*</span>Document Title:</td>
@@ -156,7 +153,7 @@ function doAjaxPost() {
                <td valign="middle" align="right" class="input_txt" width="20%"><span class="err">*</span>Process:</td>
                <td valign="top" align="left" class="input_txt" width="25%">
                
-               <select name="process" id="id_inpprocess" class="input_cmbbx1" style="width:200px;">
+               <select name="process" id="id_inpprocess" onchange="doAjaxPost_for_process();" class="input_cmbbx1" style="width:200px;">
                <option value="">--Select--</option>
                <c:forEach items="${processForm.processes}" var="processes" varStatus="true">
                <option value="<c:out value="${processes.process_name}"/>"><c:out value="${processes.process_name}"/></option>
@@ -220,7 +217,7 @@ function doAjaxPost() {
               
                </select>
                
-               <select name="issuer" id="issuer" class="input_cmbbx1" style="width:120px;">
+               <!-- <select name="issuer" id="issuer" class="input_cmbbx1" style="width:120px;"> -->
                <span id="issuer_generate">
                
                
@@ -230,19 +227,21 @@ function doAjaxPost() {
                </c:forEach> --%> 
               
                             
-               </select>
+             <!--   </select> -->
                
                
                <br/><span class="err"><form:errors path="DocumentMain.issuer"></form:errors></span></td>
             
                 <td valign="middle" align="right" class="input_txt" width="20%"><span class="err">*</span>Approver 1(Process Owner):</td>
                <td valign="top" align="left" class="input_txt" width="25%">
-               <select name="approver1" id="approver1" class="input_cmbbx1" style="width:200px;">
+               <!-- <select name="approver1" id="approver1" class="input_cmbbx1" style="width:200px;">
                <option value="">--Select--</option>
                <option value="Apporver name1">Approver name 1</option>
                <option value="Approver name2">Approver name 2</option>
                <option value="Approver name3">Approver name 3</option>
-               </select>               
+               </select>  -->
+               <span id="process_owner_id"></span>
+                           
                <br/><span class="err"><form:errors path="DocumentMain.approver1"></form:errors></span>
                
                
@@ -257,11 +256,20 @@ function doAjaxPost() {
                <td valign="middle" align="right" class="input_txt" width="20%"><span class="err">*</span>Approver 2(Doc Control):</td>
                <td valign="top" align="left" class="input_txt" width="25%">
                
- 				<select name="approver2" class="input_cmbbx1" id="approver2" style="width:200px;">
+ 			<!-- 	<select name="approver2" class="input_cmbbx1" id="approver2" style="width:200px;">
              	  <option value="">--Select--</option>
             	   <option value="Apporver name1">Approver name 1</option>
             	   <option value="Approver name2">Approver name 2</option>
             	   <option value="Approver name3">Approver name 3</option>
+               </select> -->
+                <select name="approver2" id="id_inpapprover2"  class="input_cmbbx1" style="width:200px;">
+               <option value="">--Select--</option>
+               <c:forEach items="${employeeForm1.employees}" var="employees" varStatus="true">
+               <option value="<c:out value="${employees.name}"/>"><c:out value="${employees.name}"/></option>
+               </c:forEach>
+               
+               
+               
                </select>
                
                <br/><span class="err"><form:errors path="DocumentMain.approver2"></form:errors></span></td>
@@ -270,7 +278,7 @@ function doAjaxPost() {
              <tr class="row1" style="border:none;">
               
                <td valign="middle" align="right" class="input_txt" width="25%"><span class="err">*</span>Date:</td>
-               <td valign="top" align="left" class="input_txt" width="20%"><input type="text" id="date" name="date" class="input_txtbx1" style="width:200px;" value="${documentMain.date}"/><br/><span class="err"><form:errors path="DocumentMain.date"></form:errors></span></td>
+               <td valign="top" align="left" class="input_txt" width="20%"><input type="text" id="datepicker123" name="date" class="input_txtbx1" style="width:200px;" value="${documentMain.date}"/><br/><span class="err"><form:errors path="DocumentMain.date"></form:errors></span></td>
               
                 <td valign="middle" align="right" class="input_txt" width="20%">
                
@@ -279,11 +287,20 @@ function doAjaxPost() {
                <span class="err">*</span>Approver 3(Mgmt Report):</td>
                <td valign="top" align="left" class="input_txt" width="25%">
                
-               <select name="approver3" id="approver3" class="input_cmbbx1" style="width:200px;">
+              <!--  <select name="approver3" id="approver3" class="input_cmbbx1" style="width:200px;">
                <option value="">--Select--</option>
                <option value="Apporver name1">Approver name 1</option>
                <option value="Approver name2">Approver name 2</option>
                <option value="Approver name3">Approver name 3</option>
+               </select> -->
+               <select name="approver3" id="id_inpapprover3"  class="input_cmbbx1" style="width:200px;">
+               <option value="">--Select--</option>
+               <c:forEach items="${employeeForm2.employees}" var="employees" varStatus="true">
+               <option value="<c:out value="${employees.name}"/>"><c:out value="${employees.name}"/></option>
+               </c:forEach>
+               
+               
+               
                </select>
                
                <br/><span class="err"><form:errors path="DocumentMain.approver3"></form:errors></span></td>
@@ -349,4 +366,100 @@ else if(value==0)
     
 }
 </script>
+         <script>
+ $(function() {
+	
+           $( "#datepicker" ).datepicker();
+         });
+ 
+</script>
+
+<script type="text/javascript">
+function doAjaxPost() {
+
+	var filer_value = $('#filter_value').val();
+	/*   var education = $('#education').val();	 */		
+	$.ajax({
+		type : "POST",
+		url : "/QMS_App/ajax_getissuer",
+		data : "filter_val=" + filer_value,
+		success : function(response) {
+			
+			$('#issuer_generate').html(response);
+		
+		},
+		error : function(e) {
+			alert('Error: ' + e);
+		}
+	});
+}
+function doAjaxPost_for_process() {
+
+	var proceee_name = $('#id_inpprocess').val();
+	/*   var education = $('#education').val();	 */		
+	$.ajax({
+		type : "POST",
+		url : "/QMS_App/ajax_getprocess",
+		data : "process=" + proceee_name,
+		success : function(response) {
+			
+			$('#process_owner_id').html(response);
+		
+		},
+		error : function(e) {
+			alert('Error: ' + e);
+		}
+	});
+}
+function change_to_label()
+{
+	
+    
+	var type=document.getElementById("document_type_id");	
+	var doc_id=document.getElementById("document_id");	
+	document.getElementById("lable_td").style.display="block";
+	document.getElementById("edit_td").style.display="none";
+	
+	document.getElementById("document_id_full_lbl").innerHTML=type.value+-+doc_id.value;
+	var gen_id=document.getElementById("generated_id");
+	gen_id.value=type.value+-+doc_id.value;
+	
+
+	}
+function show_edit()
+{
+	
+document.getElementById("lable_td").style.display="none";
+	document.getElementById("edit_td").style.display="block";
+	
+	}
+function show_lable()
+{
+	//var type=document.getElementById("document_type_id");	
+	var doc_id=document.getElementById("user_def_document_id");	
+	document.getElementById("lable_td").style.display="block";
+	document.getElementById("edit_td").style.display="none";
+	document.getElementById("user_defined_td").style.display="none";
+	document.getElementById("document_id_full_lbl").innerHTML=doc_id.value;
+	var gen_id=document.getElementById("generated_id");
+	gen_id.value=type.value+-+doc_id.value;
+	
+	} 
+  function show_userdefined()
+{
+	
+document.getElementById("lable_td").style.display="none";
+	document.getElementById("edit_td").style.display="none";
+	document.getElementById("user_defined_td").style.display="block";
+	} 
+  function hide_userdefined()
+  {
+  	
+  document.getElementById("lable_td").style.display="none";
+  	document.getElementById("edit_td").style.display="block";
+  	document.getElementById("user_defined_td").style.display="none";
+  	} 
+  </script>
+       
+ 
       <jsp:include page="footer.jsp"></jsp:include>
