@@ -1,37 +1,46 @@
 package qms.model;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 public class Form {
 	
 
 	private String auto_number;
 
-	@NotEmpty
+	
 	private String location;
 	
-	@NotEmpty
+    @NotEmpty
 	private String form_or_rec_id;
 
-	@NotEmpty
+    @NotEmpty
 	private String responsibility;
 
-	@NotEmpty
+    @NotEmpty
 	private String form_or_rec_title;
 
-	@NotEmpty
+
 	private String process;
 	
-	@NotEmpty
+	
 	private String media_type;
 	
 	@NotEmpty
 	private String retention_time;
 	
-	@NotEmpty
+
 	private String form;
 	
-	@NotEmpty
+    private CommonsMultipartFile attachments;
+	
+	private String attachment_name;	
+	
+	private String attachment_type;
+	
+	private String attachment_referrence;
+	
+	
 	private String auto_no;
 	
 	@NotEmpty
@@ -49,8 +58,7 @@ public class Form {
 	@NotEmpty
 	private String comments;
 
-	
-
+    
 	
 	public Form() {
 		super();
@@ -62,7 +70,7 @@ public class Form {
 
 	public Form(String auto_number, String location, String form_or_rec_id,
 			String responsibility, String form_or_rec_title, String process,
-			String media_type, String retention_time, String form,
+			String media_type, String retention_time, String form,String attachment_referrence,String attachment_name,String attachment_type,
 			String auto_no, String effective_date, String document_id,
 			String approver1, String issuer, String comments) {
 		super();
@@ -75,12 +83,16 @@ public class Form {
 		this.media_type = media_type;
 		this.retention_time = retention_time;
 		this.form = form;
+		this.attachment_referrence=attachment_referrence;
+		this.attachment_name=attachment_name;
+		this.attachment_type=attachment_type;
 		this.auto_no = auto_no;
 		this.effective_date = effective_date;
 		this.document_id = document_id;
 		this.approver1 = approver1;
 		this.issuer = issuer;
 		this.comments = comments;
+		
 	}
 
 
@@ -210,7 +222,59 @@ public class Form {
 	}
 
 
+	public String getAttachment_name() {
+		return attachment_name;
+	}
 
+
+
+
+	public void setAttachment_name(String attachment_name) {
+		this.attachment_name = attachment_name;
+	}
+
+
+
+
+	public String getAttachment_type() {
+		return attachment_type;
+	}
+
+
+
+
+	public void setAttachment_type(String attachment_type) {
+		this.attachment_type = attachment_type;
+	}
+
+
+
+
+	public String getAttachment_referrence() {
+		return attachment_referrence;
+	}
+
+
+
+
+	public void setAttachment_referrence(String attachment_referrence) {
+		this.attachment_referrence = attachment_referrence;
+	}
+
+
+
+
+	public CommonsMultipartFile getAttachments() {
+		return attachments;
+	}
+
+
+
+
+	public void setAttachments(CommonsMultipartFile attachments) {
+		this.attachments = attachments;
+	}
+	
 
 	public String getAuto_no() {
 		return auto_no;
@@ -292,7 +356,11 @@ public class Form {
 	public void setComments(String comments) {
 		this.comments = comments;
 	}
-	
+
+
+
+
+
 	
 	
 }

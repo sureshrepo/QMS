@@ -43,7 +43,7 @@
 			          <h2>View Employees</h2>
 			        </div>
 			        <div class="contentbox">
-						<div style="border:#ccc 2px solid; padding:15px; margin-bottom:15px;">
+						<div style="border:#993300 2px solid; padding:15px; margin-bottom:15px;">
 							<table width="100%" border="0" cellspacing="0" cellpadding="0">
 							  <tr>
 							    <td align="left" valign="middle" width="10%">Mobile No:</td>

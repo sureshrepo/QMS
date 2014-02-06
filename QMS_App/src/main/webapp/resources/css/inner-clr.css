@@ -8,6 +8,10 @@
  * See copyright notices and details.
  --------------------------------------------------------------------------------------*/
 body {
-	background:white;/* #eaeaea; */
+
+	background:#FFFFD6 url(../images/bg_header.gif) repeat-x;
+
+	/* background:white;#eaeaea; */
+
 	
 }

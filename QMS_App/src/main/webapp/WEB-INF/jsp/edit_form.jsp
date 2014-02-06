@@ -1,4 +1,5 @@
  <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+ <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <jsp:include page="header.jsp"></jsp:include>
 	<script src="/QMS_App/resources/js/jquery.js"></script>
  <form method="post" action="updateform">
@@ -9,23 +10,49 @@
         <td>
         <div>
   <ul class="horizmenu">
-						
-							<li style=" float:left;margin-right:8px;text-transform:uppercase;">
-								<a href="addform" class="select">
-									<span>Add Form</span>
+						<li  style=" float:left;margin-right:8px;text-transform:uppercase;">
+								<a href="add_documents" class="<c:choose>
+								<c:when test="${menu==''}">select</c:when><c:otherwise>unselect</c:otherwise></c:choose>">
+									<span>Add Document</span>
+									
 								</a>
 							</li>
 						
-				           <li style=" float:left;margin-right:8px;text-transform:uppercase;">
-				            	<a href="viewform" class="select">
-				            		<span>View Form</span>
-				            	</a>
-				            </li>
-				             <li style=" float:left;margin-right:8px;text-transform:uppercase;">
-				            	<a href="form_report" class="select">
-				            		<span>Reports</span>
-				            	</a>
-				            </li>
+				          <li  style=" float:left;margin-right:8px;text-transform:uppercase;">
+								<a href="viewdocuments" class="<c:choose>
+								<c:when test="${menu==''}">select</c:when><c:otherwise>unselect</c:otherwise></c:choose>">
+									<span>View Document</span>
+									
+								</a>
+							</li>
+				            <li  style=" float:left;margin-right:8px;text-transform:uppercase;">
+								<a href="document_report" class="<c:choose>
+								<c:when test="${menu==''}">select</c:when><c:otherwise>unselect</c:otherwise></c:choose>">
+									<span>Document report</span>
+									
+								</a>
+							</li>
+				             <li  style=" float:left;margin-right:8px;text-transform:uppercase;">
+								<a href="addform" class="<c:choose>
+								<c:when test="${menu==''}">select</c:when><c:otherwise>unselect</c:otherwise></c:choose>">
+									<span>Add Form</span>
+									
+								</a>
+							</li>
+				            <li  style=" float:left;margin-right:8px;text-transform:uppercase;">
+								<a href="view_form" class="<c:choose>
+								<c:when test="${menu=='document'}">select</c:when><c:otherwise>unselect</c:otherwise></c:choose>">
+									<span>View Form</span>
+									
+								</a>
+							</li>
+				            <li  style=" float:left;margin-right:8px;text-transform:uppercase;">
+								<a href="formreport" class="<c:choose>
+								<c:when test="${menu==''}">select</c:when><c:otherwise>unselect</c:otherwise></c:choose>">
+									<span>Form Report</span>
+									
+								</a>
+							</li>
 				            </ul>
   </div>
         </td>
@@ -81,7 +108,7 @@
 																			onmouseover="showTooltip('tooltip_id','inp_id3');"
 																			onmouseout="hideTooltip('tooltip_id');"
 																			name="form_or_rec_id"
-																			value="${form.form_or_rec_id}" />
+																			value="${form.form_or_rec_id}" /><br/><span class="err"><form:errors path="Form.form_or_rec_id"></form:errors></span>
 																		
 																		</td>
 																		              <td valign="middle" align="left" class="input_txt"><span
@@ -91,7 +118,7 @@
 																			onmouseover="showTooltip('tooltip_id','inp_id3');"
 																			onmouseout="hideTooltip('tooltip_id');"
 																			name="responsibility"
-																			value="${form.responsibility}" />
+																			value="${form.responsibility}" /><br/><span class="err"><form:errors path="Form.responsibility"></form:errors></span>
 																		
 																		</td>
 																		<td valign="top" align="left" class="input_txt">																	
@@ -110,7 +137,7 @@
 																			onmouseover="showTooltip('tooltip_id','inp_id3');"
 																			onmouseout="hideTooltip('tooltip_id');"
 																			name="form_or_rec_title"
-																			value="${form.form_or_rec_title}" />
+																			value="${form.form_or_rec_title}" /><br/><span class="err"><form:errors path="Form.form_or_rec_title"></form:errors></span>
 																		
 																		</td>
 				<td valign="middle" align="left" class="input_txt" width="20%"><span class="err">*</span>Process:</td>
@@ -190,7 +217,7 @@
 																			onmouseover="showTooltip('tooltip_id','inp_id3');"
 																			onmouseout="hideTooltip('tooltip_id');"
 																			name="effective_date"
-																			value="${form.effective_date}" />
+																			value="${form.effective_date}" /><br/><span class="err"><form:errors path="Form.effective_date"></form:errors></span>
 																		</td>  
 																		<td valign="top" align="left" class="input_txt">																	
 																		</td>
@@ -207,7 +234,7 @@
 																			onmouseover="showTooltip('tooltip_id','inp_id3');"
 																			onmouseout="hideTooltip('tooltip_id');"
 																			name="document_id"
-																			value="${form.document_id}" />
+																			value="${form.document_id}" /><br/><span class="err"><form:errors path="Form.document_id"></form:errors></span>
 																		</td>
 																		              <td valign="middle" align="left" class="input_txt"><span
 																			class="err">*</span>Approver1(Process Owner) :</td>
@@ -216,7 +243,7 @@
 																			onmouseover="showTooltip('tooltip_id','inp_id3');"
 																			onmouseout="hideTooltip('tooltip_id');"
 																			name="approver1"
-																			value="${form.approver1}" />
+																			value="${form.approver1}" /><br/><span class="err"><form:errors path="Form.approver1"></form:errors></span>
 																		</td>
 																		<td valign="top" align="left" class="input_txt">																	
 																		</td>
@@ -231,7 +258,7 @@
 																			onmouseover="showTooltip('tooltip_id','inp_id3');"
 																			onmouseout="hideTooltip('tooltip_id');"
 																			name="issuer"
-																			value="${form.issuer}" />
+																			value="${form.issuer}" /><br/><span class="err"><form:errors path="Form.issuer"></form:errors></span>
 																		</td>
 																		<td valign="top" align="left" class="input_txt">																	
 																		</td>

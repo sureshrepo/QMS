@@ -62,16 +62,16 @@
 							<h2>View Form</h2>
 						</div>
 						 <div class="contentbox">
-						<form action="searchform" name="dashboard" method="GET">
-<div style="border:#ccc 2px solid; padding:15px; margin-bottom:15px;">
+						<form action="search_form" name="dashboard" method="GET">
+<div style="border:#993300 2px solid; padding:15px; margin-bottom:15px;">
 							<table width="100%" border="0" cellspacing="0" cellpadding="0">
 							  <tr>
-							    <td align="left" valign="middle" width="10%">Record Title</td>
-							    <td align="left" valign="middle" width="10%"><input type="text" name="form_or_rec_title" class="input_txtbx1" id="recordtitle"></td>
-							    <td align="left" valign="middle" width="15%">&nbsp;Media Type:</td>
-							    <td align="left" valign="middle" width="10%"><input type="text" name="form_media_type" class="input_txtbx1" id="mediatype"></td>
-							    <td align="left" valign="middle" width="15%">&nbsp;Retention Time:</td>
-							    <td align="left" valign="middle" width="10%"><input type="text" name="retention_time" id="retentiontime" class="input_txtbx1"></td>
+							    <td align="left" valign="middle" width="10%">Auto Number</td>
+							    <td align="left" valign="middle" width="10%"><input type="text" name="auto_number" class="input_txtbx1" id="recordtitle"></td>
+							    <td align="left" valign="middle" width="15%">&nbsp;Form Id</td>
+							    <td align="left" valign="middle" width="10%"><input type="text" name="form_or_rec_id" class="input_txtbx1" id="mediatype"></td>
+							    <td align="left" valign="middle" width="15%">&nbsp;Document Id</td>
+							    <td align="left" valign="middle" width="10%"><input type="text" name="document_id" id="retentiontime" class="input_txtbx1"></td>
 							    <td align="center" valign="middle" width="38%">
 							  <input type="submit" value="search" class="submit_btn" name="search" id="id_submit" onmouseover="showTooltip('tooltip_id','inp_id3');" /></td>
 							  </tr>
@@ -81,17 +81,12 @@
 					<form action="?do=viewparticipants" name="dashboard" method="POST">
 							<table cellpadding="0" cellspacing="0" border="0" width="100%">
 								<tr class="title">
-									<td valign="top" align="left" width="5%">Auto Number</td>
-									
-									<td valign="top" align="left" width="15%">Form/Rec ID</td>
+									<td valign="top" align="left" width="10%">Auto Number</td>
+									<td valign="top" align="left" width="10%">Form/Rec ID</td>
 									<td valign="top" align="left" width="15%">Responsibility</td>
-																		
-									<td valign="top" align="left" width="15%">Process</td>
-									
-									<td valign="top" align="left" width="10%">Retention Time</td>
-									<td valign="top" align="left" width="10%">Form?(Y/N)</td>
+									<td valign="top" align="left" width="10%">Process</td>
 									<td valign="top" align="left" width="10%">Effective Date</td>
-									<td valign="top" align="left" width="10%">Retention Time</td>
+									 <td valign="top" align="left" width="10%">Document Id</td>
 									<td valign="top" align="left" width="10%">Approver1</td>
 									<td valign="top" align="left" width="10%">Issuer</td>
 									<td valign="top" align="left" width="10%">Actions</td>
@@ -107,15 +102,9 @@
 							       			i=1;%>
 							       		<tr class="row<%=i%>" onmouseover="mouse_event(this,"row_hover");" onmouseout="mouse_event(this,"row1");">
 								           	<td valign="top" align="left"  width="10%">${form.auto_number}</td>
-									
-											<td valign="top" align="left" width="10%">${form.form_or_rec_id}</td>
+									        <td valign="top" align="left" width="10%">${form.form_or_rec_id}</td>
 											<td valign="top" align="left" width="10%">${form.responsibility}</td>
-											
-											<td valign="top" align="left" width="15%">${form.process}</td>
-											
-											<td valign="top" align="left" width="15%">${form.retention_time}</td>
-											<td valign="top" align="left" width="15%">${form.form}</td>
-											
+											<td valign="top" align="left" width="10%">${form.process}</td>
 											<td valign="top" align="left" width="10%">${form.effective_date}</td>
 											<td valign="top" align="left" width="10%">${form.document_id}</td>
 											<td valign="top" align="left" width="10%">${form.approver1}</td>
@@ -127,10 +116,14 @@
 											<%-- <a href="#" title="" ><img src="resources/images/icons/icon_edit.png" alt="Edit" /></a><a href="edit_form?id=<c:out value="${form.id}"/>">Edit</a>
 											<a href="#" title=""><img src="resources/images/icons/icon_delete.png" alt="Delete" /></a><a href="delete_form?id=<c:out value="${form.id}"/>" onclick="return confirmation()">Delete</a>
 											 --%>
-											 <a href="#" title="" ><img src="resources/images/icons/icon_edit.png" alt="Edit" /></a>
-											<a href="editform?fid=<c:out value="${form.form_or_rec_id}"/>" style="padding-right:10px;">Edit</a>
+											<%--  <a href="#" title="" ><img src="resources/images/icons/icon_edit.png" alt="Edit" /></a>
+											<a href="editform?auto_no=<c:out value="${form.auto_no}"/>" style="padding-right:10px;">Edit</a>
 											<a href="#" title=""><img src="resources/images/icons/icon_delete.png" alt="Delete" /></a>
-											<a href="deleteform?fid=<c:out value="${form.form_or_rec_id}"/>" style="padding-right:10px;">Delete</a>
+											<a href="deleteform?auto_no=<c:out value="${form.auto_no}"/>" style="padding-right:10px;">Delete</a>
+											
+											 --%>
+											<a href="#" title="" ><img src="resources/images/icons/icon_edit.png" alt="Edit" /></a><a href="<c:out value="edit_form?auto_no=${form.auto_no}"/>" style="padding-right:10px;">Edit</a>
+											<a href="#" title=""><img src="resources/images/icons/icon_delete.png" alt="Delete" /></a><a href="<c:out value="deleteform?auto_no=${form.auto_no}"/>" onclick="return confirmation()">Remove</a>
 											
 											</td>
 										</tr>
@@ -170,4 +163,4 @@ function confirmation(val) {
 	}
 }
 </script>
-<jsp:include page="footer.jsp"></jsp:include>
+<%-- <jsp:include page="footer.jsp"></jsp:include> --%>

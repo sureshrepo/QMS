@@ -1,5 +1,9 @@
 package qms.controllers;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.security.Principal;
 
 
@@ -9,6 +13,7 @@ import javax.validation.Valid;
 
 
 
+import org.apache.poi.util.SystemOutLogger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -18,20 +23,37 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
+import qms.dao.EmployeeDAO;
+import qms.dao.FileHandlingDAO;
 import qms.dao.FormDAO;
+import qms.dao.ProcessDAO;
 import qms.model.Employee;
 import qms.model.Form;
+import qms.forms.DocumentMainForm;
 import qms.forms.EmployeeForm;
 import qms.forms.FormForm;
+import qms.forms.InternalAuditsForm;
+import qms.forms.ProcessForm;
 
 @Controller
 //@SessionAttributes({"audit_id","audit_process","audit_start_date","audit_due_date","auditor","audit_notes","audit_finding","audit_completion_date","auditors_initials","auditee_name"})
-/*@SessionAttributes({"form"})*/
+@SessionAttributes({"docform"})
 public class FormController
 {
 	@Autowired
 	FormDAO formDAO;
+	
+	@Autowired
+	ProcessDAO processDAO;
+
+	@Autowired
+	EmployeeDAO employeeDAO;
+
+
+	@Autowired
+	FileHandlingDAO fileHandlingDAO;
 	
 	
 	
@@ -48,32 +70,137 @@ public class FormController
 	@RequestMapping(value={"/addform"}, method = RequestMethod.GET)
 	public String add_form(HttpSession session,ModelMap model, Principal principal )
 	{
-		session.removeAttribute("form");
-		model.addAttribute("id", formDAO.get_maxid());
+		session.removeAttribute("docform");
+		/*model.addAttribute("id", formDAO.get_formid());*/
 		  model.addAttribute("menu","document");
         return "add_form";
  	}
 	
 
 	@RequestMapping(value={"/addform"}, method = RequestMethod.POST)
-	public String insert_form(HttpSession session,ModelMap model, @ModelAttribute("Form") @Valid Form form, BindingResult result, Principal principal)
+	public String insert_form(HttpSession session,HttpServletRequest request,ModelMap model, @ModelAttribute("Form") @Valid Form form, BindingResult result, Principal principal)
 
 	{	
+		int flag = 0;
 		
-		System.out.println("came");
+		String auto_number=request.getParameter("auto_number");
+		System.out.println("Auto"+auto_number);
+		form.setDocument_id(request.getParameter("document_type_id") + '-'	+ form.getDocument_id());
+		System.out.println("Started Inserting documents");
+		session.setAttribute("docform",form);
+		// Started to handle upload document
+		if(result.hasErrors())
+		{
+			System.out.println("Error");
+			load_document_page_dropdowns(model);
+		    /*model.addAttribute("id", formDAO.get_formid());*/
+			return "add_form";
+		}
+		else
+		{
+		byte[] buffer;
+		try {
+			MultipartFile file = form.getAttachments();
+			String orginal_fileName = null;
+			String duplicate_fileName = null;
+			InputStream inputStream = null;
+			OutputStream outputStream = null;
+			if (file != null) {
+				if (file.getSize() > 0) {
+					inputStream = file.getInputStream();
+					if (file.getSize() > 100000) {
+						System.out.println("File Size:::" + file.getSize());
+						return "/add_form";
+					}
+					orginal_fileName = "C:/QMS/Upload/Documents/"
+							+ file.getOriginalFilename();
+					duplicate_fileName = orginal_fileName;
+					File create_file = new File(orginal_fileName);
+					int i = 1;
+					while (create_file.exists()) {
+						duplicate_fileName = "C:/QMS/Upload/Documents/"
+								+ file.getOriginalFilename().substring(
+										0,
+										file.getOriginalFilename().lastIndexOf(
+												'.'))
+								+ i
+								+ file.getOriginalFilename().substring(
+										file.getOriginalFilename().lastIndexOf(
+												'.'));
+						create_file = new File(duplicate_fileName);
+						i++;
+					}
+					outputStream = new FileOutputStream(duplicate_fileName);
+					System.out
+							.println("fileName:" + file.getOriginalFilename());
+
+					// ------Lines to changes------//
+
+					form.setAttachment_type(file.getContentType());
+					form.setAttachment_name(file.getOriginalFilename());
+					form.setAttachment_referrence(duplicate_fileName);
+
+					// ----End Lines to changed----//
+
+					int readBytes = 0;
+					buffer = new byte[(int) file.getSize()];
+					while ((readBytes = inputStream.read(buffer, 0,
+							(int) file.getSize())) != -1) {
+						outputStream.write(buffer, 0, readBytes);
+					}
+					outputStream.close();
+					inputStream.close();
+
+				}
+			}
+			if (formDAO.insert_form(form)) {
+				model.addAttribute("success", "true");
+				model.addAttribute("success_message", "Inserted Successfully");
+				flag = 1;
+			}
+
+		} catch (Exception e) {
+			System.out.println(e.toString());
+			e.printStackTrace();
+		}
+
+		model.addAttribute("id", "1001");
+		if (flag == 1)
+		{
+			
+			FormForm formForm=new FormForm();
+		    formForm.setForm(formDAO.getform());
+		    model.addAttribute("formForm",formForm);
+             model.addAttribute("menu","document");
+             /*model.addAttribute("id", formDAO.get_formid());*/
+			return "view_form";
+		}
+		else
+			return "view_form";
+		}
+		/*System.out.println("came");
 		formDAO.insert_form(form);
 		model.put("form", form);
 		model.addAttribute("form",form);
 		model.addAttribute("menu","form");
 		  model.addAttribute("menu","document");
-		return "add_form";
+		return "add_form";*/
  	}
 	
 	
 	@RequestMapping(value={"/updateform"}, method = RequestMethod.POST)
-	public String update_form(HttpSession session,@ModelAttribute("form") @Valid Form form,BindingResult result,ModelMap model, Principal principal)
+	public String update_form(HttpSession session,@ModelAttribute("Form") @Valid Form form,BindingResult result,ModelMap model, Principal principal)
 	{
 		/*session.setAttribute("form",form);*/
+		
+		if(result.hasErrors())
+		{
+			System.out.println("vali");
+			FormForm formForm=new FormForm();
+		    formForm.setForm(formDAO.getform(form.getAuto_no()));
+		    model.addAttribute("formForm",formForm);
+			return "edit_form";
+		}
 		
 		formDAO.update_form(form);
 		
@@ -123,7 +250,7 @@ public class FormController
 		return "edit_form";
  	}
 	
-	@RequestMapping(value="/searchform",method=RequestMethod.GET)		
+	/*@RequestMapping(value="/searchform",method=RequestMethod.GET)		
 	public String searchform(HttpServletRequest request,HttpSession session,@RequestParam("form_or_rec_title") String recordtitle,@RequestParam("form_media_type") String mediatype,@RequestParam("retention_time") String retentiontime,ModelMap model)
 
 	{
@@ -153,6 +280,41 @@ public class FormController
         System.out.println("finding result");
 		return "view_form";		
 		}
-		}
+		}*/
+	
+	public void load_document_page_dropdowns(ModelMap model)
+	{
+		System.out.println("load");
+		
+		/* * To generate process drop down*/
+		 
+		ProcessForm processForm = new ProcessForm();
+		processForm.setProcesses(processDAO.getProcess());
+		model.addAttribute("processForm", processForm);
+
+		/*
+		 * Load Employee list*/
+		 
+
+		EmployeeForm employeeForm = new EmployeeForm();
+		employeeForm.setEmployees(employeeDAO.filterEmployees("A"));
+		model.addAttribute("employeeForm", employeeForm);
+	}
+	
+	 @RequestMapping(value={"/search_form"}, method = RequestMethod.GET)
+		
+		public String search_form(@RequestParam("auto_number") String auto_number,@RequestParam("form_or_rec_id") String form_or_rec_id,@RequestParam("document_id") String document_id,ModelMap model, Principal principal)
+	{
+		System.out.println(auto_number);
+		
+		FormForm formForm=new FormForm();
+		
+		formForm.setForm(formDAO.search_form(auto_number,form_or_rec_id,document_id));
+		
+		 model.addAttribute("formForm",formForm);
+		
+	    return "view_form";
+
+	}
 }
 
