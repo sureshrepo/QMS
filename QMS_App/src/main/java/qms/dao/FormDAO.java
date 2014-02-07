@@ -6,13 +6,26 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
+
+import org.apache.poi.hssf.usermodel.HSSFFont;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.hssf.util.HSSFColor;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.Font;
+import org.springframework.web.servlet.view.document.AbstractExcelView;
 
 import qms.model.DocumentMain;
 import qms.model.Form;
 import qms.model.InternalAudits;
 
-public class FormDAO {
+public class FormDAO extends AbstractExcelView{
 	private DataSource datasource;
 
 	
@@ -167,9 +180,9 @@ public class FormDAO {
 		}
 		try
 		{
-			String cmd_update1 = "update tbl_form set auto_number='"+form.getAuto_number()+"',location='"+form.getLocation()+"',form_or_rec_id='"+form.getForm_or_rec_id()+"',responsibility='"+form.getResponsibility()+"',form_or_rec_title='"+form.getForm_or_rec_title()+"',process='"+form.getProcess()+"',media_type='"+form.getMedia_type()+"',retention_time='"+form.getRetention_time()+"',form='"+form.getForm()+"',attachment_name='"+form.getAttachment_name()+"',attachment_type='"+form.getAttachment_type()+"',attachment_referrence='"+form.getAttachment_referrence()+"'";
+			String cmd_update1 = "update tbl_form set auto_number='"+form.getAuto_number()+"',location='"+form.getLocation()+"',form_or_rec_id='"+form.getForm_or_rec_id()+"',responsibility='"+form.getResponsibility()+"',form_or_rec_title='"+form.getForm_or_rec_title()+"',process='"+form.getProcess()+"',media_type='"+form.getMedia_type()+"',retention_time='"+form.getRetention_time()+"',form='"+form.getForm()+"',attachment_name='"+form.getAttachment_name()+"',attachment_type='"+form.getAttachment_type()+"',attachment_referrence='"+form.getAttachment_referrence()+"' where auto_number='"+form.getAuto_number()+"'";
 			statement.execute(cmd_update1);
-			String cmd_update2="update tbl_form_child set auto_no='"+form.getAuto_no()+"',effective_date='"+form.getEffective_date()+"',document_id='"+form.getDocument_id()+"',approver1='"+form.getApprover1()+"',issuer='"+form.getIssuer()+"',comments='"+form.getComments()+"'";
+			String cmd_update2="update tbl_form_child set auto_no='"+form.getAuto_no()+"',effective_date='"+form.getEffective_date()+"',document_id='"+form.getDocument_id()+"',approver1='"+form.getApprover1()+"',issuer='"+form.getIssuer()+"',comments='"+form.getComments()+"' where auto_no='"+form.getAuto_no()+"'";
 		    statement.execute(cmd_update2);
 		}
 		catch(Exception e)
@@ -354,6 +367,300 @@ public class FormDAO {
 		return form;
 	}
 	
+	public List<Form> gethuman_resources(){
+		Connection con = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
+		try {
+			con = datasource.getConnection();
+			statement = con.createStatement();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		List<Form> form = new ArrayList<Form>();
+	    try{
+			resultSet = statement.executeQuery("select t1.*,t2.* from tbl_form as t1 join tbl_form_child as t2 on t1.auto_number=t2.auto_no where form_or_rec_id LIKE  'FHR%'");
+			System.out.println("fhr");
+			while(resultSet.next()){
+				form.add(new Form(resultSet.getString("auto_number"), resultSet.getString("location"), resultSet.getString("form_or_rec_id"),resultSet.getString("responsibility"),resultSet.getString("form_or_rec_title"), resultSet.getString("process"), resultSet.getString("media_type"),resultSet.getString("retention_time"),resultSet.getString("form"),resultSet.getString("attachment_name"),resultSet.getString("attachment_type"),resultSet.getString("attachment_referrence"), resultSet.getString("auto_no"),resultSet.getString("effective_date"),resultSet.getString("document_id"),resultSet.getString("approver1"),resultSet.getString("issuer"),resultSet.getString("comments")));
+			}
+	    }catch(Exception e){
+	    	System.out.println(e.toString());
+	    	releaseResultSet(resultSet);
+	    	releaseStatement(statement);
+	    	releaseConnection(con);
+	    }finally{
+	    	releaseResultSet(resultSet);
+	    	releaseStatement(statement);
+	    	releaseConnection(con);	    	
+	    }
+	    return form;
+		
+	}
+	
+	
+	public List<Form> getengineering(){
+		Connection con = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
+		try {
+			con = datasource.getConnection();
+			statement = con.createStatement();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		List<Form> form = new ArrayList<Form>();
+	    try{
+			resultSet = statement.executeQuery("select t1.*,t2.* from tbl_form as t1 join tbl_form_child as t2 on t1.auto_number=t2.auto_no where form_or_rec_id LIKE  'FEN%'");
+			System.out.println("fen");
+			while(resultSet.next()){
+				form.add(new Form(resultSet.getString("auto_number"), resultSet.getString("location"), resultSet.getString("form_or_rec_id"),resultSet.getString("responsibility"),resultSet.getString("form_or_rec_title"), resultSet.getString("process"), resultSet.getString("media_type"),resultSet.getString("retention_time"),resultSet.getString("form"),resultSet.getString("attachment_name"),resultSet.getString("attachment_type"),resultSet.getString("attachment_referrence"), resultSet.getString("auto_no"),resultSet.getString("effective_date"),resultSet.getString("document_id"),resultSet.getString("approver1"),resultSet.getString("issuer"),resultSet.getString("comments")));
+			}
+	    }catch(Exception e){
+	    	System.out.println(e.toString());
+	    	releaseResultSet(resultSet);
+	    	releaseStatement(statement);
+	    	releaseConnection(con);
+	    }finally{
+	    	releaseResultSet(resultSet);
+	    	releaseStatement(statement);
+	    	releaseConnection(con);	    	
+	    }
+	    return form;
+		
+	}
+	
+	
+	@Override
+	protected void buildExcelDocument(Map model, HSSFWorkbook workbook,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+
+		HSSFSheet excelSheet = workbook.createSheet("Form Report");
+		excelSheet.setDefaultColumnWidth(20);
+		  
+		//Style 1
+		CellStyle style = workbook.createCellStyle();
+	        Font font = workbook.createFont();
+	        font.setFontName("Arial");
+	        style.setFillForegroundColor(HSSFColor.BROWN.index);
+	        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
+	        style.setWrapText(true);
+	        font.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
+	        font.setColor(HSSFColor.WHITE.index);
+	        style.setFont(font);
+		
+	    //Style2
+	        CellStyle style2 = workbook.createCellStyle();
+	        Font font2 = workbook.createFont();
+	        font2.setFontName("Arial");
+	        style2.setFillForegroundColor(HSSFColor.YELLOW.index);
+	        style2.setFillPattern(CellStyle.SOLID_FOREGROUND);
+	        style2.setWrapText(true);
+	        font2.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
+	        font2.setColor(HSSFColor.WHITE.index);
+	        style2.setFont(font2); 
+		
+		@SuppressWarnings("unchecked")
+		List<Form> form = (List<Form>) model.get("form");
+		String[] fields=(String[])model.get("fields");
+		
+
+        setExcelHeader(excelSheet,style,fields);
+		
+		setExcelRows(excelSheet,form,fields,style2);
+		
+	}
+	
+	
+	public void setExcelHeader(HSSFSheet excelSheet,CellStyle style,String[] fields) {
+		HSSFRow excelHeader = excelSheet.createRow(0);	
+	//	String[] fields={"document_id","document_title","document_type","media_type","location","process","external","issuer","revision_level","date","approver1","approver2","approver3","status","comments"};
+		int i=0;
+		for (String field : fields) {
+			
+			if(field.equals("auto_number"))
+			{
+				excelHeader.createCell(i).setCellValue("Auto Number");
+				excelHeader.getCell(i).setCellStyle(style);
+				i++;
+			}
+			else if(field.equals("location"))
+			{
+				excelHeader.createCell(i).setCellValue("Location");
+				excelHeader.getCell(i).setCellStyle(style);
+				i++;
+			}
+			else if(field.equals("form_or_rec_id"))
+			{
+				excelHeader.createCell(i).setCellValue("Form/Rec Id");
+				excelHeader.getCell(i).setCellStyle(style);
+				i++;
+			}
+			else if(field.equals("responsibility"))	
+			{
+				excelHeader.createCell(i).setCellValue("Responsibility");
+				excelHeader.getCell(i).setCellStyle(style);
+				i++;
+			}else if(field.equals("form_or_rec_title"))	
+			{
+				excelHeader.createCell(i).setCellValue("Form/Rec Title");
+				excelHeader.getCell(i).setCellStyle(style);
+				i++;
+			}else if(field.equals("process"))	
+			{
+				excelHeader.createCell(i).setCellValue("Process");
+				excelHeader.getCell(i).setCellStyle(style);
+				i++;
+			}else if(field.equals("media_type"))
+			{
+				excelHeader.createCell(i).setCellValue("Media Type");
+				excelHeader.getCell(i).setCellStyle(style);
+				i++;
+			}else if(field.equals("retention_time"))	
+			{
+				excelHeader.createCell(i).setCellValue("Retention Time");
+				excelHeader.getCell(i).setCellStyle(style);
+				i++;
+			}else if(field.equals("form"))	
+			{
+				excelHeader.createCell(i).setCellValue("Form");
+				excelHeader.getCell(i).setCellStyle(style);
+				i++;
+			}else if(field.equals("effective_date"))	
+			{
+				excelHeader.createCell(i).setCellValue("Effective Date");
+				excelHeader.getCell(i).setCellStyle(style);
+				i++;
+			}else if(field.equals("document_id"))	
+			{
+				excelHeader.createCell(i).setCellValue("Document Id");
+				excelHeader.getCell(i).setCellStyle(style);
+				i++;
+			}else if(field.equals("approver1"))	
+			{
+				excelHeader.createCell(i).setCellValue("Approver 1");
+				excelHeader.getCell(i).setCellStyle(style);
+				i++;
+			}else if(field.equals("issuer"))	
+			{
+				excelHeader.createCell(i).setCellValue("Issuer");
+				excelHeader.getCell(i).setCellStyle(style);
+				i++;
+			}else if(field.equals("comments"))	
+			{
+				excelHeader.createCell(i).setCellValue("Comments");
+				excelHeader.getCell(i).setCellStyle(style);
+				i++;
+			}
+			
+		}
+	
+	}
+	
+	
+	//End
+	
+	
+	public void setExcelRows(HSSFSheet excelSheet, List<Form> form,String[] fields,CellStyle style2){
+		int record = 1;
+		int i=0;
+		for (Form forms:form){	
+			HSSFRow excelRow = excelSheet.createRow(record++);
+	//		excelRow.setRowStyle((HSSFCellStyle) style2);
+		i=0;
+				for (String field : fields) {
+					
+					if(field.equals("auto_number"))
+					{
+						excelRow.createCell(i).setCellValue(
+								forms.getAuto_number());
+							i++;
+					}
+					else if(field.equals("location"))
+					{
+						excelRow.createCell(i).setCellValue(
+								forms.getLocation());
+
+						i++;
+					}
+					else if(field.equals("form_or_rec_id"))
+					{
+						excelRow.createCell(i).setCellValue(
+								forms.getForm_or_rec_id()
+								);	i++;
+					}
+					else if(field.equals("responsibility"))	
+					{
+						excelRow.createCell(i).setCellValue(
+								forms.getResponsibility());
+						i++;
+					}else if(field.equals("form_or_rec_title"))	
+					{
+						excelRow.createCell(i).setCellValue(
+								forms.getForm_or_rec_title());
+						i++;
+					}else if(field.equals("process"))	
+					{
+						excelRow.createCell(i).setCellValue(
+								forms.getProcess());
+						i++;
+					}else if(field.equals("media_type"))
+					{
+						excelRow.createCell(i).setCellValue(
+								forms.getMedia_type());
+						i++;
+					}else if(field.equals("retention_time"))	
+					{
+						excelRow.createCell(i).setCellValue(
+								forms.getRetention_time());
+						i++;
+					}else if(field.equals("form"))	
+					{
+						if(forms.getForm().equals("1"))
+							excelRow.createCell(i).setCellValue("Yes");
+							else
+								excelRow.createCell(i).setCellValue("No");
+							i++;
+					}else if(field.equals("effective_date"))	
+					{
+						excelRow.createCell(i).setCellValue(
+								forms.getEffective_date());
+						i++;
+					}else if(field.equals("document_id"))	
+					{
+						excelRow.createCell(i).setCellValue(
+								forms.getDocument_id());
+						i++;
+					}else if(field.equals("approver1"))	
+					{
+						excelRow.createCell(i).setCellValue(
+								forms.getApprover1());
+						i++;
+					}else if(field.equals("issuer"))	
+					{
+						excelRow.createCell(i).setCellValue(
+								forms.getIssuer());
+						i++;
+					}else if(field.equals("comments"))	
+					{
+						excelRow.createCell(i).setCellValue(
+								forms.getComments());
+						i++;
+					}
+					
+				}
+				
+				
+				
+				
+				
+				
+				
+				
+				
+		}
+	}
 
 	public void releaseConnection(Connection con){
 		try{if(con != null)

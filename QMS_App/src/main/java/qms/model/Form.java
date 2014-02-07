@@ -5,7 +5,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 public class Form {
 	
-
+	/*private String document_type_id;*/
 	private String auto_number;
 
 	
@@ -40,7 +40,9 @@ public class Form {
 	
 	private String attachment_referrence;
 	
+	private String document_type_id;
 	
+	private String document_type_id1;
 	private String auto_no;
 	
 	@NotEmpty
@@ -357,6 +359,38 @@ public class Form {
 		this.comments = comments;
 	}
 
+
+
+
+	public String getDocument_type_id() {
+		return document_type_id;
+	}
+
+
+
+
+	public void setDocument_type_id(String document_type_id) {
+		this.document_type_id = document_type_id;
+	}
+
+
+
+
+	public String getDocument_type_id1() {
+		return document_type_id1;
+	}
+
+
+
+
+	public void setDocument_type_id1(String document_type_id1) {
+		this.document_type_id1 = document_type_id1;
+	}
+
+
+
+
+	
 
 
 

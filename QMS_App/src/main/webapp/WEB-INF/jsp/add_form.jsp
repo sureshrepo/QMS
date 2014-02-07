@@ -53,7 +53,7 @@
 								</a>
 							</li>
 				            <li  style=" float:left;margin-right:8px;text-transform:uppercase;">
-								<a href="formreport" class="<c:choose>
+								<a href="form_report" class="<c:choose>
 								<c:when test="${menu==''}">select</c:when><c:otherwise>unselect</c:otherwise></c:choose>">
 									<span>Form Report</span>
 									
@@ -78,25 +78,9 @@
             
               <table cellpadding="0" cellspacing="0" border="0" width="100%">
               <tr class="row1">
-              <td valign="middle" align="left" class="input_txt" ><span class="err">*</span>Auto Number:</td>
-              
-               <td valign="top" align="left" class="input_txt1"  id="lable_td" style="display:none;">
-               <label id="document_id_full_lbl"></label><a href="#" style="text-decoration: none;" onclick="show_edit()">&nbsp;&nbsp;Change</a>            
-               <br/>
-               </td>          
-              
-               <td valign="top" align="left" id="edit_td" class="input_txt1" width="15%"><select name="document_type_id" id="document_type_id" class="input_cmbbx1" style="width:57px;border:none;background-color:lightgrey;">
-               <option value="FHR">FHR</option>
-               <option value="FEN">FEN</option>
-              
-               </select><input type="hidden" name="document_id_hidden" id="generated_id" class="input_txtbx1" style="width:200px;" value=""/><input type="text" value="" id="auto_number" class="input_txtbx145" style="height:22px;background-color:lightgrey;width:50px;border:none;" name="auto_number" onblur="change_to_label();"/>
-               <a href="#" style="text-decoration: none;" onclick="show_userdefined()">&nbsp;&nbsp;User defined</a><br/><span class="err"></span>
-               </td>
-              
-              <td valign="top" align="left" class="input_txt1" width="15%" id="user_defined_td" style="display:none;">
-               <input type="text" id="user_def_document_id" class="input_txtbx1" value="" style="width:150px;" onblur="show_lable();"/><a href="#" style="text-decoration: none;" onclick="hide_userdefined()">&nbsp;&nbsp;Cancel</a>           
-               <br/>
-               </td>
+             <td valign="middle" align="left" class="input_txt" ><span class="err">*</span>Auto Number:</td>
+                  <td valign="top" align="left" class="input_txt" ><input type="hidden" name="auto_number" value="<c:out value="${id }"/>"/><c:out value="${id }"/><br/><span class="err"></span></td>
+			
 			<td valign="middle" id="id_location_lbl" align="left" class="input_txt" ><label id="location_label" ><span class="err">*</span> Location:</label><label id="file_upload_label" style="display:none;"><span class="err">*</span> Upload File:</label></td>
                <td valign="top" align="left" id="id_location_txt" class="input_txt" >
                
@@ -114,16 +98,25 @@
                
               
               <tr class="row2">
-                            <td valign="middle" align="left" class="input_txt"><span
-																			class="err">*</span>Form/Rec ID :</td>
-																		<td valign="top" align="left" class="input_txt"><input
-																			type="text" class="input_txtbx1" id="inp_external_id"
-																			onmouseover="showTooltip('tooltip_id','inp_id3');"
-																			onmouseout="hideTooltip('tooltip_id');"
-																			name="form_or_rec_id"
-																			value="${docform.form_or_rec_id}" /><br/><span class="err"><form:errors path="Form.form_or_rec_id"></form:errors></span>
-																		
-																		</td>
+                           <td valign="middle" align="left" class="input_txt" ><span class="err">*</span>Form/Rec Id:</td>
+              
+               <td valign="top" align="left" class="input_txt1"  id="lable_td" style="display:none;">
+               <label id="document_id_full_lbl"></label><a href="#" style="text-decoration: none;" onclick="show_edit()">&nbsp;&nbsp;Change</a>            
+               <br/>
+               </td>          
+              
+               <td valign="top" align="left" id="edit_td" class="input_txt1" width="15%"><select name="document_type_id" id="document_type_id" class="input_cmbbx1" style="width:57px;border:none;background-color:lightgrey;">
+               <option value="FHR">FHR</option>
+               <option value="FEN">FEN</option>
+              
+               </select><input type="hidden" name="document_id_hidden" id="generated_id" class="input_txtbx1" style="width:200px;" value=""/><input type="text" value="" id="form_or_rec_id" class="input_txtbx145" style="height:22px;background-color:lightgrey;width:50px;border:none;" name="form_or_rec_id" onblur="change_to_label();"/>
+               <a href="#" style="text-decoration: none;" onclick="show_userdefined()">&nbsp;&nbsp;User defined</a><br/><span class="err"></span>
+               </td>
+              
+              <td valign="top" align="left" class="input_txt1" width="15%" id="user_defined_td" style="display:none;">
+               <input type="text" id="user_def_document_id" class="input_txtbx1" value="" style="width:150px;" onblur="show_lable();"/><a href="#" style="text-decoration: none;" onclick="hide_userdefined()">&nbsp;&nbsp;Cancel</a>           
+               <br/>
+               </td>
 																		              <td valign="middle" align="left" class="input_txt"><span
 																			class="err">*</span>Responsibility :</td>
 																		<td valign="top" align="left" class="input_txt"><input
@@ -172,7 +165,7 @@
 																		</td>              </tr>
               
               <tr class="row2">
-                            <td valign="middle" align="left" class="input_txt" ><span class="err">*</span>Media Type:</td>
+               <td valign="middle" align="left" class="input_txt" ><span class="err">*</span>Media Type:</td>
                <td valign="top" align="left" class="input_txt">
                
                 <input type="radio" name="media_type" onchange="toggle2(this.value);" value="0"   id="id_hardcopy"  checked/>Hard Copy&nbsp;&nbsp;&nbsp;<input type="radio" name="media_type" onchange="toggle2(this.value);" value="1"  id="id_electronic" onchange="toggle2(this.value);" />Electronic&nbsp;&nbsp;&nbsp;<br/><span class="err"></span>
@@ -212,25 +205,8 @@
              <table cellpadding="0" cellspacing="0" border="0" width="100%" >
              
               <tr class="row1">
-                               <td valign="middle" align="left" class="input_txt" ><span class="err">*</span>Auto Number:</td>
-              
-               <td valign="top" align="left" class="input_txt1"  id="lable_td1" style="display:none;">
-               <label id="document_id_full_lbl1"></label><a href="#" style="text-decoration: none;" onclick="show_edit1()">&nbsp;&nbsp;Change</a>            
-               <br/>
-               </td>          
-              
-               <td valign="top" align="left" id="edit_td1" class="input_txt1" width="15%"><select name="document_type_id1" id="document_type_id1" class="input_cmbbx1" style="width:57px;border:none;background-color:lightgrey;">
-               <option value="FHR">FHR</option>
-               <option value="FEN">FEN</option>
-              
-               </select><input type="hidden" name="document_id_hidden1" id="generated_id1" class="input_txtbx1" style="width:200px;" value=""/><input type="text" value="" id="auto_no" class="input_txtbx145" style="height:22px;background-color:lightgrey;width:50px;border:none;" name="auto_no" onblur="change_to_label1();"/>
-               <a href="#" style="text-decoration: none;" onclick="show_userdefined1()">&nbsp;&nbsp;User defined</a><br/><span class="err"></span>
-               </td>
-              
-              <td valign="top" align="left" class="input_txt1" width="15%" id="user_defined_td1" style="display:none;">
-               <input type="text" id="user_def_document_id1" class="input_txtbx1" value="" style="width:150px;" onblur="show_lable1();"/><a href="#" style="text-decoration: none;" onclick="hide_userdefined1()">&nbsp;&nbsp;Cancel</a>           
-               <br/>
-               </td>
+                             <td valign="middle" align="left" class="input_txt" ><span class="err">*</span>Auto Number:</td>
+                  <td valign="top" align="left" class="input_txt" ><input type="hidden" name="auto_no" value="<c:out value="${id }"/>"/><c:out value="${id }"/><br/><span class="err"></span></td>
               
 																		             
 																		          
@@ -365,7 +341,7 @@ function change_to_label()
 	
     
 	var type=document.getElementById("document_type_id");	
-	var doc_id=document.getElementById("auto_number");	
+	var doc_id=document.getElementById("form_or_rec_id");	
 	document.getElementById("lable_td").style.display="block";
 	document.getElementById("edit_td").style.display="none";
 	

@@ -11,7 +11,7 @@
         <div>
   <ul class="horizmenu">
 						<li  style=" float:left;margin-right:8px;text-transform:uppercase;">
-								<a href="add_documents" class="<c:choose>
+								<a href="adddocument" class="<c:choose>
 								<c:when test="${menu==''}">select</c:when><c:otherwise>unselect</c:otherwise></c:choose>">
 									<span>Add Document</span>
 									
@@ -47,7 +47,7 @@
 								</a>
 							</li>
 				            <li  style=" float:left;margin-right:8px;text-transform:uppercase;">
-								<a href="formreport" class="<c:choose>
+								<a href="form_report" class="<c:choose>
 								<c:when test="${menu==''}">select</c:when><c:otherwise>unselect</c:otherwise></c:choose>">
 									<span>Form Report</span>
 									
@@ -73,15 +73,16 @@
             
               <table cellpadding="0" cellspacing="0" border="0" width="100%">
               <tr class="row1">
-              <input type="hidden" class="input_txtbx1" id="inp_id" value="${form.auto_number}" name="auto_number" />
+              <%-- <input type="hidden" class="input_txtbx1" id="inp_id" value="${form.auto_number}" name="auto_number" /> --%>
               <td valign="middle" align="left" class="input_txt"><span
 																			class="err">*</span>Auto Number :</td>
 																		<td valign="top" align="left" class="input_txt"><input
-																			type="text" class="input_txtbx1" id="inp_external_id"
+																			type="hidden" class="input_txtbx1" id="inp_external_id"
 																			onmouseover="showTooltip('tooltip_id','inp_id3');"
 																			onmouseout="hideTooltip('tooltip_id');"
 																			name="auto_number"
 																			value="${form.auto_number}" />
+																			<c:out value="${form.auto_number}"></c:out>
 																		
 																		</td>
 			<td valign="middle" id="id_location_lbl" align="left" class="input_txt" ><label id="location_label" ><span class="err">*</span> Location:</label><label id="file_upload_label" style="display:none;"><span class="err">*</span> Upload File:</label></td>
@@ -203,11 +204,12 @@
                              <td valign="middle" align="left" class="input_txt"><span
 																			class="err">*</span>Auto Number :</td>
 																		<td valign="top" align="left" class="input_txt"><input
-																			type="text" class="input_txtbx1" id="inp_external_id"
+																			type="hidden" class="input_txtbx1" id="inp_external_id"
 																			onmouseover="showTooltip('tooltip_id','inp_id3');"
 																			onmouseout="hideTooltip('tooltip_id');"
 																			name="auto_no"
 																			value="${form.auto_no}" />
+																			<c:out value="${form.auto_no}"></c:out>
 																		
 																		</td>
 																		              <td valign="middle" align="left" class="input_txt"><span

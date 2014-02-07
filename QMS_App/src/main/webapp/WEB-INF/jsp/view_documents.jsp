@@ -12,7 +12,7 @@
       		 <div>
   						<ul class="horizmenu">
 						<li  style=" float:left;margin-right:8px;text-transform:uppercase;">
-								<a href="add_documents" class="<c:choose>
+								<a href="adddocument" class="<c:choose>
 								<c:when test="${menu==''}">select</c:when><c:otherwise>unselect</c:otherwise></c:choose>">
 									<span>Add Document</span>
 									
@@ -48,7 +48,7 @@
 								</a>
 							</li>
 				            <li  style=" float:left;margin-right:8px;text-transform:uppercase;">
-								<a href="formreport" class="<c:choose>
+								<a href="form_report" class="<c:choose>
 								<c:when test="${menu==''}">select</c:when><c:otherwise>unselect</c:otherwise></c:choose>">
 									<span>Form Report</span>
 									
