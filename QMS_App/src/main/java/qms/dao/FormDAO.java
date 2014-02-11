@@ -430,6 +430,79 @@ public class FormDAO extends AbstractExcelView{
 		
 	}
 	
+	public List<String> getDocument_prefix(){
+		Connection con = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
+		try {
+			con = datasource.getConnection();
+			statement = con.createStatement();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		List<String> prefix = new ArrayList<String>();
+		//int i=0;
+	    try{
+	    	//System.out.println("Edit:"+document_id);
+			resultSet = statement.executeQuery("select * from tbl_form_id_prefix");
+			while(resultSet.next())
+			{
+		
+				prefix.add(resultSet.getString("prefix"));
+				
+			}
+	    }catch(Exception e){
+	    	System.out.println(e.toString());
+	    	releaseResultSet(resultSet);
+	    	releaseStatement(statement);
+	    	releaseConnection(con);
+	    }finally{
+	    	releaseResultSet(resultSet);
+	    	releaseStatement(statement);
+	    	releaseConnection(con);	    	
+	    }
+	    return prefix;
+		
+	}
+	
+	public List<Form> insert_prefix(String prefix){
+		Connection con = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
+		try {
+			con = datasource.getConnection();
+			statement = con.createStatement();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		int flag=0;
+		List<Form> form = new ArrayList<Form>();
+	    try{
+	    	String cmd_available="Select * from tbl_form_id_prefix where prefix='"+prefix+"'";
+	    	System.out.println(cmd_available);
+	    	resultSet=statement.executeQuery(cmd_available);	    	
+	    	if(resultSet.next())
+	    	{
+	    	 flag=1;
+	    	}
+	    	if(flag==0)
+	    	{
+	    	statement.execute("insert into tbl_form_id_prefix (form_type,prefix) values('Userdefined','"+prefix+"')");
+	    	}
+			
+	    }catch(Exception e){
+	    	System.out.println("prefix:"+e.toString());
+	    	releaseResultSet(resultSet);
+	    	releaseStatement(statement);
+	    	releaseConnection(con);
+	    }finally{
+	    	releaseResultSet(resultSet);
+	    	releaseStatement(statement);
+	    	releaseConnection(con);	    	
+	    }
+	    return form;
+		
+	}
 	
 	@Override
 	protected void buildExcelDocument(Map model, HSSFWorkbook workbook,

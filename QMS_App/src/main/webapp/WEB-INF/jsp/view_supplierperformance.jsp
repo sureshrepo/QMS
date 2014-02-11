@@ -3,6 +3,7 @@
 
 <html>
 <head>
+
 <script type="text/javascript" src="js/ajaxpaging.js"></script>
 </head>
 <body>
@@ -12,8 +13,7 @@
 				<td>
 				 <div>
   <ul class="horizmenu">
-						
-								<li  style=" float:left;margin-right:8px;text-transform:uppercase;">
+  							<li  style=" float:left;margin-right:8px;text-transform:uppercase;">
 								<a href="add_supplierperformance" class="<c:choose>
 								<c:when test="${menu==''}">select</c:when><c:otherwise>unselect</c:otherwise></c:choose>">
 									<span>Add Supplier</span>
@@ -27,16 +27,24 @@
 									
 								</a>
 							</li>
+				            <li  style=" float:left;margin-right:8px;text-transform:uppercase;">
+								<a href="supplierperformance_report" class="<c:choose>
+								<c:when test="${menu=='supplier'}">select</c:when><c:otherwise>unselect</c:otherwise></c:choose>">
+									<span>Report Supplier</span>
+									
+								</a>
+							</li>
+				            
 				            </ul>
   </div>
 				</td>
 				</tr>
 				<tr>
-					<div class="del_div">
+				<!-- 	<div class="del_div">
 						<p><label style="padding: 0pt 20px 0pt 0pt;"><input type="submit" name="delete" value="" class="icon1" onclick="form.action='?do=deleteparticipant'" /></label></p>
 
 	          		</div>
-				</td>
+				</td> -->
 			</tr>
 			<tr>
         		<td valign="top" align="left">
@@ -44,23 +52,25 @@
 			          <h2>View SupplierPerformance</h2>
 			        </div>
 			        <div class="contentbox">
-<!-- 			        <div style="border:#ccc 2px solid; padding:15px; margin-bottom:15px;">
+ 			        <div style="border:#ccc 2px solid; padding:15px; margin-bottom:15px;">
 							<form action="findsupplierperformance" method="GET">
 							
 							<table width="100%" border="0" cellspacing="0" cellpadding="0">
 							  <tr>
-							    <td align="left" valign="middle" width="10%">Id:</td>
-							    <td align="left" valign="middle" width="10%"><input type="text" name="Supplier_id" class="input_txtbx1" id="supplier_id"></td>
-							    <td align="left" valign="middle" width="15%">&nbsp;&nbsp;Name:</td>
-								<td align="left" valign="middle" width="10%"><input type="text" name="supplier_name" id="supplier_name" class="input_txtbx1"></td>							    
-							    <td align="left" valign="middle" width="8%">&nbsp;&nbsp;Category:</td>
-							    <td align="left" valign="middle" width="10%"><input type="text" name="category" id="category" class="input_txtbx1"></td>
-							    <td align="center" valign="middle" width="38%"><input type="submit" class="submit_btn" value="Find" name="findsupplierperformance" ></td>
+							    <td align="left" valign="middle" width="10%">Supplier Name:</td>
+							    <td align="left" valign="middle" width="10%"><input type="text" name="supplier_name" class="input_txtbox" id="suppliername"></td>
+							    <td align="left" valign="middle" width="15%">&nbsp;&nbsp;Phone:</td>
+								<td align="left" valign="middle" width="10%"><input type="text" name="phone" id="phone" class="input_txtbox"></td>							    
+							    <td align="left" valign="middle" width="8%">&nbsp;&nbsp;Email:</td>
+							    <td align="left" valign="middle" width="10%"><input type="text" name="email_address" id="email" class="input_txtbox"></td>
+							    <td align="center" valign="middle" width="20%"><input type="submit" class="submit_btn" value="Find" name="findsupplierperformance" ></td>
+							  	<td align="center" valign="middle" width="20%"><input type="submit" class="submit_btn" value="Clear" name="welcome" ></td>
+							  
 							  </tr>
 							  
 							</table>
 							</form>
-						</div> -->
+						</div> 
 
 	<form action="?do=viewparticipants" name="dashboard" method="POST">
    				
@@ -71,20 +81,20 @@
 								<!-- <td valign="center" align="left" width="5%"><input type="checkbox" onclick="selectall(this.form)" value="" name="checkall"></td> -->
          						<td valign="top" align="left" width="10%">&nbsp;Supplier ID</td>
 					         	<td valign="top" align="left" width="10%">Supplier Name</td>
-					         	<td valign="top" align="left" width="10%">Category</td>
+					         <!--	<td valign="top" align="left" width="10%">Category</td> -->
 								<!-- <td valign="top" align="left" width="15%">Address</td>
           						<td valign="top" align="left" width="5%">City</td>
           						<td valign="top" align="left" width="10%">State</td>
           						<td valign="top" align="left" width="20%">Postal Code</td>
-          						<td valign="top" align="left" width="5%">Country</td> -->
+          						<td valign="top" align="left" width="5%">Country</td>
           						<td valign="top" align="left" width="10%">Website</td>
           						<!-- <td valign="top" align="left" width="30%">Certified to</td> -->
-          						<td valign="top" align="left" width="15%">Contact name</td>
+          				<!-- 		<td valign="top" align="left" width="15%">Contact name</td> -->
           						<!-- <td valign="top" align="left" width="30%">Contact Title</td> -->
-          						<td valign="top" align="left" width="15%">Phone</td>
-          						<td valign="top" align="left" width="10%">Fax</td>
-          						<td valign="top" align="left" width="10%">e_mail address</td>
-          						<td valign="top" align="left" width="10%">Actions</td>
+          						<td valign="top" align="left" >Phone</td>
+          					<!-- 	<td valign="top" align="left" width="10%">Fax</td> -->
+          						<td valign="top" align="left" >e_mail address</td>
+          						<td valign="top" align="left" >Actions</td>
         					</tr>
 						
 						
@@ -98,27 +108,14 @@
 							       		<tr class="row<%=i%>" ">
 								           	<td valign="top" align="left"  width="15%">${supplierperformance.supplier_id}</td>
 											<td valign="top" align="left" width="15%">${supplierperformance.supplier_name}</td>
-											<td valign="top" align="left" width="15%">${supplierperformance.category}</td>
-											<%-- <td valign="top" align="left" width="10%">${supplierperformance.address}</td>
-											<td valign="top" align="left" width="10%">${supplierperformance.city}</td>
-											<td valign="top" align="left" width="10%">${supplierperformance.state}</td>
-											<td valign="top" align="left" width="10%">${supplierperformance.postalcode}</td>
-											<td valign="top" align="left" width="10%">${supplierperformance.country}</td> --%>
-											<td valign="top" align="left" width="15%">${supplierperformance.website}</td>
-											<%-- <td valign="top" align="left" width="15%">${supplierperformance.certified_to}</td> --%>
-											<td valign="top" align="left" width="15%">${supplierperformance.contact_name}</td>
-											<%-- <td valign="top" align="left" width="15%">${supplierperformance.contact_title}</td> --%>
 											<td valign="top" align="left" width="15%">${supplierperformance.phone}</td>
-											<td valign="top" align="left" width="15%">${supplierperformance.fax}</td>
 											<td valign="top" align="left" width="15%">${supplierperformance.email_address}</td>
 											<td valign="top" align="left" width="15%">
-											<a href="#" title="" ><img src="resources/images/icons/icon_edit.png" alt="Edit" /></a>
-											<a href="editsupplierperformance?sid=<c:out value="${supplierperformance.supplier_id}"/>" style="padding-right:10px;">Edit</a>
-											<a href="#" title=""><img src="resources/images/icons/icon_delete.png" alt="Delete" /></a>
-											<a href="deletesupplierperformance?sid=<c:out value="${supplierperformance.supplier_id}"/>" style="padding-right:10px;">Delete</a>
-											
+										
+											<a href="#" title="" ><img src="resources/images/icons/icon_edit.png" alt="Edit" /></a><a href="<c:out value="editsupplierperformance?sid=${supplierperformance.supplier_id}"/>" style="padding-right:10px;">Edit</a>
+											<a href="#" title=""><img src="resources/images/icons/icon_delete.png" alt="Delete" /></a><a href="<c:out value="deletesupplierperformance?sid=${supplierperformance.supplier_id}"/>" onclick="return confirmation()">Remove</a>
 											</td>
-										</tr>
+											</tr>
 							    	</c:forEach>
 						    	
 						
@@ -133,15 +130,17 @@
 </div>
 
 <script>
-function confirmation(val) {
-	var answer = confirm("Are you Sure You Want to Delete Participant ?");
+function confirmation() {
+	var answer = confirm("Are you Sure You Want to Delete Supplier Performance Form ?")
 	if (answer){
-		window.location = "?do=deleteparticipant&id="+val;
+		return true;
 	}
 	else{
-		
+		return false;
 	}
 }
+
+
 </script>
 
 <script language="javascript">

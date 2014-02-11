@@ -84,6 +84,7 @@ public class FormController
 	public String add_form(HttpSession session,ModelMap model, Principal principal )
 	{
 		session.removeAttribute("docform");
+		load_document_page_dropdowns(model);
 		model.addAttribute("id", formDAO.get_formid());
 		  model.addAttribute("menu","document");
         return "add_form";
@@ -96,9 +97,16 @@ public class FormController
 	{	
 		int flag = 0;
 		
+		String form_id=request.getParameter("document_id_hidden");
+		form.setForm_or_rec_id(form_id);
+		
+		
+		
+		
+		
 		String auto_number=request.getParameter("auto_number");
 		System.out.println("Auto"+auto_number);
-		form.setForm_or_rec_id(request.getParameter("document_type_id") + '-'	+ form.getForm_or_rec_id());
+	//	form.setForm_or_rec_id(request.getParameter("document_type_id") + '-'	+ form.getForm_or_rec_id());
 		/*form.setAuto_no(request.getParameter("document_type_id1") + '-' + form.getAuto_no());*/
 		System.out.println("Started Inserting documents");
 		session.setAttribute("docform",form);
@@ -168,11 +176,13 @@ public class FormController
 				}
 			}
 			if (formDAO.insert_form(form)) {
+				formDAO.insert_prefix(form.getForm_or_rec_id().substring(0,form.getForm_or_rec_id().lastIndexOf('-')));
 				model.addAttribute("success", "true");
 				model.addAttribute("success_message", "Inserted Successfully");
 				flag = 1;
 			}
-
+			
+			
 		} catch (Exception e) {
 			System.out.println(e.toString());
 			e.printStackTrace();
@@ -415,6 +425,8 @@ public class FormController
 		EmployeeForm employeeForm = new EmployeeForm();
 		employeeForm.setEmployees(employeeDAO.filterEmployees("A"));
 		model.addAttribute("employeeForm", employeeForm);
+		
+		model.addAttribute("prefix",formDAO.getDocument_prefix());
 	}
 	
 	 @RequestMapping(value={"/search_form"}, method = RequestMethod.GET)

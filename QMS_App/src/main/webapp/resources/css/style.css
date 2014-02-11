@@ -29,18 +29,19 @@ ul, li {
 	list-style:none;
 }
 #login_div {
-	width:385px;
+	width:200px;
 	margin:100px auto auto auto;
 }
 .login-top {
-	background:url(../images/max-properties.gif) no-repeat;
-	width:385px;
+/*	background:url(../images/max-properties.gif) no-repeat;*/
+	width:200px;
 	height:63px;
 	display:block;
 }
 .login-center {
-	background:#000 url(../images/login-c.gif) repeat-x;
-	width:345px;
+	/*background:#000 url(../images/login-c.gif) repeat-x;*/
+	background-color:#FFFFD6;
+	width:200px;
 	padding:20px;
 	color:#fff;
 }
@@ -98,12 +99,12 @@ ul.login-list li p {
 .forgot-password:hover {
 	background:url(../images/forgot-password-hov.gif) no-repeat;
 }
-.login-bottom {
+/* .login-bottom {
 	background:url(../images/login-btm.gif) no-repeat;
 	width:385px;
 	height:61px;
 	display:block;
-}
+} */
 .error_div {
 	color:#ff0000;
 	font-size:12px;
@@ -496,6 +497,29 @@ ul.pagination li.page a:hover {
 	background:#f8fbfd;
 	border:1px solid #9fb7cd;
 }
+
+.submit-button{
+	background:url(../images/submit-btn.gif) no-repeat;
+	width:200px;
+	height:56px;
+	display:block;
+	cursor:pointer;
+	display:block;
+	border:0;
+	outline:none;
+	margin:0 0 0 40px;
+}
+.submit-btn {
+	background:url(../images/submit-btn.gif) no-repeat;
+	width:260px;
+	height:56px;
+	display:block;
+	cursor:pointer;
+	display:block;
+	border:0;
+	outline:none;
+	margin:0 0 0 40px;
+}
 .submit_btn {
 	background:url(../images/login_btn.png) 0 0 no-repeat;
 	width:78px;
@@ -708,6 +732,23 @@ ul.prev li{margin-right:50px; float:left; margin-bottom:20px;}
 	background: none repeat scroll 0 0 #F8FBFD;
     border: 1px solid #9FB7CD;
 }
+
+.inputbox {
+	font-size:12px;
+	text-align:left;
+	color:#333;
+	/* background:url(../images/input-bg.gif) no-repeat; */
+	width:130px;
+	height:25px;
+	display:block;
+	border:0;
+	outline:none;
+	padding:20px;
+	text-align:right;
+	margin-left:40px;
+}
+
+
 
 .err {
 font-size:11px; font-style:italic; color:#ff0000;

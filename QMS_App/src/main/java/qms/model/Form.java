@@ -11,7 +11,7 @@ public class Form {
 	
 	private String location;
 	
-    @NotEmpty
+  
 	private String form_or_rec_id;
 
     @NotEmpty

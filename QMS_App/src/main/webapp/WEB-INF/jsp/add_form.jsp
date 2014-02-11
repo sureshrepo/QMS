@@ -105,16 +105,25 @@
                <br/>
                </td>          
               
-               <td valign="top" align="left" id="edit_td" class="input_txt1" width="15%"><select name="document_type_id" id="document_type_id" class="input_cmbbx1" style="width:57px;border:none;background-color:lightgrey;">
-               <option value="FHR">FHR</option>
-               <option value="FEN">FEN</option>
+               <td valign="top" align="left" id="edit_td" class="input_txt1" width="15%">
+               <select name="document_type_id" id="document_type_id" class="input_cmbbx1" style="width:57px;border:none;background-color:lightgrey;">
+               <!-- <option value="FHR">FHR</option>
+               <option value="FEN">FEN</option> -->
+               <c:forEach items="${prefix}" var="prefix" varStatus="true">
+               <option value="<c:out value="${prefix}"/>"><c:out value="${prefix}"/></option>
+               </c:forEach>
               
-               </select><input type="hidden" name="document_id_hidden" id="generated_id" class="input_txtbx1" style="width:200px;" value=""/><input type="text" value="" id="form_or_rec_id" class="input_txtbx145" style="height:22px;background-color:lightgrey;width:50px;border:none;" name="form_or_rec_id" onblur="change_to_label();"/>
+               </select>
+               
+              <input type="hidden" name="document_id_hidden" id="generated_id" class="input_txtbx1" style="width:200px;" value=""/> 
+              <input type="text" value="" id="form_or_rec_id" class="input_txtbx145" style="height:22px;background-color:lightgrey;width:50px;border:none;" name="form_or_rec_id" onblur="change_to_label();"/>
                <a href="#" style="text-decoration: none;" onclick="show_userdefined()">&nbsp;&nbsp;User defined</a><br/><span class="err"></span>
                </td>
               
               <td valign="top" align="left" class="input_txt1" width="15%" id="user_defined_td" style="display:none;">
-               <input type="text" id="user_def_document_id" class="input_txtbx1" value="" style="width:150px;" onblur="show_lable();"/><a href="#" style="text-decoration: none;" onclick="hide_userdefined()">&nbsp;&nbsp;Cancel</a>           
+               <!-- <input type="text" id="user_def_document_id" class="input_txtbx1" value="" style="width:150px;" onblur="show_lable();"/> -->
+               <input type="text" id="user_def_document_id" class="input_txtbx1" value="" style="width:70px;"/>-<input type="text" id="user_def_document_id1" class="input_txtbx1" value="" style="width:70px;" onblur="show_lable();"/>
+               <a href="#" style="text-decoration: none;" onclick="hide_userdefined()">&nbsp;&nbsp;Cancel</a>           
                <br/>
                </td>
 																		              <td valign="middle" align="left" class="input_txt"><span
@@ -368,14 +377,15 @@ document.getElementById("lable_td").style.display="none";
 	}
 function show_lable()
 {
-	//var type=document.getElementById("document_type_id");	
-	var doc_id=document.getElementById("user_def_document_id");	
+	
+	var doc_id3=document.getElementById("user_def_document_id");	
+	var doc_id4=document.getElementById("user_def_document_id1");
+	var gen_id1=document.getElementById("generated_id");
+	gen_id1.value=doc_id3.value+-+doc_id4.value;
 	document.getElementById("lable_td").style.display="block";
 	document.getElementById("edit_td").style.display="none";
 	document.getElementById("user_defined_td").style.display="none";
-	document.getElementById("document_id_full_lbl").innerHTML=doc_id.value;
-	var gen_id=document.getElementById("generated_id");
-	gen_id.value=type.value+-+doc_id.value;
+	document.getElementById("document_id_full_lbl").innerHTML=doc_id3.value+-+doc_id4.value;	
 	
 	} 
   function show_userdefined()
@@ -396,54 +406,7 @@ document.getElementById("lable_td").style.display="none";
   
   <script type="text/javascript">
   
-  function change_to_label1()
-{
-	
-    
-	var type=document.getElementById("document_type_id1");	
-	var doc_id=document.getElementById("auto_no");	
-	document.getElementById("lable_td1").style.display="block";
-	document.getElementById("edit_td1").style.display="none";
-	
-	document.getElementById("document_id_full_lbl1").innerHTML=type.value+-+doc_id.value;
-	var gen_id=document.getElementById("generated_id1");
-	gen_id.value=type.value+-+doc_id.value;
-	
 
-	}
-function show_edit1()
-{
-	
-document.getElementById("lable_td1").style.display="none";
-	document.getElementById("edit_td1").style.display="block";
-	
-	}
-function show_lable1()
-{
-	//var type=document.getElementById("document_type_id");	
-	var doc_id=document.getElementById("user_def_document_id");	
-	document.getElementById("lable_td1").style.display="block";
-	document.getElementById("edit_td1").style.display="none";
-	document.getElementById("user_defined_td1").style.display="none";
-	document.getElementById("document_id_full_lbl1").innerHTML=doc_id.value;
-	var gen_id=document.getElementById("generated_id1");
-	gen_id.value=type.value+-+doc_id.value;
-	
-	} 
-  function show_userdefined1()
-{
-	
-document.getElementById("lable_td1").style.display="none";
-	document.getElementById("edit_td1").style.display="none";
-	document.getElementById("user_defined_td1").style.display="block";
-	} 
-  function hide_userdefined1()
-  {
-  	
-  document.getElementById("lable_td1").style.display="none";
-  	document.getElementById("edit_td1").style.display="block";
-  	document.getElementById("user_defined_td1").style.display="none";
-  	} 
   </script>
       <jsp:include page="footer.jsp"></jsp:include>
        

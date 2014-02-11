@@ -31,47 +31,54 @@
 		  <div class="login-top"></div>
 		  <div class="login-center">
 		  <ul class="login-list">
-		  <li  style="background-color:black;"><h1 style="font-family:verdana;font-size:30 px;text-align:center;">QMS LOGIN</h1>
+		  <li  style="background-color:#FFFFD6;"><h3 style="font-family:verdana;font-size:100px;text-align:center;"><font color="#993300">QMS LOGIN</font></h3>
 		  </li>
 		  </ul>
 		    <ul class="login-list">
 		   <li>
 <BR/>
-		        <p>Enter Your Email-Id</p>
+		        <p><font color="#993300">Enter Your Email-Id</font></p>
 		     
 		      </li>
 		      
 		      <li> 
-		      <table cellpadding="0" cellspacing="0" border="0" width="350"%>
+		      <table cellpadding="0" cellspacing="0" border="0" width="200"%>
 		       <td valign="top" align="center"> <input type="text" class="inputbx1" name="j_username" value=''>
-				<p><font color="Red"></font></p></td>
+				<p><font color="#993300"></font></p></td>
 		      </table>
 		      </li>
 		      <li>
-		        <p>Enter Your Password</p>
+		        <p><font color="#993300">Enter Your Password</font></p>
 		      </li>
 		      <li>
-		      <table cellpadding="0" cellspacing="0" border="0" width="350"%>
+		      <table cellpadding="0" cellspacing="0" border="0" width="200">
 		      <td valign="top" align="center"><input type="password" class="inputbx1" name="j_password">
 					
 		      </td>
 		      </table>
 		      </li>
 		      <li>
-		      <table cellpadding="0" cellspacing="0" border="0" width="350"%>
+		      <table cellpadding="0" cellspacing="0" border="0" width="200">
 		      <td valign="top" align="center">
 		      <a href="#">
 		        <input type="submit" class="submit_btn" value="submit" name="submit">
 		        </a></td></table></li>
-		      <li><a href="#" class="forgot-password"></a></li>
+		      
+		      
+		      <li>
+		      <table cellpadding="0" cellspacing="0" border="0" width="200">
+		      <td valign="top" align="center">
+		      <a href="forgot-password"><font color="#993300">forgot-password</font></a></li>
+		      </td>
+		      </table>
 		    
 		    <li>
-		    <table cellpadding="0" cellspacing="0" border="0" width="350"%>
-		    <td valign="top" align="center"><input type="reset" align="left" name="reset" width="30%" ></td></table></li>
-		    
+		    <table cellpadding="0" cellspacing="0" border="0" width="200">
+		    <td valign="top" align="center"><input type="reset" align="left" name="reset" width="150" ></td></table></li>
+		    		
 		      <li>
 		      <table cellpadding="0" cellspacing="0" width="100%">
-		      <td valign="top" align="middle"> <a href="createuser"><font color="Black"></font>Register</a></td></table></li>
+		      <td valign="top" align="middle"> <a href="createuser"><font color="#993300">Register</font></a></td></table></li>
 		    </ul>
 		  </div>
 		  <div class="login-bottom"></div>

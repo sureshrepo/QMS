@@ -1,9 +1,11 @@
 	package qms.controllers;
 
 	import java.security.Principal;
+import java.util.ArrayList;
 
 
 	import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 	import javax.servlet.http.HttpSession;
 	import javax.validation.Valid;
 
@@ -18,10 +20,12 @@
 	import org.springframework.web.bind.annotation.RequestMethod;
 	import org.springframework.web.bind.annotation.RequestParam;
 	import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
 
 	import qms.dao.SupplierPerformanceDAO;
 	import qms.model.SupplierPerformance;
-	import qms.forms.SupplierPerformanceForm;;
+import qms.forms.MaintenanceForm;
+import qms.forms.SupplierPerformanceForm;;
 
 	@Controller
 	@SessionAttributes({"supplier"})
@@ -71,12 +75,12 @@
 			}
 			System.out.println("inserting....");
 			supplierPerformanceDAO.insert_supplierperformance(supplierPerformance);
-			System.out.println("inserted.........");
-			model.put("supplier", supplierPerformance);
-			model.addAttribute("supplierperformance",supplierPerformance);
-			
+			SupplierPerformanceForm supplierPerformanceForm= new SupplierPerformanceForm();
+			supplierPerformanceForm.setSupplierperformance(supplierPerformanceDAO.getsupplierperformance());
+			model.addAttribute("supplierPerformanceForm",supplierPerformanceForm);
 			model.addAttribute("menu","supplier");
 			return "view_supplierperformance";
+			
 	 	}
 		
 		
@@ -86,15 +90,19 @@
 			session.setAttribute("supplier",supplierPerformance);
 			if(result.hasErrors())
 			{
+				
+				SupplierPerformanceForm supplierPerformanceForm = new SupplierPerformanceForm();
+				supplierPerformanceForm.setSupplierperformance(supplierPerformanceDAO.getsupplierperformance());
+				model.addAttribute("supplierPerformanceForm",supplierPerformanceForm);
 				return "edit_supplierperformance";
 			}	
 			supplierPerformanceDAO.update_supplierperformance(supplierPerformance);
 			
 					
-			SupplierPerformanceForm supplierPerformanceForm = new SupplierPerformanceForm();
-			model.addAttribute("supplierPerformanceForm", supplierPerformanceForm);
+			
+			/*model.addAttribute("supplierPerformanceForm", supplierPerformanceForm);
 			model.addAttribute("success","true");
-			model.addAttribute("menu","supplier");
+			*/model.addAttribute("menu","supplier");
 			
 			
 			return "view_supplierperformance";
@@ -158,6 +166,82 @@
 			return "view_supplierperformance";		
 			}
 			}
+		
+		//report page request passing
+		@RequestMapping(value = "/supplierperformance_report", method = RequestMethod.GET)
+		public String reportsupplierperformance(ModelMap model) {
+			  model.addAttribute("menu","supplierperformance");
+			return "report_supplierperformance";
+
+		}
+		
+
+
+		//This is used for downloading Excel Sheet
+		@RequestMapping(value ={ "/supplierperformancereport" }, method = RequestMethod.GET)
+		  public ModelAndView getExcel_view() {
+		java.util.List<SupplierPerformance> supplierPerformances = new ArrayList<SupplierPerformance>();
+		
+		supplierPerformances = supplierPerformanceDAO.getsupplierperformance();
+		
+		return new ModelAndView("supplierperformanceDAO","supplierPerformances",supplierPerformances);
+		
+		}
+		
+		//Report Generation
+		@RequestMapping(value = "/generate_supplierperformance_report", method = RequestMethod.POST)
+		public ModelAndView generatesupplierperformance_Report(HttpServletRequest request,ModelMap model, HttpServletResponse response)
+		{
+		
+			String[] fields={"supplier_id","supplier_name","category","address","city","state","postalcode","country",
+					"website","certified_to","contact_name","contact_title","phone","fax","email_address"};
+		
+			System.out.println(request.getParameter("type_of_report"));
+			
+			java.util.List<SupplierPerformance> supplierPerformances=new ArrayList<SupplierPerformance>();
+				switch(Integer.parseInt(request.getParameter("doc_type")))
+					  {
+			  case 0:
+				  supplierPerformances=supplierPerformanceDAO.get_supplierperformance_type("opensupplierperformance");
+				  break;
+	/*		  case 1:
+				  supplierPerformances=supplierPerformanceDAO.get_nonconformance_type("nodispositionover30days","start","end");
+				  break;
+			  case 2:
+				  start=request.getParameter("start_date");
+					end=request.getParameter("end_date");
+					
+				  supplierPerformances=supplierPerformanceDAO.get_noncon_type("opennonconformance","start","end");
+				  break;
+			  
+	*/		  default:
+				  break;
+					  
+					
+			}
+			if(Integer.parseInt(request.getParameter("report_type"))==1)
+			{
+			
+					System.out.println("now ok");
+					 response.setHeader("Content-Disposition","attachment;filename='"+request.getParameter("supplier_name")+"'");
+						
+					fields=request.getParameterValues("report_field[]");
+				
+			}
+			else
+				
+			response.setHeader("Content-Disposition","attachment;filename='SupplierPerformance_Report'");
+			
+			
+			ModelAndView modelAndView=new ModelAndView("supplierperformanceDAO","supplierPerformances",supplierPerformances);
+			
+			modelAndView.addObject("fields",fields);
+			
+			System.out.println("now ok::::");
+			return modelAndView ;
+		}
+
+		
 	}
 
 
