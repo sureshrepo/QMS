@@ -55,7 +55,7 @@ public class EmployeeController
 				EmployeeForm employeeForm=new EmployeeForm();
 				employeeForm.setEmployees(employeeDAO.getEmployees());
 				model.addAttribute("employeeForm",employeeForm);
-				model.addAttribute("Success","true");
+				
 				model.addAttribute("id",employeeDAO.getMax_employeeID());
 		        return "add_employee";
 			}
@@ -66,7 +66,8 @@ public class EmployeeController
 		employeeForm.setEmployees(employeeDAO.getEmployees());
 		model.addAttribute("employeeForm",employeeForm);
 		model.addAttribute("menu","employee");
-		return "add_employee";
+		model.addAttribute("Success","true");
+		return "view_employees";
 	}
 	
 	@RequestMapping(value={"/viewemployees"},method=RequestMethod.GET)

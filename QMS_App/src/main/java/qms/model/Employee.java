@@ -13,6 +13,68 @@ public class Employee
 	private String date_hired;
 	@NotEmpty
 	private String attachments;
+	
+	
+	private String process;
+		
+	public String getProcess() {
+		return process;
+	}
+	public void setProcess(String process) {
+		this.process = process;
+	}
+	public String getProcess_name() {
+		return process_name;
+	}
+	public void setProcess_name(String process_name) {
+		this.process_name = process_name;
+	}
+	public String getDoc_control() {
+		return doc_control;
+	}
+	public void setDoc_control(String doc_control) {
+		this.doc_control = doc_control;
+	}
+	public String getManagement_rep() {
+		return management_rep;
+	}
+	public Employee(String id, String name, String job_title,
+			String date_hired, String attachments, String process,
+			String process_name, String doc_control, String management_rep,
+			String list_of_functions_needes, String documented_in,
+			String qualified_by, String type_of_training, String trainer,
+			String training_due_date, String training_completion_date,
+			String training_effectiveness_review_due_date,
+			String training_effectiveness_notes) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.job_title = job_title;
+		this.date_hired = date_hired;
+		this.attachments = attachments;
+		this.process = process;
+		this.process_name = process_name;
+		this.doc_control = doc_control;
+		this.management_rep = management_rep;
+		this.list_of_functions_needes = list_of_functions_needes;
+		this.documented_in = documented_in;
+		this.qualified_by = qualified_by;
+		this.type_of_training = type_of_training;
+		this.trainer = trainer;
+		this.training_due_date = training_due_date;
+		this.training_completion_date = training_completion_date;
+		this.training_effectiveness_review_due_date = training_effectiveness_review_due_date;
+		this.training_effectiveness_notes = training_effectiveness_notes;
+	}
+	public void setManagement_rep(String management_rep) {
+		this.management_rep = management_rep;
+	}
+	private String process_name;
+	
+	private String doc_control;
+	
+	private String management_rep;	
+	
 	@NotEmpty
 	private String list_of_functions_needes;
 	@NotEmpty
@@ -31,6 +93,9 @@ public class Employee
 	private String training_effectiveness_review_due_date;
 	@NotEmpty
 	private String training_effectiveness_notes;
+	
+	
+	
     
 	public Employee(String id, String name, String job_title,
 			String date_hired, String attachments,

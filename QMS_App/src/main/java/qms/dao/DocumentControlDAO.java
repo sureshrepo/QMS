@@ -387,7 +387,40 @@ public class DocumentControlDAO extends AbstractExcelView
 		
 	}
 	
-
+	public List<String> getDocument_prefix(){
+		Connection con = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
+		try {
+			con = dataSource.getConnection();
+			statement = con.createStatement();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		List<String> prefix = new ArrayList<String>();
+		//int i=0;
+	    try{
+	    	//System.out.println("Edit:"+document_id);
+			resultSet = statement.executeQuery("select * from tbl_document_type_prefix");
+			while(resultSet.next())
+			{
+		
+				prefix.add(resultSet.getString("prefix"));
+				
+			}
+	    }catch(Exception e){
+	    	System.out.println(e.toString());
+	    	releaseResultSet(resultSet);
+	    	releaseStatement(statement);
+	    	releaseConnection(con);
+	    }finally{
+	    	releaseResultSet(resultSet);
+	    	releaseStatement(statement);
+	    	releaseConnection(con);	    	
+	    }
+	    return prefix;
+		
+	}
 	public boolean update_document(DocumentMain documentMain)
 	{
 		Connection con = null;
@@ -490,6 +523,46 @@ public class DocumentControlDAO extends AbstractExcelView
 	    return documentMains;
 		
 	}
+	
+	public List<DocumentMain> insert_prefix(String prefix){
+		Connection con = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
+		try {
+			con = dataSource.getConnection();
+			statement = con.createStatement();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		int flag=0;
+		List<DocumentMain> documentMains = new ArrayList<DocumentMain>();
+	    try{
+	    	String cmd_available="Select * from tbl_document_type_prefix where prefix='"+prefix+"'";
+	    	System.out.println(cmd_available);
+	    	resultSet=statement.executeQuery(cmd_available);	    	
+	    	if(resultSet.next())
+	    	{
+	    	 flag=1;
+	    	}
+	    	if(flag==0)
+	    	{
+	    	statement.execute("insert into tbl_document_type_prefix(document_type,prefix) values('Userdefined','"+prefix+"')");
+	    	}
+			
+	    }catch(Exception e){
+	    	System.out.println("prefix:"+e.toString());
+	    	releaseResultSet(resultSet);
+	    	releaseStatement(statement);
+	    	releaseConnection(con);
+	    }finally{
+	    	releaseResultSet(resultSet);
+	    	releaseStatement(statement);
+	    	releaseConnection(con);	    	
+	    }
+	    return documentMains;
+		
+	}
+	
 	public List<DocumentMain> getDocuments(String id){
 		Connection con = null;
 		Statement statement = null;

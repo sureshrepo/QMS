@@ -170,10 +170,17 @@ public class EmployeeDAO {
 				e1.printStackTrace();
 		}
 		  try{
-			  String cmd_insert1="insert into tbl_employee(employee_id,name,job_title,date_hired,attachments) values('"+employee.getId()+"','"+employee.getName()+"','"+employee.getJob_title()+"','"+employee.getDate_hired()+"','"+employee.getAttachments()+"')";
+			  String cmd_insert1="insert into tbl_employee(employee_id,name,job_title,date_hired,attachments,process,process_name,doc_control,management_rep) values('"+employee.getId()+"','"+employee.getName()+"','"+employee.getJob_title()+"','"+employee.getDate_hired()+"','"+employee.getAttachments()+"','"+employee.getProcess()+"','"+employee.getProcess_name()+"','"+employee.getDoc_control()+"','"+employee.getManagement_rep()+"')";
 			  String cmd_insert2="insert into tbl_employee_desc(employee_id,list_of_functions_needes,documented_in,qualified_by,type_of_training,trainer,training_due_date,training_completion_date,training_effectiveness_review_due_date,training_effectiveness_notes) values('"+employee.getId()+"','"+employee.getList_of_functions_needes()+"','"+employee.getDocumented_in()+"','"+employee.getQualified_by()+"','"+employee.getType_of_training()+"','"+employee.getTrainer()+"','"+employee.getTraining_due_date()+"','"+employee.getTraining_completion_date()+"','"+employee.getTraining_effectiveness_review_due_date()+"','"+employee.getTraining_effectiveness_notes()+"')";
 			  statement.execute(cmd_insert1);
 			  statement.execute(cmd_insert2);
+			  
+			  if(employee.getProcess().equals("yes"))
+			  {
+				  String cmd_insert_process="insert into tbl_process(process_id,process_name,process_owner) values('"+employee.getProcess()+"','"+employee.getProcess_name()+"','"+employee.getName()+"')";
+				  statement.execute(cmd_insert_process);
+			  }
+			  
 		  }catch(Exception e){
 	    	System.out.println(e.toString());
 	    	releaseResultSet(resultSet);
@@ -253,6 +260,72 @@ public class EmployeeDAO {
 	    return employees;
 		
 	}
+	
+	
+	public List<Employee> getEmployees_by_doc_control(){
+		Connection con = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
+		try {
+			con = dataSource.getConnection();
+			statement = con.createStatement();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		List<Employee> employees = new ArrayList<Employee>();
+	    try{
+			resultSet = statement.executeQuery("select * from tbl_employee as t1 join tbl_employee_desc as t2 on t1.employee_id=t2.employee_id where t1.doc_control='yes';");
+			//System.out.println("came");
+			while(resultSet.next()){
+				System.out.println("doc_employee");
+				employees.add(new Employee(resultSet.getString("employee_id"),resultSet.getString("name"), resultSet.getString("job_title"), resultSet.getString("date_hired"), resultSet.getString("attachments"), resultSet.getString("list_of_functions_needes"),resultSet.getString("documented_in"), resultSet.getString("qualified_by"),resultSet.getString("type_of_training"),resultSet.getString("trainer"), resultSet.getString("training_due_date"),resultSet.getString("training_completion_date"),resultSet.getString("training_effectiveness_review_due_date"),resultSet.getString("training_effectiveness_notes")));
+			}
+	    }catch(Exception e){
+	    	System.out.println(e.toString());
+	    	releaseResultSet(resultSet);
+	    	releaseStatement(statement);
+	    	releaseConnection(con);
+	    }finally{
+	    	releaseResultSet(resultSet);
+	    	releaseStatement(statement);
+	    	releaseConnection(con);	    	
+	    }
+	    return employees;
+		
+	}
+	public List<Employee> getEmployees_by_management_rep(){
+		Connection con = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
+		try {
+			con = dataSource.getConnection();
+			statement = con.createStatement();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		List<Employee> employees = new ArrayList<Employee>();
+	    try{
+			resultSet = statement.executeQuery("select * from tbl_employee as t1 join tbl_employee_desc as t2 on t1.employee_id=t2.employee_id where management_rep='yes';");
+			//System.out.println("came");
+			while(resultSet.next()){
+				System.out.println("count");
+				employees.add(new Employee(resultSet.getString("employee_id"),resultSet.getString("name"), resultSet.getString("job_title"), resultSet.getString("date_hired"), resultSet.getString("attachments"), resultSet.getString("list_of_functions_needes"),resultSet.getString("documented_in"), resultSet.getString("qualified_by"),resultSet.getString("type_of_training"),resultSet.getString("trainer"), resultSet.getString("training_due_date"),resultSet.getString("training_completion_date"),resultSet.getString("training_effectiveness_review_due_date"),resultSet.getString("training_effectiveness_notes")));
+			}
+	    }catch(Exception e){
+	    	System.out.println(e.toString());
+	    	releaseResultSet(resultSet);
+	    	releaseStatement(statement);
+	    	releaseConnection(con);
+	    }finally{
+	    	releaseResultSet(resultSet);
+	    	releaseStatement(statement);
+	    	releaseConnection(con);	    	
+	    }
+	    return employees;
+		
+	}
+	
+	
 	
 	public void releaseConnection(Connection con){
 		try{if(con != null)

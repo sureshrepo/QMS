@@ -199,7 +199,10 @@ public class DocumentController {
 			HttpServletRequest request, ModelMap model, Principal principal,
 			@ModelAttribute("DocumentMain") @Valid DocumentMain documentMain, BindingResult result) throws IOException {
 		int flag = 0;
-		documentMain.setDocument_id(request.getParameter("document_type_id") + '-'	+ documentMain.getDocument_id());
+		documentMain.setDocument_id(request.getParameter("document_id_hidden"));
+		
+		// + '-'	+ documentMain.getDocument_id());
+	
 		System.out.println("Started Inserting documents");
 		session.setAttribute("documentMain",documentMain);
 		// Started to handle upload document
@@ -266,6 +269,7 @@ public class DocumentController {
 				}
 			}
 			if (documentControlDAO.insert_document(documentMain)) {
+				documentControlDAO.insert_prefix(documentMain.getDocument_id().substring(0,documentMain.getDocument_id().lastIndexOf('-')));
 				model.addAttribute("success", "true");
 				model.addAttribute("success_message", "Inserted Successfully");
 				flag = 1;
@@ -294,21 +298,37 @@ public class DocumentController {
  
 	
 
-	@SuppressWarnings("unchecked")
+	
 	@RequestMapping(value = { "/ajax_getissuer" }, method = RequestMethod.POST)
 	public @ResponseBody
 	String insert_external_document(HttpSession session,
 			HttpServletRequest request, ModelMap model, Principal principal) {
-
+		String resultHTML="";
 		EmployeeForm employeeForm=new EmployeeForm();
 		employeeForm.setEmployees(employeeDAO.filterEmployees(request.getParameter("filter_val")));
-		
+		resultHTML="<Select name='issuer' class='input_cmbbx1' style='width:120px;'>";
+		for (Employee employee : employeeDAO.filterEmployees(request.getParameter("filter_val")) ) {
+			resultHTML+="<option value='"+employee.getName()+"'>"+employee.getName()+"</option>";
+		}
+		resultHTML+="</select>";
+		return resultHTML;
+	}
+	@RequestMapping(value = { "/ajax_getprocess" }, method = RequestMethod.POST)
+	public @ResponseBody
+	String ajax_process_owner(HttpSession session,
+			HttpServletRequest request, ModelMap model, Principal principal) {
 		String resultHTML="";
+	
+		String process_name=request.getParameter("process");
 		
+		String process_owner=processDAO.getProcess_owner(process_name).get(0).getProcess_owner();
+		
+		
+		
+		resultHTML="<input type='hidden' name='approver1' id='hidden_process_owner' value='"+process_owner+"'/><label id='process_owner_lbl'>"+process_owner+"</label>";
 		
 		return resultHTML;
 	}
-
 	// Document Views
 
 	@RequestMapping(value = "/viewdocuments", method = RequestMethod.GET)
@@ -440,5 +460,24 @@ public void load_document_page_dropdowns(ModelMap model)
 	EmployeeForm employeeForm = new EmployeeForm();
 	employeeForm.setEmployees(employeeDAO.filterEmployees("A"));
 	model.addAttribute("employeeForm", employeeForm);
+	
+	/*
+	 * Load Employee of Doc Control
+	 */
+	EmployeeForm employeeForm1 = new EmployeeForm();
+	employeeForm1.setEmployees(employeeDAO.getEmployees_by_doc_control());
+	model.addAttribute("employeeForm1",employeeForm1);
+	
+	/*
+	 * Load Employee for management 
+	 */
+	
+	EmployeeForm employeeForm2 = new EmployeeForm();
+	employeeForm2.setEmployees(employeeDAO.getEmployees_by_management_rep());
+	model.addAttribute("employeeForm2",employeeForm2);
+	
+	model.addAttribute("prefix",documentControlDAO.getDocument_prefix());
+	
+	
 }
 }

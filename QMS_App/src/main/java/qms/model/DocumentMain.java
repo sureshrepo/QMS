@@ -6,7 +6,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 public class DocumentMain
 {
-	@NotEmpty
+
 	private String document_id;
 	
 	
