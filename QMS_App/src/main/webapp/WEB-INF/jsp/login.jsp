@@ -6,9 +6,9 @@
 <link href="<c:url value="/resources/css/home.css" />" rel="stylesheet"  type="text/css" />
 <style>
 .errorblock {
-	color: #ff0000;
-	background-color: #ffEEEE;
-	border: 3px solid #ff0000;
+	color: #eaeaea;
+	background-color: #eaeaea;
+	border: 3px solid #eaeaea;
 	padding: 8px;
 	margin: 16px;
 }
@@ -30,27 +30,48 @@
 		<div id="login_div">
 		  <div class="login-top"></div>
 		  <div class="login-center">
+		  <ul class="login-list">
+		  <li  style="background-color:black;"><h1 style="font-family:verdana;font-size:30 px;text-align:center;">QMS LOGIN</h1>
+		  </li>
+		  </ul>
 		    <ul class="login-list">
-		      <li>
+		   <li>
+<BR/>
 		        <p>Enter Your Email-Id</p>
+		     
 		      </li>
-		      <li>
-		        <input type="text" class="inputbx" name="j_username" value=''>
-				<p><font color="Red"></font></p>
+		      
+		      <li> 
+		      <table cellpadding="0" cellspacing="0" border="0" width="350"%>
+		       <td valign="top" align="center"> <input type="text" class="inputbx1" name="j_username" value=''>
+				<p><font color="Red"></font></p></td>
+		      </table>
 		      </li>
 		      <li>
 		        <p>Enter Your Password</p>
 		      </li>
 		      <li>
-		        <input type="password" class="inputbx" name="j_password">
-				<p><font color="Red">Required Field Cannot Be Blank</font></p>	
+		      <table cellpadding="0" cellspacing="0" border="0" width="350"%>
+		      <td valign="top" align="center"><input type="password" class="inputbx1" name="j_password">
+					
+		      </td>
+		      </table>
 		      </li>
-		      <li><a href="#">
-		        <input type="submit" class="submit-btn" value=" " name="submit">
-		        </a></li>
+		      <li>
+		      <table cellpadding="0" cellspacing="0" border="0" width="350"%>
+		      <td valign="top" align="center">
+		      <a href="#">
+		        <input type="submit" class="submit_btn" value="submit" name="submit">
+		        </a></td></table></li>
 		      <li><a href="#" class="forgot-password"></a></li>
-		      <li><input name="reset" type="reset" /></li>
-		      <li><a href="createuser">Register</a></li>
+		    
+		    <li>
+		    <table cellpadding="0" cellspacing="0" border="0" width="350"%>
+		    <td valign="top" align="center"><input type="reset" align="left" name="reset" width="30%" ></td></table></li>
+		    
+		      <li>
+		      <table cellpadding="0" cellspacing="0" width="100%">
+		      <td valign="top" align="middle"> <a href="createuser"><font color="Black"></font>Register</a></td></table></li>
 		    </ul>
 		  </div>
 		  <div class="login-bottom"></div>
