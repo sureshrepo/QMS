@@ -173,12 +173,20 @@
                </td>
 																		              <td valign="middle" align="left" class="input_txt"><span
 																			class="err">*</span>Retention Time :</td>
-																		<td valign="top" align="left" class="input_txt"><input
-																			type="text" class="input_txtbx1" id="inp_external_id"
+																		<td valign="top" align="left" class="input_txt">
+																		<%-- <input type="text" class="input_txtbx1" id="inp_external_id"
 																			onmouseover="showTooltip('tooltip_id','inp_id3');"
 																			onmouseout="hideTooltip('tooltip_id');"
 																			name="retention_time"
-																			value="${docform.retention_time}" /><br/><span class="err"><form:errors path="Form.retention_time"></form:errors></span>
+																			value="${docform.retention_time}" /><br/><span class="err"><form:errors path="Form.retention_time"></form:errors></span> --%>
+																		
+																		 
+               <select id="retention" name="retention_time" class="input_cmbbx1" style="width:200px;">
+              <option value="">--Select--</option>
+               <option value="1Week" <c:if test="${form.retention_time=='1Week'}"><c:out value="Selected"/></c:if>>1Week</option>
+               <option value="1Month" <c:if test="${form.retention_time=='1Month'}"><c:out value="Selected"/></c:if>>1Month</option>
+               <option value="1Year" <c:if test="${form.retention_time=='1Year'}"><c:out value="Selected"/></c:if>>1Year</option>
+               </select>
 																		
 																		</td>
 																		<td></td><td></td>

@@ -164,28 +164,43 @@
                             <td valign="middle" align="left" class="input_txt" ><span class="err">*</span>Media Type:</td>
                <td valign="top" align="left" class="input_txt">
                
-                <input type="radio" name="media_type" onchange="toggle2(this.value);" value="0"   id="id_hardcopy"  checked/>Hard Copy&nbsp;&nbsp;&nbsp;<input type="radio" name="media_type" onchange="toggle2(this.value);" value="1"  id="id_electronic" onchange="toggle2(this.value);" />Electronic&nbsp;&nbsp;&nbsp;<br/><span class="err"></span>
+                <!-- <input type="radio" name="media_type" onchange="toggle2(this.value);" value="0"   id="id_hardcopy"  checked/>Hard Copy&nbsp;&nbsp;&nbsp;<input type="radio" name="media_type" onchange="toggle2(this.value);" value="1"  id="id_electronic" onchange="toggle2(this.value);" />Electronic&nbsp;&nbsp;&nbsp;<br/><span class="err"></span> -->
+                 
+                 <input type="radio" name="media_type" value="0" id="id_hardcopy" class="input_txt"   <c:if test="${form.media_type=='0'}"><c:out value="Checked=checked"/></c:if>>Yes&nbsp;&nbsp;&nbsp;
+				  <input type="radio" name="media_type" value="1" id="id_electronic" class="input_txt"  <c:if test="${form.media_type=='1'}"><c:out value="Checked=checked"/></c:if>>No&nbsp;&nbsp;&nbsp;
+				  
                     
                </td>
 																		              <td valign="middle" align="left" class="input_txt"><span
 																			class="err">*</span>Retention Time :</td>
-																		<td valign="top" align="left" class="input_txt"><input
+																		<td valign="top" align="left" class="input_txt"><%-- <input
 																			type="text" class="input_txtbx1" id="inp_external_id"
 																			onmouseover="showTooltip('tooltip_id','inp_id3');"
 																			onmouseout="hideTooltip('tooltip_id');"
 																			name="retention_time"
-																			value="${form.retention_time}" />
+																			value="${form.retention_time}" /> --%>
+																			 <select id="retention" name="retention_time" class="input_cmbbx1" style="width:200px;">
+              <option value="">--Select--</option>
+               <option value="1Week" <c:if test="${form.retention_time=='1Week'}"><c:out value="Selected"/></c:if>>1Week</option>
+               <option value="1Month" <c:if test="${form.retention_time=='1Month'}"><c:out value="Selected"/></c:if>>1Month</option>
+               <option value="1Year" <c:if test="${form.retention_time=='1Year'}"><c:out value="Selected"/></c:if>>1Year</option>
+               </select>
 																		
 																		</td>
 																		<td></td><td></td>
 																		</tr>
 																		<tr class="row1">
 																		<td valign="middle" align="left" class="input_txt">Form:</td>
-														<td valign="top" align="left" class="input_txt"><input
+														<td valign="top" align="left" class="input_txt">
+														<!-- <input
 															type="radio" name="form" value="1"
 															class="input_txt" onchange="toggle2(this.value)">Yes&nbsp;&nbsp;&nbsp;<input
 															type="radio" name="form" value="0"
-															class="input_txt" checked onchange="toggle2(this.value)">No
+															class="input_txt" checked onchange="toggle2(this.value)">No -->
+															
+															<input type="radio" name="form" value="1"  class="input_txt"   <c:if test="${form.form=='1'}"><c:out value="Checked=checked"/></c:if>>Yes&nbsp;&nbsp;&nbsp;
+				  											<input type="radio" name=form" value="0"  class="input_txt"  <c:if test="${form.form=='0'}"><c:out value="Checked=checked"/></c:if>>No&nbsp;&nbsp;&nbsp;
+				  
                             <td></td>
                             <td></td>
                             <td></td>
