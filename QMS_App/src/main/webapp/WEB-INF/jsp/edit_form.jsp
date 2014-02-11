@@ -199,7 +199,7 @@
 															class="input_txt" checked onchange="toggle2(this.value)">No -->
 															
 															<input type="radio" name="form" value="1"  class="input_txt"   <c:if test="${form.form=='1'}"><c:out value="Checked=checked"/></c:if>>Yes&nbsp;&nbsp;&nbsp;
-				  											<input type="radio" name=form" value="0"  class="input_txt"  <c:if test="${form.form=='0'}"><c:out value="Checked=checked"/></c:if>>No&nbsp;&nbsp;&nbsp;
+				  											<input type="radio" name="form" value="0"  class="input_txt"  <c:if test="${form.form=='0'}"><c:out value="Checked=checked"/></c:if>>No&nbsp;&nbsp;&nbsp;
 				  
                             <td></td>
                             <td></td>
