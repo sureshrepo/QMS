@@ -103,7 +103,7 @@
 					</tr>
 					<tr>
 						<td align="right" valign="middle"><span class="cart_txt">Welcome
-								<sec:authentication property="principal.username" />&nbsp;&nbsp;|&nbsp;&nbsp;<a href="<c:url value="/j_spring_security_logout" />">Logout</a>
+								<sec:authentication property="principal.username" />&nbsp;&nbsp;|&nbsp;&nbsp;<a href="<c:url value="/j_spring_security_logout" />"><span class="cart_txt">Logout</span></a>
 						</span></td>
 					</tr>
 				</table>
