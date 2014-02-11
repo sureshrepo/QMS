@@ -25,7 +25,7 @@
 							<li  style=" float:left;margin-right:8px;text-transform:uppercase;">
 								<a href="view_internalaudits" class="<c:choose>
 								<c:when test="${menu==''}">select</c:when><c:otherwise>unselect</c:otherwise></c:choose>">
-									<span>View Internal Audits </span>
+																	<span>View Internal Audits </span>
 									
 								</a>
 							</li>

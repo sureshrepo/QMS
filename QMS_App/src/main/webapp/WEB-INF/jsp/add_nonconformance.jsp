@@ -86,7 +86,7 @@
 
 																	<tr class="row2">
 																		<td valign="middle" align="left" class="input_txt">
-																			Source of Non Conformance :</td>
+																			&nbsp;&nbsp;&nbsp;Source of Non Conformance :</td>
 																		<td valign="top" align="left" class="input_txt">
 																			<select name="source_of_nonconformance"
 																			class="input_cmbbx1">
@@ -123,7 +123,7 @@
 																	
 																	<tr class="row2">
 																		<td valign="middle" align="left" class="input_txt">
-																			Type of NonConformance :</td>
+																			&nbsp;&nbsp;&nbsp;Type of NonConformance :</td>
 																		<td valign="top" align="left" class="input_txt">
 																			<select name="type_of_nonconformance"
 																			class="input_cmbbx1">
@@ -170,7 +170,7 @@
 																		</td>
 																	
 																		<td valign="top" align="left" class="input_txt">
-																			Disposition Required:</td>
+																			&nbsp;&nbsp;&nbsp;Disposition Required:</td>
 																		<td valign="top" align="left" class="input_txt"><input
 																			type="radio" name="disposition_required" value="0"
 																			class="input_txt" checked>Yes&nbsp;&nbsp;&nbsp;<input
@@ -193,7 +193,7 @@
 
 																	
 																		<td valign="middle" align="left" class="input_txt">
-																			Disposition :</td>
+																			&nbsp;&nbsp;&nbsp;Disposition :</td>
 																		<td valign="top" align="left" class="input_txt">
 																			<select name="disposition" class="input_cmbbx1">
 																				<option selected="selected" value="Product Quality">Discard</option>
@@ -270,7 +270,7 @@
 																	</tr>
 																	
 																	<tr class="row2">
-																	<td valign="middle" align="left" class="input_txt">Corrective
+																	<td valign="middle" align="left" class="input_txt">&nbsp;&nbsp;&nbsp;Corrective
 															Action Required:</td>
 														<td valign="top" align="left" class="input_txt"><input
 															type="radio" name="corrective_action_required" value="1"

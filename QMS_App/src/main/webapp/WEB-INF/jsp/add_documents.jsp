@@ -71,26 +71,26 @@
               <table cellpadding="0" cellspacing="0" border="0" width="100%">
              <tr class="row1">
              
-               <td valign="middle" align="right" class="input_txt" width="15%"><span class="err">*</span>Document ID:</td>
+               <td valign="middle" align="right" class="input_txt" width="15%"><span class="err">*</span>Document ID:<input type="hidden" name="document_id_hidden" id="generated_id" class="input_txtbx1" style="width:200px;" value=""/></td>
               
                <td valign="top" align="left" class="input_txt1" width="15%" id="lable_td" style="display:none;">
                <label id="document_id_full_lbl"></label><a href="#" style="text-decoration: none;" onclick="show_edit()">&nbsp;&nbsp;Change</a>            
                <br/>
                </td>          
               
-               <td valign="top" align="left" id="edit_td" class="input_txt1" width="15%"><select name="document_type_id" id="document_type_id" class="input_cmbbx1" style="width:57px;border:none;background-color:lightgrey;">
-               <option value="PM">PM</option>
-               <option value="QSP">QSP</option>
-               <option value="WI">WI</option>
-               <option value="SD">SD</option>
-               <option value="GR">GR</option>
-               <option value="SP">SP</option>
-               </select><input type="hidden" name="document_id_hidden" id="generated_id" class="input_txtbx1" style="width:200px;" value=""/><input type="text" value="" id="document_id" class="input_txtbx145" style="height:22px;background-color:lightgrey;width:50px;border:none;" name="document_id" onblur="change_to_label();"/>
+               <td valign="top" align="left" id="edit_td" class="input_txt1" width="15%">
+               <select name="document_type_id" id="document_type_id" class="input_cmbbx1" style="width:60px;border:none;background-color:lightgrey;">
+            	 <c:forEach items="${prefix}" var="prefix" varStatus="true">
+               <option value="<c:out value="${prefix}"/>"><c:out value="${prefix}"/></option>
+               </c:forEach>
+               </select>
+               <input type="text" value="" id="document_id" class="input_txtbx145" style="height:22px;background-color:lightgrey;width:50px;border:none;" name="document_id" onblur="change_to_label();"/>
                <a href="#" style="text-decoration: none;" onclick="show_userdefined()">&nbsp;&nbsp;User defined</a><br/><span class="err"></span>
                </td>
               
               <td valign="top" align="left" class="input_txt1" width="15%" id="user_defined_td" style="display:none;">
-               <input type="text" id="user_def_document_id" class="input_txtbx1" value="" style="width:150px;" onblur="show_lable();"/><a href="#" style="text-decoration: none;" onclick="hide_userdefined()">&nbsp;&nbsp;Cancel</a>           
+               <input type="text" id="user_def_document_id1" class="input_txtbx1" value="" style="width:70px;"/>-<input type="text" id="user_def_document_id2" class="input_txtbx1" value="" style="width:70px;" onblur="show_lable();"/>
+               <a href="#" style="text-decoration: none;" onclick="hide_userdefined()">&nbsp;&nbsp;Cancel</a>           
                <br/>
                </td> 
               
@@ -222,24 +222,11 @@
                
                
                </span>
-              <%--  <c:forEach items="${employeeForm.employees}" var="employees" varStatus="true">
-               <option value="<c:out value="${employees.name}"/>"><c:out value="${employees.name}"/></option>
-               </c:forEach> --%> 
-              
-                            
-             <!--   </select> -->
-               
-               
+           <a href="#" style="text-decoration: none;" onclick="show_filter()">&nbsp;&nbsp;Change</a>
                <br/><span class="err"><form:errors path="DocumentMain.issuer"></form:errors></span></td>
             
                 <td valign="middle" align="right" class="input_txt" width="20%"><span class="err">*</span>Approver 1(Process Owner):</td>
                <td valign="top" align="left" class="input_txt" width="25%">
-               <!-- <select name="approver1" id="approver1" class="input_cmbbx1" style="width:200px;">
-               <option value="">--Select--</option>
-               <option value="Apporver name1">Approver name 1</option>
-               <option value="Approver name2">Approver name 2</option>
-               <option value="Approver name3">Approver name 3</option>
-               </select>  -->
                <span id="process_owner_id"></span>
                            
                <br/><span class="err"><form:errors path="DocumentMain.approver1"></form:errors></span>
@@ -369,16 +356,17 @@ else if(value==0)
          <script>
  $(function() {
 	
-           $( "#datepicker" ).datepicker();
+           $( "#datepicker123" ).datepicker({dateFormat:"yy-mm-dd"});
          });
  
 </script>
 
 <script type="text/javascript">
 function doAjaxPost() {
-
+	document.getElementById('filter_value').style.display="none";
+	 document.getElementById("issuer_generate").style.display="inline";
 	var filer_value = $('#filter_value').val();
-	/*   var education = $('#education').val();	 */		
+	
 	$.ajax({
 		type : "POST",
 		url : "/QMS_App/ajax_getissuer",
@@ -386,6 +374,9 @@ function doAjaxPost() {
 		success : function(response) {
 			
 			$('#issuer_generate').html(response);
+			//$('#filter_value').hide();
+			
+			
 		
 		},
 		error : function(e) {
@@ -435,14 +426,15 @@ document.getElementById("lable_td").style.display="none";
 	}
 function show_lable()
 {
-	//var type=document.getElementById("document_type_id");	
-	var doc_id=document.getElementById("user_def_document_id");	
+	
+	var doc_id3=document.getElementById("user_def_document_id1");	
+	var doc_id4=document.getElementById("user_def_document_id2");
+	var gen_id1=document.getElementById("generated_id");
+	gen_id1.value=doc_id3.value+-+doc_id4.value;
 	document.getElementById("lable_td").style.display="block";
 	document.getElementById("edit_td").style.display="none";
 	document.getElementById("user_defined_td").style.display="none";
-	document.getElementById("document_id_full_lbl").innerHTML=doc_id.value;
-	var gen_id=document.getElementById("generated_id");
-	gen_id.value=type.value+-+doc_id.value;
+	document.getElementById("document_id_full_lbl").innerHTML=doc_id3.value+-+doc_id4.value;	
 	
 	} 
   function show_userdefined()
@@ -458,6 +450,12 @@ document.getElementById("lable_td").style.display="none";
   document.getElementById("lable_td").style.display="none";
   	document.getElementById("edit_td").style.display="block";
   	document.getElementById("user_defined_td").style.display="none";
+  	} 
+  function show_filter()
+  {
+  	
+  document.getElementById("filter_value").style.display="inline";
+  document.getElementById("issuer_generate").style.display="none";
   	} 
   </script>
        
