@@ -166,8 +166,8 @@
                
                 <!-- <input type="radio" name="media_type" onchange="toggle2(this.value);" value="0"   id="id_hardcopy"  checked/>Hard Copy&nbsp;&nbsp;&nbsp;<input type="radio" name="media_type" onchange="toggle2(this.value);" value="1"  id="id_electronic" onchange="toggle2(this.value);" />Electronic&nbsp;&nbsp;&nbsp;<br/><span class="err"></span> -->
                  
-                 <input type="radio" name="media_type" value="0" id="id_hardcopy" class="input_txt"   <c:if test="${form.media_type=='0'}"><c:out value="Checked=checked"/></c:if>>Yes&nbsp;&nbsp;&nbsp;
-				  <input type="radio" name="media_type" value="1" id="id_electronic" class="input_txt"  <c:if test="${form.media_type=='1'}"><c:out value="Checked=checked"/></c:if>>No&nbsp;&nbsp;&nbsp;
+                 <input type="radio" name="media_type" value="0" id="id_hardcopy" class="input_txt"   <c:if test="${form.media_type=='0'}"><c:out value="Checked=checked"/></c:if>>Hardcopy&nbsp;&nbsp;&nbsp;
+				  <input type="radio" name="media_type" value="1" id="id_electronic" class="input_txt"  <c:if test="${form.media_type=='1'}"><c:out value="Checked=checked"/></c:if>>Electronic&nbsp;&nbsp;&nbsp;
 				  
                     
                </td>
