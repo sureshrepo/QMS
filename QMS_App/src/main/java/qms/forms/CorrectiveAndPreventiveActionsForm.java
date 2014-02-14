@@ -1,12 +1,12 @@
 package qms.forms;
 
-import java.util.ArrayList;
-import java.util.List;
 
+import java.util.List;
 import qms.model.CorrectiveAndPreventiveActions;
+
 public class CorrectiveAndPreventiveActionsForm
 {
-	List<CorrectiveAndPreventiveActions> correctiveAndPreventiveActions=new ArrayList<CorrectiveAndPreventiveActions>();
+	List<CorrectiveAndPreventiveActions> correctiveAndPreventiveActions;
 
 	public List<CorrectiveAndPreventiveActions> getCorrectiveAndPreventiveActions() {
 		return correctiveAndPreventiveActions;

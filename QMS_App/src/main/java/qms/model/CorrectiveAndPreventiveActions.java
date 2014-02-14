@@ -4,42 +4,30 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 public class CorrectiveAndPreventiveActions
 {
-	private String capa_id;
-	private String nc_id;
-	private String source_of_nonconformance;
-	private String external_id;
-	private String type_of_nonconformance;
-	private String date_found;
-	private String temporary_action;
-	private String capa_requestor;
-	private String request_date;
-	private String capa_due_date;
-	@NotEmpty
-	private String assigned_team_leader;
-	private String team_members;
-	private String root_cause_analysis_file;
-	private String use_5_why_in_system;
-	private String why;
-	private String root_cause_statement;
-	private String upload_external_analysis;
-	private String action;
-	private String responsibility;
-	private String due_date;
-	private String completion_date;
-	private String verified_by;
-	private String verification_date;
-	public CorrectiveAndPreventiveActions(String capa_id,String nc_id,
-			 String capa_requestor,
-			String request_date, String capa_due_date,
+	public CorrectiveAndPreventiveActions() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public CorrectiveAndPreventiveActions(String capa_id, String nc_id,
+			String source_of_nonconformance, String external_id,
+			String type_of_nonconformance, String date_found,
+			String temporary_action, String nature_of_nc,
+			String capa_requestor, String request_date, String capa_due_date,
 			String assigned_team_leader, String team_members,
 			String root_cause_analysis_file, String use_5_why_in_system,
 			String why, String root_cause_statement,
-			String upload_external_analysis, String action,
+			String upload_external_analysis,String upload, String action,
 			String responsibility, String due_date, String completion_date,
 			String verified_by, String verification_date) {
 		super();
-		this.capa_id=capa_id;
+		this.capa_id = capa_id;
 		this.nc_id = nc_id;
+		this.source_of_nonconformance = source_of_nonconformance;
+		this.external_id = external_id;
+		this.type_of_nonconformance = type_of_nonconformance;
+		this.date_found = date_found;
+		this.temporary_action = temporary_action;
+		this.nature_of_nc = nature_of_nc;
 		this.capa_requestor = capa_requestor;
 		this.request_date = request_date;
 		this.capa_due_date = capa_due_date;
@@ -50,6 +38,7 @@ public class CorrectiveAndPreventiveActions
 		this.why = why;
 		this.root_cause_statement = root_cause_statement;
 		this.upload_external_analysis = upload_external_analysis;
+		this.upload = upload;
 		this.action = action;
 		this.responsibility = responsibility;
 		this.due_date = due_date;
@@ -57,6 +46,46 @@ public class CorrectiveAndPreventiveActions
 		this.verified_by = verified_by;
 		this.verification_date = verification_date;
 	}
+	private String capa_id;
+	private String nc_id;
+	private String source_of_nonconformance;
+	private String external_id;
+	private String type_of_nonconformance;
+	private String date_found;
+	private String temporary_action;
+	private String nature_of_nc;
+	public String getNature_of_nc() {
+		return nature_of_nc;
+	}
+	public void setNature_of_nc(String nature_of_nc) {
+		this.nature_of_nc = nature_of_nc;
+	}
+	private String capa_requestor;
+	private String request_date;
+	private String capa_due_date;
+	
+	@NotEmpty
+	private String assigned_team_leader;
+	private String team_members;
+	private String root_cause_analysis_file;
+	private String use_5_why_in_system;
+	private String why;
+	private String root_cause_statement;
+	private String upload_external_analysis;
+	private String upload;
+	public String getUpload() {
+		return upload;
+	}
+	public void setUpload(String upload) {
+		this.upload = upload;
+	}
+	private String action;
+	private String responsibility;
+	private String due_date;
+	private String completion_date;
+	private String verified_by;
+	private String verification_date;
+	
 	public String getRoot_cause_statement() {
 		return root_cause_statement;
 	}
@@ -195,10 +224,6 @@ public class CorrectiveAndPreventiveActions
 	}
 	public void setVerification_date(String verification_date) {
 		this.verification_date = verification_date;
-	}
-	public CorrectiveAndPreventiveActions() {
-		super();
-		// TODO Auto-generated constructor stub
 	}
 	
 	

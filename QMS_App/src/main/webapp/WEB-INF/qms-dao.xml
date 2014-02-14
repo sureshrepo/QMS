@@ -6,6 +6,9 @@
 	<bean id="mainDAO" class="qms.dao.MainDAO">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
+	<bean id="maintenanceDAO" class="qms.dao.MaintenanceDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
 	<bean id="nonconformanceDAO" class="qms.dao.NonConformanceDAO">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
@@ -38,9 +41,7 @@
 	<bean id="internalauditsDAO" class="qms.dao.InternalAuditsDAO">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
-	<bean id="maintenanceDAO" class="qms.dao.MaintenanceDAO">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
+	
 	
 	<bean id="supplierPerformanceDAO" class="qms.dao.SupplierPerformanceDAO">
 		<property name="dataSource" ref="dataSource" />

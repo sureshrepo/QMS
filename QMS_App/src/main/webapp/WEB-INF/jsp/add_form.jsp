@@ -5,7 +5,14 @@
 <link rel="stylesheet" href="resources/css/jquery-ui.css" type="text/css" />
 <script src="resources/js/jquery.min.js"></script>
  <script src="resources/js/jquery-ui.js"></script>
-	<script src="/QMS_App/resources/js/jquery.js"></script>
+	
+	  <script>
+ $(function() {
+	
+           $( "#datepicker123" ).datepicker({dateFormat:"yy-mm-dd"});
+         });
+ 
+</script>
 	<form method="post" enctype="multipart/form-data" action="addform">
 
  
@@ -233,10 +240,8 @@
 																		              <td valign="middle" align="left" class="input_txt"><span
 																			class="err">*</span>Effective Date :</td>
 																		<td valign="top" align="left" class="input_txt"><input
-																			type="text" class="input_txtbx1" id="datepicker"
-																			onmouseover="showTooltip('tooltip_id','inp_id3');"
-																			onmouseout="hideTooltip('tooltip_id');"
-																			name="effective_date"
+																			type="text" class="input_txtbx1" id="datepicker123"
+																				name="effective_date"
 																			value="${docform.effective_date}" /><br/><span class="err"><form:errors path="Form.effective_date"></form:errors></span>
 																		</td>  
 																		<td valign="top" align="left" class="input_txt">																	
@@ -317,12 +322,7 @@
             </div>
             </form>
            
-        <script>
- $(function() {
-           $( "#datepicker" ).datepicker();
-         });
- 
-</script>      
+        
        
        <script type="text/javascript">
 function toggle2(value){
@@ -408,5 +408,7 @@ document.getElementById("lable_td").style.display="none";
   
 
   </script>
+    
+  
       <jsp:include page="footer.jsp"></jsp:include>
        

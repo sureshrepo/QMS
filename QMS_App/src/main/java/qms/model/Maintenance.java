@@ -15,7 +15,7 @@ import org.springframework.format.annotation.NumberFormat.Style;
 public class Maintenance
 {
 	
-	private String auto_equip;
+	
 	
 	@NotEmpty
 	private String equipment_id;
@@ -57,7 +57,7 @@ public class Maintenance
 		// TODO Auto-generated constructor stub
 	}
 
-	public Maintenance(String auto_equip,String equipment_id, String equipment_name,
+	public Maintenance(String equipment_id, String equipment_name,
 			String equipment_model, String serial_number, String date_acquired,
 			String equipment_status, String frequency_maintenance,
 			String calibration, String equipmentid, String type_of_maintenance,
@@ -65,7 +65,6 @@ public class Maintenance
 			String instructions, String due_date, String completion_date,
 			String completed_by, String notes) {
 		super();
-		this.auto_equip=auto_equip;
 		this.equipment_id = equipment_id;
 		this.equipment_name = equipment_name;
 		this.equipment_model = equipment_model;
@@ -86,13 +85,7 @@ public class Maintenance
 	}
 
 	
-	public String getAuto_equip() {
-		return auto_equip;
-	}
 
-	public void setAuto_equip(String auto_equip) {
-		this.auto_equip = auto_equip;
-	}
 
 	public String getEquipment_id() {
 		return equipment_id;

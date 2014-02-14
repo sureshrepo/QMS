@@ -206,6 +206,9 @@ public class DocumentController {
 		System.out.println("Started Inserting documents");
 		session.setAttribute("documentMain",documentMain);
 		// Started to handle upload document
+		
+		
+		
 		if(result.hasErrors())
 		{
 			load_document_page_dropdowns(model);
@@ -213,6 +216,10 @@ public class DocumentController {
 		}
 		else
 		{
+			if(documentMain.getMedia_type().equals("1"))
+			{
+				documentMain.setLocation("Nil");
+			}
 		byte[] buffer;
 		try {
 			MultipartFile file = documentMain.getAttachments();
@@ -227,13 +234,13 @@ public class DocumentController {
 						System.out.println("File Size:::" + file.getSize());
 						return "/add_document";
 					}
-					orginal_fileName = "D:/Projects/Upload/DocumentControl/"
+					orginal_fileName = "/usr/share/tomcat6/temp/Upload/Document"
 							+ file.getOriginalFilename();
 					duplicate_fileName = orginal_fileName;
 					File create_file = new File(orginal_fileName);
 					int i = 1;
 					while (create_file.exists()) {
-						duplicate_fileName = "D:/Projects/Upload/DocumentControl/"
+						duplicate_fileName = "/usr/share/tomcat6/temp/Upload/Document"
 								+ file.getOriginalFilename().substring(
 										0,
 										file.getOriginalFilename().lastIndexOf(

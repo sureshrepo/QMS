@@ -94,7 +94,7 @@
 							    <td align="left" valign="middle" width="8%">&nbsp;&nbsp;Process:</td>
 							    <td align="left" valign="middle" width="10%"><input type="text" name="search_process" id="search_process" class="input_txtbx1"></td>
 							    <td align="center" valign="middle" width="38%"><input type="submit" value="Find" class="submit_btn"  onclick="findpart()"></td>
-							    <td align="center" valign="middle" width="38%"><a class="submit_btn" style="color:white;" href="viewdocuments">Clear</a></td>
+							    <td align="center" valign="middle" width="38%"><input type="button" value="Clear" class="submit_btn"></td>
 							  </tr>
 							</table>
 							

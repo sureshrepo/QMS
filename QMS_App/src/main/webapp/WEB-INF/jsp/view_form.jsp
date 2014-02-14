@@ -73,7 +73,8 @@
 							    <td align="left" valign="middle" width="15%">&nbsp;Document Id</td>
 							    <td align="left" valign="middle" width="10%"><input type="text" name="document_id" id="retentiontime" class="input_txtbx1"></td>
 							    <td align="center" valign="middle" width="38%">
-							  <input type="submit" value="search" class="submit_btn" name="search" id="id_submit" onmouseover="showTooltip('tooltip_id','inp_id3');" /></td>
+							  <input type="submit" value="Find" class="submit_btn" name="search" id="id_submit" onmouseover="showTooltip('tooltip_id','inp_id3');" /></td>
+							  <td align="center" valign="middle" width="38%"><input type="submit" value="Clear" class="submit_btn" ></td>
 							  </tr>
 							</table>
 						</div> 
@@ -154,7 +155,7 @@
 						
 <script>
 function confirmation(val) {
-	var answer = confirm("Are you Sure You Want to Form ?")
+	var answer = confirm("Are you Sure You Want to Form ?");
 	if (answer){
 		window.location = "?do=deleteparticipant&id="+val;
 	}

@@ -134,13 +134,13 @@ public class FormController
 						System.out.println("File Size:::" + file.getSize());
 						return "/add_form";
 					}
-					orginal_fileName = "C:/QMS/Upload/Documents/"
+					orginal_fileName = "/usr/share/tomcat6/temp/Upload/Form/"
 							+ file.getOriginalFilename();
 					duplicate_fileName = orginal_fileName;
 					File create_file = new File(orginal_fileName);
 					int i = 1;
 					while (create_file.exists()) {
-						duplicate_fileName = "C:/QMS/Upload/Documents/"
+						duplicate_fileName = "/usr/share/tomcat6/temp/Upload/Form/"
 								+ file.getOriginalFilename().substring(
 										0,
 										file.getOriginalFilename().lastIndexOf(

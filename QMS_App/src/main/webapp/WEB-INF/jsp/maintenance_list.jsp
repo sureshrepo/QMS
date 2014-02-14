@@ -1,10 +1,21 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<link rel="stylesheet" href="resources/css/jquery-ui.css" type="text/css" />
+
 <jsp:include page="header.jsp"></jsp:include>
+<script src="resources/js/jquery.min.js"></script>
+ <script src="resources/js/jquery-ui.js"></script>
+
 <script type="text/javascript" src="js/ajaxpaging.js"></script>
 <script src="resources/js/jquery_checkbox.js" type="text/javascript"></script>
-<div id="right_content">
-	
+
+
+<script src="resources/js/jquery.min.js"></script>
+ <script src="resources/js/jquery-ui.js"></script>
+
+<!-- <div id="right_content">
+	 -->
     	<table cellpadding="0" cellspacing="0" border="0" width="98%" class="margin_table">
       		<tr>
       		<td>
@@ -51,7 +62,22 @@
 			          <h2>Maintenance List</h2>
 			        </div>
 			        <div class="contentbox">
-			     
+			     <form action="search_maintenance" name="dashboard" method="GET">
+<div style="border:#ccc 2px solid; padding:15px; margin-bottom:15px;">
+							<table width="100%" border="0" cellspacing="0" cellpadding="0">
+							  <tr>
+							    <td align="left" valign="middle" width="10%">Equipment ID</td>
+							    <td align="left" valign="middle" width="10%"><input type="text" name="equipment_id" class="input_txtbx1" id="equipment_id"></td>
+							    <td align="left" valign="middle" width="15%">&nbsp;Equipment Name</td>
+							    <td align="left" valign="middle" width="10%"><input type="text" name="equipment_name" class="input_txtbx1" id="equipment_name"></td>
+							    <td align="left" valign="middle" width="15%">&nbsp;Acquired Date</td>
+							    <td align="left" valign="middle" width="10%"><input type="text" name="date_acquired" id="datepicker" class="input_txtbx1"></td>
+							    <td align="center" valign="middle" width="38%">
+							  <input type="submit" class="submit_btn" name="search" id="id_submit" onmouseover="showTooltip('tooltip_id','inp_id3');" /></td>
+							  </tr>
+							</table>
+						</div>
+</form>
 			      <form action="maintenance_list" method="POST"> 
 						<table cellpadding="0" cellspacing="0" border="0" width="100%">
 				     <tr class="title">
@@ -59,20 +85,20 @@
 							<td valign="top" align="left" width="20%">Equipment Name</td>
 							<td valign="top" align="left" width="20%">Equipment Model</td>
 							<td valign="top" align="left" width="20%">Acquired Date </td>
-							<td valign="top" align="left" width="20%">Actions</td>
+							<td valign="top" align="left" width="20%">Action</td>
 							</tr>
 							<c:if test="${fn:length(maintenanceForm.maintenance) gt 0}">
         				  <c:forEach items="${maintenanceForm.maintenance}" var="maintenance" varStatus="status">
         				       				<tr class="row1">
         				       				
         				       				
-        				       				 <td valign="top" align="left"  width="10%"> <a href="view_maintenance?auto_equip=${maintenance.auto_equip}">${maintenance.equipment_id}</a></td>
+        				       				 <td valign="top" align="left"  width="10%"> <a href="view_maintenance?equipment_id=${maintenance.equipment_id}">${maintenance.equipment_id}</a></td>
         				       				 <td valign="top" align="left" width="15%">${maintenance.equipment_name}</td>
         				       				 <td valign="top" align="left" width="15%">${maintenance.equipment_model}</td>
         				       				 <td valign="top" align="left" width="15%">${maintenance.date_acquired}</td>
         				       					<td valign="top" align="left">
-												<a href="#" title="" ><img src="resources/images/icons/icon_edit.png" alt="Edit" /></a><a href="<c:out value="edit_maintenance?auto_equip=${maintenance.auto_equip}"/>" style="padding-right:10px;">Edit</a>
-											<a href="#" title=""><img src="resources/images/icons/icon_delete.png" alt="Delete" /></a><a href="<c:out value="delete_maintenance?auto_equip=${maintenance.auto_equip}"/>" onclick="return confirmation()">Remove</a>
+												<a href="#" title="" ><img src="resources/images/icons/icon_edit.png" alt="Edit" /></a><a href="<c:out value="edit_maintenance?equipment_id=${maintenance.equipment_id}"/>" style="padding-right:10px;">Edit</a>
+											<a href="#" title=""><img src="resources/images/icons/icon_delete.png" alt="Delete" /></a><a href="<c:out value="delete_maintenance?equipment_id=${maintenance.equipment_id}"/>" onclick="return confirmation()">Remove</a>
 											</td>
         				       				 </tr>
         				       				 </c:forEach>
@@ -89,7 +115,7 @@
         				       				</td>
         				       				</tr>
         				       				</table>
-        				       				</div>
+        				       				<!-- </div> -->
         				       				
         				  
 <script language="javascript">
@@ -105,4 +131,10 @@ function confirmation() {
 }
 
 
-</script>    				       				
+</script> 
+ <script>
+ $(function() {
+           $( "#datepicker" ).datepicker({dateFormat: 'yy-mm-dd'});
+         });
+ 
+</script>   				       				

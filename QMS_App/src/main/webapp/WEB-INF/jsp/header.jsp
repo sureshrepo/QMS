@@ -124,27 +124,27 @@
 						<!-- <ul class="menu"> -->
 						<div>
 						  <ul class="menu">
-						  <li>
+						  <li >
 								<a href="welcome" class="<c:choose>
 								<c:when test="${menu=='dashboard'}">select</c:when><c:otherwise>unselect</c:otherwise></c:choose>">
 									<span><img src="<c:url value="/resources/images/icon_01.png" />" alt="" style="padding:5px 5px 0 0;" />Dashboard</span>
 								</a>
 							</li>
-							<hr width="100%"/>
+							<hr width="95%"/>
 							<li>
 								<a href="add_maintenance" class="<c:choose>
 								<c:when test="${menu=='maintenance'}">select</c:when><c:otherwise>unselect</c:otherwise></c:choose>">
 									<span><img src="<c:url value="/resources/images/icon_07.png" />" alt="" style="padding:5px 5px 0 0;" />Maintenance & Calibration</span>
 								</a>
 							</li>
-				            <hr width="100%"/>
+				            <hr width="95%"/>
 				            <li>
 								<a href="add_nonconformance" class="<c:choose>
 								<c:when test="${menu=='nonconformance'}">select</c:when><c:otherwise>unselect</c:otherwise></c:choose>">
 									<span><img src="<c:url value="/resources/images/icon_03.png" />" alt="" style="padding:5px 5px 0 0;" />Non Conformance</span>
 								</a>
 							</li>
-				            <hr width="100%"/>
+				            <hr width="95%"/>
 				             <li>
 								<a href="addcustomer" class="<c:choose>
 								<c:when test="${menu=='customer'}">select</c:when><c:otherwise>unselect</c:otherwise></c:choose>">
@@ -152,14 +152,14 @@
 								</a>
 							</li>
 				           
-				            <hr width="100%"/>
+				            <hr width="95%"/>
 				             <li>
 								<a href="addemployee" class="<c:choose>
 								<c:when test="${menu=='employee'}">select</c:when><c:otherwise>unselect</c:otherwise></c:choose>">
 									<span><img src="<c:url value="/resources/images/emploee.png" />" alt="" style="padding:5px 5px 0 0;" />Employees</span>
 								</a>
 							</li>
-				            <hr width="100%"/>
+				            <hr width="95%"/>
 				            <li>
 								<a href="adddocument" class="<c:choose>
 								<c:when test="${menu=='document'}">select</c:when><c:otherwise>unselect</c:otherwise></c:choose>">
@@ -167,26 +167,26 @@
 								</a>
 							</li>
 				           
-				            <hr width="100%"/>
+				            <hr width="95%"/>
 				            <li>
 								<a href="addinternalaudits" class="<c:choose>
 								<c:when test="${menu=='audits'}">select</c:when><c:otherwise>unselect</c:otherwise></c:choose>">
-									<span><img src="<c:url value="/resources/images/document.png" />" alt="" style="padding:5px 5px 0 0;" />Internal Audits</span>
+									<span><img style="width:20px;height:20px;margin-top:2px;m" src="<c:url value="/resources/images/audit_black.png" />" alt=""  />Internal Audits</span>
 								</a>
 							</li>
 				           
-				              <hr width="100%"/>
+				              <hr width="95%"/>
 				              <li>
 								<a href="view_correctiveactions" class="<c:choose>
 								<c:when test="${menu=='corrective'}">select</c:when><c:otherwise>unselect</c:otherwise></c:choose>">
-									<span><img src="<c:url value="/resources/images/document.png" />" alt="" style="padding:5px 5px 0 0;" />Corrective And Preventive Actions</span>
+									<span><img src="<c:url value="/resources/images/corrective.png" />" alt="" style="padding:5px 5px 0 0;" />Corrective And Preventive Actions</span>
 								</a>
 							</li>
-				            <hr width="100%"/>
+				            <hr width="95%"/>
 				            <li>
 								<a href="add_supplierperformance" class="<c:choose>
 								<c:when test="${menu=='supplier'}">select</c:when><c:otherwise>unselect</c:otherwise></c:choose>">
-									<span><img src="<c:url value="/resources/images/document.png" />" alt="" style="padding:5px 5px 0 0;" />Supplier Performance</span>
+									<span><img src="<c:url value="/resources/images/suplier.png" />" alt="" style="padding:5px 5px 0 0;" />Supplier Performance</span>
 								</a>
 							</li>
 				            

@@ -17,23 +17,27 @@
 <body onload='document.f.j_username.focus();'>
 	<h3>Login with Username and Password (Custom Page)</h3>
 
-	<c:if test="${not empty error}">
-		<div class="errorblock">
+	
+
+	<form name='f' action="<c:url value='j_spring_security_check' />" method='POST'>
+		<div id="login_div">
+		  <div class="login-top">
+		 
+		  
+		  </div>
+		  <div class="login-center">
+		  <ul class="login-list">
+		  <li  style="background-color:#FFFFD6;"><h3 style="font-family:verdana;background-color:gainsboro;padding:10px;font-weight:bolder;text-align:center;border:solid 1px brown;"><font color="#993300">QMS LOGIN</font></h3>
+		  </li>
+		  </ul>
+		   <c:if test="${not empty error}">
+		<div style="color:red;text-align:center;">
 			Your login attempt was not successful, try again.<br /> Caused :
 			${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}
 			${blank.message}
 		</div><br/>
 		
 	</c:if>
-
-	<form name='f' action="<c:url value='j_spring_security_check' />" method='POST'>
-		<div id="login_div">
-		  <div class="login-top"></div>
-		  <div class="login-center">
-		  <ul class="login-list">
-		  <li  style="background-color:#FFFFD6;"><h3 style="font-family:verdana;font-size:100px;text-align:center;"><font color="#993300">QMS LOGIN</font></h3>
-		  </li>
-		  </ul>
 		    <ul class="login-list">
 		   <li>
 <BR/>
@@ -42,8 +46,8 @@
 		      </li>
 		      
 		      <li> 
-		      <table cellpadding="0" cellspacing="0" border="0" width="200"%>
-		       <td valign="top" align="center"> <input type="text" class="inputbx1" name="j_username" value=''>
+		      <table cellpadding="0" cellspacing="0" border="0" width="300"%>
+		       <td valign="top" align="center"> <input type="text" class="inputbx1" style="border:solid 1px brown;" name="j_username" value=''>
 				<p><font color="#993300"></font></p></td>
 		      </table>
 		      </li>
@@ -51,30 +55,30 @@
 		        <p><font color="#993300">Enter Your Password</font></p>
 		      </li>
 		      <li>
-		      <table cellpadding="0" cellspacing="0" border="0" width="200">
-		      <td valign="top" align="center"><input type="password" class="inputbx1" name="j_password">
+		      <table cellpadding="0" cellspacing="0" border="0" width="300">
+		      <td valign="top" align="center"><input type="password"  class="inputbx1" style="border:solid 1px brown;" name="j_password">
 					
 		      </td>
 		      </table>
 		      </li>
 		      <li>
-		      <table cellpadding="0" cellspacing="0" border="0" width="200">
+		      <table cellpadding="0" cellspacing="0" border="0" width="300">
 		      <td valign="top" align="center">
 		      <a href="#">
-		        <input type="submit" class="submit_btn" value="submit" name="submit">
+		        <input type="submit" value="Submit" style="width:100px;height:30px;" name="submit">
 		        </a></td></table></li>
 		      
 		      
 		      <li>
-		      <table cellpadding="0" cellspacing="0" border="0" width="200">
+		      <table cellpadding="0" cellspacing="0" border="0" width="300">
 		      <td valign="top" align="center">
-		      <a href="forgot-password"><font color="#993300">forgot-password</font></a></li>
+		      <a href="forgot-password"><font color="#993300">Forgot Password</font></a></li>
 		      </td>
 		      </table>
 		    
 		    <li>
-		    <table cellpadding="0" cellspacing="0" border="0" width="200">
-		    <td valign="top" align="center"><input type="reset" align="left" name="reset" width="150" ></td></table></li>
+		    <table cellpadding="0" cellspacing="0" border="0" width="300">
+		    <td valign="top" align="center"><input type="reset" align="left" name="reset" style="width:75px;height:25px;" ></td></table></li>
 		    		
 		      <li>
 		      <table cellpadding="0" cellspacing="0" width="100%">

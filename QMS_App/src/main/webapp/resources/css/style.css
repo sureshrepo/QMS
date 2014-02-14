@@ -29,19 +29,19 @@ ul, li {
 	list-style:none;
 }
 #login_div {
-	width:200px;
+	width:300px;
 	margin:100px auto auto auto;
 }
 .login-top {
 /*	background:url(../images/max-properties.gif) no-repeat;*/
-	width:200px;
+	width:300px;
 	height:63px;
 	display:block;
 }
 .login-center {
 	/*background:#000 url(../images/login-c.gif) repeat-x;*/
 	background-color:#FFFFD6;
-	width:200px;
+	width:300px;
 	padding:20px;
 	color:#fff;
 }
@@ -505,62 +505,135 @@ ul.pagination li.page a:hover {
 	display:block;
 	cursor:pointer;
 	display:block;
-	border:0;
+	border:solid 1px brown;
 	outline:none;
 	margin:0 0 0 40px;
+	color:brown;
 }
-.submit-btn {
+
+.submit-button.hover{
 	background:url(../images/submit-btn.gif) no-repeat;
-	width:260px;
+	width:200px;
 	height:56px;
 	display:block;
 	cursor:pointer;
 	display:block;
-	border:0;
+	border:solid 1px brown;
+	outline:none;
+	margin:0 0 0 40px;
+	color:white;
+}
+
+
+
+.submit-btn {
+	/* background:url(../images/submit-btn.gif) no-repeat;
+	 */width:260px;
+	height:56px;
+	display:block;
+	cursor:pointer;
+	display:block;
+	color:brown;
+	color:brown;
+	border:solid 1px brown;
 	outline:none;
 	margin:0 0 0 40px;
 }
 .submit_btn {
-	background:url(../images/login_btn.png) 0 0 no-repeat;
-	width:78px;
+	/* background:url(../images/login_btn.png) 0 0 no-repeat;
+	 */width:78px;
 	height:30px;
 	line-height:30px;
 	text-align:center;
-	color:#fff;
+	/* color:#fff; */
+	color:brown;
 	font-weight:bold;
 	font-size:14px;
 	cursor:pointer;
 	display:block;
-	border:0;
+	border:solid 1px brown;
 	outline:none;
-	text-shadow:1px 1px 1px #555;
+	/* text-shadow:1px 1px 1px #555; */
+}
+.submit_btn:hover {
+	/* background:url(../images/login_btn.png) 0 0 no-repeat;
+	 */width:78px;
+	height:30px;
+	line-height:30px;
+	text-align:center;
+	/* color:#fff; */
+	color:white;
+	font-weight:bold;
+	font-size:14px;
+	cursor:pointer;
+	display:block;
+	border:solid 1px brown;
+	outline:none;
+	background-color:brown;
+	/* text-shadow:1px 1px 1px #555; */
 }
 .submit_btn1 {
-	background:url(../images/login_btn1.png) 0 0 no-repeat;
-	width:125px;
+	/* background:url(../images/login_btn1.png) 0 0 no-repeat;
+	 */width:125px;
 	height:30px;
 	line-height:30px;
 	text-align:center;
-	color:#d8ebff;
-	font-weight:bold;
+	/* color:#d8ebff;
+	 */
+	 color:brown;
+	 font-weight:bold;
 	font-size:14px;
 	cursor:pointer;
 	display:block;
-	border:0;
+	border:solid 1px brown;
+	outline:none;
+}
+.submit_btn1:hover {
+	/* background:url(../images/login_btn1.png) 0 0 no-repeat;
+	 */width:125px;
+	height:30px;
+	line-height:30px;
+	text-align:center;
+	/* color:#d8ebff;
+	 */
+	 background-color:brown;
+	 color:white;
+	 font-weight:bold;
+	font-size:14px;
+	cursor:pointer;
+	display:block;
+	border:solid 1px brown;
 	outline:none;
 }
 .submit_btn2 {
-	background:url(../images/login_btn2.png) 0 0 no-repeat;
-	width:175px;
+/* 	background:url(../images/login_btn2.png) 0 0 no-repeat;
+ */	width:175px;
 	height:30px;
 	line-height:30px;
 	text-align:center;
-	color:#d8ebff;
+/* 	color:#d8ebff;
+ */	 color:brown;
 	font-weight:bold;
 	font-size:14px;
 	cursor:pointer;
 	display:block;
-	border:0;
+	border:solid 1px brown;
+	outline:none;
+}
+.submit_btn2:hover {
+/* 	background:url(../images/login_btn2.png) 0 0 no-repeat;
+ */	width:175px;
+	height:30px;
+	line-height:30px;
+	text-align:center;
+/* 	color:#d8ebff;
+ */	 color:white;
+ background-color:brown;
+	font-weight:bold;
+	font-size:14px;
+	cursor:pointer;
+	display:block;
+	border:solid 1px brown;
 	outline:none;
 }
 .input_txt .chk_bx {

@@ -410,7 +410,7 @@ public class NonConformanceDAO extends AbstractExcelView {
 			resultSet = statement.executeQuery(cmd_select);
 			while (resultSet.next()) {
 				System.out.println("correct");
-				correctiveAndPreventiveActions.add(new CorrectiveAndPreventiveActions (resultSet
+				/*correctiveAndPreventiveActions.add(new CorrectiveAndPreventiveActions (resultSet
 						.getString("capa_id"),resultSet
 						.getString("nc_id"), resultSet
 						.getString("capa_requestor"), resultSet
@@ -428,7 +428,7 @@ public class NonConformanceDAO extends AbstractExcelView {
 						.getString("due_date"),resultSet
 						.getString("completion_date"),resultSet
 						.getString("verified_by"),
-						resultSet.getString("verification_date")));
+						resultSet.getString("verification_date")));*/
 
 			}
 
@@ -463,7 +463,7 @@ public class NonConformanceDAO extends AbstractExcelView {
 			resultSet = statement.executeQuery(cmd_select);
 			while (resultSet.next()) {
 				System.out.println("came");
-				correctiveAndPreventiveActions.add(new CorrectiveAndPreventiveActions (resultSet
+				/*correctiveAndPreventiveActions.add(new CorrectiveAndPreventiveActions (resultSet
 						.getString("capa_id"),resultSet
 						.getString("nc_id"), resultSet
 						.getString("capa_requestor"), resultSet
@@ -481,7 +481,7 @@ public class NonConformanceDAO extends AbstractExcelView {
 						.getString("due_date"),resultSet
 						.getString("completion_date"),resultSet
 						.getString("verified_by"),
-						resultSet.getString("verification_date")));
+						resultSet.getString("verification_date")));*/
 
 			}
 
