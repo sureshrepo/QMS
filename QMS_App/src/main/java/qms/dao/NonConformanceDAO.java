@@ -12,19 +12,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
+import org.apache.poi.hssf.usermodel.HSSFFont;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.hssf.util.HSSFColor;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.Font;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.servlet.view.document.AbstractExcelView;
-
-import qms.model.InternalAudits;
 import qms.model.NonConformance;
 import qms.model.CorrectiveAndPreventiveActions;
 
 public class NonConformanceDAO extends AbstractExcelView {
 	private DataSource dataSource;
 
+	 
 	/**
 	 * Excel Sheet Generation
 	 */
@@ -33,38 +36,249 @@ public class NonConformanceDAO extends AbstractExcelView {
 	protected void buildExcelDocument(Map model, HSSFWorkbook workbook,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-
-		HSSFSheet excelSheet = workbook.createSheet("Animal List");
-		setExcelHeader(excelSheet);
 		
+
+		HSSFSheet excelSheet = workbook.createSheet("NonConformance Report");
+		excelSheet.setDefaultColumnWidth(20);
+		  
+		//Style 1
+		CellStyle style = workbook.createCellStyle();
+	        Font font = workbook.createFont();
+	        font.setFontName("Arial");
+	        style.setFillForegroundColor(HSSFColor.BROWN.index);
+	        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
+	        style.setWrapText(true);
+	        font.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
+	        font.setColor(HSSFColor.WHITE.index);
+	        style.setFont(font);
+		
+	    //Style2
+	        CellStyle style2 = workbook.createCellStyle();
+	        Font font2 = workbook.createFont();
+	        font2.setFontName("Arial");
+	        style2.setFillForegroundColor(HSSFColor.YELLOW.index);
+	        style2.setFillPattern(CellStyle.SOLID_FOREGROUND);
+	        style2.setWrapText(true);
+	        font2.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
+	        font2.setColor(HSSFColor.WHITE.index);
+	        style2.setFont(font2); 
+	        System.out.println("came inside report");
+
+		@SuppressWarnings("unchecked")
 		List<NonConformance> nonConformances = (List<NonConformance>) model.get("nonConformances");
-		setExcelRows(excelSheet,nonConformances);
+		String[] fields=(String[])model.get("fields");
+		
+		//System.out.println("came inside report");
+        setExcelHeader(excelSheet,style,fields);
+		
+		setExcelRows(excelSheet,nonConformances,fields,style2);
 		
 	}
 	
 	
-	public void setExcelHeader(HSSFSheet excelSheet) {
-		HSSFRow excelHeader = excelSheet.createRow(0);
-		excelHeader.createCell(0).setCellValue("Id");
-		excelHeader.createCell(1).setCellValue("Name");
-		excelHeader.createCell(2).setCellValue("Type");
-		excelHeader.createCell(3).setCellValue("Aggressive");
-		excelHeader.createCell(4).setCellValue("Weight");
+	public DataSource getDataSource() {
+		return dataSource;
+	}
+
+	//creating header records
+	public void setExcelHeader(HSSFSheet excelSheet,CellStyle style,String[] fields) {
+		HSSFRow excelHeader = excelSheet.createRow(0);	
+	//	String[] fields={"document_id","document_title","document_type","media_type","location","process","external","issuer","revision_level","date","approver1","approver2","approver3","status","comments"};
+		int i=0;
+		for (String field : fields) {
+			
+			if(field.equals("id"))
+			{
+				excelHeader.createCell(i).setCellValue("ID");
+				excelHeader.getCell(i).setCellStyle(style);
+				i++;
+			}
+			else if(field.equals("source_of_nonconformance"))
+			{
+				excelHeader.createCell(i).setCellValue("Source Of NonConformance");
+				excelHeader.getCell(i).setCellStyle(style);
+				i++;
+			}
+			else if(field.equals("external_id"))
+			{
+				excelHeader.createCell(i).setCellValue("External Id");
+				excelHeader.getCell(i).setCellStyle(style);
+				i++;
+			}
+			else if(field.equals("type_of_nonconformance"))
+			{
+				excelHeader.createCell(i).setCellValue("Type of NonConformance");
+				excelHeader.getCell(i).setCellStyle(style);
+				i++;
+			}
+			else if(field.equals("product_id"))
+			{
+				excelHeader.createCell(i).setCellValue("Product Id");
+				excelHeader.getCell(i).setCellStyle(style);
+				i++;
+			}
+			else if(field.equals("quantity_suspect"))
+			{
+				excelHeader.createCell(i).setCellValue("Quantity Suspect");
+				excelHeader.getCell(i).setCellStyle(style);
+				i++;
+			}
+			else if(field.equals("nature_of_nonconformance"))	
+			{
+				excelHeader.createCell(i).setCellValue("Nature of NonConformance");
+				excelHeader.getCell(i).setCellStyle(style);
+				i++;
+			}else if(field.equals("date_found"))	
+			{
+				excelHeader.createCell(i).setCellValue("Date Found");
+				excelHeader.getCell(i).setCellStyle(style);
+				i++;
+			}else if(field.equals("reported_by"))	
+			{
+				excelHeader.createCell(i).setCellValue("Reported By");
+				excelHeader.getCell(i).setCellStyle(style);
+				i++;
+			}else if(field.equals("temporary_action"))
+			{
+				excelHeader.createCell(i).setCellValue("Temporary Action");
+				excelHeader.getCell(i).setCellStyle(style);
+				i++;
+			}else if(field.equals("corrective_action_required"))	
+			{
+				excelHeader.createCell(i).setCellValue("Corrective Action Required");
+				excelHeader.getCell(i).setCellStyle(style);
+				i++;
+			}else if(field.equals("disposition_required"))	
+			{
+				excelHeader.createCell(i).setCellValue("Disposition Required");
+				excelHeader.getCell(i).setCellStyle(style);
+				i++;
+			}else if(field.equals("disposition"))	
+			{
+				excelHeader.createCell(i).setCellValue("Disposition");
+				excelHeader.getCell(i).setCellStyle(style);
+				i++;
+			}else if(field.equals("disposition_complete_date"))	
+			{
+				excelHeader.createCell(i).setCellValue("Disposition Complete Date");
+				excelHeader.getCell(i).setCellStyle(style);
+				i++;
+			}else if(field.equals("name_of_disposition_responsibility"))	
+			{
+				excelHeader.createCell(i).setCellValue("Name of Disposition Responsibility");
+				excelHeader.getCell(i).setCellStyle(style);
+				i++;
+			}else if(field.equals("cost_of_nonconformance"))	
+			{
+				excelHeader.createCell(i).setCellValue("Cost of NonConformance");
+				excelHeader.getCell(i).setCellStyle(style);
+				i++;
+			}
+		}
+	
 	}
 	
 	
 	//End
 	
 	
-	public void setExcelRows(HSSFSheet excelSheet, List<NonConformance> nonConformances){
+	//creating cell records
+	public void setExcelRows(HSSFSheet excelSheet, List<NonConformance> nonConformances,String[] fields,CellStyle style2){
 		int record = 1;
-		for (NonConformance nonConformance:nonConformances) {
+		int i=0;
+		for (NonConformance nonConformance:nonConformances){	
 			HSSFRow excelRow = excelSheet.createRow(record++);
-			excelRow.createCell(0).setCellValue(nonConformance.getExternal_id());
-			excelRow.createCell(1).setCellValue(nonConformance.getName_of_disposition_responsibility());
-			excelRow.createCell(2).setCellValue(nonConformance.getDisposition());
-			excelRow.createCell(3).setCellValue(nonConformance.getNature_of_nonconformance());
-			excelRow.createCell(4).setCellValue(nonConformance.getProduct_id());
+	//		excelRow.setRowStyle((HSSFCellStyle) style2);
+		i=0;
+				for (String field : fields) {
+					
+					if(field.equals("id"))
+					{
+						excelRow.createCell(i).setCellValue(
+								nonConformance.getId());
+							i++;
+					}
+					else if(field.equals("source_of_nonconformance"))
+					{
+						excelRow.createCell(i).setCellValue(
+								nonConformance.getSource_of_nonconformance());
+
+						i++;
+					}
+					else if(field.equals("external_id"))
+					{
+						excelRow.createCell(i).setCellValue(
+								nonConformance.getSource_of_nonconformance());
+								i++;
+					}
+					else if(field.equals("type_of_nonconformance"))	
+					{
+						excelRow.createCell(i).setCellValue(
+								nonConformance.getType_of_nonconformance());
+						i++;
+					}else if(field.equals("product_id"))	
+					{
+						excelRow.createCell(i).setCellValue(
+								nonConformance.getProduct_id());
+						i++;
+					}else if(field.equals("quantity_suspect"))	
+					{
+						excelRow.createCell(i).setCellValue(
+								nonConformance.getQuantity_suspect());
+						i++;
+					}else if(field.equals("nature_of_nonconformance"))
+					{
+						excelRow.createCell(i).setCellValue(
+								nonConformance.getNature_of_nonconformance());
+					}else if(field.equals("date_found"))	
+					{
+						excelRow.createCell(i).setCellValue(
+								nonConformance.getDate_found());
+						i++;
+					}else if(field.equals("reported_by"))	
+					{
+						excelRow.createCell(i).setCellValue(
+								nonConformance.getReported_by());
+						i++;
+					}else if(field.equals("temporary_action"))	
+					{
+						excelRow.createCell(i).setCellValue(
+								nonConformance.getTemporary_action());
+						i++;
+					}else if(field.equals("corrective_action_required"))	
+					{
+						if(nonConformance.getCorrective_action_required().equals("1"))
+							excelRow.createCell(i).setCellValue("Yes");
+							else
+								excelRow.createCell(i).setCellValue("No");
+							i++;
+					
+					}else if(field.equals("disposition_required"))	
+					{
+						if(nonConformance.getDisposition_required().equals("1"))
+						excelRow.createCell(i).setCellValue("Yes");
+					else
+						excelRow.createCell(i).setCellValue("No");
+					i++;
+					}else if(field.equals("disposition"))	
+					{
+						excelRow.createCell(i).setCellValue(
+								nonConformance.getDisposition());
+						i++;
+					}else if(field.equals("disposition_complete_date"))	
+					{
+						excelRow.createCell(i).setCellValue(
+								nonConformance.getDisposition_complete_date());
+						i++;
+					}else if(field.equals("name_of_disposition_responsibility"))	
+					{
+						excelRow.createCell(i).setCellValue(
+								nonConformance.getName_of_disposition_responsibility());
+						i++;
+					}
+					
+				}
+				
 		}
 	}
 	
@@ -283,7 +497,7 @@ public class NonConformanceDAO extends AbstractExcelView {
 	}
 
 	
-	public List<NonConformance> find_nonconformance(String nc_id,String type_of_nonconformance,String product_id ) {
+	public List<NonConformance> find_nonconformance(String id,String type_of_nonconformance,String product_id ) {
 		Connection con = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
@@ -297,7 +511,73 @@ public class NonConformanceDAO extends AbstractExcelView {
 			e1.printStackTrace();
 		}
 		try {
-			String cmd_select = "select * from tbl_nonconformance where id='"+nc_id+"' or type_of_nonconformance='"+type_of_nonconformance+"' or product_id='"+product_id+"'";
+			String cmd_select = "select * from tbl_nonconformance where id='"+id+"' or type_of_nonconformance='"+type_of_nonconformance+"' or product_id='"+product_id+"'";
+			resultSet = statement.executeQuery(cmd_select);
+			while (resultSet.next()) {
+				System.out.println("came");
+				nonConformances.add(new NonConformance(resultSet
+						.getString("id"), resultSet
+						.getString("source_of_nonconformance"), resultSet
+						.getString("external_id"), resultSet
+						.getString("type_of_nonconformance"), resultSet
+						.getString("product_id"), resultSet
+						.getString("quantity_suspect"), resultSet
+						.getString("nature_of_nonconformance"), resultSet
+						.getString("date_found"), resultSet
+						.getString("reported_by"), resultSet
+						.getString("temporary_action"), resultSet
+						.getString("corrective_action_required"), resultSet
+						.getString(
+								"disposition_required"), resultSet
+						.getString("disposition"), resultSet
+						.getString("disposition_complete_date"), resultSet
+						.getString("name_of_disposition_responsibility"),
+						resultSet.getString("cost_of_nonconformance")));
+
+			}
+
+		} catch (Exception e) {
+			System.out.println(e.toString());
+			releaseResultSet(resultSet);
+			releaseStatement(statement);
+			releaseConnection(con);
+		} finally {
+			releaseResultSet(resultSet);
+			releaseStatement(statement);
+			releaseConnection(con);
+		}
+		return nonConformances;
+	}
+	
+	
+	
+	//REPORT GENERATION
+	public List<NonConformance> get_nonconformance_type(String type,String start,String end)
+	 {
+		Connection con = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
+		boolean status = false;
+		List<NonConformance> nonConformances = new ArrayList<NonConformance>();
+
+		try {
+			con = dataSource.getConnection();
+			statement = con.createStatement();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		try {
+			String cmd_select = null;
+			
+			if(type=="opennonconformance")
+				cmd_select= "select * from tbl_nonconformance" ;
+			//cmd_select= "select * from tbl_nonconformance where disposition==0 AND disposition_complete_date==NULL" ;
+			
+				else if(type=="nodispositionover30days")
+				//	cmd_select="select * from tbl_nonconformance where disposition_complete_date between now() and DATE_ADDNOW(), INTERVAL 30 DAYS";
+					cmd_select="select * from tbl_nonconformance  WHERE   disposition_complete_date BETWEEN NOW() + INTERVAL 30 DAY AND NOW()";
+					else if(type=="defined")
+						cmd_select="select * from tbl_nonconformance where disposition_complete_date between start AND end";
 			resultSet = statement.executeQuery(cmd_select);
 			while (resultSet.next()) {
 				System.out.println("came");
@@ -333,10 +613,7 @@ public class NonConformanceDAO extends AbstractExcelView {
 		}
 		return nonConformances;
 	}
-	
-	
-	
-	
+
 	
 	
 	
@@ -391,6 +668,8 @@ public class NonConformanceDAO extends AbstractExcelView {
 		}
 		return nonConformances;
 	}
+	
+	
 	
 	public List<CorrectiveAndPreventiveActions> get_corrective() {
 		Connection con = null;

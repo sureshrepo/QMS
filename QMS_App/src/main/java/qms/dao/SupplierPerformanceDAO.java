@@ -274,7 +274,6 @@ public class SupplierPerformanceDAO extends AbstractExcelView {
 				
 		}
 	}
-
 	public String get_maxid() {
 		Connection con = null;
 		Statement statement = null;
@@ -606,12 +605,11 @@ public class SupplierPerformanceDAO extends AbstractExcelView {
 						cmd_select="select * from tbl_supplierperformance where disposition_complete_date between start AND end";
 		*/	resultSet = statement.executeQuery(cmd_select);
 			while (resultSet.next()) {
-				System.out.println("came");
+				System.out.println(" type result");
 				supplierPerformances.add(new SupplierPerformance(
 						resultSet.getString("supplier_id"), 
 						resultSet.getString("supplier_name"), 
 						resultSet.getString("category"), 
-						
 						resultSet.getString("address"), 
 						resultSet.getString("city"), 
 						resultSet.getString("state"), 

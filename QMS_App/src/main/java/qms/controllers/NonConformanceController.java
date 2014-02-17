@@ -5,6 +5,7 @@ import java.security.Principal;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -17,16 +18,13 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 
 import qms.dao.FileHandlingDAO;
 import qms.dao.NonConformanceDAO;
 import qms.forms.CorrectiveAndPreventiveActionsForm;
-import qms.forms.CustomersForm;
-import qms.forms.MaintenanceForm;
+import qms.forms.EmployeeForm;
 import qms.forms.NonConformanceForm;
-import qms.forms.ParticipantsDetailsForm;
 import qms.model.*;
 
 import org.slf4j.Logger;
@@ -86,7 +84,7 @@ public class NonConformanceController {
 		nonConformanceForm.setNonconformance(nonConformanceDAO.get_nonconformance());
 	    model.addAttribute("nonConformanceForm",nonConformanceForm);
 	    model.addAttribute("menu","nonconformance");
-		return "/view_nonconformance";
+		return "view_nonconformance";
 	}
 
 	@RequestMapping(value = "/delete_nonconformance", method = RequestMethod.GET)
@@ -94,6 +92,9 @@ public class NonConformanceController {
 			NonConformance nonConformance,ModelMap model) {
 
 		nonConformanceDAO.delete_nonconformance(id);
+		NonConformanceForm nonConformanceForm = new NonConformanceForm();
+		nonConformanceForm.setNonconformance(nonConformanceDAO.get_nonconformance());
+		model.addAttribute("nonConformanceForm",nonConformanceForm);
 		model.addAttribute("menu","nonconformance");
 		return "/view_nonconformance";
 	}
@@ -126,15 +127,18 @@ public class NonConformanceController {
 		
 		
 		nonConformanceDAO.update_nonconformance(nonConformance);
+		NonConformanceForm nonConformanceForm=new NonConformanceForm();
+		nonConformanceForm.setNonconformance(nonConformanceDAO.get_nonconformance());
+		model.addAttribute("nonConformanceForm",nonConformanceForm);
 		model.addAttribute("menu","nonconformance");
 		return "view_nonconformance";
 	}
 
 	
 	@RequestMapping(value = "/findnonconformance", method = RequestMethod.GET)
-	public String findNonconformance(@RequestParam("nc_id") String nc_id,@RequestParam("type_of_non_conformance") String type_of_nonconformance,@RequestParam("product_id") String product_id,NonConformance nonConformance,ModelMap model) {
+	public String findNonconformance(@RequestParam("id") String id,@RequestParam("type_of_nonconformance") String type_of_nonconformance,@RequestParam("product_id") String product_id,NonConformance nonConformance,ModelMap model) {
 
-		if(nc_id.equals("")&&type_of_nonconformance.equals("")&&product_id.equals(""))
+		if(id.equals("")&&type_of_nonconformance.equals("")&&product_id.equals(""))
 		{
 			NonConformanceForm nonConformanceForm=new NonConformanceForm();
 			nonConformanceForm.setNonconformance(nonConformanceDAO.get_nonconformance());
@@ -144,7 +148,7 @@ public class NonConformanceController {
 		else
 		{
 		NonConformanceForm nonConformanceForm=new NonConformanceForm();
-			nonConformanceForm.setNonconformance(nonConformanceDAO.find_nonconformance(nc_id, type_of_nonconformance, product_id));
+			nonConformanceForm.setNonconformance(nonConformanceDAO.find_nonconformance(id, type_of_nonconformance, product_id));
 		    model.addAttribute("nonConformanceForm",nonConformanceForm);
 				}
 	  
@@ -152,8 +156,9 @@ public class NonConformanceController {
 		
 	}
 	
-	
-	@RequestMapping(value ={ "/nonconformanceexport" }, method = RequestMethod.GET)
+
+	//This is used for downloading Excel Sheet
+	@RequestMapping(value ={ "/nonconformancereport" }, method = RequestMethod.GET)
 	  public ModelAndView getExcel_view() {
 	java.util.List<NonConformance> nonConformances=new ArrayList<NonConformance>();
 	
@@ -162,7 +167,65 @@ public class NonConformanceController {
 	return new ModelAndView("nonconformanceDAO","nonConformances",nonConformances);
 	
 	}
+	//report page request passing
+	@RequestMapping(value = "/nonconformance_report", method = RequestMethod.GET)
+	public String reportnonconformance(ModelMap model) {
+		  model.addAttribute("menu","nonconformance");
+		return "report_nonconformance";
+
+	}
 	
+	//Nonconformance Report Generation
+	@RequestMapping(value = "/generate_nonconformance_report", method = RequestMethod.POST)
+	public ModelAndView generatenonnonconformance_Report(HttpServletRequest request,ModelMap model, HttpServletResponse response)
+	{
+		String start = null,end = null;
+		String[] fields={"id","source_of_nonconformance","external_id","type_of_nonconformance","product_id","quantity_suspect","nature_of_nonconformance","date_found","reported_by","temporary_action","corrective_action_required","disposition","disposition_complete_date","name_of_disposition_responsibility","cost_of_nonconformance"};
+		System.out.println(request.getParameter("type_of_report"));
+		java.util.List<NonConformance> nonConformances=new ArrayList<NonConformance>();
+			switch(Integer.parseInt(request.getParameter("doc_type")))
+				  {
+		  case 0:
+			  nonConformances=nonConformanceDAO.get_nonconformance_type("opennonconformance",start,end);
+			  break;
+		  case 1:
+			  nonConformances=nonConformanceDAO.get_nonconformance_type("nodispositionover30days","start","end");
+			  break;
+		  case 2:
+			  start=request.getParameter("start_date");
+				end=request.getParameter("end_date");
+				
+			  nonConformances=nonConformanceDAO.get_nonconformance_type("opennonconformance","start","end");
+			  break;
+		  
+		  default:
+			  break;
+				  
+				
+		}
+		if(Integer.parseInt(request.getParameter("report_type"))==1)
+		{
+		
+				System.out.println("now ok");
+				 response.setHeader("Content-Disposition","attachment;filename='"+request.getParameter("name_of_disposition_responsibility")+"'");
+					
+				fields=request.getParameterValues("report_field[]");
+			
+		}
+		else
+			
+		response.setHeader("Content-Disposition","attachment;filename='NonConformance_Report'");
+		
+		
+		ModelAndView modelAndView=new ModelAndView("nonconformanceDAO","nonConformances",nonConformances);
+		
+		modelAndView.addObject("fields",fields);
+		
+		System.out.println("now ok::::");
+		return modelAndView ;
+	}
+
+
 	@RequestMapping(value = { "/edit_correctiveactions" }, method = RequestMethod.GET)
 	public String add_corrective(@RequestParam("nc_id") String nc_id,HttpSession session,ModelMap model, Principal principal) {
 		

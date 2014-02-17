@@ -95,7 +95,7 @@
 				        
 							<tr class="title">
 								<td valign="top" align="left" width="10%">Employee&nbsp;ID</td>
-					         	<td valign="top" align="left" width="15%">Trainer</td>
+					         	<td valign="top" align="left" width="15%">Name</td>
 					         	<td valign="top" align="left" width="10%">Job Title</td>
 								<td valign="top" align="left" width="10%">Date Hired</td>
           						<td valign="top" align="left" width="15%">Attachments</td>
@@ -112,7 +112,7 @@
 							       			i=1;%>
 							       		<tr class="row<%=i%>" ">
 								           	<td valign="top" align="left"  width="10%">${employees.employee_id}</td>
-											<td valign="top" align="left" width="15%">${employees.trainer}</td>
+											<td valign="top" align="left" width="15%">${employees.name}</td>
 											<td valign="top" align="left" width="10%">${employees.job_title}</td>
 											<td valign="top" align="left" width="10%">${employees.date_hired}</td>
 											<td valign="top" align="left" width="15%">${employees.attachments}</td>

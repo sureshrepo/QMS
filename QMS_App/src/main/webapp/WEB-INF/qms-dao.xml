@@ -43,7 +43,7 @@
 	</bean>
 	
 	
-	<bean id="supplierPerformanceDAO" class="qms.dao.SupplierPerformanceDAO">
+	<bean id="supplierperformanceDAO" class="qms.dao.SupplierPerformanceDAO">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 	

@@ -134,14 +134,14 @@ public class EmployeeController
 	public String update_customer(ModelMap model, @ModelAttribute("Employee") @Valid Employee employee, BindingResult result)
 	{
 
-		/*if (result.hasErrors())
+		if (result.hasErrors())
 		{
 			System.out.println("output");
 			EmployeeForm employeeForm=new EmployeeForm();
 			employeeForm.setEmployees(employeeDAO.getEmployeess_byid(employee.getEmployee_id()));
 			model.addAttribute("employeeForm",employeeForm);
 	        return "edit_employee";
-		}*/
+		}
     	employeeDAO.update_employee(employee);
     	EmployeeForm employeeForm=new EmployeeForm();
 		employeeForm.setEmployees(employeeDAO.getEmployees());

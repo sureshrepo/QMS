@@ -50,18 +50,17 @@
         <td valign="top" align="left"><div>
             <div class="headings altheading">
               <h2>Add SupplierPerformance</h2>
+              
             </div>
             <div class="contentbox">
             
               <table cellpadding="0" cellspacing="0" border="0" width="100%">
    				 <tr class="row2">
-   				 <%-- <td valign="middle" align="left" class="input_txt"><span class="err">*</span>ID</td>
-				<td valign="top" align="left" class="input_txt"><input type="hidden" name="supplier_id" value="<c:out value="${id }"/>" />
-				<c:out value="${id}" /> <br/><font color="Red" size="+1"></font></td>
-                   --%><td valign="middle" align="right" class="input_txt" width="30%"><span class="err">*</span>ID:</td>
-                  <td valign="top" align="left" class="input_txt" width="70%"><input type="hidden" name="supplier_id" id="inp_id" value="<c:out value="${id }"/>"/><c:out value="${id }"/><br/><span class="err"><form:errors path="supplierperformance.supplier_id"></form:errors></span></td>
-            
-                  <td valign="middle" align="right" class="input_txt" width="30%">Website:</td>
+                  <td valign="middle" align="right" class="input_txt" width="30%"><span class="err">*</span>ID:</td>
+                <%--   <td valign="top" align="left" class="input_txt" width="70%"><input type="hidden" name="supplier_id" id="inp_id" value="<c:out value="${id }"/>"/><c:out value="${id }"/><br/><span class="err"><form:errors path="supplierperformance.supplier_id"></form:errors></span></td>
+            	 --%><td valign="top" align="left" class="input_txt" width="70%"><input type="hidden" name="supplier_id" value="<c:out value="${id}"/>"/><c:out value="${id}"/><br/><span class="err"></span><form:errors path="supplierperformance.supplier_id"></form:errors></td>
+                
+            	 <td valign="middle" align="right" class="input_txt" width="30%">Website:</td>
                   <td valign="top" align="left" class="input_txt" width="70%"><input type="text" name="website" class="input_txtbx" id="inp_website" onmouseover="showTooltip('tooltip_id','inp_id3');" onmouseout="hideTooltip('tooltip_id');" value="${supplierperformance.website}" /><br/><span class="err"><form:errors path="supplierperformance.website"></form:errors></span></td>
                 </tr>
             
@@ -71,6 +70,7 @@
                   <td valign="top" align="left" class="input_txt" width="70%"><input type="text" name="supplier_name" class="input_txtbx" id="inp_supplier_name" onmouseover="showTooltip('tooltip_id','inp_id3');" onmouseout="hideTooltip('tooltip_id');" value="${supplierperformance.supplier_name}" /><br/><span class="err"><form:errors path="supplierperformance.supplier_name"></form:errors></span></td>
            		  <td valign="middle" align="right" class="input_txt" width="70%">Certified</td>
 				<td valign="top" align="left" class="input_txt"><select	name="certified_to" class="input_cmbbx1">
+															<option value="">--Select--</option>			
                   										<option
 															<c:if test="${supplierperformance.certified_to eq 'ISO 9001'}"><c:out value="Selected"/></c:if>
 															value="ISO 9001">ISO 9001</option>
@@ -84,6 +84,8 @@
 		        <tr class="row2">
 				  <td valign="middle" align="right" class="input_txt" width="30%">Category :</td>
 				<td valign="top" align="left" class="input_txt"><select	name="category" class="input_cmbbx1">
+					<option value="">--Select--</option>
+				                  									
                   										<option
 															<c:if test="${supplierperformance.category eq 'Critical'}"><c:out value="Selected"/></c:if>
 															value="Critical">Critical</option>
