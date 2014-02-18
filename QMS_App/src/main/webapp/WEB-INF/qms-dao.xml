@@ -31,7 +31,7 @@
 		<property name="datasource" ref="dataSource" />
 	</bean>
 	
-	<bean id="correctiveAndPreventiveActionsDAO" class="qms.dao.CorrectiveAndPreventiveActionsDAO">
+	<bean id="CorrectiveAndPreventiveActionsDAO" class="qms.dao.CorrectiveAndPreventiveActionsDAO">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 	
@@ -50,6 +50,11 @@
 	<bean id="childSupplierDAO" class="qms.dao.ChildSupplierDAO">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
+	
+	<bean id="ManagementReviewDAO" class="qms.dao.ManagementReviewDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
  <bean id="filehandlingDAO" class="qms.dao.FileHandlingDAO">
 	</bean>
 </beans>

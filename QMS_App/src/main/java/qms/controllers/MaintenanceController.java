@@ -243,10 +243,11 @@ public class MaintenanceController {
 		
 		
 		
-		String no_of_days=request.getParameter("number_of_days");
+		//String no_of_days=request.getParameter("number_of_days");
 		
 		MaintenanceForm maintenanceForm= new MaintenanceForm();
-		maintenanceForm.setMaintenance(maintenanceDAO.getMaintenance_bytype(type,Integer.parseInt(no_of_days)));
+		int no_of_days = 0;
+		maintenanceForm.setMaintenance(maintenanceDAO.getMaintenance_bytype(type, no_of_days));
 		model.addAttribute("maintenanceForm",maintenanceForm);
 		
 		model.addAttribute("report_table","yes");

@@ -159,7 +159,7 @@
                 </tr>
                 <tr class="row1">
                   <td valign="middle" align="right" class="input_txt" width="30%"><span class="err">*</span>Completed By :</td>
-                  <td valign="top" align="left" class="input_txt" width="70%"><input type="text" name="completed_by" class="input_txtbx" id="searchbox" onmouseover="showTooltip('tooltip_id','inp_id3');" onmouseout="hideTooltip('tooltip_id');" value="" /><span class="err"><form:errors path="Maintenance.completed_by"></form:errors></span></td>
+                  <td valign="top" align="left" class="input_txt" width="70%"><input type="text" name="completed_by" class="input_txtbx" id="completed_by" onmouseover="showTooltip('tooltip_id','inp_id3');" onmouseout="hideTooltip('tooltip_id');" value="" /><span class="err"><form:errors path="Maintenance.completed_by"></form:errors></span></td>
                 </tr>
                 <tr class="row2">
               
@@ -210,6 +210,8 @@
             }
             </script>
  <script>
+$(document).ready(function()
+{
 $("#searchbox").keyup(function()
 {
 var sr=$("#searchbox").val();
@@ -217,21 +219,12 @@ $("#suggestion_box").val('');
 $.ajax(
 {
 type:"post",
-url:"QMS_App/add_maintenance.jsp",
+url:"add_maintenance.jsp",
 data:"search="+ sr,
 cache:false,
 success:function(html)
 {
 $("#suggestion_box").html(html);
-}
-if(!sr.equals("")) 
-{ 
-sr=sr+"%"; 
-//rs=s.executeQuery("select keyword from dictionary where keyword LIKE '"+sr+"'"); 
-rs=s.executeQuery("select name from tbl_employee where name LIKE '"+sr+"'");
-while(rs.next()) 
-{
-name=rs.getString(1); 
 }
 });
 }); 

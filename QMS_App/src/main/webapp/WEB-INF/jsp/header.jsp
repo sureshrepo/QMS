@@ -177,7 +177,7 @@
 				           
 				              <hr width="95%"/>
 				              <li>
-								<a href="view_correctiveactions" class="<c:choose>
+								<a href="addcorrectiveAndPreventiveActions" class="<c:choose>
 								<c:when test="${menu=='corrective'}">select</c:when><c:otherwise>unselect</c:otherwise></c:choose>">
 									<span><img src="<c:url value="/resources/images/corrective.png" />" alt="" style="padding:5px 5px 0 0;" />Corrective And Preventive Actions</span>
 								</a>
@@ -187,6 +187,12 @@
 								<a href="add_supplierperformance" class="<c:choose>
 								<c:when test="${menu=='supplier'}">select</c:when><c:otherwise>unselect</c:otherwise></c:choose>">
 									<span><img src="<c:url value="/resources/images/suplier.png" />" alt="" style="padding:5px 5px 0 0;" />Supplier Performance</span>
+								</a>
+							</li>
+							<li>
+								<a href="addmanagementreview" class="<c:choose>
+								<c:when test="${menu=='managementreview'}">select</c:when><c:otherwise>unselect</c:otherwise></c:choose>">
+									<span><img src="<c:url value="/resources/images/suplier.png" />" alt="" style="padding:5px 5px 0 0;" />Management Review</span>
 								</a>
 							</li>
 				            

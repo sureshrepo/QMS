@@ -9,7 +9,6 @@
 <td>
 <div>
   <ul class="horizmenu">
-						
 							<li  style=" float:left;margin-right:8px;text-transform:uppercase;">
 								<a href="addinternalaudits" class="<c:choose>
 								<c:when test="${menu==''}">select</c:when><c:otherwise>unselect</c:otherwise></c:choose>">
@@ -33,6 +32,7 @@
 									
 								</a>
 							</li>
+							</ul>
   </div>
 </td>
 </tr>
@@ -80,7 +80,7 @@
 							       			else
 							       			i=1;%>
 							       		<tr class="row<%=i%>" onmouseover="mouse_event(this,"row_hover");" onmouseout="mouse_event(this,"row1");">
-								           	<td valign="top" align="left"  width="10%">${internalAudits.id}</td>
+								           	<td valign="top" align="left"  width="10%"><a href="list_internalaudit?id=${internalAudits.id}">${internalAudits.id}</a></td>
 											<td valign="top" align="left" width="10%">${internalAudits.process}</td>
 											<td valign="top" align="left" width="10%">${internalAudits.audit_due_date}</td>
 											<td valign="top" align="left" width="10%">${internalAudits.audit_start_date}</td>
@@ -105,9 +105,13 @@
                 					</ul></div></td></tr>
 
 								</table>
+								</form>
 
 								<div style="clear: both;"></div>
 								</div>
+								
+								
+								
 								</div>
 								</td>
 								</tr>
@@ -116,7 +120,7 @@
 								</tr>
 								
 							</table>
-							</form>
+							
 						</div>
 						
 						

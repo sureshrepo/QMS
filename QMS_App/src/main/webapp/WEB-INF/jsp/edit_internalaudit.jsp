@@ -86,7 +86,7 @@
 				                  	<input type="text" value="<c:out value="${internalaudits.audit_due_date}"/>"  class="input_txtbx1" id="inp_external_id" onmouseover="showTooltip('tooltip_id','inp_id3');" onmouseout="hideTooltip('tooltip_id');"  name="audit_due_date" /></br><span class="err"><form:errors path="InternalAudits.audit_due_date"></form:errors></span></td>
 				                </tr> 
 				                  <tr class="row1">
-						         	<td valign="middle" align="left" class="input_txt"> auditor :</td>
+						         	<td valign="middle" align="left" class="input_txt"> Auditor :</td>
 						           <td valign="top" align="left" class="input_txt">
 				                  		<select name="auditor" class="input_cmbbx1">
 						                    <option <c:if test="${internalaudits.auditor eq 'name1'}"><c:out value="Selected"/></c:if> value="name1" >Name1</option>

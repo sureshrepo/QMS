@@ -1,6 +1,8 @@
 package qms.controllers;
 
 import java.awt.List;
+
+
 import java.security.Principal;
 import java.util.ArrayList;
 
@@ -19,9 +21,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import qms.dao.InternalAuditsDAO;
+//import com.sun.mail.iap.Response;
 
-import qms.forms.CustomersForm;
+import qms.dao.InternalAuditsDAO;
 import qms.forms.InternalAuditsForm;
 
 import qms.model.InternalAudits;
@@ -33,6 +35,70 @@ public class InternalAuditsController {
 	@Autowired
 	InternalAuditsDAO internalAuditsDAO;
 
+	
+	//Internal Audit Report generation
+	@RequestMapping(value = "/internal_audit_report", method = RequestMethod.POST)
+	public ModelAndView generateAudit_Report(HttpServletRequest request,ModelMap model) {
+		
+	String[] fields={"report_id","process","auditee_name","audit_start_date","audit_due_date","auditor","audit_notes","finding","completion_date","auditors_initial","type"};	
+		String title = "internal_audit";
+		java.util.List<InternalAudits> internalAudits=new ArrayList<InternalAudits>();
+		
+		 switch(Integer.parseInt(request.getParameter("audit_report_type")))
+				  {
+					  case 0:
+			  internalAudits=internalAuditsDAO.getAudit_bytype("past_due_audits");
+			  title="past_due_audits";
+			  break;
+		  case 1:
+			  internalAudits=internalAuditsDAO.getAudit_bytype("audits_with_nonconformance");
+			  title="audits_with_nonconformance";
+			  break;
+		  case 2:
+			  internalAudits=internalAuditsDAO.getAudit_bytype("area_of_improvements");
+			  title="area_of_improvements";
+			  break;
+		  case 3:
+			  internalAudits=internalAuditsDAO.getAudit_bytype("past_due_audits_by_auditor");
+			  title="past_due_audits_by_auditor";
+			  break;
+		  case 4:
+			  internalAudits=internalAuditsDAO.getAudit_bytype("audit_schedule");
+			  title="audit_schedule";
+			  break;
+		  default:
+			  break;
+				  
+		}		
+		 System.out.println(title);
+	if(Integer.parseInt(request.getParameter("report_type"))==1)
+		{
+		if(request.getParameterValues("report_field[]")!=null)
+			
+			for (@SuppressWarnings("unused") String field : request.getParameterValues("report_field[]")) 
+			{
+				title=request.getParameter("report_title");
+				System.out.println(title);
+						
+				//fields=request.getParameterValues("report_type");
+				
+				ModelAndView modelAndView=new ModelAndView("internalauditsDAO","internalAudits",internalAudits);
+				modelAndView.addObject("fields",request.getParameterValues("report_field[]"));
+				modelAndView.addObject("title",title);
+				return modelAndView ;
+			}
+		}
+		
+		
+		ModelAndView modelAndView=new ModelAndView("internalauditsDAO","internalAudits",internalAudits);
+		modelAndView.addObject("fields",fields);
+		modelAndView.addObject("title",title);
+		 
+		return modelAndView ;
+		
+	}
+	
+	
 	// getting unique id
 	@RequestMapping(value = { "/addinternalaudits" }, method = RequestMethod.GET)
 	public String add_internalaudits(ModelMap model, Principal principal) {
@@ -42,6 +108,8 @@ public class InternalAuditsController {
 
 	}
 
+	
+	
 	// inserting audit
 	@RequestMapping(value = "/add_internalaudits", method = RequestMethod.POST)
 	public String insert_internalaudits(HttpSession session,
@@ -70,7 +138,21 @@ public class InternalAuditsController {
 		model.addAttribute("menu","audits");
 		return "view_internalaudits";
 	}
+	// INTERNAL AUDITS REPORT list page	
+	
+	@RequestMapping(value = "list_internalaudit", method = RequestMethod.GET)
+	public String list_internalaudits(@RequestParam("id") String id,
+			ModelMap model, Principal principal) 
+	{
+		InternalAuditsForm internalAuditsForm = new InternalAuditsForm();
 
+		internalAuditsForm.setInternalAudits(internalAuditsDAO.edit_internalaudit(id));
+
+		model.addAttribute("internalAuditsForm", internalAuditsForm);
+		model.addAttribute("menu","audits");
+		return "auditslist";
+	}
+	// INTERNAL AUDITS REPORT edit page
 	@RequestMapping(value = "edit_internalaudit", method = RequestMethod.GET)
 	public String edit_internalaudits(@RequestParam("id") String id,
 			ModelMap model, Principal principal) {
@@ -83,6 +165,8 @@ public class InternalAuditsController {
 		return "edit_internalaudit";
 	}
 
+	
+	//update record
 	@RequestMapping(value = "/updateinternalaudits", method = RequestMethod.POST)
 	public String update_internalaudits(ModelMap model, Principal principal,@ModelAttribute("InternalAudits") @Valid InternalAudits internalAudits,
 			BindingResult result) {
@@ -99,9 +183,17 @@ public class InternalAuditsController {
 		
 		internalAuditsDAO.update_internalaudits(internalAudits);
 		model.addAttribute("menu","audits");
+		InternalAuditsForm internalAuditsForm = new InternalAuditsForm();
+
+		internalAuditsForm.setInternalAudits(internalAuditsDAO.get_internalaudits());
+
+		model.addAttribute("internalAuditsForm", internalAuditsForm);
+		model.addAttribute("menu","audits");
 		return "view_internalaudits";
 	}
 
+	
+	//view records
 	@RequestMapping(value = { "/view_internalaudits" }, method = RequestMethod.GET)
 	public String showInternalAudits(ModelMap model, Principal principal) {
 
@@ -114,6 +206,8 @@ public class InternalAuditsController {
 		return "view_internalaudits";
 	}
 
+	
+	//delete a record 
 	@RequestMapping(value = { "/delete_internalaudit" }, method = RequestMethod.GET)
 	public String delete_internalaudits(@RequestParam("id") String id,
 			ModelMap model, Principal principal) {
@@ -123,13 +217,15 @@ public class InternalAuditsController {
 	}
 
 	
+	
+	
 	@RequestMapping(value = { "/internalaudit_report" }, method = RequestMethod.POST)
 	public String internalaudits_report(HttpServletRequest request,ModelMap model, Principal principal) 
 	{
 		String type=request.getParameter("type_of_report");
 		
 		InternalAuditsForm internalAuditsForm = new InternalAuditsForm();
-		internalAuditsForm.setInternalAudits(internalAuditsDAO.get_report_internalaudits(type));
+		//InternalAuditsForm.setInternalAudits(internalAuditsDAO.get_report_internalaudits(type));
 		model.addAttribute("internalAuditsForm", internalAuditsForm);
 		model.addAttribute("type",type);		
 		model.addAttribute("report_table","yes");
@@ -137,30 +233,8 @@ public class InternalAuditsController {
 		return "internalaudit_report";
 	}
 	
-	/*@RequestMapping(value ={ "/export" }, method = RequestMethod.GET)
-	  public ModelAndView getExcel() {
-		System.out.println("i am in new request mapping");
-	    List<InternalAudits> internalAudits=new ArrayList<InternalAudits>();
-	    
-	    internalAudits=internalAuditsDAO.get_internalaudits();
-	    java.util.List<Animal> animalList = animalService.getAnimalList();
-		return new ModelAndView("AnimalListExcel", "animalList", animalList);
-
-	   // return new ModelAndView("AnimalListExcel", "internalAudits", internalAudits);
-	  }*/
 	
-	@RequestMapping(value ={ "/export" }, method = RequestMethod.GET)
-	  public ModelAndView getExcel_view(@RequestParam("type") String type) {
-		java.util.List<InternalAudits> internalAudits=new ArrayList<InternalAudits>();
-	
-	internalAudits=internalAuditsDAO.get_report_internalaudits(type);
-	
-	return new ModelAndView("InternalAuditsExcelView","internalAudits",internalAudits);
-	
-	}
-	
-	
-	
+	//report page request passing
 	@RequestMapping(value = { "/internalaudit_report" }, method = RequestMethod.GET)
 	public String get_internalaudits_report(ModelMap model, Principal principal) 
 	{
@@ -169,7 +243,10 @@ public class InternalAuditsController {
 		return "internalaudit_report";
 	}
 	
-   @RequestMapping(value={"/search_audits"}, method = RequestMethod.GET)
+   
+	
+	//search for record in view 
+	@RequestMapping(value={"/search_audits"}, method = RequestMethod.GET)
 	
 	public String search_internalaudits(@RequestParam("id") String id,@RequestParam("process") String process,@RequestParam("auditee_name") String auditee_name,ModelMap model, Principal principal)
 {
