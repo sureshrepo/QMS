@@ -25,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 	import qms.dao.SupplierPerformanceDAO;
 	import qms.model.SupplierPerformance;
 import qms.forms.EmployeeForm;
+import qms.forms.InternalAuditsForm;
 import qms.forms.MaintenanceForm;
 import qms.forms.SupplierPerformanceForm;;
 
@@ -167,6 +168,19 @@ import qms.forms.SupplierPerformanceForm;;
 			}
 			}
 		
+		@RequestMapping(value = "list_supplierperformance", method = RequestMethod.GET)
+		public String list_supplierperformance(@RequestParam("supplier_id") String supplier_id,
+				ModelMap model, Principal principal) 
+		{
+			SupplierPerformanceForm supplierPerformanceForm = new SupplierPerformanceForm();
+
+			supplierPerformanceForm.setSupplierperformance(supplierPerformanceDAO.list_supplierperformance(supplier_id));
+			System.out.println("list:"+supplier_id);
+			model.addAttribute("supplierPerformanceForm", supplierPerformanceForm);
+			model.addAttribute("menu","supplier");
+			System.out.println("list result.......");
+			return "list_supplier";
+		}
 
 	//report page request passing
 	@RequestMapping(value = "/supplierperformance_report", method = RequestMethod.GET)

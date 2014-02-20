@@ -10,6 +10,7 @@ import java.util.Map;
 
 import javax.sql.DataSource;
 import qms.model.Employee;
+import qms.model.InternalAudits;
 
 
 import javax.servlet.http.HttpServletRequest;
@@ -395,6 +396,40 @@ public class EmployeeDAO extends AbstractExcelView{
 	}
 	
 
+	public List<Employee> edit_employee(String employee_id) {
+		Connection con = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
+		List<Employee> employees = new ArrayList<Employee>();
+
+		try {
+			con = dataSource.getConnection();
+			statement = con.createStatement();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		try {
+			resultSet = statement.executeQuery
+			("select * from tbl_employee as t1 join tbl_employee_desc as t2 on t1.employee_id=t2.employee_id where t1.employee_id='"+employee_id+"'");
+			//("select * from tbl_employee where employee_id='"+employee_id+"'");
+			while (resultSet.next()) {
+
+				employees.add(new Employee(resultSet.getString("employee_id"),resultSet.getString("name"), resultSet.getString("job_title"), resultSet.getString("date_hired"), resultSet.getString("attachments"), resultSet.getString("process"), resultSet.getString("process_name"), resultSet.getString("doc_control"), resultSet.getString("management_rep"), resultSet.getString("list_of_functions_needes"),resultSet.getString("documented_in"), resultSet.getString("qualified_by"),resultSet.getString("type_of_training"),resultSet.getString("trainer"), resultSet.getString("training_due_date"),resultSet.getString("training_completion_date"),resultSet.getString("training_effectiveness_review_due_date"),resultSet.getString("training_effectiveness_notes")));			
+			}
+		} catch (Exception e) {
+			System.out.println(e.toString());
+			releaseResultSet(resultSet);
+			releaseStatement(statement);
+			releaseConnection(con);
+		} finally {
+			releaseResultSet(resultSet);
+			releaseStatement(statement);
+			releaseConnection(con);
+		}
+		return employees;
+	}
+
+	
 	public boolean update_employee(Employee employee)
 	{
 		Connection con = null;

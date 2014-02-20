@@ -8,10 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.sql.DataSource;
 
-import org.aspectj.weaver.NewConstructorTypeMunger;
-
 import qms.model.Customers;
-import qms.model.ParticipantsDetails;
 
 
 
@@ -210,6 +207,45 @@ public class CustomersDAO {
 	    return customers;
 		
 	}
+	
+	public List<Customers> getfindcustomer(String id,String name, String address) {
+		Connection con = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
+		
+		try {
+			con = dataSource.getConnection();
+			statement = con.createStatement();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		List<Customers> customers = new ArrayList<Customers>();
+		try {
+			
+			String cmd="";
+			
+			cmd = "select * from tbl_customer where customer_id='"+ id +"' or customer_name='"+ name +"' or address='"+ address +"'";
+			
+			resultSet = statement.executeQuery(cmd);
+		while (resultSet.next()) {
+			customers.add(new Customers(resultSet.getString("customer_id"), resultSet.getString("customer_name"), resultSet.getString("address"), resultSet.getString("city"), resultSet.getString("state"), resultSet.getString("country"), resultSet.getString("zipcode"), resultSet.getString("website"), resultSet.getString("contact_name"), resultSet.getString("title_of_contact"), resultSet.getString("telephone"), resultSet.getString("fax"), resultSet.getString("email_address")));
+			
+}
+		} catch (Exception e) {
+			//logger.info(e.toString());
+			System.out.println(e.toString());
+			releaseResultSet(resultSet);
+			releaseStatement(statement);
+			releaseConnection(con);
+		} finally {
+			releaseResultSet(resultSet);
+			releaseStatement(statement);
+			releaseConnection(con);
+		}
+		return customers;
+
+	}
+
 	
 	public void releaseConnection(Connection con){
 		try{if(con != null)

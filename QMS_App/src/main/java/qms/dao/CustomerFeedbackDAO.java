@@ -279,6 +279,44 @@ public class CustomerFeedbackDAO extends AbstractExcelView
 	    
 	    }
 	
+	public List<CustomerFeedback> getfindcustomerfeedback(String date, String type) {
+		Connection con = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
+		
+		try {
+			con = dataSource.getConnection();
+			statement = con.createStatement();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		List<CustomerFeedback> customerFeedbacks = new ArrayList<CustomerFeedback>();
+		try {
+			
+			String cmd="";
+			
+			cmd = "select * from tbl_customerfeedback where date_of_feedback='"+ date +"' or type_of_feedback='"+ type +"'";
+			
+			resultSet = statement.executeQuery(cmd);
+		while (resultSet.next()) {
+			customerFeedbacks.add(new CustomerFeedback(resultSet.getString("feedback_id"),resultSet.getString("date_of_feedback"), resultSet.getString("type_of_feedback"), resultSet.getString("feedback_recorded_by"), resultSet.getString("feedback_details"), resultSet.getString("attachment_name"),resultSet.getString("attachement_type"),resultSet.getString("attachment_referrence")));
+			
+
+}
+		} catch (Exception e) {
+			//logger.info(e.toString());
+			System.out.println(e.toString());
+			releaseResultSet(resultSet);
+			releaseStatement(statement);
+			releaseConnection(con);
+		} finally {
+			releaseResultSet(resultSet);
+			releaseStatement(statement);
+			releaseConnection(con);
+		}
+		return customerFeedbacks;
+
+	}
 	
 	
 	public DataSource getDataSource() {

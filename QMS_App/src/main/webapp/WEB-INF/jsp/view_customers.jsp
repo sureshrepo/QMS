@@ -4,8 +4,8 @@
 <script type="text/javascript" src="js/ajaxpaging.js"></script>
 
 <div id="right_content">
-	<form name="grid"  action="" method="POST">
-    	<table cellpadding="0" cellspacing="0" border="0" width="98%" class="margin_table">
+<!-- 	<form name="grid"  action="" method="POST">
+ -->    	<table cellpadding="0" cellspacing="0" border="0" width="98%" class="margin_table">
       		<tr>
       		<td>
       		 <div>
@@ -66,17 +66,24 @@
 			        </div>
 			        <div class="contentbox">
 						<div style="border:#ccc 2px solid; padding:15px; margin-bottom:15px;">
+							<form action="findcustomer" method="GET">
+							
 							<table width="100%" border="0" cellspacing="0" cellpadding="0">
 							  <tr>
-							    <td align="left" valign="middle" width="10%">Mobile No:</td>
-							    <td align="left" valign="middle" width="10%"><input type="text" name="moblie" class="input_txtbx1" id="moblie"></td>
-							    <td align="left" valign="middle" width="15%">&nbsp;&nbsp;Group Name:</td>
-							    <td align="left" valign="middle" width="10%"><AJDF:output>$group</AJDF:output></td>
-							    <td align="left" valign="middle" width="8%">&nbsp;&nbsp;City:</td>
-							    <td align="left" valign="middle" width="10%"><input type="text" name="city" id="city" class="input_txtbx1"></td>
-							    <td align="center" valign="middle" width="38%"><input type="button" class="submit_btn" value="Find" name="find" onclick="findpart()"></td>
+							    <td align="left" valign="middle" width="10%">Id:</td>
+							    <td align="left" valign="middle" width="10%"><input type="text" name="customer_id" class="input_txtbox" id="id"></td>
+							    <td align="left" valign="middle" width="15%">&nbsp;&nbsp;Name:</td>
+							    <td align="left" valign="middle" width="10%"><input type="text" name="customer_name" class="input_txtbox" id="name"></td>
+							    <td align="left" valign="middle" width="8%">&nbsp;&nbsp;Address:</td>
+							    <td align="left" valign="middle" width="10%"><input type="text" name="address" id="address" class="input_txtbox"></td>
+							    <!-- <td align="center" valign="middle" width="38%"><input type="button" class="submit_btn" value="Find" name="find" onclick="findpart()"></td>
+							     -->
+							      <td align="center" valign="middle" width="20%"><input type="submit" class="submit_btn" value="Find" name="findcustomer" ></td>
+							  	<td align="center" valign="middle" width="20%"><input type="submit" class="submit_btn" value="Clear" name="welcome" ></td>
+							  
 							  </tr>
 							</table>
+							</form>
 						</div>
 				        <table cellpadding="0" cellspacing="0" border="0" width="100%">
 				        
@@ -87,7 +94,6 @@
 					         	<td valign="top" align="left" width="15%">Customer Name</td>
 					         	<td valign="top" align="left" width="10%">Website</td>
 								<td valign="top" align="left" width="10%">Telephone</td>
-          						<td valign="top" align="left" width="15%">Fax</td>
           						<td valign="top" align="left" width="15%">Email Address</td>
           						<td valign="top" align="left" width="15%">Actions</td>
         					</tr>
@@ -105,7 +111,6 @@
 											<td valign="top" align="left" width="15%">${customers.customer_name}</td>
 											<td valign="top" align="left" width="10%">${customers.website}</td>
 											<td valign="top" align="left" width="10%">${customers.telephone}</td>
-											<td valign="top" align="left" width="15%">${customers.fax}</td>
 											<td valign="top" align="left" width="15%">${customers.email_address}</td>
 											<td valign="top" align="left" width="15%">
 											
@@ -122,7 +127,7 @@
 				</td>
 			</tr>
 		</table> 
-	</form>
+
 </div>
 
 <script>

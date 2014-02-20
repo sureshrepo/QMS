@@ -20,6 +20,8 @@ import org.springframework.web.servlet.view.document.AbstractExcelView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
+
+import qms.model.InternalAudits;
 import qms.model.SupplierPerformance;
 
 
@@ -291,7 +293,7 @@ public class SupplierPerformanceDAO extends AbstractExcelView {
 			resultSet = statement.executeQuery(cmd_select);
 			if (resultSet.next()) {
 				if (!resultSet.getString("auto_id").equals("null"))
-					Max_id = "IA"
+					Max_id = "SP"
 							+ (Integer.parseInt(resultSet.getString("auto_id")) + 1000 + 1);
 
 			}
@@ -466,6 +468,40 @@ public class SupplierPerformanceDAO extends AbstractExcelView {
 	    return supplierPerformances;
 		
 	}
+	
+	public List<SupplierPerformance> list_supplierperformance(String supplier_id) {
+		Connection con = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
+		List<SupplierPerformance> supplierPerformances = new ArrayList<SupplierPerformance>();
+
+		try {
+			con = dataSource.getConnection();
+			statement = con.createStatement();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		try {
+			resultSet = statement.executeQuery("select * from tbl_supplierperformance where supplier_id='"+supplier_id+"'");
+			while (resultSet.next()) {
+							
+				supplierPerformances.add(new SupplierPerformance(resultSet.getString("supplier_id"), resultSet.getString("supplier_name"), resultSet.getString("category"), resultSet.getString("address"), resultSet.getString("city"), resultSet.getString("state"), resultSet.getString("postalcode"), resultSet.getString("country"), resultSet.getString("website"), resultSet.getString("certified_to"), resultSet.getString("contact_name"), resultSet.getString("contact_title"), resultSet.getString("phone"), resultSet.getString("fax"), resultSet.getString("email_address")));
+			System.out.println("Dao list result....");
+			}
+		} catch (Exception e) {
+			System.out.println("error occured in dao...");
+			System.out.println(e.toString());
+			releaseResultSet(resultSet);
+			releaseStatement(statement);
+			releaseConnection(con);
+		} finally {
+			releaseResultSet(resultSet);
+			releaseStatement(statement);
+			releaseConnection(con);
+		}
+		return supplierPerformances;
+	}
+
 	
 	public void releaseConnection(Connection con){
 		try{if(con != null)

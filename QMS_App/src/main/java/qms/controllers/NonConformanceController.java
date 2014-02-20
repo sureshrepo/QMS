@@ -24,6 +24,7 @@ import qms.dao.FileHandlingDAO;
 import qms.dao.NonConformanceDAO;
 import qms.forms.CorrectiveAndPreventiveActionsForm;
 import qms.forms.EmployeeForm;
+import qms.forms.InternalAuditsForm;
 import qms.forms.NonConformanceForm;
 import qms.model.*;
 
@@ -155,6 +156,23 @@ public class NonConformanceController {
 		return "view_nonconformance";
 		
 	}
+	
+// NONCONFORMANCE REPORT list page	
+	
+	@RequestMapping(value = "list_nonconformance", method = RequestMethod.GET)
+	public String list_nonconformance(@RequestParam("id") String id,
+			ModelMap model, Principal principal) 
+	{
+		NonConformanceForm nonConformanceForm = new NonConformanceForm();
+
+		nonConformanceForm.setNonconformance(nonConformanceDAO.list_nonconformance(id));
+
+		model.addAttribute("nonConformanceForm", nonConformanceForm);
+		model.addAttribute("menu","nonconformance");
+		return "list_nonconformance";
+	}
+
+	
 	
 
 	//This is used for downloading Excel Sheet

@@ -3,6 +3,7 @@ package qms.controllers;
 import java.io.IOException;
 import java.security.Principal;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -17,10 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import qms.dao.CustomersDAO;
-import qms.forms.MaintenanceForm;
-import qms.forms.ParticipantsDetailsForm;
 import qms.model.Customers;
-import qms.model.Maintenance;
 import qms.forms.CustomersForm;
 
 @Controller
@@ -57,20 +55,21 @@ public class CustomersController
 		session.setAttribute("customer",customers);
 			if (result.hasErrors())
 			{
-				CustomersForm customersForm=new CustomersForm();
+			/*	CustomersForm customersForm=new CustomersForm();
 				customersForm.setCustomers(customersDAO.getCustomers());
 				model.addAttribute("customersForm",customersForm);
 				model.addAttribute("Success","true");
-				model.addAttribute("id",customersDAO.getMax_customerID());	
-		        return "view_customers";
+			*/	model.addAttribute("id",customersDAO.getMax_customerID());	
+		        return "add_customers";
 			}
     // model.addAttribute("id",customersDAO.getMax_customerID());
     customersDAO.insert_customer(customers);
     CustomersForm customersForm=new CustomersForm();
 	customersForm.setCustomers(customersDAO.getCustomers());
 	model.addAttribute("customersForm",customersForm);
+	model.addAttribute("id", customersDAO.getMax_customerID());
 	model.addAttribute("menu","customer");
-	return "edit_customers";
+	return "view_customers";
  	}
 	
 	@RequestMapping(value={"/updatecustomer"}, method = RequestMethod.POST)
@@ -82,7 +81,8 @@ public class CustomersController
 			
 			System.out.println("output");
 			CustomersForm customersForm=new CustomersForm();
-			customersForm.setCustomers(customersDAO.getCustomers_byid(customers.getCustomer_id()));
+			//customersForm.setCustomers(customersDAO.getCustomers_byid(customers.getCustomer_id()));
+			customersForm.setCustomers(customersDAO.getCustomers());
 			model.addAttribute("customersForm",customersForm);	
 	        return "edit_customers";
 		}
@@ -93,6 +93,7 @@ public class CustomersController
     CustomersForm customersForm=new CustomersForm();
     customersForm.setCustomers(customersDAO.getCustomers());
     model.addAttribute("customerForm",customersForm);
+    model.addAttribute("success","true");
     model.addAttribute("menu","customer");
 	return "view_customers";
 
@@ -106,8 +107,11 @@ public class CustomersController
 	{
     
 		customersDAO.delete_customer(customer_id);
+		CustomersForm customersForm = new CustomersForm();
+	    customersForm.setCustomers(customersDAO.getCustomers());
+	    model.addAttribute("customersForm",customersForm);
 		model.addAttribute("menu","customer");
-		return "add_customers";
+		return "view_customers";
  	}
 	
 	@RequestMapping(value={"/editcustomer"}, method = RequestMethod.GET)
@@ -120,5 +124,37 @@ public class CustomersController
 		model.addAttribute("menu","customer");
 		return "edit_customers";
  	}
+	
+	@RequestMapping(value="/findcustomer",method=RequestMethod.GET)		
+	public String findcustomer(HttpServletRequest request,HttpSession session,@RequestParam("customer_id") String id,@RequestParam("customer_name") String name,@RequestParam("address") String address,ModelMap model)
+	{
+	
+		System.out.println("find");
+		session.setAttribute("id", id);
+		session.setAttribute("name", name);
+		session.setAttribute("address",address);
+
+		if(id=="" && name=="" && address=="")
+		{
+			CustomersForm customersForm = new CustomersForm();
+			customersForm.setCustomers(customersDAO.getfindcustomer(id, name, address));
+			model.addAttribute("customersForm",customersForm);
+			model.addAttribute("menu", "customer");
+			System.out.println("finding....");
+			return "view_customers";
+		}
+		else
+		{
+			System.out.println("searching.......");
+		CustomersForm customersForm = new CustomersForm();
+		customersForm.setCustomers(customersDAO.getfindcustomer(id, name, address));
+        model.addAttribute("customersForm", customersForm);
+        model.addAttribute("menu","customer");
+        System.out.println("finding result");
+        model.addAttribute("menu","customer");
+		return "view_customers";		
+		}
+		}
+
 	
 }

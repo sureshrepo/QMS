@@ -2,8 +2,8 @@
 <jsp:include page="header.jsp"></jsp:include>
 
 <div id="right_content">
-	<form name="grid" onSubmit="return validate(this)" action="" method="POST">
-    	<table cellpadding="0" cellspacing="0" border="0" width="98%" class="margin_table">
+	<!-- <form name="grid" onSubmit="return validate(this)" action="" method="POST">
+     -->	<table cellpadding="0" cellspacing="0" border="0" width="98%" class="margin_table">
       		<tr>
       		<td>
       			 <div>
@@ -54,8 +54,7 @@
 					<div class="del_div">
 						<p><label style="padding: 0pt 20px 0pt 0pt;"><input type="submit" name="delete" value="" class="icon1" onclick="form.action='?do=deleteparticipant'" /></label></p>
 	          		</div>
-				</td>
-			</tr>
+						</tr>
 			<tr>
         		<td valign="top" align="left">
 			        <div class="headings altheading">
@@ -63,17 +62,22 @@
 			        </div>
 			        <div class="contentbox">
 						<div style="border:#ccc 2px solid; padding:15px; margin-bottom:15px;">
+							<form action="findcustomerfeedback" method="GET">
+							
 							<table width="100%" border="0" cellspacing="0" cellpadding="0">
 							  <tr>
-							    <td align="left" valign="middle" width="10%">Mobile No:</td>
-							    <td align="left" valign="middle" width="10%"><input type="text" name="moblie" class="input_txtbx1" id="moblie"></td>
-							    <td align="left" valign="middle" width="15%">&nbsp;&nbsp;Group Name:</td>
-							    <td align="left" valign="middle" width="10%"><input type="text" name="group_name" class="input_txtbx1" id="group_name"></td>
-							    <td align="left" valign="middle" width="8%">&nbsp;&nbsp;City:</td>
-							    <td align="left" valign="middle" width="10%"><input type="text" name="city" id="city" class="input_txtbx1"></td>
-							    <td align="center" valign="middle" width="38%"><input type="button" class="submit_btn" value="Find" name="find" onclick="findpart()"></td>
+							    <td align="left" valign="middle" width="25%">Date of Feedback</td>
+							    <td align="left" valign="middle" width="10%"><input type="text" name="date_of_feedback" class="input_txtbx1" id="date"></td>
+							    <td align="left" valign="middle" width="25%">&nbsp;Type of Feedback</td>
+							    <td align="left" valign="middle" width="10%"><input type="text" name="type_of_feedback" id="type" class="input_txtbx1"></td>
+							    <!-- <td align="left" valign="middle" width="10%">Feedback Details:</td>
+							    <td align="left" valign="middle" width="10%"><input type="text" name="feedback_details" class="input_txtbx1" id="details"></td>
+							     -->
+							    <td align="center" valign="middle" width="20%"><input type="submit" class="submit_btn" value="Find" name="findcustomerfeedback" ></td>
+							  	<td align="center" valign="middle" width="20%"><input type="submit" class="submit_btn" value="Clear" name="welcome" ></td>
 							  </tr>
 							</table>
+							</form>
 						</div>
 				        <table cellpadding="0" cellspacing="0" border="0" width="100%">
 				        
@@ -82,8 +86,8 @@
 								<!-- <td valign="center" align="left" width="5%"><input type="checkbox" onclick="selectall(this.form)" value="" name="checkall"></td> -->
          						<td valign="top" align="left" width="15%">Date of Feedback</td>
 					         	<td valign="top" align="left" width="15%">Type of Feedback</td>
-					         	<td valign="top" align="left" width="20%">Feedback recorded by</td>
-								<td valign="top" align="left" width="20%">Feedback details</td>
+					         	<!-- <td valign="top" align="left" width="20%">Feedback recorded by</td>
+								 --><td valign="top" align="left" width="20%">Feedback details</td>
           						<td valign="top" align="left" width="15%">Attachments</td>
           						<td valign="top" align="left" width="20%">Actions</td>
           						
@@ -100,8 +104,8 @@
 							       		 <tr class="row<%=i%>" onmouseover="mouse_event(this,"row_hover");" onmouseout="mouse_event(this,"row1");"> 
 								           	<td valign="top" align="left"  width="10%">${customerFeedbacks.date_of_feedback}</td>
 											<td valign="top" align="left" width="15%">${customerFeedbacks.type_of_feedback}</td>
-											<td valign="top" align="left" width="10%">${customerFeedbacks.feedback_recorded_by}</td>
-											<td valign="top" align="left" width="10%"><a href="download_attachment?fid=<c:out value="${customerFeedbacks.feedback_id}"/>">Download</a></td>
+									<%-- 		<td valign="top" align="left" width="10%">${customerFeedbacks.feedback_recorded_by}</td>
+									 --%>		<td valign="top" align="left" width="10%"><a href="download_attachment?fid=<c:out value="${customerFeedbacks.feedback_id}"/>">Download</a></td>
 											<td valign="top" align="left" width="15%">${customerFeedbacks.attachments}</td>
 									    	<td valign="top" align="left" width="15%">
 											
@@ -119,7 +123,7 @@
 				</td>
 			</tr>
 		</table> 
-	</form>
+	
 </div>
 
 <script>
@@ -178,7 +182,7 @@ function findpart()
 // alert(document.getElementById("moblie").value);
 // alert(document.getElementById("group").value);
 // alert(document.getElementById("city").value);
-window.location="?do=viewparticipants&moblie="+document.getElementById("moblie").value+"&group="+document.getElementById("group").value+"&city="+document.getElementById("city").value;
+window.location="?do=viewparticipants&id="+document.getElementById("id").value+"&date="+document.getElementById("date").value+"&type="+document.getElementById("type").value;
 }
 </script>
 

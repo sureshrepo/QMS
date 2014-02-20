@@ -106,7 +106,7 @@
 							       			else
 							       			i=1;%>
 							       		<tr class="row<%=i%>" ">
-								           	<td valign="top" align="left"  width="15%">${supplierperformance.supplier_id}</td>
+								           	<td valign="top" align="left"  width="15%"><a href="list_supplierperformance?supplier_id=${supplierperformance.supplier_id}">${supplierperformance.supplier_id}</a></td>
 											<td valign="top" align="left" width="15%">${supplierperformance.supplier_name}</td>
 											<td valign="top" align="left" width="15%">${supplierperformance.phone}</td>
 											<td valign="top" align="left" width="15%">${supplierperformance.email_address}</td>

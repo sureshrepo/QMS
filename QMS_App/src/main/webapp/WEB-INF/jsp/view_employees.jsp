@@ -111,7 +111,7 @@
 							       			else
 							       			i=1;%>
 							       		<tr class="row<%=i%>" ">
-								           	<td valign="top" align="left"  width="10%">${employees.employee_id}</td>
+								           	<td valign="top" align="left"  width="10%"><a href="list_employee?id=${employees.employee_id}">${employees.employee_id}</td>
 											<td valign="top" align="left" width="15%">${employees.name}</td>
 											<td valign="top" align="left" width="10%">${employees.job_title}</td>
 											<td valign="top" align="left" width="10%">${employees.date_hired}</td>

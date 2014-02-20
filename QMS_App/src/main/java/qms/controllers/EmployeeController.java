@@ -25,6 +25,7 @@ import qms.model.Employee;
 import qms.model.SupplierPerformance;
 import qms.forms.DocumentMainForm;
 import qms.forms.EmployeeForm;
+import qms.forms.InternalAuditsForm;
 
 
 import qms.dao.JobDAO;
@@ -182,6 +183,23 @@ public class EmployeeController
 		}
 		}
 
+	
+// INTERNAL AUDITS REPORT list page	
+	
+	@RequestMapping(value = "list_employee", method = RequestMethod.GET)
+	public String list_employee(@RequestParam("id") String employee_id,
+			ModelMap model, Principal principal) 
+	{
+		EmployeeForm employeeForm = new EmployeeForm();
+
+		employeeForm.setEmployees(employeeDAO.edit_employee(employee_id));
+System.out.println("edit:"+employee_id);
+		model.addAttribute("employeeForm",employeeForm);
+		model.addAttribute("menu","employees");
+		return "list_employee";
+	}
+
+	
 	@RequestMapping(value = "/employee_report", method = RequestMethod.GET)
 	public String reportEmployee(ModelMap model) {
 		  model.addAttribute("menu","employees");

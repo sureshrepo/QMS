@@ -203,7 +203,8 @@
 							       			else
 							       			i=1;%>
 							       		<tr class="row<%=i%>" onmouseover="mouse_event(this,"row_hover");" onmouseout="mouse_event(this,"row1");">
-								           	<td valign="top" align="left"  width="10%">${nonconformance.id}</td><%-- 
+								           	<td valign="top" align="left"  width="10%"><a href="list_nonconformance?id=${nonconformance.id}">${nonconformance.id}</a></td>
+								           	<%-- 
 											<td valign="top" align="left" width="15%">${nonconformance.source_of_nonconformance}</td>
 											<td valign="top" align="left" width="10%">${nonconformance.external_id}</td> --%>
 											<td valign="top" align="left" width="10%">${nonconformance.type_of_nonconformance}</td>

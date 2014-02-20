@@ -37,6 +37,7 @@ import qms.dao.CustomerFeedbackDAO;
 import qms.model.CustomerFeedback;
 import qms.forms.CustomerFeedbackForm;
 import qms.forms.MaintenanceForm;
+import qms.forms.SupplierPerformanceForm;
 import qms.dao.FileHandlingDAO;
 
 @Controller
@@ -194,5 +195,36 @@ public class CustomerFeedbackController
 		return "/view_customerfeedback";
 	}
 	
+	@RequestMapping(value="/findcustomerfeedback",method=RequestMethod.GET)		
+	public String findcustomerfeedback(HttpServletRequest request,HttpSession session,@RequestParam("date_of_feedback") String date,@RequestParam("type_of_feedback") String type,ModelMap model)
+	{
 	
+		System.out.println("find");
+		
+		session.setAttribute("date", date);
+		session.setAttribute("type",type);
+		if(date=="" && type=="")
+		{
+			CustomerFeedbackForm customerFeedbackForm = new CustomerFeedbackForm();
+			customerFeedbackForm.setCustomerFeedbacks(customerFeedbackDAO.getfindcustomerfeedback(date, type));
+			model.addAttribute("customerFeedbackForm",customerFeedbackForm);
+			model.addAttribute("menu", "customer");
+			System.out.println("finding....");
+			return "view_customerfeedback";
+		}
+		else
+		{
+			System.out.println("searching.......");
+		CustomerFeedbackForm customerFeedbackForm = new CustomerFeedbackForm();
+		customerFeedbackForm.setCustomerFeedbacks(customerFeedbackDAO.getfindcustomerfeedback(date, type));
+       
+		System.out.println("the search operation is perform well.....");
+		model.addAttribute("customerFeedbackForm", customerFeedbackForm);
+        model.addAttribute("menu","customer");
+        System.out.println("finding result");
+        model.addAttribute("menu","customer");
+		return "view_customerfeedback";		
+		}
+		}
+
 }

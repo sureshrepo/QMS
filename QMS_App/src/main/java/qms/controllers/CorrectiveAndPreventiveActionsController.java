@@ -1,5 +1,6 @@
 package qms.controllers;
 
+import java.io.IOException;
 import java.security.Principal;
 import java.util.ArrayList;
 
@@ -7,8 +8,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.security.Principal;
+import java.util.ArrayList;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -22,10 +28,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import qms.dao.CorrectiveAndPreventiveActionsDAO;
 import qms.forms.CorrectiveAndPreventiveActionsForm;
-import qms.forms.InternalAuditsForm;
-import qms.forms.MaintenanceForm;
 import qms.model.CorrectiveAndPreventiveActions;
-import qms.model.InternalAudits;
+
 
 
 @Controller
@@ -34,14 +38,12 @@ public class CorrectiveAndPreventiveActionsController
 {
 	@Autowired
 	CorrectiveAndPreventiveActionsDAO correctiveAndPreventiveActionsDAO;
-private static final Logger logger = LoggerFactory.getLogger(MainController.class);
-	
-	
+
 	
 	
 	
 	//CorrectiveAndPreventiveActions Report generation
-	@RequestMapping(value = "/correctiveAndPreventiveActions_report", method = RequestMethod.POST)
+	@RequestMapping(value = "/capas_report", method = RequestMethod.POST)
 	public ModelAndView generateActions_Report(HttpServletRequest request,ModelMap model) {
 		
 	String[] fields={"capa_id","nc_id","source_of_nonconformance","external_id",
@@ -75,7 +77,7 @@ private static final Logger logger = LoggerFactory.getLogger(MainController.clas
 			  break;
 				  
 		}		
-		 System.out.println(title);
+		 
 	if(Integer.parseInt(request.getParameter("report_type"))==1)
 		{
 		if(request.getParameterValues("report_field[]")!=null)
@@ -87,7 +89,7 @@ private static final Logger logger = LoggerFactory.getLogger(MainController.clas
 						
 				//fields=request.getParameterValues("report_type");
 				
-				ModelAndView modelAndView=new ModelAndView("correctiveAndPreventiveActionsDAO","correctiveAndPreventiveActions",correctiveAndPreventiveActions);
+				ModelAndView modelAndView=new ModelAndView("CorrectiveAndPreventiveActionsDAO","correctiveAndPreventiveActions",correctiveAndPreventiveActions);
 				modelAndView.addObject("fields",request.getParameterValues("report_field[]"));
 				modelAndView.addObject("title",title);
 				return modelAndView ;
@@ -95,7 +97,7 @@ private static final Logger logger = LoggerFactory.getLogger(MainController.clas
 		}
 		
 		
-		ModelAndView modelAndView=new ModelAndView("correctiveAndPreventiveActionsDAO","correctiveAndPreventiveActions",correctiveAndPreventiveActions);
+		ModelAndView modelAndView=new ModelAndView("CorrectiveAndPreventiveActionsDAO","correctiveAndPreventiveActions",correctiveAndPreventiveActions);
 		modelAndView.addObject("fields",fields);
 		modelAndView.addObject("title",title);
 		 
@@ -160,6 +162,7 @@ private static final Logger logger = LoggerFactory.getLogger(MainController.clas
 	}
 	
 	
+	
 	@RequestMapping(value="/correctiveactions_list", method=RequestMethod.GET)
 	public String correctiveactionslist(HttpServletRequest request,ModelMap model, Principal principal) {
 		 
@@ -175,7 +178,6 @@ private static final Logger logger = LoggerFactory.getLogger(MainController.clas
 	
 	
 	
-	// INTERNAL AUDITS REPORT PAE
 	@RequestMapping(value = "edit_correctiveAndPreventiveActions", method = RequestMethod.GET)
 	public String edit_correctiveAndPreventiveActions(@RequestParam("capa_id") String capa_id,
 			ModelMap model, Principal principal) {
@@ -239,11 +241,23 @@ System.out.println(capa_id);
 	
 	@RequestMapping(value = { "/capa_report" }, method = RequestMethod.POST)
 	public String capa_report(HttpServletRequest request,ModelMap model, Principal principal) 
-	{
+	{		
+		String[] fields={"capa_id","nc_id","source_of_nonconformance","external_id",
+				"type_of_nonconformance","date_found",
+				"temporary_action","nature_of_nc",
+				"capa_requestor","request_date","capa_due_date",
+				"assigned_team_leader","team_members",
+				"root_cause_analysis_file","use_5_why_in_system",
+				"why","root_cause_statement",
+				"upload_external_analysis","upload","action",
+				"responsibility","due_date","completion_date",
+				"verified_by","verification_date"};	
+		
 		String type=request.getParameter("type_of_report");
 		
 		CorrectiveAndPreventiveActionsForm correctiveAndPreventiveActionsForm = new CorrectiveAndPreventiveActionsForm();
 		//InternalAuditsForm.setInternalAudits(internalAuditsDAO.get_report_internalaudits(type));
+		correctiveAndPreventiveActionsForm.setCorrectiveAndPreventiveActions(correctiveAndPreventiveActionsDAO.getCorrectiveAndPreventiveActions_bytype(type));
 		model.addAttribute("correctiveAndPreventiveActionsForm",correctiveAndPreventiveActionsForm);
 		model.addAttribute("type",type);		
 		model.addAttribute("report_table","yes");
