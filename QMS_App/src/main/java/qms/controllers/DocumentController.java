@@ -37,6 +37,7 @@ import qms.model.DocumentMain;
 import qms.model.NonConformance;
 import qms.dao.ProcessDAO;
 import qms.forms.EmployeeForm;
+import qms.forms.InternalAuditsForm;
 import qms.forms.ProcessForm;
 import qms.dao.EmployeeDAO;
 import qms.forms.DocumentMainForm;
@@ -382,6 +383,22 @@ public class DocumentController {
 		return "view_documents";
 
 	}
+	
+	// Document Control list page	
+	
+	@RequestMapping(value = "list_document", method = RequestMethod.GET)
+	public String list_document(@RequestParam("id") String document_id,
+			ModelMap model, Principal principal) 
+	{
+		DocumentMainForm documentMainForm = new DocumentMainForm();
+
+		documentMainForm.setDocumentMains(documentControlDAO.list_documents(document_id));
+
+		model.addAttribute("documentMainForm", documentMainForm);
+		model.addAttribute("menu","document");
+		return "list_document";
+	}
+
 
 	@RequestMapping(value = "/document_report", method = RequestMethod.GET)
 	public String reportDocument(ModelMap model) {

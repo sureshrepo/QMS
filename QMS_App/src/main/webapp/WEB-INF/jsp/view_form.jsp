@@ -102,7 +102,7 @@
 							       			else
 							       			i=1;%>
 							       		<tr class="row<%=i%>" onmouseover="mouse_event(this,"row_hover");" onmouseout="mouse_event(this,"row1");">
-								           	<td valign="top" align="left"  width="10%">${form.auto_number}</td>
+								           	<td valign="top" align="left"  width="10%"><a href="list_form?id=${form.auto_number}">${form.auto_number}</a></td>
 									        <td valign="top" align="left" width="10%">${form.form_or_rec_id}</td>
 											<td valign="top" align="left" width="10%">${form.responsibility}</td>
 											<td valign="top" align="left" width="10%">${form.process}</td>

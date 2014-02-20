@@ -353,6 +353,22 @@ public class FormController
 		
  	}
 	
+// Document Control list page	
+	
+	@RequestMapping(value = "list_form", method = RequestMethod.GET)
+	public String list_document(@RequestParam("id") String auto_number,
+			ModelMap model, Principal principal) 
+	{
+		FormForm formForm = new FormForm();
+
+		formForm.setForm(formDAO.list_form(auto_number));
+		model.addAttribute("formForm", formForm);
+		model.addAttribute("menu","document");
+		return "list_form";
+	}
+
+
+	
 	@RequestMapping(value={"/view_form"},method=RequestMethod.GET)
 	public String viewEmployees(ModelMap model,Principal principal,Employee employee)
 	{

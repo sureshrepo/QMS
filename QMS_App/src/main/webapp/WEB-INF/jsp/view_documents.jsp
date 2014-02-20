@@ -124,7 +124,7 @@
 							       			else
 							       			i=1;%>
 							       		<tr class="row<%=i%>" ">
-								           	<td valign="top" align="left"  width="10%">${documentMains.document_id}</td>
+								           	<td valign="top" align="left"  width="10%"><a href="list_document?id=${documentMains.document_id}">${documentMains.document_id}</a></td>
 											<td valign="top" align="left" width="15%">${documentMains.document_title}</td>
 											<td valign="top" align="left" width="15%">${documentMains.document_type}</td>
 											<td valign="top" align="left" width="10%">${documentMains.location}</td>
