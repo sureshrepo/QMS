@@ -1,5 +1,17 @@
 package qms.dao;
 
+import org.apache.poi.hssf.usermodel.HSSFFont;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.hssf.util.HSSFColor;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.Font;
+import org.springframework.web.servlet.view.document.AbstractExcelView;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,20 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.sql.DataSource;
-
-import org.apache.poi.hssf.usermodel.HSSFCell;
-import org.apache.poi.hssf.usermodel.HSSFCellStyle;
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.hssf.util.HSSFColor;
-import org.springframework.web.servlet.view.document.AbstractExcelView;
-
 import qms.model.CorrectiveAndPreventiveActions;
-import qms.model.InternalAudits;
+
 
 
 public class CorrectiveAndPreventiveActionsDAO extends AbstractExcelView
@@ -40,19 +40,44 @@ public class CorrectiveAndPreventiveActionsDAO extends AbstractExcelView
 		response.setHeader("Content-Disposition","attachment;filename='"+(String)model.get("title")+"'");
 		
 		HSSFSheet excelSheet = workbook.createSheet((String)model.get("title"));
+		excelSheet.setDefaultColumnWidth(20);
+		
 		@SuppressWarnings("unchecked")
 		List<CorrectiveAndPreventiveActions> correctiveAndPreventiveActions=(List<CorrectiveAndPreventiveActions>)model.get("correctiveAndPreventiveActions");
 		
 		
 		String[] fields=(String[])model.get("fields");
 		System.out.println(fields[0]);
-		setExcelHeader(excelSheet,correctiveAndPreventiveActions,fields);
-		setExcelRows(excelSheet,correctiveAndPreventiveActions,fields);
+		
+		//Style 1
+		CellStyle style = workbook.createCellStyle();
+	        Font font = workbook.createFont();
+	        font.setFontName("Arial");
+	        style.setFillForegroundColor(HSSFColor.BROWN.index);
+	        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
+	        style.setWrapText(true);
+	        font.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
+	        font.setColor(HSSFColor.WHITE.index);
+	        style.setFont(font);
+		
+	    //Style2
+	        CellStyle style2 = workbook.createCellStyle();
+	        Font font2 = workbook.createFont();
+	        font2.setFontName("Arial");
+	        style2.setFillForegroundColor(HSSFColor.YELLOW.index);
+	        style2.setFillPattern(CellStyle.SOLID_FOREGROUND);
+	        style2.setWrapText(true);
+	        font2.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
+	        font2.setColor(HSSFColor.WHITE.index);
+	        style2.setFont(font2); 
+	        
+		setExcelHeader(excelSheet,correctiveAndPreventiveActions,fields,style);
+		setExcelRows(excelSheet,correctiveAndPreventiveActions,fields,style2);
 		
 	}
 	
 	//creating header records
-	public void setExcelHeader(HSSFSheet excelSheet,List<CorrectiveAndPreventiveActions> correctiveAndPreventiveActions,String[] fields)
+	public void setExcelHeader(HSSFSheet excelSheet,List<CorrectiveAndPreventiveActions> correctiveAndPreventiveActions,String[] fields,CellStyle style)
 	{
 		HSSFRow excelHeader = excelSheet.createRow(0);
 		int record = 0;
@@ -80,49 +105,79 @@ public class CorrectiveAndPreventiveActionsDAO extends AbstractExcelView
 				if (field.equals("capa_id")) 
 				{
 					
-					excelHeader.createCell(record++).setCellValue(
+					excelHeader.createCell(record).setCellValue(
 							"CORRECTIVE AND PREVENTIVE ACTIONS ID");
+
+					excelHeader.getCell(record++).setCellStyle(style);
 					
 				}
 				else if (field.equals("nc_id")) {
-					excelHeader.createCell(record++).setCellValue(
+					excelHeader.createCell(record).setCellValue(
 							"NON CONFORMANCE ID");
+
+					excelHeader.getCell(record++).setCellStyle(style);
+					
 					}
 				else if (field.equals("source_of_nonconformance")) {
-					excelHeader.createCell(record++).setCellValue(
+					excelHeader.createCell(record).setCellValue(
 							"SOURCE OF NON CONFORMANCE");
+
+					excelHeader.getCell(record++).setCellStyle(style);
 					} 
 				else if (field.equals("external_id")) {
-					excelHeader.createCell(record++).setCellValue(
+					excelHeader.createCell(record).setCellValue(
 							"EXTERNAL ID");
+
+					excelHeader.getCell(record++).setCellStyle(style);
 					}
 				else if (field.equals("temporary_action")) {
-					excelHeader.createCell(record++).setCellValue(
+					excelHeader.createCell(record).setCellValue(
 							"TEMPORARY ACTION");
+
+					excelHeader.getCell(record++).setCellStyle(style);
+					
 					}
 				
 				else if (field.equals("nature_of_nc")) {
-					excelHeader.createCell(record++).setCellValue(
+					excelHeader.createCell(record).setCellValue(
 							"NATURE OF NC");
+
+					excelHeader.getCell(record++).setCellStyle(style);
+					
 					}
 				else if (field.equals("capa_requestor")) {
-					excelHeader.createCell(record++).setCellValue(
-							"CAPA REQUESTOR");}
+					excelHeader.createCell(record).setCellValue(
+							"CAPA REQUESTOR");
+
+					excelHeader.getCell(record++).setCellStyle(style);
+					}
+				
 				else if (field.equals("request_date")) {
-					excelHeader.createCell(record++).setCellValue(
+					excelHeader.createCell(record).setCellValue(
 							"REQUEST DATE");
+
+					excelHeader.getCell(record++).setCellStyle(style);
+					
 					}
 				else if (field.equals("capa_due_date")) {
-					excelHeader.createCell(record++).setCellValue(
+					excelHeader.createCell(record).setCellValue(
 							"CAPA DUE DATE");
+
+					excelHeader.getCell(record++).setCellStyle(style);
+					
 					}
 				else if (field.equals("assigned_team_leader")) {
-					excelHeader.createCell(record++).setCellValue(
+					excelHeader.createCell(record).setCellValue(
 							"ASSIGNED TEAM LEADER");
-					}
+
+					excelHeader.getCell(record++).setCellStyle(style);
+										}
 				else if (field.equals("team_members")) {
-					excelHeader.createCell(record++).setCellValue(
+					excelHeader.createCell(record).setCellValue(
 							"TEAM MEMBERS");
+
+					excelHeader.getCell(record++).setCellStyle(style);
+					
 					}
 				else if (field.equals("root_cause_analysis_file")) {
 					excelHeader.createCell(record++).setCellValue(
@@ -144,10 +199,7 @@ public class CorrectiveAndPreventiveActionsDAO extends AbstractExcelView
 					excelHeader.createCell(record++).setCellValue(
 							"UPLOAD EXTERNAL ANALYSIS");
 					}
-				else if (field.equals("upload")) {
-					excelHeader.createCell(record++).setCellValue(
-							"UPLOAD");
-					}
+				
 				
 				else if (field.equals("action")) {
 					excelHeader.createCell(record++).setCellValue(
@@ -158,20 +210,32 @@ public class CorrectiveAndPreventiveActionsDAO extends AbstractExcelView
 							"RESPONSIBILITY");
 					}
 				else if (field.equals("due_date")) {
-					excelHeader.createCell(record++).setCellValue(
+					excelHeader.createCell(record).setCellValue(
 							"DUE DATE");
+
+					excelHeader.getCell(record++).setCellStyle(style);
+					
 					}
 				else if (field.equals("completion_date")) {
-					excelHeader.createCell(record++).setCellValue(
+					excelHeader.createCell(record).setCellValue(
 							"COMPLETION DATE");
+
+					excelHeader.getCell(record++).setCellStyle(style);
+					
 					}
 				else if (field.equals("verified_by")) {
-					excelHeader.createCell(record++).setCellValue(
+					excelHeader.createCell(record).setCellValue(
 							"VERIFIED BY");
+
+					excelHeader.getCell(record++).setCellStyle(style);
+					
 					}
 				else if (field.equals("verification_date")) {
-					excelHeader.createCell(record++).setCellValue(
+					excelHeader.createCell(record).setCellValue(
 							"VERIFICATION DATE");
+
+					excelHeader.getCell(record++).setCellStyle(style);
+					
 					}
 			}
 			
@@ -195,7 +259,7 @@ public class CorrectiveAndPreventiveActionsDAO extends AbstractExcelView
 	
 	//creating cell records
 		
-	public void setExcelRows(HSSFSheet excelSheet,List<CorrectiveAndPreventiveActions> correctiveAndPreventiveActions,String[] fields){
+	public void setExcelRows(HSSFSheet excelSheet,List<CorrectiveAndPreventiveActions> correctiveAndPreventiveActions,String[] fields,CellStyle style){
 		int record = 1,column=0;
 		
 		for (CorrectiveAndPreventiveActions correctiveandpreventiveactions:correctiveAndPreventiveActions){	
@@ -279,10 +343,7 @@ public class CorrectiveAndPreventiveActionsDAO extends AbstractExcelView
 
 					excelRow.createCell(column++).setCellValue(
 							correctiveandpreventiveactions.getUpload_external_analysis());}
-				else if (field.equals("upload")) {
-
-					excelRow.createCell(column++).setCellValue(
-							correctiveandpreventiveactions.getUpload());}
+				
 				else if (field.equals("action")) {
 
 					excelRow.createCell(column++).setCellValue(
@@ -327,7 +388,7 @@ public class CorrectiveAndPreventiveActionsDAO extends AbstractExcelView
 			e1.printStackTrace();
 		}
 		try {
-			String cmd_insert = "insert into tbl_corrective_and_preventive_main(capa_id,nc_id,source_of_nonconformance,external_id,type_of_nonconformance,date_found,temporary_action,nature_of_nc,capa_requestor,request_date,capa_due_date,assigned_team_leader,team_members,root_cause_analysis_file,use_5_why_in_system,why,root_cause_statement,upload_external_analysis,upload)values('"+correctiveAndPreventiveActions.getCapa_id()+"','"+correctiveAndPreventiveActions.getNc_id()+"','"+correctiveAndPreventiveActions.getSource_of_nonconformance()+"','"+correctiveAndPreventiveActions.getExternal_id()+"','"+correctiveAndPreventiveActions.getType_of_nonconformance()+"','"+correctiveAndPreventiveActions.getDate_found()+"','"+correctiveAndPreventiveActions.getTemporary_action()+"','"+correctiveAndPreventiveActions.getNature_of_nc()+"','"+correctiveAndPreventiveActions.getCapa_requestor()+"','"+correctiveAndPreventiveActions.getRequest_date()+"','"+correctiveAndPreventiveActions.getCapa_due_date()+"','"+correctiveAndPreventiveActions.getAssigned_team_leader()+"','"+correctiveAndPreventiveActions.getTeam_members()+"','"+correctiveAndPreventiveActions.getRoot_cause_analysis_file()+"','"+correctiveAndPreventiveActions.getUse_5_why_in_system()+"','"+correctiveAndPreventiveActions.getWhy()+"','"+correctiveAndPreventiveActions.getRoot_cause_statement()+"','"+correctiveAndPreventiveActions.getUpload_external_analysis()+"','"+correctiveAndPreventiveActions.getUpload()+"')";
+			String cmd_insert = "insert into tbl_corrective_and_preventive_main(capa_id,nc_id,source_of_nonconformance,external_id,type_of_nonconformance,date_found,temporary_action,nature_of_nc,capa_requestor,request_date,capa_due_date,assigned_team_leader,team_members,root_cause_analysis_file,use_5_why_in_system,why,root_cause_statement,upload_external_analysis,attachment_name,attachment_type,attachment_referrence)values('"+correctiveAndPreventiveActions.getCapa_id()+"','"+correctiveAndPreventiveActions.getNc_id()+"','"+correctiveAndPreventiveActions.getSource_of_nonconformance()+"','"+correctiveAndPreventiveActions.getExternal_id()+"','"+correctiveAndPreventiveActions.getType_of_nonconformance()+"','"+correctiveAndPreventiveActions.getDate_found()+"','"+correctiveAndPreventiveActions.getTemporary_action()+"','"+correctiveAndPreventiveActions.getNature_of_nc()+"','"+correctiveAndPreventiveActions.getCapa_requestor()+"','"+correctiveAndPreventiveActions.getRequest_date()+"','"+correctiveAndPreventiveActions.getCapa_due_date()+"','"+correctiveAndPreventiveActions.getAssigned_team_leader()+"','"+correctiveAndPreventiveActions.getTeam_members()+"','"+correctiveAndPreventiveActions.getRoot_cause_analysis_file()+"','"+correctiveAndPreventiveActions.getUse_5_why_in_system()+"','"+correctiveAndPreventiveActions.getWhy()+"','"+correctiveAndPreventiveActions.getRoot_cause_statement()+"','"+correctiveAndPreventiveActions.getUpload_external_analysis()+"','"+correctiveAndPreventiveActions.getAttachment_name()+"','"+correctiveAndPreventiveActions.getAttachment_type()+"','"+correctiveAndPreventiveActions.getAttachment_referrence()+"')";
 			String cmd_insert1 = "insert into tbl_corrective_and_preventive_child(capa_id,action,responsibility,due_date,completion_date,verified_by,verification_date)values('"+correctiveAndPreventiveActions.getCapa_id()+"','"+correctiveAndPreventiveActions.getAction()+"','"+correctiveAndPreventiveActions.getResponsibility()+"','"+correctiveAndPreventiveActions.getDue_date()+"','"+correctiveAndPreventiveActions.getCompletion_date()+"','"+correctiveAndPreventiveActions.getVerified_by()+"','"+correctiveAndPreventiveActions.getVerification_date()+"')";
 			statement.execute(cmd_insert);
 			statement.execute(cmd_insert1);
@@ -380,7 +441,7 @@ public class CorrectiveAndPreventiveActionsDAO extends AbstractExcelView
 						.getString("why"), resultSet
 						.getString("root_cause_statement"),resultSet
 						.getString("upload_external_analysis"),
-						resultSet.getString("upload"),resultSet.getString("action"),resultSet.getString("responsibility"),resultSet.getString("due_date"),resultSet.getString("completion_date"),resultSet.getString("verified_by"),resultSet.getString("verification_date")));
+			resultSet.getString("action"),resultSet.getString("responsibility"),resultSet.getString("due_date"),resultSet.getString("completion_date"),resultSet.getString("verified_by"),resultSet.getString("verification_date"), resultSet.getString("attachment_name"),resultSet.getString("attachment_type"),resultSet.getString("attachment_referrence")));
 
 			}
 
@@ -431,7 +492,7 @@ public class CorrectiveAndPreventiveActionsDAO extends AbstractExcelView
 						.getString("why"), resultSet
 						.getString("root_cause_statement"),resultSet
 						.getString("upload_external_analysis"),
-						resultSet.getString("upload"),resultSet.getString("action"),resultSet.getString("responsibility"),resultSet.getString("due_date"),resultSet.getString("completion_date"),resultSet.getString("verified_by"),resultSet.getString("verification_date")));
+					resultSet.getString("action"),resultSet.getString("responsibility"),resultSet.getString("due_date"),resultSet.getString("completion_date"),resultSet.getString("verified_by"),resultSet.getString("verification_date"), resultSet.getString("attachment_name"),resultSet.getString("attachment_type"),resultSet.getString("attachment_referrence")));
 			}
 			
 	    }catch(Exception e){
@@ -486,7 +547,7 @@ public class CorrectiveAndPreventiveActionsDAO extends AbstractExcelView
 						.getString("why"), resultSet
 						.getString("root_cause_statement"),resultSet
 						.getString("upload_external_analysis"),
-						resultSet.getString("upload"),resultSet.getString("action"),resultSet.getString("responsibility"),resultSet.getString("due_date"),resultSet.getString("completion_date"),resultSet.getString("verified_by"),resultSet.getString("verification_date")));
+						resultSet.getString("action"),resultSet.getString("responsibility"),resultSet.getString("due_date"),resultSet.getString("completion_date"),resultSet.getString("verified_by"),resultSet.getString("verification_date"), resultSet.getString("attachment_name"),resultSet.getString("attachment_type"),resultSet.getString("attachment_referrence")));
 			}
 		
 		} catch (Exception e) {
@@ -516,7 +577,7 @@ public class CorrectiveAndPreventiveActionsDAO extends AbstractExcelView
 		}
 		try {
 			
-			String cmd_update = "update tbl_corrective_and_preventive_main set capa_id='"+correctiveAndPreventiveActions.getCapa_id()+"',nc_id='"+correctiveAndPreventiveActions.getNc_id()+"',source_of_nonconformance='"+correctiveAndPreventiveActions.getSource_of_nonconformance()+"',external_id='"+correctiveAndPreventiveActions.getExternal_id()+"',type_of_nonconformance='"+correctiveAndPreventiveActions.getType_of_nonconformance()+"',date_found='"+correctiveAndPreventiveActions.getDate_found()+"',temporary_action='"+correctiveAndPreventiveActions.getTemporary_action()+"',nature_of_nc='"+correctiveAndPreventiveActions.getNature_of_nc()+"',capa_requestor='"+correctiveAndPreventiveActions.getCapa_requestor()+"',request_date='"+correctiveAndPreventiveActions.getRequest_date()+"',capa_due_date='"+correctiveAndPreventiveActions.getCapa_due_date()+"',assigned_team_leader='"+correctiveAndPreventiveActions.getAssigned_team_leader()+"',team_members='"+correctiveAndPreventiveActions.getTeam_members()+"',root_cause_analysis_file='"+correctiveAndPreventiveActions.getRoot_cause_analysis_file()+"',use_5_why_in_system='"+correctiveAndPreventiveActions.getUse_5_why_in_system()+"',why='"+correctiveAndPreventiveActions.getWhy()+"',root_cause_statement='"+correctiveAndPreventiveActions.getRoot_cause_statement()+"',upload_external_analysis='"+correctiveAndPreventiveActions.getUpload_external_analysis()+"',upload='"+correctiveAndPreventiveActions.getUpload()+"' where capa_id='"+correctiveAndPreventiveActions.getCapa_id()+"'";
+			String cmd_update = "update tbl_corrective_and_preventive_main set capa_id='"+correctiveAndPreventiveActions.getCapa_id()+"',nc_id='"+correctiveAndPreventiveActions.getNc_id()+"',source_of_nonconformance='"+correctiveAndPreventiveActions.getSource_of_nonconformance()+"',external_id='"+correctiveAndPreventiveActions.getExternal_id()+"',type_of_nonconformance='"+correctiveAndPreventiveActions.getType_of_nonconformance()+"',date_found='"+correctiveAndPreventiveActions.getDate_found()+"',temporary_action='"+correctiveAndPreventiveActions.getTemporary_action()+"',nature_of_nc='"+correctiveAndPreventiveActions.getNature_of_nc()+"',capa_requestor='"+correctiveAndPreventiveActions.getCapa_requestor()+"',request_date='"+correctiveAndPreventiveActions.getRequest_date()+"',capa_due_date='"+correctiveAndPreventiveActions.getCapa_due_date()+"',assigned_team_leader='"+correctiveAndPreventiveActions.getAssigned_team_leader()+"',team_members='"+correctiveAndPreventiveActions.getTeam_members()+"',root_cause_analysis_file='"+correctiveAndPreventiveActions.getRoot_cause_analysis_file()+"',use_5_why_in_system='"+correctiveAndPreventiveActions.getUse_5_why_in_system()+"',why='"+correctiveAndPreventiveActions.getWhy()+"',root_cause_statement='"+correctiveAndPreventiveActions.getRoot_cause_statement()+"',upload_external_analysis='"+correctiveAndPreventiveActions.getUpload_external_analysis()+"' where capa_id='"+correctiveAndPreventiveActions.getCapa_id()+"'";
 			String cmd_update1 = "update tbl_corrective_and_preventive_child set capa_id='"+correctiveAndPreventiveActions.getCapa_id()+"',action='"+correctiveAndPreventiveActions.getAction()+"',responsibility='"+correctiveAndPreventiveActions.getResponsibility()+"',due_date='"+correctiveAndPreventiveActions.getDue_date()+"',completion_date='"+correctiveAndPreventiveActions.getCompletion_date()+"',verified_by='"+correctiveAndPreventiveActions.getVerified_by()+"',verification_date='"+correctiveAndPreventiveActions.getVerification_date()+"' where capa_id='"+correctiveAndPreventiveActions.getCapa_id()+"'";
 		
 			 statement.execute(cmd_update);
@@ -607,7 +668,7 @@ public class CorrectiveAndPreventiveActionsDAO extends AbstractExcelView
 					.getString("why"), resultSet
 					.getString("root_cause_statement"),resultSet
 					.getString("upload_external_analysis"),
-					resultSet.getString("upload"),resultSet.getString("action"),resultSet.getString("responsibility"),resultSet.getString("due_date"),resultSet.getString("completion_date"),resultSet.getString("verified_by"),resultSet.getString("verification_date")));
+					resultSet.getString("action"),resultSet.getString("responsibility"),resultSet.getString("due_date"),resultSet.getString("completion_date"),resultSet.getString("verified_by"),resultSet.getString("verification_date"), resultSet.getString("attachment_name"),resultSet.getString("attachment_type"),resultSet.getString("attachment_referrence")));
 	
 			}
 			
@@ -705,7 +766,7 @@ public class CorrectiveAndPreventiveActionsDAO extends AbstractExcelView
 					.getString("why"), resultSet
 					.getString("root_cause_statement"),resultSet
 					.getString("upload_external_analysis"),
-					resultSet.getString("upload"),resultSet.getString("action"),resultSet.getString("responsibility"),resultSet.getString("due_date"),resultSet.getString("completion_date"),resultSet.getString("verified_by"),resultSet.getString("verification_date")));
+					resultSet.getString("action"),resultSet.getString("responsibility"),resultSet.getString("due_date"),resultSet.getString("completion_date"),resultSet.getString("verified_by"),resultSet.getString("verification_date"), resultSet.getString("attachment_name"),resultSet.getString("attachment_type"),resultSet.getString("attachment_referrence")));
 	
 			}
 			
@@ -758,7 +819,7 @@ public class CorrectiveAndPreventiveActionsDAO extends AbstractExcelView
 							.getString("why"), resultSet
 							.getString("root_cause_statement"),resultSet
 							.getString("upload_external_analysis"),
-							resultSet.getString("upload"),resultSet.getString("action"),resultSet.getString("responsibility"),resultSet.getString("due_date"),resultSet.getString("completion_date"),resultSet.getString("verified_by"),resultSet.getString("verification_date")));
+						resultSet.getString("action"),resultSet.getString("responsibility"),resultSet.getString("due_date"),resultSet.getString("completion_date"),resultSet.getString("verified_by"),resultSet.getString("verification_date"), resultSet.getString("attachment_name"),resultSet.getString("attachment_type"),resultSet.getString("attachment_referrence")));
 			
 			}
 
@@ -810,7 +871,7 @@ public class CorrectiveAndPreventiveActionsDAO extends AbstractExcelView
 							.getString("why"), resultSet
 							.getString("root_cause_statement"),resultSet
 							.getString("upload_external_analysis"),
-							resultSet.getString("upload"),resultSet.getString("action"),resultSet.getString("responsibility"),resultSet.getString("due_date"),resultSet.getString("completion_date"),resultSet.getString("verified_by"),resultSet.getString("verification_date")));
+				resultSet.getString("action"),resultSet.getString("responsibility"),resultSet.getString("due_date"),resultSet.getString("completion_date"),resultSet.getString("verified_by"),resultSet.getString("verification_date"), resultSet.getString("attachment_name"),resultSet.getString("attachment_type"),resultSet.getString("attachment_referrence")));
 			
 			}
 

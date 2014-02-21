@@ -111,18 +111,18 @@ public class CustomerFeedbackController
 	
 	
 	@RequestMapping(value={"/download_attachment"}, method = RequestMethod.GET)
-	public void download_attachment(@RequestParam("fid") String fid,HttpServletResponse response,ModelMap model, Principal principal ) throws IOException {
+	public String download_attachment(@RequestParam("fid") String feedback_id,HttpServletResponse response,ModelMap model, Principal principal ) throws IOException {
 		
-		System.out.println(fid);
+	
 		CustomerFeedbackForm customerFeedbackForm=new CustomerFeedbackForm();
-		customerFeedbackForm.setCustomerFeedbacks(customerFeedbackDAO.getParticular_Customersfeedbacks(fid));
+		customerFeedbackForm.setCustomerFeedbacks(customerFeedbackDAO.getParticular_Customersfeedbacks(feedback_id));
 		model.addAttribute("customerFeedbackForm",customerFeedbackForm);
-		
+		System.out.println("Feedback id is:::"+feedback_id);	
 		System.out.println("Going to download");
 		fileHandlingDAO.filedownload(response,customerFeedbackForm.getCustomerFeedbacks().get(0).getAttachment_referrence(),customerFeedbackForm.getCustomerFeedbacks().get(0).getAttachment_name());
 		System.out.println("End Download");
 		
-		//return "view_customerfeedback";
+		return "view_customerfeedback";
 	}
 	
 	@RequestMapping(value={"/insertfeedback"}, method = RequestMethod.POST)

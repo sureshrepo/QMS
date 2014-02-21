@@ -71,11 +71,11 @@
 							<table width="100%" border="0" cellspacing="0" cellpadding="0">
 							  <tr>
 							    <td align="left" valign="middle" width="10%">Id:</td>
-							    <td align="left" valign="middle" width="10%"><input type="text" name="customer_id" class="input_txtbox" id="id"></td>
+							    <td align="left" valign="middle" width="10%"><input type="text" name="customer_id" class="input_txtbx2" id="id"></td>
 							    <td align="left" valign="middle" width="15%">&nbsp;&nbsp;Name:</td>
-							    <td align="left" valign="middle" width="10%"><input type="text" name="customer_name" class="input_txtbox" id="name"></td>
+							    <td align="left" valign="middle" width="10%"><input type="text" name="customer_name" class="input_txtbx2" id="name"></td>
 							    <td align="left" valign="middle" width="8%">&nbsp;&nbsp;Address:</td>
-							    <td align="left" valign="middle" width="10%"><input type="text" name="address" id="address" class="input_txtbox"></td>
+							    <td align="left" valign="middle" width="10%"><input type="text" name="address" id="address" class="input_txtbx2"></td>
 							    <!-- <td align="center" valign="middle" width="38%"><input type="button" class="submit_btn" value="Find" name="find" onclick="findpart()"></td>
 							     -->
 							      <td align="center" valign="middle" width="20%"><input type="submit" class="submit_btn" value="Find" name="findcustomer" ></td>
@@ -92,7 +92,6 @@
 								<!-- <td valign="center" align="left" width="5%"><input type="checkbox" onclick="selectall(this.form)" value="" name="checkall"></td> -->
          						<td valign="top" align="left" width="10%">Customer&nbsp;ID</td>
 					         	<td valign="top" align="left" width="15%">Customer Name</td>
-					         	<td valign="top" align="left" width="10%">Website</td>
 								<td valign="top" align="left" width="10%">Telephone</td>
           						<td valign="top" align="left" width="15%">Email Address</td>
           						<td valign="top" align="left" width="15%">Actions</td>
@@ -107,9 +106,8 @@
 							       			else
 							       			i=1;%>
 							       		<tr class="row<%=i%>" ">
-								           	<td valign="top" align="left"  width="10%">${customers.customer_id}</td>
+								           	<td valign="top" align="left"  width="10%"><a href="list_customer?id=${customers.customer_id}">${customers.customer_id}</a></td>
 											<td valign="top" align="left" width="15%">${customers.customer_name}</td>
-											<td valign="top" align="left" width="10%">${customers.website}</td>
 											<td valign="top" align="left" width="10%">${customers.telephone}</td>
 											<td valign="top" align="left" width="15%">${customers.email_address}</td>
 											<td valign="top" align="left" width="15%">

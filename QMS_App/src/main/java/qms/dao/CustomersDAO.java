@@ -247,6 +247,39 @@ public class CustomersDAO {
 	}
 
 	
+	public List<Customers> listCustomers(String customer_id){
+		Connection con = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
+		try {
+			con = dataSource.getConnection();
+			statement = con.createStatement();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		List<Customers> customers = new ArrayList<Customers>();
+	    try{
+			resultSet = statement.executeQuery("select * from tbl_customer where customer_id='"+customer_id+"'");
+			System.out.println("came");
+			while(resultSet.next()){
+				System.out.println("count");
+				customers.add(new Customers(resultSet.getString("customer_id"), resultSet.getString("customer_name"), resultSet.getString("address"), resultSet.getString("city"), resultSet.getString("state"), resultSet.getString("country"), resultSet.getString("zipcode"), resultSet.getString("website"), resultSet.getString("contact_name"), resultSet.getString("title_of_contact"), resultSet.getString("telephone"), resultSet.getString("fax"), resultSet.getString("email_address")));
+			System.out.println("DAO output");
+			}
+	    }catch(Exception e){
+	    	System.out.println(e.toString());
+	    	releaseResultSet(resultSet);
+	    	releaseStatement(statement);
+	    	releaseConnection(con);
+	    }finally{
+	    	releaseResultSet(resultSet);
+	    	releaseStatement(statement);
+	    	releaseConnection(con);	    	
+	    }
+	    return customers;
+		
+	}
+	
 	public void releaseConnection(Connection con){
 		try{if(con != null)
 			con.close();

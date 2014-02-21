@@ -87,12 +87,12 @@
 							
 							<table width="100%" border="0" cellspacing="0" cellpadding="0">
 							  <tr>
-							    <td align="left" valign="middle" width="10%">Document ID:</td>
-							    <td align="left" valign="middle" width="10%"><input type="text" name="search_document_id" class="input_txtbx1" id="moblie"></td>
-							    <td align="left" valign="middle" width="15%">&nbsp;&nbsp;&nbsp;&nbsp;Document Title:</td>
-							    <td align="left" valign="middle" width="10%"><input type="text" name="search_document_title" class="input_txtbx1" id="moblie"></td>
+							    <td align="left" valign="middle" width="5%"> ID:</td>
+							    <td align="left" valign="middle" width="8%"><input type="text" name="search_document_id" class="input_txtbx2" id="moblie"></td>
+							    <td align="left" valign="middle" width="26%">&nbsp;&nbsp;Document Title:</td>
+							    <td align="left" valign="middle" width="8%"><input type="text" name="search_document_title" class="input_txtbx2" id="moblie"></td>
 							    <td align="left" valign="middle" width="8%">&nbsp;&nbsp;Process:</td>
-							    <td align="left" valign="middle" width="10%"><input type="text" name="search_process" id="search_process" class="input_txtbx1"></td>
+							    <td align="left" valign="middle" width="10%"><input type="text" name="search_process" id="search_process" class="input_txtbx2"></td>
 							    <td align="center" valign="middle" width="38%"><input type="submit" value="Find" class="submit_btn"  onclick="findpart()"></td>
 							    <td align="center" valign="middle" width="38%"><input type="button" value="Clear" class="submit_btn"></td>
 							  </tr>
@@ -108,7 +108,7 @@
          						<td valign="top" align="left" width="10%">Document&nbsp;ID</td>
 					         	<td valign="top" align="left" width="15%">Document Title</td>
 					         	<td valign="top" align="left" width="15%">Document Type</td>
-								<td valign="top" align="left" width="10%">Location</td>
+
           						<td valign="top" align="left" width="10%">Process</td>
           						<td valign="top" align="center" width="10%">Document</td>
           						<td valign="top" align="center" width="15%">External Documents</td>
@@ -127,7 +127,6 @@
 								           	<td valign="top" align="left"  width="10%"><a href="list_document?id=${documentMains.document_id}">${documentMains.document_id}</a></td>
 											<td valign="top" align="left" width="15%">${documentMains.document_title}</td>
 											<td valign="top" align="left" width="15%">${documentMains.document_type}</td>
-											<td valign="top" align="left" width="10%">${documentMains.location}</td>
 											<td valign="top" align="left" width="10%">${documentMains.process}</td>
 											
 											<c:choose>

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import qms.dao.CustomersDAO;
 import qms.model.Customers;
 import qms.forms.CustomersForm;
+import qms.forms.FormForm;
 
 @Controller
 @SessionAttributes({"customer"})
@@ -154,6 +155,22 @@ public class CustomersController
         model.addAttribute("menu","customer");
 		return "view_customers";		
 		}
+		}
+	
+	
+	// Customer list page	
+		
+		@RequestMapping(value = "list_customer", method = RequestMethod.GET)
+		public String list_customer(@RequestParam("id") String customer_id,
+				ModelMap model, Principal principal) 
+		{
+			CustomersForm customersForm = new CustomersForm();
+
+			customersForm.setCustomers(customersDAO.listCustomers(customer_id));
+			System.out.println("list id::"+customer_id);
+			model.addAttribute("customersForm", customersForm);
+			model.addAttribute("menu","customer");
+			return "list_customer";
 		}
 
 	

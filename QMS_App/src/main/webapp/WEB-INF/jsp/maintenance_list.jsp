@@ -1,7 +1,10 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <jsp:include page="header.jsp"></jsp:include>
+
 <script type="text/javascript" src="js/ajaxpaging.js"></script>
+
+ 
 <script src="resources/js/jquery_checkbox.js" type="text/javascript"></script>
 <div id="right_content">
 	
@@ -51,6 +54,24 @@
 			          <h2>Maintenance List</h2>
 			        </div>
 			        <div class="contentbox">
+		<form action="search_maintenance" name="dashboard" method="GET">
+<div style="border:#ccc 2px solid; padding:15px; margin-bottom:15px;">
+							<table width="100%" border="0" cellspacing="0" cellpadding="0">
+							  <tr>
+							    <td align="left" valign="middle" width="5%">ID : </td>
+							    <td align="left" valign="middle" width="5%"><input type="text" name="equipment_id" class="input_txtbx2" id="equipment_id"></td>
+							    <td align="left" valign="middle" width="15%">&nbsp;Equipment Name:</td>
+							    <td align="left" valign="middle" width="10%"><input type="text" name="equipment_name" class="input_txtbx2" id="equipment_name"></td>
+							    <td align="left" valign="middle" width="5%">&nbsp;Date:</td>
+							    <td align="left" valign="middle" width="5%"><input type="text" name="date_acquired" id="date_acquired" class="input_txtbx2"></td>
+							   	<td align="center" valign="middle">
+							  	<input type="submit" class="submit_btn" value="Find" id="id_submit" name="search_maintenance"/></td>
+							 	<td align="center" valign="middle">
+							  <input type="button" class="submit_btn" name="clear" id="id_clear" value="clear">
+							  </tr>
+							</table>
+						</div>
+</form>
 			     
 			      <form action="maintenance_list" method="POST"> 
 						<table cellpadding="0" cellspacing="0" border="0" width="100%">
@@ -105,4 +126,11 @@ function confirmation() {
 }
 
 
-</script>    				       				
+</script>  
+<script>
+   $(function() {
+		 var format="yy-mm-dd";
+	           $( "#datepicker" ).datepicker();
+	           
+	         });
+   </script>  				       				

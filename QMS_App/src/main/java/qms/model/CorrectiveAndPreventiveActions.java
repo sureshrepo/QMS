@@ -1,6 +1,7 @@
 package qms.model;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 public class CorrectiveAndPreventiveActions
 {
@@ -16,9 +17,13 @@ public class CorrectiveAndPreventiveActions
 			String assigned_team_leader, String team_members,
 			String root_cause_analysis_file, String use_5_why_in_system,
 			String why, String root_cause_statement,
-			String upload_external_analysis,String upload, String action,
+			String upload_external_analysis, String action,
 			String responsibility, String due_date, String completion_date,
-			String verified_by, String verification_date) {
+			String verified_by, String verification_date, String attachment_name, String attachment_type,
+			String attachment_referrence)
+	// String attachment_name, String attachment_type,
+	//String attachment_referrence
+	{
 		super();
 		this.capa_id = capa_id;
 		this.nc_id = nc_id;
@@ -38,54 +43,116 @@ public class CorrectiveAndPreventiveActions
 		this.why = why;
 		this.root_cause_statement = root_cause_statement;
 		this.upload_external_analysis = upload_external_analysis;
-		this.upload = upload;
+		
 		this.action = action;
 		this.responsibility = responsibility;
 		this.due_date = due_date;
 		this.completion_date = completion_date;
 		this.verified_by = verified_by;
 		this.verification_date = verification_date;
+		this.attachment_name = attachment_name;
+		this.attachment_type = attachment_type;
+		this.attachment_referrence = attachment_referrence;
+	
 	}
+	@NotEmpty
 	private String capa_id;
+	@NotEmpty
 	private String nc_id;
+	@NotEmpty
 	private String source_of_nonconformance;
+	@NotEmpty
 	private String external_id;
+	@NotEmpty
 	private String type_of_nonconformance;
+	@NotEmpty
 	private String date_found;
+	@NotEmpty
 	private String temporary_action;
+	@NotEmpty
 	private String nature_of_nc;
+	
+	@NotEmpty
+	private String capa_requestor;
+	@NotEmpty
+	private String request_date;
+	@NotEmpty
+	private String capa_due_date;
+	
+	
+	@NotEmpty
+	private String assigned_team_leader;
+	@NotEmpty
+	private String team_members;
+	@NotEmpty
+	private String root_cause_analysis_file;
+	
+	private String use_5_why_in_system;
+	
+	private String why;
+	@NotEmpty
+	private String root_cause_statement;
+	@NotEmpty
+	private String upload_external_analysis;
+
+	@NotEmpty
+	private String action;
+	@NotEmpty
+	private String responsibility;
+	@NotEmpty
+	private String due_date;
+	@NotEmpty
+	private String completion_date;
+	@NotEmpty
+	private String verified_by;
+	@NotEmpty
+	private String verification_date;
+	
+	private CommonsMultipartFile attachments;
+	private String attachment_name;	
+	private String attachment_type;
+	private String attachment_referrence;
+
 	public String getNature_of_nc() {
 		return nature_of_nc;
 	}
 	public void setNature_of_nc(String nature_of_nc) {
 		this.nature_of_nc = nature_of_nc;
 	}
-	private String capa_requestor;
-	private String request_date;
-	private String capa_due_date;
 	
-	@NotEmpty
-	private String assigned_team_leader;
-	private String team_members;
-	private String root_cause_analysis_file;
-	private String use_5_why_in_system;
-	private String why;
-	private String root_cause_statement;
-	private String upload_external_analysis;
-	private String upload;
-	public String getUpload() {
-		return upload;
+	public String getAttachment_name() {
+		return attachment_name;
 	}
-	public void setUpload(String upload) {
-		this.upload = upload;
+
+	public void setAttachment_name(String attachment_name) {
+		this.attachment_name = attachment_name;
 	}
-	private String action;
-	private String responsibility;
-	private String due_date;
-	private String completion_date;
-	private String verified_by;
-	private String verification_date;
+
+	public String getAttachment_type() {
+		return attachment_type;
+	}
+
+	public void setAttachment_type(String attachment_type) {
+		this.attachment_type = attachment_type;
+	}
+
+	public String getAttachment_referrence() {
+		return attachment_referrence;
+	}
+
+	public void setAttachment_referrence(String attachment_referrence) {
+		this.attachment_referrence = attachment_referrence;
+	}
+
 	
+	public CommonsMultipartFile getAttachments() {
+		return attachments;
+	}
+
+	public void setAttachments(CommonsMultipartFile attachments) {
+		this.attachments = attachments;
+	}
+
 	public String getRoot_cause_statement() {
 		return root_cause_statement;
 	}

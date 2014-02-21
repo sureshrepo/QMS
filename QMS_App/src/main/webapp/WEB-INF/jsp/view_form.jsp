@@ -66,12 +66,12 @@
 <div style="border:#993300 2px solid; padding:15px; margin-bottom:15px;">
 							<table width="100%" border="0" cellspacing="0" cellpadding="0">
 							  <tr>
-							    <td align="left" valign="middle" width="10%">Auto Number</td>
-							    <td align="left" valign="middle" width="10%"><input type="text" name="auto_number" class="input_txtbx1" id="recordtitle"></td>
-							    <td align="left" valign="middle" width="15%">&nbsp;Form Id</td>
-							    <td align="left" valign="middle" width="10%"><input type="text" name="form_or_rec_id" class="input_txtbx1" id="mediatype"></td>
-							    <td align="left" valign="middle" width="15%">&nbsp;Document Id</td>
-							    <td align="left" valign="middle" width="10%"><input type="text" name="document_id" id="retentiontime" class="input_txtbx1"></td>
+							    <td align="left" valign="middle" width="20%">Auto Number:</td>
+							    <td align="left" valign="middle" width="10%"><input type="text" name="auto_number" class="input_txtbx2" id="recordtitle"></td>
+							    <td align="left" valign="middle" width="15%">&nbsp;Form Id:</td>
+							    <td align="left" valign="middle" width="10%"><input type="text" name="form_or_rec_id" class="input_txtbx2" id="mediatype"></td>
+							    <td align="left" valign="middle" width="18%">&nbsp;Document Id:</td>
+							    <td align="left" valign="middle" width="10%"><input type="text" name="document_id" id="retentiontime" class="input_txtbx2"></td>
 							    <td align="center" valign="middle" width="38%">
 							  <input type="submit" value="Find" class="submit_btn" name="search" id="id_submit" onmouseover="showTooltip('tooltip_id','inp_id3');" /></td>
 							  <td align="center" valign="middle" width="38%"><input type="submit" value="Clear" class="submit_btn" ></td>
@@ -84,7 +84,6 @@
 								<tr class="title">
 									<td valign="top" align="left" width="10%">Auto Number</td>
 									<td valign="top" align="left" width="10%">Form/Rec ID</td>
-									<td valign="top" align="left" width="15%">Responsibility</td>
 									<td valign="top" align="left" width="10%">Process</td>
 									<td valign="top" align="left" width="10%">Effective Date</td>
 									 <td valign="top" align="left" width="10%">Document Id</td>
@@ -104,7 +103,6 @@
 							       		<tr class="row<%=i%>" onmouseover="mouse_event(this,"row_hover");" onmouseout="mouse_event(this,"row1");">
 								           	<td valign="top" align="left"  width="10%"><a href="list_form?id=${form.auto_number}">${form.auto_number}</a></td>
 									        <td valign="top" align="left" width="10%">${form.form_or_rec_id}</td>
-											<td valign="top" align="left" width="10%">${form.responsibility}</td>
 											<td valign="top" align="left" width="10%">${form.process}</td>
 											<td valign="top" align="left" width="10%">${form.effective_date}</td>
 											<td valign="top" align="left" width="10%">${form.document_id}</td>

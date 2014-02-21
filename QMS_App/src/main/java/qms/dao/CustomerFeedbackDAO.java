@@ -168,7 +168,7 @@ public class CustomerFeedbackDAO extends AbstractExcelView
 		
 	}
 	
-	public List<CustomerFeedback> getParticular_Customersfeedbacks(String feedbackid){
+	public List<CustomerFeedback> getParticular_Customersfeedbacks(String feedback_id){
 		Connection con = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
@@ -180,7 +180,7 @@ public class CustomerFeedbackDAO extends AbstractExcelView
 		}
 		List<CustomerFeedback> customerFeedbacks = new ArrayList<CustomerFeedback>();
 	    try{
-			resultSet = statement.executeQuery("select * from tbl_customerfeedback where feedback_id='"+feedbackid+"'");
+			resultSet = statement.executeQuery("select * from tbl_customerfeedback where feedback_id='"+feedback_id+"'");
 			//System.out.println("came");
 			while(resultSet.next()){
 			customerFeedbacks.add(new CustomerFeedback(resultSet.getString("feedback_id"),resultSet.getString("date_of_feedback"), resultSet.getString("type_of_feedback"), resultSet.getString("feedback_recorded_by"), resultSet.getString("feedback_details"), resultSet.getString("attachment_name"),resultSet.getString("attachement_type"),resultSet.getString("attachment_referrence")));

@@ -158,7 +158,7 @@
 </td>
 </tr>
 			<tr>
-				<td valign="top" align="left"><div>
+				<td valign="top" align="left">
 						<div class="headings altheading">
 							<h2>Non Conformance</h2>
 						</div>
@@ -171,12 +171,30 @@
 							    <td align="left" valign="middle" width="10%"> NC ID: </td>
 							    <td align="left" valign="middle"><input type="text" name="id" class="input_text" id="id"></td>
 							    <td align="left" valign="middle">Type of Non Conformance:</td>
-							    <td align="left" valign="middle"><input type="text" name="type_of_nonconformance" id="type_of_nonconformance" class="input_text"></td>
-							    <td align="left" valign="middle">Product Id:</td>
+							    <td valign="top" align="left" class="input_txt">
+				                  									<select name="type_of_nonconformance" id="type_of_nonconformance" class="input_cmbbx1">
+				                  										<option value="">--Select--</option>
+						                    							<option
+				                  										<c:if test="${nonconformance.type_of_nonconformance eq 'Product Quality'}"><c:out value="Selected"/></c:if>
+																		value="Product Quality">Product Quality</option>
+																		<option
+				                  										<c:if test="${nonconformance.type_of_nonconformance eq 'Service Quality'}"><c:out value="Selected"/></c:if>
+																		value="Service Quality">Service Quality</option>
+																		<option
+				                  										<c:if test="${nonconformance.type_of_nonconformance eq 'Late Delivery'}"><c:out value="Selected"/></c:if>
+																		value="Late Delivery">Late Delivery</option>
+																		<option
+				                  										<c:if test="${nonconformance.type_of_nonconformance eq 'Early Delivery'}"><c:out value="Selected"/></c:if>
+																		value="Early Delivery">Early Delivery</option>
+															
+																	</select></td>
+							   
+							 <!--    <td align="left" valign="middle"><input type="text" name="type_of_nonconformance" id="type_of_nonconformance" class="input_text"></td>
+							  --><!--    <td align="left" valign="middle">Product Id:</td>
 							    <td align="left" valign="middle"><input type="text" name="product_id" id="product_id" class="input_text"></td>
-							  
-							    <td align="center" valign="middle"><input type="submit" class="submit_btn" value="Find"></td>&nbsp;
-							     <td align="center" valign="middle"><input type="reset" class="submit_btn" value="Clear"></td>
+							   -->
+							    <td align="center" valign="middle"><input type="submit" class="submit_btn" value="Find" name="findnonconformance"></td>
+							    <td align="center" valign="middle"><input type="reset" class="submit_btn" value="Clear"></td>
 							  </tr>
 							</table>
 							</form>
@@ -226,7 +244,7 @@
 </table>
 </form>
 </div>
-</div>
+
 </td>
 </tr>
 </table>

@@ -1,17 +1,17 @@
 package qms.controllers;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.security.Principal;
-import java.util.ArrayList;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
+//import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 import java.security.Principal;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -24,10 +24,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import qms.dao.CorrectiveAndPreventiveActionsDAO;
+//import qms.dao.EmployeeDAO;
+import qms.dao.FileHandlingDAO;
+//import qms.dao.ProcessDAO;
 import qms.forms.CorrectiveAndPreventiveActionsForm;
+import qms.forms.DocumentMainForm;
+//import qms.forms.DocumentMainForm;
 import qms.model.CorrectiveAndPreventiveActions;
 
 
@@ -36,6 +42,11 @@ import qms.model.CorrectiveAndPreventiveActions;
 @SessionAttributes({"correctiveAndPreventiveActions"})
 public class CorrectiveAndPreventiveActionsController
 {
+	
+
+	@Autowired
+	FileHandlingDAO fileHandlingDAO;
+
 	@Autowired
 	CorrectiveAndPreventiveActionsDAO correctiveAndPreventiveActionsDAO;
 
@@ -53,7 +64,7 @@ public class CorrectiveAndPreventiveActionsController
 			"assigned_team_leader","team_members",
 			"root_cause_analysis_file","use_5_why_in_system",
 			"why","root_cause_statement",
-			"upload_external_analysis","upload","action",
+			"upload_external_analysis","action",
 			"responsibility","due_date","completion_date",
 			"verified_by","verification_date"};	
 		String title = "Corrective And Preventive Actions";
@@ -105,6 +116,31 @@ public class CorrectiveAndPreventiveActionsController
 		
 	}
 	
+	@RequestMapping(value = "/downloadMaindoc1", method = RequestMethod.GET)
+	public String downloadMaindoc(HttpServletResponse response,
+			@RequestParam("capa_id") String capa_id, ModelMap model)
+			throws IOException {
+
+
+		CorrectiveAndPreventiveActionsForm correctiveAndPreventiveActionsForm = new CorrectiveAndPreventiveActionsForm();
+
+		correctiveAndPreventiveActionsForm.setCorrectiveAndPreventiveActions(correctiveAndPreventiveActionsDAO.getCorrectiveAndPreventiveActions(capa_id));
+			
+		model.addAttribute("correctiveAndPreventiveActionsForm",correctiveAndPreventiveActionsForm);
+		
+		
+
+		fileHandlingDAO
+				.filedownload(response, correctiveAndPreventiveActionsForm.getCorrectiveAndPreventiveActions()
+						.get(0).getAttachment_referrence(), correctiveAndPreventiveActionsForm.getCorrectiveAndPreventiveActions().get(0).getAttachment_name());
+
+		
+		return "correctiveactions_list";
+}
+	
+	
+	
+	
 @RequestMapping(value={"/search_correctiveactions"}, method = RequestMethod.GET)
 	
 	public String search_correctiveactions(@RequestParam("capa_requestor") String capa_requestor,@RequestParam("request_date") String request_date,@RequestParam("action") String action,ModelMap model, Principal principal)
@@ -130,36 +166,129 @@ public class CorrectiveAndPreventiveActionsController
 
 	}
 
-	// inserting audit
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/add_correctiveAndPreventiveActions", method = RequestMethod.POST)
 	public String insert_correctiveAndPreventiveActions(HttpSession session,
 			@ModelAttribute("CorrectiveAndPreventiveActions") @Valid CorrectiveAndPreventiveActions correctiveAndPreventiveActions,
-			BindingResult result, ModelMap model, Principal principal) {
+			BindingResult result, ModelMap model, Principal principal) 
+	{
+		
 
 		session.setAttribute("correctiveAndPreventiveActions",correctiveAndPreventiveActions);
 
-		if (result.hasErrors()) {
+		if (result.hasErrors()) 
+		{System.out.println("if");
 			// session.removeAttribute("audit_start_date");
 			model.addAttribute("capa_id",correctiveAndPreventiveActionsDAO.get_maxid());
 			return "add_correctiveAndPreventiveActions";
-		} else {
+		} 
+		else 
+		{System.out.println("else");
+			int flag = 0;
+			correctiveAndPreventiveActions.setCapa_id(correctiveAndPreventiveActions.getCapa_id());
 
-			if (!correctiveAndPreventiveActionsDAO.insert_correctiveAndPreventiveActions(correctiveAndPreventiveActions)) {
-				CorrectiveAndPreventiveActionsForm correctiveAndPreventiveActionsForm = new CorrectiveAndPreventiveActionsForm();
-				correctiveAndPreventiveActionsForm.setCorrectiveAndPreventiveActions(correctiveAndPreventiveActionsDAO
-						.getCorrectiveAndPreventiveActions());
-				model.addAttribute("correctiveAndPreventiveActionsForm", correctiveAndPreventiveActionsForm);
+			System.out.println("Started Inserting documents");
+			// Started to handle upload document
+			byte[] buffer;
+			try 
+			{System.out.println("try");
+				MultipartFile file = correctiveAndPreventiveActions.getAttachments();
+				String orginal_fileName = null;
+				String duplicate_fileName = null;
+				InputStream inputStream = null;
+				OutputStream outputStream = null;
+					if (file != null) 
+					{System.out.println("file != null");
+						if (file.getSize() > 0) 
+						{System.out.println("file.getSize() > 0");
+							inputStream = file.getInputStream();
+							if (file.getSize() > 100000)
+							{
+								System.out.println("File Size:::" + file.getSize());
+								return "/add_correctiveAndPreventiveActions";
+							}
+							orginal_fileName = "D:/QMS_App/"
+								+ file.getOriginalFilename();
+							duplicate_fileName = orginal_fileName;
+							File create_file = new File(orginal_fileName);
+							int i = 1;
+							while (create_file.exists())
+								{System.out.println("create");
+									duplicate_fileName = "D:/QMS_App/"
+									+ file.getOriginalFilename().substring(
+											0,
+											file.getOriginalFilename().lastIndexOf(
+													'.'))
+									+ i
+									+ file.getOriginalFilename().substring(
+											file.getOriginalFilename().lastIndexOf(
+													'.'));
+									create_file = new File(duplicate_fileName);
+									i++;
+								}
+							outputStream = new FileOutputStream(duplicate_fileName);
+							System.out.println("fileName:" + file.getOriginalFilename());
 
+						// ------Lines to changes------//
+
+							correctiveAndPreventiveActions.setAttachment_type(file.getContentType());
+							correctiveAndPreventiveActions.setAttachment_name(file.getOriginalFilename());
+							correctiveAndPreventiveActions.setAttachment_referrence(duplicate_fileName);
+							System.out.println(correctiveAndPreventiveActions.getAttachment_type());
+						// ----End Lines to changed----//
+
+							int readBytes = 0;
+							buffer = new byte[(int) file.getSize()];
+							while ((readBytes = inputStream.read(buffer, 0,
+								(int) file.getSize())) != -1) 
+								{
+									outputStream.write(buffer, 0, readBytes);
+								}
+							outputStream.close();
+							inputStream.close();
+
+					}
+				}
+					
+				if (!correctiveAndPreventiveActionsDAO.insert_correctiveAndPreventiveActions(correctiveAndPreventiveActions))
+				 	{
+					//	model.addAttribute("success", "true");
+					//	model.addAttribute("success_message", "Inserted Successfully");
+						flag = 1;
+				 	}	
+
+			} 
+			
+			catch (Exception e)
+			{
+				System.out.println(e.toString());
+				e.printStackTrace();
 			}
-			CorrectiveAndPreventiveActionsForm correctiveAndPreventiveActionsForm = new CorrectiveAndPreventiveActionsForm();
 
-			correctiveAndPreventiveActionsForm.setCorrectiveAndPreventiveActions(correctiveAndPreventiveActionsDAO.getCorrectiveAndPreventiveActions());
+			if (flag == 1)
+			{
+				CorrectiveAndPreventiveActionsForm correctiveAndPreventiveActionsForm = new CorrectiveAndPreventiveActionsForm();
 
-			model.addAttribute("correctiveAndPreventiveActionsForm",correctiveAndPreventiveActionsForm);
+				correctiveAndPreventiveActionsForm.setCorrectiveAndPreventiveActions(correctiveAndPreventiveActionsDAO.getCorrectiveAndPreventiveActions());
+
+				model.addAttribute("correctiveAndPreventiveActionsForm",correctiveAndPreventiveActionsForm);
+				return "correctiveactions_list";
+			}
+			else
+			{
+				return "add_correctiveAndPreventiveActions";
+			}
 		}
-	//	model.addAttribute("menu","audits");
-		return "correctiveactions_list";
-	}
+	
+		
+		}
+
+	
+	
+	
+	
+	
+	
 	
 	
 	
@@ -202,7 +331,7 @@ System.out.println(capa_id);
 			CorrectiveAndPreventiveActionsForm correctiveAndPreventiveActionsForm = new CorrectiveAndPreventiveActionsForm();
 			correctiveAndPreventiveActionsForm.setCorrectiveAndPreventiveActions(correctiveAndPreventiveActionsDAO.edit_CorrectiveAndPreventiveActions(correctiveAndPreventiveActions.getCapa_id()));
 			model.addAttribute("correctiveAndPreventiveActionsForm", correctiveAndPreventiveActionsForm);
-	        return "edit_internalaudit";
+	        return "view_correctiveactions";
 		}
 		
 		correctiveAndPreventiveActionsDAO.update_correctiveAndPreventiveActions(correctiveAndPreventiveActions);
@@ -213,7 +342,7 @@ System.out.println(capa_id);
 
 		model.addAttribute("correctiveAndPreventiveActionsForm",correctiveAndPreventiveActionsForm);
 	//	model.addAttribute("menu","audits");
-		return "view_internalaudits";
+		return "view_correctiveactions";
 	}
 
 	//view records
@@ -231,27 +360,23 @@ System.out.println(capa_id);
 
 	//delete a record 
 	@RequestMapping(value = { "delete_correctiveAndPreventiveActions" }, method = RequestMethod.GET)
-	public String delete_internalaudits(@RequestParam("capa_id") String capa_id,
+	public String delete_capa(@RequestParam("capa_id") String capa_id,
 			ModelMap model, Principal principal) {
 
 		correctiveAndPreventiveActionsDAO.delete_correctiveAndPreventiveActions(capa_id);
+		CorrectiveAndPreventiveActionsForm correctiveAndPreventiveActionsForm = new CorrectiveAndPreventiveActionsForm();
+
+		correctiveAndPreventiveActionsForm.setCorrectiveAndPreventiveActions(correctiveAndPreventiveActionsDAO.getCorrectiveAndPreventiveActions());
+
+		model.addAttribute("correctiveAndPreventiveActionsForm",correctiveAndPreventiveActionsForm);
+		
 		return "correctiveactions_list";
-	}
+		}
 
 	
 	@RequestMapping(value = { "/capa_report" }, method = RequestMethod.POST)
 	public String capa_report(HttpServletRequest request,ModelMap model, Principal principal) 
 	{		
-		String[] fields={"capa_id","nc_id","source_of_nonconformance","external_id",
-				"type_of_nonconformance","date_found",
-				"temporary_action","nature_of_nc",
-				"capa_requestor","request_date","capa_due_date",
-				"assigned_team_leader","team_members",
-				"root_cause_analysis_file","use_5_why_in_system",
-				"why","root_cause_statement",
-				"upload_external_analysis","upload","action",
-				"responsibility","due_date","completion_date",
-				"verified_by","verification_date"};	
 		
 		String type=request.getParameter("type_of_report");
 		

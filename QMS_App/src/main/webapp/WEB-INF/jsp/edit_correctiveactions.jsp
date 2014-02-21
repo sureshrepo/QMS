@@ -157,12 +157,7 @@
                <td valign="middle" align="left" class="input_txt"> Upload External Analysis(Y/N)</td>
 				                   	<td><input type="checkbox" name="upload_external_analysis" value="upload_external_analysis" id="0"/></td>
 							</tr>
-				<tr class="row2">
-				 <td valign="middle" align="right" class="input_txt" width="30%">Upload</td>
-                  <td valign="top" align="left" class="input_txt" width="70%">
-                  <input type="text" name="upload" class="input_txtbx" id="upload" onmouseover="showTooltip('tooltip_id','inp_id3');" onmouseout="hideTooltip('tooltip_id');" value='<c:out value="${correctiveAndPreventiveActions.upload}"></c:out>' /><br/><span class="err"><form:errors path="CorrectiveAndPreventiveActions.upload"></form:errors></span>
-                  </td>         		</tr>
-                 
+				
                  
                   </table>
                 

@@ -137,19 +137,19 @@ public class NonConformanceController {
 
 	
 	@RequestMapping(value = "/findnonconformance", method = RequestMethod.GET)
-	public String findNonconformance(@RequestParam("id") String id,@RequestParam("type_of_nonconformance") String type_of_nonconformance,@RequestParam("product_id") String product_id,NonConformance nonConformance,ModelMap model) {
+	public String findnonconformance(@RequestParam("id") String id,@RequestParam("type_of_nonconformance") String type_of_nonconformance,@RequestParam("product_id") String product_id,NonConformance nonConformance,ModelMap model) {
 
-		if(id.equals("")&&type_of_nonconformance.equals("")&&product_id.equals(""))
+		if(id.equals("")&&type_of_nonconformance.equals(""))
 		{
 			NonConformanceForm nonConformanceForm=new NonConformanceForm();
-			nonConformanceForm.setNonconformance(nonConformanceDAO.get_nonconformance());
+			nonConformanceForm.setNonconformance(nonConformanceDAO.find_nonconformance(id, type_of_nonconformance));
 		    model.addAttribute("nonConformanceForm",nonConformanceForm);
 			
 		}
 		else
 		{
 		NonConformanceForm nonConformanceForm=new NonConformanceForm();
-			nonConformanceForm.setNonconformance(nonConformanceDAO.find_nonconformance(id, type_of_nonconformance, product_id));
+			nonConformanceForm.setNonconformance(nonConformanceDAO.find_nonconformance(id, type_of_nonconformance));
 		    model.addAttribute("nonConformanceForm",nonConformanceForm);
 				}
 	  

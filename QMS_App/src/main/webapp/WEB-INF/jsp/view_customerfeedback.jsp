@@ -51,9 +51,11 @@
       		</tr>
       		
       		<tr>
+					<table>
 					<div class="del_div">
 						<p><label style="padding: 0pt 20px 0pt 0pt;"><input type="submit" name="delete" value="" class="icon1" onclick="form.action='?do=deleteparticipant'" /></label></p>
 	          		</div>
+	          		</table>
 						</tr>
 			<tr>
         		<td valign="top" align="left">
@@ -86,10 +88,10 @@
 								<!-- <td valign="center" align="left" width="5%"><input type="checkbox" onclick="selectall(this.form)" value="" name="checkall"></td> -->
          						<td valign="top" align="left" width="15%">Date of Feedback</td>
 					         	<td valign="top" align="left" width="15%">Type of Feedback</td>
-					         	<!-- <td valign="top" align="left" width="20%">Feedback recorded by</td>
-								 --><td valign="top" align="left" width="20%">Feedback details</td>
+					         <!--  <td valign="top" align="left" width="20%">Feedback recorded by</td>
+ 							 -->	<td valign="top" align="left" width="20%">Feedback details</td> 
           						<td valign="top" align="left" width="15%">Attachments</td>
-          						<td valign="top" align="left" width="20%">Actions</td>
+          						<td valign="top" align="left" width="15%">Actions</td>
           						
         					</tr>
 						
@@ -104,10 +106,18 @@
 							       		 <tr class="row<%=i%>" onmouseover="mouse_event(this,"row_hover");" onmouseout="mouse_event(this,"row1");"> 
 								           	<td valign="top" align="left"  width="10%">${customerFeedbacks.date_of_feedback}</td>
 											<td valign="top" align="left" width="15%">${customerFeedbacks.type_of_feedback}</td>
-									<%-- 		<td valign="top" align="left" width="10%">${customerFeedbacks.feedback_recorded_by}</td>
-									 --%>		<td valign="top" align="left" width="10%"><a href="download_attachment?fid=<c:out value="${customerFeedbacks.feedback_id}"/>">Download</a></td>
-											<td valign="top" align="left" width="15%">${customerFeedbacks.attachments}</td>
-									    	<td valign="top" align="left" width="15%">
+									 	 <td valign="top" align="left" width="10%">${customerFeedbacks.feedback_details}</td>
+									 	 <c:choose>
+											<c:when test="${customerFeedbacks.attachment_name!='null'}">
+											<td valign="top" align="left" width="10%"><a href="<c:out value="download_attachment?fid=${customerFeedbacks.feedback_id}"></c:out>">Download</a></td>
+										</c:when>
+										<c:otherwise><td valign="top" align="center" width="10%">No Document</td>
+										</c:otherwise>
+										</c:choose>	
+									 	 <%-- 
+										 	 <td valign="top" align="left" width="10%"><a href="download_attachment?fid=<c:out value="${customerFeedbacks.feedback_id}"/>">Download</a></td>
+										 --%>	<%-- <td valign="top" align="left" width="15%">${customerFeedbacks.attachments}</td>
+									    	 --%><td valign="top" align="left" width="15%">
 											
 											<a href="#" title="" ><img src="resources/images/icons/icon_edit.png" alt="Edit" /></a><a href="<c:out value="editfeedback?fid=${customerFeedbacks.feedback_id}"/>" style="padding-right:10px;">Edit</a>
 											<a href="#" title=""><img src="resources/images/icons/icon_delete.png" alt="Delete" /></a><a href="<c:out value="deletefeedbackr?fid=${customersFeedbacks.feedback_id}"/>" onclick="return confirmation()">Remove</a>

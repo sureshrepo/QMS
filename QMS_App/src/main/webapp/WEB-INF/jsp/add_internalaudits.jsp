@@ -56,11 +56,11 @@
 			<td align="left" valign="top" width="50%" style="padding-right: 25px;">
 			<table cellpadding="0" cellspacing="0" border="0" width="100%">
                 <tr class="row2">
-                  <td valign="middle" align="right" class="input_txt" width="30%"><span class="err">*</span>Audit ID:</td>
+                  <td valign="middle" align="left" class="input_txt" width="30%"><span class="err">*</span>Audit ID:</td>
                   <td valign="top" align="left" class="input_txt" width="70%"><input type="hidden" name="id" value="<c:out value="${id}"/>"/><c:out value="${id}"/><br/><span class="err"></span></td>
                 </tr>
                 <tr class="row1">
-						         	<td valign="top" align="right" class="input_txt"> Process :</td>
+						         	<td valign="top" align="left" class="input_txt"> Process :</td>
 						          <td valign="top" align="left" class="input_txt">
 				                  		<select name="process" class="input_cmbbx1">
 				                  		<option value="">--Select--</option>
@@ -73,26 +73,26 @@
 						         </tr> 
 			<tr class="row2">
                <tr class="row1">
-                  <td valign="middle" align="right" class="input_txt" width="30%"> Auditee Name :</td>
+                  <td valign="middle" align="left" class="input_txt" width="30%"> Auditee Name :</td>
                   <td valign="top" align="left" class="input_txt" width="70%">
-                  <input type="text" name="auditee_name" class="input_txtbx" id="inp_auditee_name" onmouseover="showTooltip('tooltip_id','inp_id3');" onmouseout="hideTooltip('tooltip_id');" value='<c:out value="${internalaudits.auditee_name}"></c:out>' /><br/><span class="err"><form:errors path="InternalAudits.auditee_name"></form:errors></span>
+                  <input type="text" name="auditee_name" class="input_txtbx1" id="inp_auditee_name" onmouseover="showTooltip('tooltip_id','inp_id3');" onmouseout="hideTooltip('tooltip_id');" value='<c:out value="${internalaudits.auditee_name}"></c:out>' /><br/><span class="err"><form:errors path="InternalAudits.auditee_name"></form:errors></span>
                   </td>         		</tr>
                   
 
 								
                 <tr class="row1">
-                  <td valign="middle" align="right" class="input_txt" width="30%"><span class="err">*</span>Audit Start Date :</td>
+                  <td valign="middle" align="left" class="input_txt" width="30%"><span class="err">*</span>Audit Start Date:</td>
                   
-                  <td valign="top" align="left" class="input_txt" width="70%"><input type="text" name="audit_start_date" class="input_txtbx" id="datepicker1" onmouseover="showTooltip('tooltip_id','inp_id3');" onmouseout="hideTooltip('tooltip_id');" value='<c:out value="${internalaudits.audit_start_date}"></c:out>' /><br/><span class="err"><form:errors path="InternalAudits.audit_start_date"></form:errors></span></td>
+                  <td valign="top" align="left" class="input_txt" width="70%"><input type="text" name="audit_start_date" class="input_txtbx1" id="datepicker1" onmouseover="showTooltip('tooltip_id','inp_id3');" onmouseout="hideTooltip('tooltip_id');" value='<c:out value="${internalaudits.audit_start_date}"></c:out>' /><br/><span class="err"><form:errors path="InternalAudits.audit_start_date"></form:errors></span></td>
                
    
                 </tr>
                  <tr class="row2">
-                  <td valign="middle" align="right" class="input_txt" width="30%"><span class="err">*</span>Audit Due Date :</td>
-                  <td valign="top" align="left" class="input_txt" width="70%"><input type="text" name="audit_due_date" class="input_txtbx" id="datepicker" onmouseover="showTooltip('tooltip_id','inp_id3');" onmouseout="hideTooltip('tooltip_id');" value="${internalaudits.audit_due_date}" /><br/><span class="err"><form:errors path="InternalAudits.audit_due_date"></form:errors></span></td>
+                  <td valign="middle" align="left" class="input_txt" width="30%"><span class="err">*</span>Audit Due Date:</td>
+                  <td valign="top" align="left" class="input_txt" width="70%"><input type="text" name="audit_due_date" class="input_txtbx1" id="datepicker" onmouseover="showTooltip('tooltip_id','inp_id3');" onmouseout="hideTooltip('tooltip_id');" value="${internalaudits.audit_due_date}" /><br/><span class="err"><form:errors path="InternalAudits.audit_due_date"></form:errors></span></td>
                 </tr>
 			<tr class="row1">
-							         	<td valign="middle" align="right" class="input_txt"> Auditor :</td>
+							         	<td valign="middle" align="left" class="input_txt"> Auditor :</td>
 							           <td valign="top" align="left" class="input_txt">
 					                  		<select name="auditor" class="input_cmbbx1">
 							                <option value="">--Select--</option>
@@ -108,12 +108,12 @@
 						         <table cellpadding="0" cellspacing="0" border="0" width="100%">
 								
                       <tr class="row2">
-                  <td valign="middle" align="right" class="input_txt" width="30%"> Auditor Notes :</td>
+                  <td valign="middle" align="left" class="input_txt" width="30%"> Auditor Notes :</td>
                                 
                   <td valign="top" align="left" class="input_txt" width="70%"><textarea class="input_txtbx1"  name="auditor_notes"  style="width:70%; height: 70px;">${internalaudits.auditor_notes}</textarea><span class="err"><form:errors path="InternalAudits.auditor_notes"></form:errors></span></td>
                 </tr>
                  <tr class="row1">
-						         	<td valign="middle" align="right" class="input_txt"> Finding :</td>
+						         	<td valign="middle" align="left" class="input_txt"> Finding :</td>
 						           <td valign="top" align="left" class="input_txt">
 				                  		<select name="finding" class="input_cmbbx1">
 						                  <option value="">--Select--</option>
@@ -125,12 +125,12 @@
 						         </tr> 
 				
                 <tr class="row2">
-                  <td valign="middle" align="right" class="input_txt" width="30%"> Completion Date :</td>
-                  <td valign="top" align="left" class="input_txt" width="70%"><input type="text" name="completion_date" class="input_txtbx" id="datepicker2" onmouseover="showTooltip('tooltip_id','inp_id3');" onmouseout="hideTooltip('tooltip_id');" value="${internalaudits.completion_date}" /><span class="err"><form:errors path="InternalAudits.completion_date"></form:errors></span></td>
+                  <td valign="middle" align="left" class="input_txt" width="30%"> Completion Date :</td>
+                  <td valign="top" align="left" class="input_txt" width="70%"><input type="text" name="completion_date" class="input_txtbx1" id="datepicker2" onmouseover="showTooltip('tooltip_id','inp_id3');" onmouseout="hideTooltip('tooltip_id');" value="${internalaudits.completion_date}" /><span class="err"><form:errors path="InternalAudits.completion_date"></form:errors></span></td>
                 </tr>
                 <tr class="row1">
-                  <td valign="middle" align="right" class="input_txt" width="30%"> Auditor's Initials :</td>
-                  <td valign="top" align="left" class="input_txt" width="70%"><input type="text" name="auditors_initials" class="input_txtbx" id="inp_auditors_initials" onmouseover="showTooltip('tooltip_id','inp_id3');" onmouseout="hideTooltip('tooltip_id');" value="${internalaudits.auditors_initials}" /><span class="err"><form:errors path="InternalAudits.auditors_initials"></form:errors></span></td>
+                  <td valign="middle" align="left" class="input_txt" width="30%"> Auditor's Initials :</td>
+                  <td valign="top" align="left" class="input_txt" width="70%"><input type="text" name="auditors_initials" class="input_txtbx1" id="inp_auditors_initials" onmouseover="showTooltip('tooltip_id','inp_id3');" onmouseout="hideTooltip('tooltip_id');" value="${internalaudits.auditors_initials}" /><span class="err"><form:errors path="InternalAudits.auditors_initials"></form:errors></span></td>
                 </tr>
                
                  
@@ -140,7 +140,7 @@
                   <tr >
                   
                   <td valign="top" align="center"></td>
-				  <td valign="top" align="center"><input type="submit" class="submit_btn2" value="Submit" class="submit_btn1">
+				  <td valign="middle" align="center"><input type="submit" class="submit_btn2" value="Submit" class="submit_btn1">
 				 </td>
                   </tr>
                   </table>

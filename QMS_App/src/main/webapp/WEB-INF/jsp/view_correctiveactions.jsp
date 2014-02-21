@@ -10,20 +10,20 @@
   <ul class="horizmenu">
 						
 							<li  style=" float:left;margin-right:8px;text-transform:uppercase;">
-								<a href="add_maintenance" class="<c:choose>
+								<a href="addcorrectiveAndPreventiveActions" class="<c:choose>
 								<c:when test="${menu==''}">select</c:when><c:otherwise>unselect</c:otherwise></c:choose>">
 									<span>Add Corrective and Preventive Actions</span>
 									
 								</a>
 							</li>
 						<li  style=" float:left;margin-right:8px;text-transform:uppercase;">
-								<a href="maintenance_list" class="<c:choose>
+								<a href="correctiveactions_list" class="<c:choose>
 								<c:when test="${menu==''}">select</c:when><c:otherwise>unselect</c:otherwise></c:choose>">
 									<span>View Corrective and Preventive Actions</span>
 								</a>
 							</li>
 				           <li  style=" float:left;margin-right:8px;text-transform:uppercase;">
-								<a href="maintenance_report" class="<c:choose>
+								<a href="capa_report" class="<c:choose>
 								<c:when test="${menu==''}">select</c:when><c:otherwise>unselect</c:otherwise></c:choose>">
 									<span>Reports</span>
 								</a>
@@ -135,11 +135,7 @@
                <td valign="top" align="left" class="input_txt" width="70%">${correctiveAndPreventiveActions.upload_external_analysis}
                </td>
                 </tr>
-                  <tr class="row1">
-               <td valign="middle" align="left" class="input_txt" width="20%">Upload:</td>
-               <td valign="top" align="left" class="input_txt" width="70%">${correctiveAndPreventiveActions.upload}
-               </td>
-                </tr>
+                  
                  
 
                 <tr>

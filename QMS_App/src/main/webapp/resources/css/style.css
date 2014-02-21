@@ -555,6 +555,22 @@ ul.pagination li.page a:hover {
 	outline:none;
 	/* text-shadow:1px 1px 1px #555; */
 }
+.submit_btn1 {
+	/* background:url(../images/login_btn.png) 0 0 no-repeat;
+	 */width:1px;
+	height:30px;
+	line-height:30px;
+	text-align:center;
+	/* color:#fff; */
+	color:brown;
+	font-weight:bold;
+	font-size:1px;
+	cursor:pointer;
+	display:block;
+	border:solid 1px brown;
+	outline:none;
+	/* text-shadow:1px 1px 1px #555; */
+}
 .submit_btn:hover {
 	/* background:url(../images/login_btn.png) 0 0 no-repeat;
 	 */width:78px;
@@ -773,8 +789,22 @@ ul.prev li{margin-right:50px; float:left; margin-bottom:20px;}
 	background:#f8fbfd;
 	border:1px solid #9fb7cd;
 }
+.input_txtbx2 {
+	width:120px;
+	height:17px;
+	padding:3px;
+	background:#f8fbfd;
+	border:1px solid #9fb7cd;
+}
 .input_cmbbx1 {
 	width:177px;
+	padding:3px;
+	background:#f8fbfd;
+	border:1px solid #9fb7cd;
+}
+
+.input_cmbbox {
+	width:170px;
 	padding:3px;
 	background:#f8fbfd;
 	border:1px solid #9fb7cd;

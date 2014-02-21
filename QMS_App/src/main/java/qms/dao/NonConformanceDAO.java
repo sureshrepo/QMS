@@ -550,7 +550,7 @@ public class NonConformanceDAO extends AbstractExcelView {
 	}
 
 	
-	public List<NonConformance> find_nonconformance(String id,String type_of_nonconformance,String product_id ) {
+	public List<NonConformance> find_nonconformance(String id,String type_of_nonconformance) {
 		Connection con = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
@@ -564,7 +564,7 @@ public class NonConformanceDAO extends AbstractExcelView {
 			e1.printStackTrace();
 		}
 		try {
-			String cmd_select = "select * from tbl_nonconformance where id='"+id+"' or type_of_nonconformance='"+type_of_nonconformance+"' or product_id='"+product_id+"'";
+			String cmd_select = "select * from tbl_nonconformance where id='"+id+"' or type_of_nonconformance='"+type_of_nonconformance+"'";
 			resultSet = statement.executeQuery(cmd_select);
 			while (resultSet.next()) {
 				System.out.println("came");
