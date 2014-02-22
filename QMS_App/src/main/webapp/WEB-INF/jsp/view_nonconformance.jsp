@@ -238,7 +238,7 @@
 
 								<tr><td colspan="7">  <div class="extrabottom">
               						<ul class="pagination">
-                						<li class="text"><input type="submit" name="view" value="View All" class="submit_btn"></li>
+                						<li class="text"><input type="submit" name="view" value="View All" class="submit_btn1"></li>
                 						<li class="text"></li>
                 					</ul></div></td></tr>
 </table>

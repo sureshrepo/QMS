@@ -122,7 +122,7 @@
               	</tr>
                 <tr class="row1">
                   <td valign="top" align="center">&nbsp;</td>
-                  <td valign="top" align="left"><input type="submit" class="submit_btn2" value="Update Participant" onclick="update.submit()"></td>
+                  <td valign="top" align="left"><input type="submit" class="submit_btn1" value="Update" onclick="update.submit()"></td>
                 </tr>
               </table></form>
               </div>

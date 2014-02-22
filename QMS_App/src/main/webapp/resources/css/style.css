@@ -557,20 +557,14 @@ ul.pagination li.page a:hover {
 }
 .submit_btn1 {
 	/* background:url(../images/login_btn.png) 0 0 no-repeat;
-	 */width:1px;
+	 */width:100px;
 	height:30px;
 	line-height:30px;
 	text-align:center;
 	/* color:#fff; */
 	color:brown;
-	font-weight:bold;
-	font-size:1px;
-	cursor:pointer;
-	display:block;
-	border:solid 1px brown;
-	outline:none;
-	/* text-shadow:1px 1px 1px #555; */
-}
+
+
 .submit_btn:hover {
 	/* background:url(../images/login_btn.png) 0 0 no-repeat;
 	 */width:78px;
@@ -784,6 +778,13 @@ ul.prev li{margin-right:50px; float:left; margin-bottom:20px;}
 }
 .input_txtbx1 {
 	width:220px;
+	height:17px;
+	padding:3px;
+	background:#f8fbfd;
+	border:1px solid #9fb7cd;
+}
+.input_txtbox {
+	width:10px;
 	height:17px;
 	padding:3px;
 	background:#f8fbfd;

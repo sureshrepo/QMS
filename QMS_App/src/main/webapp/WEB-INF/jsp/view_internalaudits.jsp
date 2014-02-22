@@ -46,12 +46,12 @@
 <div style="border:#ccc 2px solid; padding:15px; margin-bottom:15px;">
 							<table width="100%" border="0" cellspacing="0" cellpadding="0">
 							  <tr>
-							    <td align="left" valign="middle" width="20%">Audit ID:</td>
+							    <td align="left" valign="middle" width="5%">ID:</td>
 							    <td align="left" valign="middle" width="10%"><input type="text" name="id" class="input_txtbx2" id="id"></td>
 							    <td align="left" valign="middle" width="13%">&nbsp;&nbsp;Process:</td>
 							    <td align="left" valign="middle" width="8%"><input type="text" name="process" class="input_txtbx2" id="process"></td>
-							    <td align="left" valign="middle" width="25%">&nbsp;Auditee name:</td>
-							    <td align="left" valign="middle" width="10%"><input type="text" name="auditee_name" id="auditee_name" class="input_txtbx2"></td>
+							    <td align="left" valign="middle" width="40%">&nbsp;Auditee name:</td>
+							    <td align="left" valign="middle" width="8%"><input type="text" name="auditee_name" id="auditee_name" class="input_txtbx2"></td>
 							    <td align="center" valign="middle" width="38%">
 							  <input type="submit" class="submit_btn" name="Search" id="id_submit" onmouseover="showTooltip('tooltip_id','inp_id3');" value="Search"/></td>
 								<td align="center" valign="middle" width="38%">

@@ -110,7 +110,7 @@
                   
                     <tr class="row1">
                  <td valign="middle" align="right" class="input_txt" width="30%"></td>
-                  <td valign="top" align="left" class="input_txt" width="70%"><input type="submit" class="submit_btn2" name="submit" id="id_submit" onmouseover="showTooltip('tooltip_id','inp_id3');" /><br/></td>
+                  <td valign="top" align="left" class="input_txt" width="70%"><input type="submit" class="submit_btn1" value="Update Feedback" id="id_submit" onmouseover="showTooltip('tooltip_id','inp_id3');" /><br/></td>
                   </tr>
                   
                   

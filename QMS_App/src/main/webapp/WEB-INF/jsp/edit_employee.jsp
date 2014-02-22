@@ -227,7 +227,7 @@
                  --%></tr>    
                  <tr class="row1">
                   <td valign="top" align="left">&nbsp;</td>
-                  <td valign="top" align="left"><input type="submit" value="Add Employee" class="submit_btn2"></td>
+                  <td valign="top" align="left"><input type="submit" value="Update Employee" class="submit_btn1"></td>
                 </tr>
               </table>
               

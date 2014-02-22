@@ -105,7 +105,7 @@
                 </tr>
                  <tr class="row1">
                   <td valign="top" align="center">&nbsp;</td>
-                  <td valign="middle" align="center"><input type="submit" value="Update Customer" class="submit_btn2"></td>
+                  <td valign="middle" align="center"><input type="submit" value="Update Customer" class="submit_btn1"></td>
                 </tr>
               </table>
               

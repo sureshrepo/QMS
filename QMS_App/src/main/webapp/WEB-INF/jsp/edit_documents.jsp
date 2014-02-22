@@ -289,9 +289,9 @@ $(window).load(function(){
              
              <tr class="row1" >
              <td colspan="2" align="right">
-             <input type="submit" id="submit"  name="submit" value="Submit" class="submit_btn"></td>
+             <input type="submit" id="submit"  name="submit" value="Submit" class="submit_btn1"></td>
              <td colspan="3">
-            <input type="reset" id="reset_export" name="reset_export" value="Reset" class="submit_btn"></td>
+            <input type="reset" id="reset_export" name="reset_export" value="Reset" class="submit_btn1"></td>
             
              </tr>
             

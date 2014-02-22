@@ -133,7 +133,7 @@
                
                  <tr class="row1">
                   <td valign="top" align="right">&nbsp;</td>
-                  <td valign="top" align="left"><input type="submit" value="Add SupplierPerformance" class="submit_btn2"></td>
+                  <td valign="top" align="left"><input type="submit" value="Add Supplier" class="submit_btn1"></td>
                 </tr>
               </table>
 

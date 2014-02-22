@@ -204,7 +204,7 @@
                   <tr >
                   
                   <td valign="top" align="center"></td>
-				  <td valign="top" align="center"><input type="submit" class="submit_btn2" value="Submit" class="submit_btn1">
+				  <td valign="top" align="center"><input type="submit" class="submit_btn1" value="Submit" class="submit_btn1">
 				 </td>
                   </tr>
                   </table>
