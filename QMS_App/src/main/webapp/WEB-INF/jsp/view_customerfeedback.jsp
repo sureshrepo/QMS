@@ -68,15 +68,15 @@
 							
 							<table width="100%" border="0" cellspacing="0" cellpadding="0">
 							  <tr>
-							    <td align="left" valign="middle" width="25%">Date of Feedback</td>
+							    <td align="left" valign="middle" width="25%">Date of Feedback : </td>
 							    <td align="left" valign="middle" width="10%"><input type="text" name="date_of_feedback" class="input_txtbx1" id="date"></td>
-							    <td align="left" valign="middle" width="25%">&nbsp;Type of Feedback</td>
+							    <td align="left" valign="middle" width="25%">&nbsp;Type of Feedback: </td>
 							    <td align="left" valign="middle" width="10%"><input type="text" name="type_of_feedback" id="type" class="input_txtbx1"></td>
 							    <!-- <td align="left" valign="middle" width="10%">Feedback Details:</td>
 							    <td align="left" valign="middle" width="10%"><input type="text" name="feedback_details" class="input_txtbx1" id="details"></td>
 							     -->
-							    <td align="center" valign="middle" width="20%"><input type="submit" class="submit_btn" value="Find" name="findcustomerfeedback" ></td>
-							  	<td align="center" valign="middle" width="20%"><input type="submit" class="submit_btn" value="Clear" name="welcome" ></td>
+							    <td align="center" valign="middle" width="20%"><input type="submit" class="submit_btn1" value="Find" name="findcustomerfeedback" ></td>
+							  	<td align="center" valign="middle" width="20%"><input type="submit" class="submit_btn1" value="Clear" name="welcome" ></td>
 							  </tr>
 							</table>
 							</form>

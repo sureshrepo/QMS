@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import org.apache.http.HttpRequest;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,14 +17,10 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 
 import qms.dao.MaintenanceDAO;
-import qms.dao.NonConformanceDAO;
-import qms.forms.InternalAuditsForm;
 import qms.forms.MaintenanceForm;
-import qms.forms.NonConformanceForm;
 import qms.model.*;
 
 import org.slf4j.Logger;
@@ -78,7 +73,7 @@ return "maintenance_list";
 
 	
 	
-	
+	//Insert a record
 	@RequestMapping(value = "/add_maintenance", method = RequestMethod.POST)
 	public String postMaintenance(HttpSession session,@ModelAttribute("Maintenance") @Valid Maintenance maintenance,BindingResult result, ModelMap model) {
 
@@ -100,6 +95,7 @@ return "maintenance_list";
 		return "maintenance_list";
 	}
 	
+	//maintenance report list page
 	@RequestMapping(value="/maintenance_list", method=RequestMethod.GET)
 	public String maintenancelist(HttpServletRequest request,ModelMap model, Principal principal) {
 		 
@@ -110,18 +106,8 @@ return "maintenance_list";
 		model.addAttribute("menu","maintenance");
 		return "maintenance_list";
 	}
-/*	@RequestMapping(value={"/suggestion_func"}, method = RequestMethod.GET)
-	public String suggestion_func(@RequestParam("id") String id,ModelMap model, Principal principal)
-{
-		 String name=""; 
-		 String sr=""; 
-		 sr=request.getParameter("search"); 
-		
-	
-    return ;
 
-}
-	*/
+	//view records
 	@RequestMapping(value="/view_maintenance", method=RequestMethod.GET)
 	public String viewmaintenance(HttpServletRequest request,@RequestParam("equipment_id") String equipment_id,ModelMap model,Maintenance maintenance)
 	{
@@ -132,6 +118,7 @@ return "maintenance_list";
 		return "view_maintenance";
 	}
 	
+	//Edit a record
 	@RequestMapping(value = "/edit_maintenance", method = RequestMethod.GET)
 	public String editmaintenance_get(@RequestParam("equipment_id") String equipment_id,Maintenance maintenance,ModelMap model) {
 
@@ -142,7 +129,7 @@ return "maintenance_list";
 	    return "edit_maintenance";
 	}
 	
-	
+	//Update a record
 	@RequestMapping(value = "/update_maintenance", method = RequestMethod.POST)
 	public String update_maintenance(ModelMap model,@ModelAttribute("Maintenance") @Valid Maintenance maintenance,BindingResult result) throws IOException {
 
@@ -164,6 +151,7 @@ return "maintenance_list";
 	    return "view_maintenance";
 	}
 	
+	//Report generation
 	@RequestMapping(value = "/maintenances_report", method = RequestMethod.POST)
 		public ModelAndView generateMaintenance_Report(HttpServletRequest request,ModelMap model) {
 		//System.out.println("generateAudit_Report");
@@ -214,7 +202,6 @@ return "maintenance_list";
 				ModelAndView modelAndView=new ModelAndView("maintenanceDAO","maintenance",maintenance);
 
 				modelAndView.addObject("fields",request.getParameterValues("report_field[]"));
-				//System.out.println();
 				modelAndView.addObject("title",title);
 				return modelAndView ;
 			}
@@ -229,12 +216,8 @@ return "maintenance_list";
 		return modelAndView ;
 		
 	}
-	
-	
-	
-	
-	
 
+	//report page request passing
 	@RequestMapping(value = { "/maintenance_report" }, method = RequestMethod.GET)
 	public String view_maintenance_report(Maintenance maintenance,ModelMap model) {
 
@@ -243,6 +226,7 @@ return "maintenance_list";
 	    return "maintenance_report";
 	}
 	
+	//Report generation
 	@RequestMapping(value = "/maintanence_report", method = RequestMethod.POST)
 	public String getReport(HttpServletRequest request,ModelMap model) {
 
@@ -265,7 +249,7 @@ return "maintenance_list";
 	    return "maintenance_report";
 	}
 	
-	
+	//delete a record
 	@RequestMapping(value = "/delete_maintenance", method = RequestMethod.GET)
 	public String deletemaintenance(@RequestParam("equipment_id") String equipment_id,Maintenance maintenance,ModelMap model) {
 

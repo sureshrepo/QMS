@@ -7,21 +7,17 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.security.Principal;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import org.apache.http.HttpRequest;
-import org.apache.velocity.runtime.directive.Foreach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,12 +28,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import qms.dao.DocumentControlDAO;
 import qms.dao.FileHandlingDAO;
-import qms.model.ExternalDocument;
 import qms.model.DocumentMain;
-import qms.model.NonConformance;
 import qms.dao.ProcessDAO;
 import qms.forms.EmployeeForm;
-import qms.forms.InternalAuditsForm;
 import qms.forms.ProcessForm;
 import qms.dao.EmployeeDAO;
 import qms.forms.DocumentMainForm;
@@ -60,6 +53,7 @@ public class DocumentController {
 	FileHandlingDAO fileHandlingDAO;
 
 
+	//getting a unique id
 	@RequestMapping(value = { "/adddocument" }, method = RequestMethod.GET)
 	public String add_document(HttpSession session, ModelMap model,
 			Principal principal) {
@@ -70,6 +64,7 @@ public class DocumentController {
 		return "add_documents";
 	}
 
+	//delete a record
 	@RequestMapping(value = { "/deletedocument" }, method = RequestMethod.GET)
 	public String delete_document(@RequestParam("doc_id") String doc_id,ModelMap model,
 			Principal principal) {
@@ -83,6 +78,7 @@ public class DocumentController {
 		
 	}
 	
+	//edit a record
 	@RequestMapping(value = { "/edit_document" }, method = RequestMethod.GET)
 	public String edit_document(@RequestParam("doc_id") String document_id,HttpSession session, ModelMap model,Principal principal) {
 
@@ -97,6 +93,8 @@ public class DocumentController {
 		
 		return "edit_documents";
 	}
+	
+	//updating a record
 	@RequestMapping(value = { "/update_documents" }, method = RequestMethod.POST)
 	public String update_document(@ModelAttribute("DocumentMain") @Valid DocumentMain documentMain,BindingResult result,HttpSession session, ModelMap model,Principal principal) {
 
@@ -194,7 +192,7 @@ public class DocumentController {
 			
 		}
 	
-	@SuppressWarnings("unchecked")
+	//Insert a record
 	@RequestMapping(value = { "/insert_documents" }, method = RequestMethod.POST)
 	public String insert_document(HttpSession session,
 			HttpServletRequest request, ModelMap model, Principal principal,
@@ -303,10 +301,7 @@ public class DocumentController {
 	}
 
 
- 
-	
-
-	
+	//ajax get issuer post method
 	@RequestMapping(value = { "/ajax_getissuer" }, method = RequestMethod.POST)
 	public @ResponseBody
 	String insert_external_document(HttpSession session,
@@ -321,6 +316,8 @@ public class DocumentController {
 		resultHTML+="</select>";
 		return resultHTML;
 	}
+	
+	//Post method for ajax get process 
 	@RequestMapping(value = { "/ajax_getprocess" }, method = RequestMethod.POST)
 	public @ResponseBody
 	String ajax_process_owner(HttpSession session,
@@ -337,8 +334,8 @@ public class DocumentController {
 		
 		return resultHTML;
 	}
-	// Document Views
 
+	// Document Views
 	@RequestMapping(value = "/viewdocuments", method = RequestMethod.GET)
 	public String login(ModelMap model) {
 
@@ -350,6 +347,7 @@ public class DocumentController {
 
 	}
 
+	//download the file
 	@RequestMapping(value = "/downloadMaindoc", method = RequestMethod.GET)
 	public String downloadMaindoc(HttpServletResponse response,
 			@RequestParam("id") String document_id, ModelMap model)
@@ -369,6 +367,7 @@ public class DocumentController {
 
 	}
 
+	//search a record
 	@RequestMapping(value = "/findDocument", method = RequestMethod.GET)
 	public String findDocument(
 			@RequestParam("search_document_id") String search_document_id,
@@ -400,6 +399,7 @@ public class DocumentController {
 	}
 
 
+	//report page request passing
 	@RequestMapping(value = "/document_report", method = RequestMethod.GET)
 	public String reportDocument(ModelMap model) {
 		  model.addAttribute("menu","document");
@@ -407,6 +407,7 @@ public class DocumentController {
 
 	}
 	
+	//report generation
 	@RequestMapping(value = "/generate_doc_report", method = RequestMethod.POST)
 	public ModelAndView generateDocument_Report(HttpServletRequest request,ModelMap model, HttpServletResponse response) {
 		
@@ -466,6 +467,7 @@ public class DocumentController {
 	
 		return modelAndView ;
 	}
+	
 	
 public void load_document_page_dropdowns(ModelMap model)
 {

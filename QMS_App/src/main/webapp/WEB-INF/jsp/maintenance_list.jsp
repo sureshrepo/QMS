@@ -58,16 +58,16 @@
 <div style="border:#ccc 2px solid; padding:15px; margin-bottom:15px;">
 							<table width="100%" border="0" cellspacing="0" cellpadding="0">
 							  <tr>
-							    <td align="left" valign="middle" width="5%">ID : </td>
+							    <td align="left" valign="middle" width="8%">ID:</td>
 							    <td align="left" valign="middle" width="5%"><input type="text" name="equipment_id" class="input_txtbx2" id="equipment_id"></td>
-							    <td align="left" valign="middle" width="15%">&nbsp;Equipment Name:</td>
+							    <td align="left" valign="middle" width="30%">&nbsp;Equipment Name:</td>
 							    <td align="left" valign="middle" width="10%"><input type="text" name="equipment_name" class="input_txtbx2" id="equipment_name"></td>
 							    <td align="left" valign="middle" width="5%">&nbsp;Date:</td>
 							    <td align="left" valign="middle" width="5%"><input type="text" name="date_acquired" id="date_acquired" class="input_txtbx2"></td>
-							   	<td align="center" valign="middle">
-							  	<input type="submit" class="submit_btn" value="Find" id="id_submit" name="search_maintenance"/></td>
-							 	<td align="center" valign="middle">
-							  <input type="button" class="submit_btn" name="clear" id="id_clear" value="clear">
+							   	<td align="center" valign="middle" width="30%">
+							  	<input type="submit" class="submit_btn1" value="Find" id="id_submit" name="search_maintenance"/></td>
+							 	<td align="center" valign="middle" width="30%">
+							  <input type="button" class="submit_btn1" name="clear" id="id_clear" value="clear">
 							  </tr>
 							</table>
 						</div>

@@ -1,6 +1,5 @@
 package qms.controllers;
 
-import java.io.IOException;
 import java.security.Principal;
 import java.util.ArrayList;
 
@@ -23,13 +22,11 @@ import org.springframework.ui.ModelMap;
 import qms.dao.FileHandlingDAO;
 import qms.dao.NonConformanceDAO;
 import qms.forms.CorrectiveAndPreventiveActionsForm;
-import qms.forms.EmployeeForm;
-import qms.forms.InternalAuditsForm;
 import qms.forms.NonConformanceForm;
 import qms.model.*;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
 
 @Controller
 @SessionAttributes({"nonconformance"})
@@ -39,9 +36,10 @@ public class NonConformanceController {
 	
 	@Autowired
 	FileHandlingDAO fileHandlingDAO;
-	private static final Logger logger = LoggerFactory.getLogger(MainController.class); // Logger
+	//private static final Logger logger = LoggerFactory.getLogger(MainController.class); // Logger
 
 	
+	// Request Method for view page
 	@RequestMapping(value = { "/view_nonconformance" }, method = RequestMethod.GET)
 	public String showNonconformance(ModelMap model, Principal principal) {
 		model.addAttribute("success","false");
@@ -52,6 +50,7 @@ public class NonConformanceController {
 		return "view_nonconformance";
 	}
 
+	//Request Method for Insert Operation
 	@RequestMapping(value = { "/add_nonconformance" }, method = RequestMethod.GET)
 	public String addNonconformance_get(HttpSession session,ModelMap model, Principal principal) {
 		model.addAttribute("id", nonConformanceDAO.get_maxid());
@@ -59,7 +58,8 @@ public class NonConformanceController {
 		model.addAttribute("menu","nonconformance");
 		return "add_nonconformance";
 	}
-
+	
+	// Insert the records into the Database
 	@RequestMapping(value = "/add_nonconformance", method = RequestMethod.POST)
 	public String addNonconformance_post(HttpSession session,@ModelAttribute("Nonconformance") @Valid NonConformance nonConformance,BindingResult result,@ModelAttribute("CorrectiveAndPreventiveActions") @Valid CorrectiveAndPreventiveActions correctiveAndPreventiveActions,BindingResult result2,ModelMap model) {
 		session.setAttribute("nonconformance",nonConformance);
@@ -88,6 +88,7 @@ public class NonConformanceController {
 		return "view_nonconformance";
 	}
 
+	//Delete operation
 	@RequestMapping(value = "/delete_nonconformance", method = RequestMethod.GET)
 	public String deleteNonconformance_get(@RequestParam("id") String id,
 			NonConformance nonConformance,ModelMap model) {
@@ -100,6 +101,7 @@ public class NonConformanceController {
 		return "/view_nonconformance";
 	}
 	
+	//Request Method for Edit Operation
 	@RequestMapping(value = "/edit_nonconformance", method = RequestMethod.GET)
 	public String editNonconformance_get(@RequestParam("id") String id,
 			NonConformance nonConformance,ModelMap model) {
@@ -112,7 +114,7 @@ public class NonConformanceController {
 	    return "/edit_nonconformance";
 	}
 	
-	
+	// Update the values in the database
 	@RequestMapping(value = "/update_nonconformance", method = RequestMethod.POST)
 	public String editNonconformance_post(ModelMap model,@ModelAttribute("Nonconformance") @Valid NonConformance nonConformance,BindingResult result) {
 
@@ -135,29 +137,41 @@ public class NonConformanceController {
 		return "view_nonconformance";
 	}
 
+	//Find Operation
+	@RequestMapping(value="/findnonconformance",method=RequestMethod.GET)		
+	public String findemployee(HttpServletRequest request,HttpSession session,@RequestParam("id") String id,@RequestParam("type_of_nonconformance") String type_of_nonconformance,ModelMap model)
+	{
 	
-	@RequestMapping(value = "/findnonconformance", method = RequestMethod.GET)
-	public String findnonconformance(@RequestParam("id") String id,@RequestParam("type_of_nonconformance") String type_of_nonconformance,@RequestParam("product_id") String product_id,NonConformance nonConformance,ModelMap model) {
-
-		if(id.equals("")&&type_of_nonconformance.equals(""))
+		System.out.println("find");
+		session.setAttribute("id", id);
+		session.setAttribute("type_of_nonconformance", type_of_nonconformance);
+	
+		if(id=="" && type_of_nonconformance=="")
 		{
-			NonConformanceForm nonConformanceForm=new NonConformanceForm();
-			nonConformanceForm.setNonconformance(nonConformanceDAO.find_nonconformance(id, type_of_nonconformance));
-		    model.addAttribute("nonConformanceForm",nonConformanceForm);
-			
+			NonConformanceForm nonConformanceForm = new NonConformanceForm();
+			nonConformanceForm.setNonconformance(nonConformanceDAO.findnonconformance(id, type_of_nonconformance));
+
+			model.addAttribute("nonConformanceForm",nonConformanceForm);
+			model.addAttribute("menu", "nonconformance");
+			System.out.println("finding....");
+			return "view_nonconformance";
 		}
 		else
 		{
-		NonConformanceForm nonConformanceForm=new NonConformanceForm();
-			nonConformanceForm.setNonconformance(nonConformanceDAO.find_nonconformance(id, type_of_nonconformance));
-		    model.addAttribute("nonConformanceForm",nonConformanceForm);
-				}
-	  
-		return "view_nonconformance";
-		
-	}
-	
-// NONCONFORMANCE REPORT list page	
+			System.out.println("searching started.......");
+			NonConformanceForm nonConformanceForm = new NonConformanceForm();
+			nonConformanceForm.setNonconformance(nonConformanceDAO.findnonconformance(id, type_of_nonconformance));
+
+			model.addAttribute("nonConformanceForm",nonConformanceForm);
+			model.addAttribute("menu", "nonconformance");
+			System.out.println("finding....");
+			return "view_nonconformance";
+					
+		}
+		}
+
+
+// Nonconformance Report list page	
 	
 	@RequestMapping(value = "list_nonconformance", method = RequestMethod.GET)
 	public String list_nonconformance(@RequestParam("id") String id,
@@ -244,6 +258,7 @@ public class NonConformanceController {
 	}
 
 
+	// Edit operation for Corrective and Preventive Actions Form
 	@RequestMapping(value = { "/edit_correctiveactions" }, method = RequestMethod.GET)
 	public String add_corrective(@RequestParam("nc_id") String nc_id,HttpSession session,ModelMap model, Principal principal) {
 		
@@ -254,6 +269,7 @@ public class NonConformanceController {
 		return "edit_correctiveactions";
 	}
 	
+	//Update Operation for Corrective and Preventive Actions Form
 	@RequestMapping(value = "/update_corrective", method = RequestMethod.POST)
 	public String update_corrective(ModelMap model,CorrectiveAndPreventiveActions correctiveAndPreventiveActions) {
 
@@ -267,7 +283,7 @@ public class NonConformanceController {
 	}
 	
 	
-
+	// View Page for Corrective and Preventive Actions Form
 	@RequestMapping(value="/view_correctiveactions", method=RequestMethod.GET)
 	public String viewcorrective(HttpServletRequest request,ModelMap model, Principal principal) {
 		 
@@ -280,8 +296,3 @@ public class NonConformanceController {
 	}
 
 	}
-	
-	
-	
-	
-

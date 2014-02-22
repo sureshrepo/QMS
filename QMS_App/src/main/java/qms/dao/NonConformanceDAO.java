@@ -19,7 +19,6 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Font;
-import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.servlet.view.document.AbstractExcelView;
 import qms.model.NonConformance;
 import qms.model.CorrectiveAndPreventiveActions;
@@ -286,6 +285,7 @@ public class NonConformanceDAO extends AbstractExcelView {
 		this.dataSource = dataSource;
 	}
 
+	//Insert the records into the database
 	public boolean insert_nonconformance(NonConformance nonConformance,CorrectiveAndPreventiveActions correctiveAndPreventiveActions) {
 		Connection con = null;
 		Statement statement = null;
@@ -350,7 +350,7 @@ public class NonConformanceDAO extends AbstractExcelView {
 
 	}
 
-	
+	//Update the values
 	public boolean update_nonconformance(NonConformance nonConformance) {
 		Connection con = null;
 		Statement statement = null;
@@ -381,7 +381,7 @@ public class NonConformanceDAO extends AbstractExcelView {
 	}
 	
 	
-	
+	//Delete the values from database
 	public boolean delete_nonconformance(String nonConformance_id) {
 		Connection con = null;
 		Statement statement = null;
@@ -410,11 +410,12 @@ public class NonConformanceDAO extends AbstractExcelView {
 		return status;
 
 	}
+	
+	//Edit the Database values
 	public List<NonConformance> edit_nonconformance(String nonConformanceid) {
 		Connection con = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
-		boolean status = false;
 		List<NonConformance> nonConformances = new ArrayList<NonConformance>();
 
 		try {
@@ -461,12 +462,11 @@ public class NonConformanceDAO extends AbstractExcelView {
 		return nonConformances;
 	}
 
-	
+	//This method is used for getting the nonconformance record's list
 	public List<NonConformance> list_nonconformance(String id) {
 		Connection con = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
-		boolean status = false;
 		List<NonConformance> nonConformances = new ArrayList<NonConformance>();
 
 		try {
@@ -513,7 +513,7 @@ public class NonConformanceDAO extends AbstractExcelView {
 		return nonConformances;
 	}
 
-	
+	//Getting the Maximum Id
 	public String get_maxid() {
 		Connection con = null;
 		Statement statement = null;
@@ -549,8 +549,8 @@ public class NonConformanceDAO extends AbstractExcelView {
 		return Max_id;
 	}
 
-	
-	public List<NonConformance> find_nonconformance(String id,String type_of_nonconformance) {
+	// Searching the values
+	public List<NonConformance> findnonconformance(String id,String type_of_nonconformance) {
 		Connection con = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
@@ -604,13 +604,12 @@ public class NonConformanceDAO extends AbstractExcelView {
 	
 	
 	
-	//REPORT GENERATION
+	//Report Generation
 	public List<NonConformance> get_nonconformance_type(String type,String start,String end)
 	 {
 		Connection con = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
-		boolean status = false;
 		List<NonConformance> nonConformances = new ArrayList<NonConformance>();
 
 		try {
@@ -670,12 +669,11 @@ public class NonConformanceDAO extends AbstractExcelView {
 	
 	
 	
-	
+	//Get Method for Nonconformance
 	public List<NonConformance> get_nonconformance() {
 		Connection con = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
-		boolean status = false;
 		List<NonConformance> nonConformances = new ArrayList<NonConformance>();
 
 		try {
@@ -723,12 +721,11 @@ public class NonConformanceDAO extends AbstractExcelView {
 	}
 	
 	
-	
+	//Get Method for corrective and preventive actions form
 	public List<CorrectiveAndPreventiveActions> get_corrective() {
 		Connection con = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
-		boolean status = false;
 		List<CorrectiveAndPreventiveActions> correctiveAndPreventiveActions = new ArrayList<CorrectiveAndPreventiveActions>();
 
 		try {
@@ -777,11 +774,11 @@ public class NonConformanceDAO extends AbstractExcelView {
 		return correctiveAndPreventiveActions;
 	}
 	
+	//Edit operation for corrective and preventive actions form
 	public List<CorrectiveAndPreventiveActions> edit_corrective(String nc_id) {
 		Connection con = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
-		boolean status = false;
 		List<CorrectiveAndPreventiveActions> correctiveAndPreventiveActions = new ArrayList<CorrectiveAndPreventiveActions>();
 
 		try {
@@ -830,7 +827,7 @@ public class NonConformanceDAO extends AbstractExcelView {
 		return correctiveAndPreventiveActions;
 	}
 	
-	
+	//Update operation for corrective and preventive actions form
 	public boolean update_corrective(CorrectiveAndPreventiveActions correctiveAndPreventiveActions) {
 		Connection con = null;
 		Statement statement = null;

@@ -93,8 +93,8 @@
 							    <td align="left" valign="middle" width="8%"><input type="text" name="search_document_title" class="input_txtbx2" id="moblie"></td>
 							    <td align="left" valign="middle" width="8%">&nbsp;&nbsp;Process:</td>
 							    <td align="left" valign="middle" width="10%"><input type="text" name="search_process" id="search_process" class="input_txtbx2"></td>
-							    <td align="center" valign="middle" width="38%"><input type="submit" value="Find" class="submit_btn"  onclick="findpart()"></td>
-							    <td align="center" valign="middle" width="38%"><input type="button" value="Clear" class="submit_btn"></td>
+							    <td align="center" valign="middle" width="38%"><input type="submit" value="Find" class="submit_btn1"  onclick="findpart()"></td>
+							    <td align="center" valign="middle" width="38%"><input type="button" value="Clear" class="submit_btn1"></td>
 							  </tr>
 							</table>
 							
@@ -166,7 +166,7 @@
 
 <script>
 function confirmation(val) {
-	var answer = confirm("Are you Sure You Want to Delete Participant ?")
+	var answer = confirm("Are you Sure You Want to Delete Participant ?");
 	if (answer){
 		window.location = "?do=deleteparticipant&id="+val;
 	}

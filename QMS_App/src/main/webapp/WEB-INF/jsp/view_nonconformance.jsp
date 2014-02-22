@@ -193,8 +193,8 @@
 							  --><!--    <td align="left" valign="middle">Product Id:</td>
 							    <td align="left" valign="middle"><input type="text" name="product_id" id="product_id" class="input_text"></td>
 							   -->
-							    <td align="center" valign="middle"><input type="submit" class="submit_btn" value="Find" name="findnonconformance"></td>
-							    <td align="center" valign="middle"><input type="reset" class="submit_btn" value="Clear"></td>
+							    <td align="center" valign="middle"><input type="submit" class="submit_btn1" value="Find" name="findnonconformance"></td>
+							    <td align="center" valign="middle"><input type="reset" class="submit_btn1" value="Clear"></td>
 							  </tr>
 							</table>
 							</form>

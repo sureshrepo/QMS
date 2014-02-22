@@ -4,8 +4,6 @@ package qms.controllers;
 import java.io.FileOutputStream;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
@@ -13,15 +11,12 @@ import java.io.OutputStream;
 
 import java.io.IOException;
 import java.security.Principal;
-import java.util.logging.FileHandler;
 
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import org.apache.http.HttpRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -36,8 +31,6 @@ import org.springframework.web.multipart.MultipartFile;
 import qms.dao.CustomerFeedbackDAO;
 import qms.model.CustomerFeedback;
 import qms.forms.CustomerFeedbackForm;
-import qms.forms.MaintenanceForm;
-import qms.forms.SupplierPerformanceForm;
 import qms.dao.FileHandlingDAO;
 
 @Controller
@@ -50,6 +43,7 @@ public class CustomerFeedbackController
 	@Autowired
 	FileHandlingDAO fileHandlingDAO;
 	
+	//Get method for customer feedback insertion 
 	@RequestMapping(value={"/addfeedback"}, method = RequestMethod.GET)
 	public String add_customerfeedback(HttpSession session, ModelMap model, Principal principal ) {
 		
@@ -59,7 +53,7 @@ public class CustomerFeedbackController
 		return "add_customerfeedback";
 	}
 	
-	
+	//edit a record
 	@RequestMapping(value={"/editfeedback"}, method = RequestMethod.GET)
 	public String edit_customerfeedback(@RequestParam("fid") String fid,ModelMap model, Principal principal ) {
 		
@@ -73,6 +67,7 @@ public class CustomerFeedbackController
 		return "edit_customerfeedback";
 	}
 	
+	//update a record
 	@RequestMapping(value={"/updatefeedback"}, method = RequestMethod.POST)
 	public String update_customerfeedback(CustomerFeedback customerFeedback,ModelMap model, Principal principal,BindingResult result ) {
 		
@@ -89,6 +84,7 @@ public class CustomerFeedbackController
 		return "view_customerfeedback";
 	}
 	
+	//delete a record
 	@RequestMapping(value={"/deletefeedback"}, method = RequestMethod.GET)
 	public String delete_customerfeedback(@RequestParam("fid") String fid,ModelMap model, Principal principal ) {
 		
@@ -98,7 +94,7 @@ public class CustomerFeedbackController
 		return "view_customerfeedback";
 	}
 	
-	
+	//view a record
 	@RequestMapping(value={"/viewfeedback"}, method = RequestMethod.GET)
 	public String view_customerfeedback(ModelMap model, Principal principal ) {
 		
@@ -109,7 +105,7 @@ public class CustomerFeedbackController
 		return "view_customerfeedback";
 	}
 	
-	
+	//downloading the attachment
 	@RequestMapping(value={"/download_attachment"}, method = RequestMethod.GET)
 	public String download_attachment(@RequestParam("fid") String feedback_id,HttpServletResponse response,ModelMap model, Principal principal ) throws IOException {
 		
@@ -125,6 +121,7 @@ public class CustomerFeedbackController
 		return "view_customerfeedback";
 	}
 	
+	//insert operation
 	@RequestMapping(value={"/insertfeedback"}, method = RequestMethod.POST)
 	public String insert_customerfeedback(HttpSession session,HttpServletRequest request,ModelMap model, Principal principal,@ModelAttribute("CustomerFeedback") @Valid CustomerFeedback customerFeedback,BindingResult result ) throws IOException {
 		System.err.println("-------------------------------------------");
@@ -195,6 +192,7 @@ public class CustomerFeedbackController
 		return "/view_customerfeedback";
 	}
 	
+	//Search operation
 	@RequestMapping(value="/findcustomerfeedback",method=RequestMethod.GET)		
 	public String findcustomerfeedback(HttpServletRequest request,HttpSession session,@RequestParam("date_of_feedback") String date,@RequestParam("type_of_feedback") String type,ModelMap model)
 	{

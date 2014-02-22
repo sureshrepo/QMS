@@ -37,7 +37,7 @@ import qms.forms.SupplierPerformanceForm;;
 		SupplierPerformanceDAO supplierPerformanceDAO;
 		
 		
-		
+		//View method for supplier performance form
 		@RequestMapping(value={"/view_supplierperformance"}, method = RequestMethod.GET)
 		public String show_supplierperformance(HttpSession session,HttpServletRequest request, ModelMap model, Principal principal )
 		{
@@ -48,7 +48,7 @@ import qms.forms.SupplierPerformanceForm;;
 		return "view_supplierperformance";
 	 	}
 		
-		
+		//Request Get Method for insert operation
 		@RequestMapping(value={"/add_supplierperformance"}, method = RequestMethod.GET)
 		public String add_supplierperformance(HttpSession session,ModelMap model, Principal principal )
 		{
@@ -61,6 +61,7 @@ import qms.forms.SupplierPerformanceForm;;
 	 	}
 		
 
+		// Insert Operation
 		@RequestMapping(value={"/add_supplierperformance"}, method = RequestMethod.POST)
 		public String insert_supplierperformance(HttpSession session, @ModelAttribute("supplierperformance") @Valid SupplierPerformance supplierPerformance, BindingResult result, ModelMap model, Principal principal)
 
@@ -86,7 +87,7 @@ import qms.forms.SupplierPerformanceForm;;
 			
 	 	}
 		
-		
+		// Update Operation
 		@RequestMapping(value={"/updatesupplierperformance"}, method = RequestMethod.POST)
 		public String update_supplierperformance(HttpSession session,@ModelAttribute("supplierperformance") @Valid SupplierPerformance supplierPerformance,BindingResult result,ModelMap model, Principal principal)
 		{
@@ -109,7 +110,7 @@ import qms.forms.SupplierPerformanceForm;;
 
 	 	}
 		
-		
+		//Delete Operation
 		@RequestMapping(value={"/deletesupplierperformance"}, method = RequestMethod.GET)
 		public String delete_supplierperformance(@RequestParam("sid") String supplier_id,ModelMap model, Principal principal )
 		{
@@ -124,6 +125,7 @@ import qms.forms.SupplierPerformanceForm;;
 			
 	 	}
 		
+		//Get Method for Edit Operation
 		@RequestMapping(value={"/editsupplierperformance"}, method = RequestMethod.GET)
 		public String edit_supplierperformance(@RequestParam("sid") String supplier_id,ModelMap model, Principal principal )
 		{
@@ -136,6 +138,7 @@ import qms.forms.SupplierPerformanceForm;;
 			return "edit_supplierperformance";
 	 	}
 		
+		//Find Operation
 		@RequestMapping(value="/findsupplierperformance",method=RequestMethod.GET)		
 		public String findsupplierperformance(HttpServletRequest request,HttpSession session,@RequestParam("supplier_name") String suppliername,@RequestParam("phone") String phone,@RequestParam("email_address") String email,ModelMap model)
 		{
@@ -168,6 +171,7 @@ import qms.forms.SupplierPerformanceForm;;
 			}
 			}
 		
+		// Getting the Supplier Performance record's list
 		@RequestMapping(value = "list_supplierperformance", method = RequestMethod.GET)
 		public String list_supplierperformance(@RequestParam("supplier_id") String supplier_id,
 				ModelMap model, Principal principal) 

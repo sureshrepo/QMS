@@ -54,17 +54,17 @@
 							<form action="findemployee" method="get">
 							<table width="100%" border="0" cellspacing="0" cellpadding="0">
 							  <tr>
-							    <td align="left" valign="middle" width="5%"> Type :&nbsp;</td>
+							    <td align="left" valign="middle" width="10%"> Type&nbsp;</td>
 							    <td align="left" valign="middle" width="5%"><input type="text" name="type_of_training" class="input_txtbx2" id="type"></td>
-							    <td align="right" valign="middle" width="12%">QualifiedBy :&nbsp; </td>
+							    <td align="right" valign="middle" width="12%">QualifiedBy&nbsp; </td>
 							    <td align="left" valign="middle" width="10%"><input type="text" name="qualified_by" id="qualifiedby" class="input_txtbx2"></td>
-								<td align="right" valign="middle" width="10%"> Trainer : &nbsp;</td>
+								<td align="right" valign="middle" width="12%"> Trainer&nbsp;</td>
 							    <td align="left" valign="middle" width="10%"><input type="text" name="trainer" class="input_txtbx2" id="trainer"></td>
 							  
 	<!-- 						    <td align="center" valign="middle"><input type="submit" class="submit_btn" value="Find"></td>
 	 -->						  
-							    <td align="center" valign="middle"><input type="submit" class="submit_btn" value="Find"></td>
-							     <td align="center" valign="middle"><input type="reset" class="submit_btn" value="Clear"></td>
+							    <td align="center" valign="middle" width="38%"><input type="submit" class="submit_btn1" value="Find"></td>
+							     <td align="center" valign="middle"><input type="reset" class="submit_btn1" value="Clear"></td>
 							  </tr>
 							  </table>
 							  </form>

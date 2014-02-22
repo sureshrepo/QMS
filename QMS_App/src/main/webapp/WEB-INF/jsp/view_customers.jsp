@@ -78,8 +78,8 @@
 							    <td align="left" valign="middle" width="10%"><input type="text" name="address" id="address" class="input_txtbx2"></td>
 							    <!-- <td align="center" valign="middle" width="38%"><input type="button" class="submit_btn" value="Find" name="find" onclick="findpart()"></td>
 							     -->
-							      <td align="center" valign="middle" width="20%"><input type="submit" class="submit_btn" value="Find" name="findcustomer" ></td>
-							  	<td align="center" valign="middle" width="20%"><input type="submit" class="submit_btn" value="Clear" name="welcome" ></td>
+							      <td align="center" valign="middle" width="20%"><input type="submit" class="submit_btn1" value="Find" name="findcustomer" ></td>
+							  	<td align="center" valign="middle" width="20%"><input type="submit" class="submit_btn1" value="Clear" name="welcome" ></td>
 							  
 							  </tr>
 							</table>

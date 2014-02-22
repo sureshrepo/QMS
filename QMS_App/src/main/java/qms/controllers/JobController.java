@@ -1,9 +1,6 @@
 package qms.controllers;
 
-import java.security.Principal;
-import java.util.ArrayList;
-import java.util.List;
-
+//import java.security.Principal;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +18,7 @@ public class JobController
     @Autowired
 	JobDAO jobDAO;
 	
+    //Method for add a new job
 	@RequestMapping(value="/ajax_addjob", method = RequestMethod.POST)
 	public @ResponseBody String addjob(HttpServletRequest request,ModelMap model)
 	{
@@ -33,6 +31,7 @@ public class JobController
  
 	}
 	
+	//Method for getting a job
 	@RequestMapping(value="/ajax_getjob", method = RequestMethod.POST)
 	public @ResponseBody String getjob(HttpServletRequest request,ModelMap model)
 	{
@@ -42,6 +41,8 @@ public class JobController
 		return ReturnText;
  
 	}
+	
+	//generate jobs
 	public String generate_jobs()
 	{
 	//List<Job> jobs=new ArrayList<Job>();

@@ -32,7 +32,6 @@ import qms.dao.CorrectiveAndPreventiveActionsDAO;
 import qms.dao.FileHandlingDAO;
 //import qms.dao.ProcessDAO;
 import qms.forms.CorrectiveAndPreventiveActionsForm;
-import qms.forms.DocumentMainForm;
 //import qms.forms.DocumentMainForm;
 import qms.model.CorrectiveAndPreventiveActions;
 
@@ -116,6 +115,7 @@ public class CorrectiveAndPreventiveActionsController
 		
 	}
 	
+	//downloading the attachements
 	@RequestMapping(value = "/downloadMaindoc1", method = RequestMethod.GET)
 	public String downloadMaindoc(HttpServletResponse response,
 			@RequestParam("capa_id") String capa_id, ModelMap model)
@@ -139,21 +139,17 @@ public class CorrectiveAndPreventiveActionsController
 }
 	
 	
-	
-	
-@RequestMapping(value={"/search_correctiveactions"}, method = RequestMethod.GET)
+	//Search Operation		
+	@RequestMapping(value={"/search_correctiveactions"}, method = RequestMethod.GET)
 	
 	public String search_correctiveactions(@RequestParam("capa_requestor") String capa_requestor,@RequestParam("request_date") String request_date,@RequestParam("action") String action,ModelMap model, Principal principal)
-{
+	{
 	
 	
-	CorrectiveAndPreventiveActionsForm correctiveAndPreventiveActionsForm = new CorrectiveAndPreventiveActionsForm();
-
-	correctiveAndPreventiveActionsForm.setCorrectiveAndPreventiveActions(correctiveAndPreventiveActionsDAO.search_correctiveactions(capa_requestor,request_date,action));
-
-	model.addAttribute("correctiveAndPreventiveActionsForm",correctiveAndPreventiveActionsForm);
-	
-	return "correctiveactions_list";
+		CorrectiveAndPreventiveActionsForm correctiveAndPreventiveActionsForm = new CorrectiveAndPreventiveActionsForm();
+		correctiveAndPreventiveActionsForm.setCorrectiveAndPreventiveActions(correctiveAndPreventiveActionsDAO.search_correctiveactions(capa_requestor,request_date,action));
+		model.addAttribute("correctiveAndPreventiveActionsForm",correctiveAndPreventiveActionsForm);
+		return "correctiveactions_list";
 
 
 }
@@ -166,7 +162,7 @@ public class CorrectiveAndPreventiveActionsController
 
 	}
 
-	@SuppressWarnings("unchecked")
+	// Insert operation
 	@RequestMapping(value = "/add_correctiveAndPreventiveActions", method = RequestMethod.POST)
 	public String insert_correctiveAndPreventiveActions(HttpSession session,
 			@ModelAttribute("CorrectiveAndPreventiveActions") @Valid CorrectiveAndPreventiveActions correctiveAndPreventiveActions,
@@ -283,15 +279,7 @@ public class CorrectiveAndPreventiveActionsController
 		
 		}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	//corrective and preventive actions report list page
 	@RequestMapping(value="/correctiveactions_list", method=RequestMethod.GET)
 	public String correctiveactionslist(HttpServletRequest request,ModelMap model, Principal principal) {
 		 
@@ -306,12 +294,12 @@ public class CorrectiveAndPreventiveActionsController
 	}
 	
 	
-	
+	//edit a record
 	@RequestMapping(value = "edit_correctiveAndPreventiveActions", method = RequestMethod.GET)
 	public String edit_correctiveAndPreventiveActions(@RequestParam("capa_id") String capa_id,
 			ModelMap model, Principal principal) {
 		CorrectiveAndPreventiveActionsForm correctiveAndPreventiveActionsForm = new CorrectiveAndPreventiveActionsForm();
-System.out.println(capa_id);
+		System.out.println(capa_id);
 
 		correctiveAndPreventiveActionsForm.setCorrectiveAndPreventiveActions(correctiveAndPreventiveActionsDAO.edit_CorrectiveAndPreventiveActions(capa_id));
 
@@ -319,7 +307,8 @@ System.out.println(capa_id);
 		
 		return "edit_correctiveactions";
 	}
-	//update record
+	
+	//update a record
 	@RequestMapping(value = "/updatecorrectiveAndPreventiveActions", method = RequestMethod.POST)
 	public String update_correctiveAndPreventiveActions(ModelMap model, Principal principal,@ModelAttribute("CorrectiveAndPreventiveActions") @Valid CorrectiveAndPreventiveActions correctiveAndPreventiveActions,
 			BindingResult result) {
@@ -337,9 +326,7 @@ System.out.println(capa_id);
 		correctiveAndPreventiveActionsDAO.update_correctiveAndPreventiveActions(correctiveAndPreventiveActions);
 	//	model.addAttribute("menu","audits");
 		CorrectiveAndPreventiveActionsForm correctiveAndPreventiveActionsForm = new CorrectiveAndPreventiveActionsForm();
-
 		correctiveAndPreventiveActionsForm.setCorrectiveAndPreventiveActions(correctiveAndPreventiveActionsDAO.getCorrectiveAndPreventiveActions());
-
 		model.addAttribute("correctiveAndPreventiveActionsForm",correctiveAndPreventiveActionsForm);
 	//	model.addAttribute("menu","audits");
 		return "view_correctiveactions";
@@ -348,11 +335,8 @@ System.out.println(capa_id);
 	//view records
 	@RequestMapping(value = { "/view_correctiveandpreventive" }, method = RequestMethod.GET)
 	public String showInternalAudits(ModelMap model, Principal principal,@RequestParam("capa_id") String capa_id) {
-
 		CorrectiveAndPreventiveActionsForm correctiveAndPreventiveActionsForm = new CorrectiveAndPreventiveActionsForm();
-
 		correctiveAndPreventiveActionsForm.setCorrectiveAndPreventiveActions(correctiveAndPreventiveActionsDAO.getCorrectiveAndPreventiveActions(capa_id));
-
 		model.addAttribute("correctiveAndPreventiveActionsForm",correctiveAndPreventiveActionsForm);
 		//model.addAttribute("menu","audits");
 		return "view_correctiveactions";
@@ -362,24 +346,20 @@ System.out.println(capa_id);
 	@RequestMapping(value = { "delete_correctiveAndPreventiveActions" }, method = RequestMethod.GET)
 	public String delete_capa(@RequestParam("capa_id") String capa_id,
 			ModelMap model, Principal principal) {
-
 		correctiveAndPreventiveActionsDAO.delete_correctiveAndPreventiveActions(capa_id);
 		CorrectiveAndPreventiveActionsForm correctiveAndPreventiveActionsForm = new CorrectiveAndPreventiveActionsForm();
-
 		correctiveAndPreventiveActionsForm.setCorrectiveAndPreventiveActions(correctiveAndPreventiveActionsDAO.getCorrectiveAndPreventiveActions());
-
 		model.addAttribute("correctiveAndPreventiveActionsForm",correctiveAndPreventiveActionsForm);
-		
 		return "correctiveactions_list";
 		}
 
 	
+	//report generation
 	@RequestMapping(value = { "/capa_report" }, method = RequestMethod.POST)
 	public String capa_report(HttpServletRequest request,ModelMap model, Principal principal) 
 	{		
 		
 		String type=request.getParameter("type_of_report");
-		
 		CorrectiveAndPreventiveActionsForm correctiveAndPreventiveActionsForm = new CorrectiveAndPreventiveActionsForm();
 		//InternalAuditsForm.setInternalAudits(internalAuditsDAO.get_report_internalaudits(type));
 		correctiveAndPreventiveActionsForm.setCorrectiveAndPreventiveActions(correctiveAndPreventiveActionsDAO.getCorrectiveAndPreventiveActions_bytype(type));

@@ -6,25 +6,12 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.security.Principal;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-
-
-import org.apache.poi.hssf.usermodel.HSSFFont;
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.hssf.util.HSSFColor;
-import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.Font;
-import org.apache.poi.util.SystemOutLogger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -41,13 +28,10 @@ import qms.dao.EmployeeDAO;
 import qms.dao.FileHandlingDAO;
 import qms.dao.FormDAO;
 import qms.dao.ProcessDAO;
-import qms.model.DocumentMain;
 import qms.model.Employee;
 import qms.model.Form;
-import qms.forms.DocumentMainForm;
 import qms.forms.EmployeeForm;
 import qms.forms.FormForm;
-import qms.forms.InternalAuditsForm;
 import qms.forms.ProcessForm;
 
 @Controller
@@ -79,7 +63,7 @@ public class FormController
 	return "view_form";
  	}*/
 	
-	
+	//Getting unique id
 	@RequestMapping(value={"/addform"}, method = RequestMethod.GET)
 	public String add_form(HttpSession session,ModelMap model, Principal principal )
 	{
@@ -91,6 +75,7 @@ public class FormController
  	}
 	
 
+	//Insert a record
 	@RequestMapping(value={"/addform"}, method = RequestMethod.POST)
 	public String insert_form(HttpSession session,HttpServletRequest request,ModelMap model, @ModelAttribute("Form") @Valid Form form, BindingResult result, Principal principal)
 
@@ -99,11 +84,6 @@ public class FormController
 		
 		String form_id=request.getParameter("document_id_hidden");
 		form.setForm_or_rec_id(form_id);
-		
-		
-		
-		
-		
 		String auto_number=request.getParameter("auto_number");
 		System.out.println("Auto"+auto_number);
 	//	form.setForm_or_rec_id(request.getParameter("document_type_id") + '-'	+ form.getForm_or_rec_id());
@@ -211,7 +191,7 @@ public class FormController
 		return "add_form";*/
  	}
 	
-	
+	//Update a record
 	@RequestMapping(value={"/updateform"}, method = RequestMethod.POST)
 	public String update_form(HttpSession session,@ModelAttribute("Form") @Valid Form form,BindingResult result,ModelMap model, Principal principal)
 	{
@@ -339,6 +319,7 @@ public class FormController
  	
 	}
 	
+	//delete a record
 	@RequestMapping(value={"/deleteform"}, method = RequestMethod.GET)
 	public String delete_form(@RequestParam("auto_no") String auto_no,ModelMap model, Principal principal )
 	{
@@ -369,6 +350,7 @@ public class FormController
 
 
 	
+	//view page generation
 	@RequestMapping(value={"/view_form"},method=RequestMethod.GET)
 	public String viewEmployees(ModelMap model,Principal principal,Employee employee)
 	{
@@ -379,6 +361,7 @@ public class FormController
 		return "view_form";
 	}
 	
+	//edit a record
 	@RequestMapping(value={"/edit_form"}, method = RequestMethod.GET)
 	public String edit_form(HttpSession session,@RequestParam("auto_no") String auto_no,Form form,ModelMap model)
 	{
@@ -445,6 +428,7 @@ public class FormController
 		model.addAttribute("prefix",formDAO.getDocument_prefix());
 	}
 	
+	//search a record
 	 @RequestMapping(value={"/search_form"}, method = RequestMethod.GET)
 		
 		public String search_form(@RequestParam("auto_number") String auto_number,@RequestParam("form_or_rec_id") String form_or_rec_id,@RequestParam("document_id") String document_id,ModelMap model, Principal principal)
@@ -461,6 +445,7 @@ public class FormController
 
 	}
 	 
+	 //report page request passing
 	 @RequestMapping(value={"/form_report"}, method = RequestMethod.GET)
 		public String form_report(HttpSession session,ModelMap model, Principal principal )
 		{
@@ -468,6 +453,7 @@ public class FormController
 	        return "form_report";
 	 	}
 	 
+	 //External Form report generation
 	 @RequestMapping(value = "/generate_doc_form", method = RequestMethod.POST)
 		public ModelAndView generateDocument_Form(HttpServletRequest request,ModelMap model, HttpServletResponse response) {
 			
@@ -509,12 +495,5 @@ public class FormController
 			return modelAndView ;
 		}
 	
-	 
-	 /**
-		 * Excel Sheet Generation
-		 */
-		
-		
-		
 }
 

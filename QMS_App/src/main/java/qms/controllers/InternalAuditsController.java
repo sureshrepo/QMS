@@ -1,8 +1,5 @@
 package qms.controllers;
 
-import java.awt.List;
-
-
 import java.security.Principal;
 import java.util.ArrayList;
 
@@ -138,7 +135,7 @@ public class InternalAuditsController {
 		model.addAttribute("menu","audits");
 		return "view_internalaudits";
 	}
-	// INTERNAL AUDITS REPORT list page	
+	// Internal audits report list page	
 	
 	@RequestMapping(value = "list_internalaudit", method = RequestMethod.GET)
 	public String list_internalaudits(@RequestParam("id") String id,
@@ -152,7 +149,7 @@ public class InternalAuditsController {
 		model.addAttribute("menu","audits");
 		return "auditslist";
 	}
-	// INTERNAL AUDITS REPORT edit page
+	// Internal audits edit page
 	@RequestMapping(value = "edit_internalaudit", method = RequestMethod.GET)
 	public String edit_internalaudits(@RequestParam("id") String id,
 			ModelMap model, Principal principal) {
@@ -218,7 +215,7 @@ public class InternalAuditsController {
 
 	
 	
-	
+	// Report Generation
 	@RequestMapping(value = { "/internalaudit_report" }, method = RequestMethod.POST)
 	public String internalaudits_report(HttpServletRequest request,ModelMap model, Principal principal) 
 	{

@@ -20,12 +20,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import qms.dao.EmployeeDAO;
-import qms.model.DocumentMain;
 import qms.model.Employee;
-import qms.model.SupplierPerformance;
-import qms.forms.DocumentMainForm;
 import qms.forms.EmployeeForm;
-import qms.forms.InternalAuditsForm;
 
 
 import qms.dao.JobDAO;
@@ -39,6 +35,7 @@ public class EmployeeController
 	@Autowired
 	JobDAO jobDAO;
 	
+	//Getting unique id
 	@RequestMapping(value={"/addemployee"},method=RequestMethod.GET)
 	public String addEmployee(HttpSession session,ModelMap model,Principal principal)
 	{
@@ -49,6 +46,7 @@ public class EmployeeController
 		return "add_employee";
 	}
 	
+	//Insert operation
 	@RequestMapping(value={"/addemployee"},method=RequestMethod.POST)
 	public String insertEmployee(HttpSession session, @ModelAttribute("Employee") @Valid Employee employee,BindingResult result, ModelMap model)
 	{
@@ -76,6 +74,7 @@ public class EmployeeController
 	
 	}
 	
+	//view records
 	@RequestMapping(value={"/viewemployees"},method=RequestMethod.GET)
 	public String viewEmployees(ModelMap model,Principal principal,Employee employee)
 	{
@@ -86,6 +85,7 @@ public class EmployeeController
 		return "view_employees";
 	}
 	
+	//delete a record
 	@RequestMapping(value={"/deleteemployee"}, method = RequestMethod.GET)
 	public String delete_customer(@RequestParam("empid") String employee_id,ModelMap model, Principal principal )
 	{
@@ -98,6 +98,7 @@ public class EmployeeController
 		return "view_employees";
  	}
 	
+	//Edit a record
 	@RequestMapping(value={"/editemployee"}, method = RequestMethod.GET)
 	public String edit_customer(@RequestParam("empid") String employee_id,ModelMap model, Principal principal)//,Employee employee )
 	{
@@ -108,29 +109,7 @@ public class EmployeeController
 		return "edit_employee";
  	}
 	
-	
-	/*@RequestMapping(value={"/updateemployee"}, method = RequestMethod.POST)
-	public String update_customer(ModelMap model, @ModelAttribute("Employee") @Valid Employee employee, BindingResult result)
-	{
-
-		if (result.hasErrors())
-		{
-			System.out.println("error occuring while updation");
-			EmployeeForm employeeForm=new EmployeeForm();
-			employeeForm.setEmployees(employeeDAO.getEmployeess_byid(employee.getEmployee_id()));
-			model.addAttribute("employeeForm",employeeForm);
-	        return "edit_employee";
-		}
-    	employeeDAO.update_employee(employee);
-    	System.out.println("records are successfully updated");
-    	EmployeeForm employeeForm=new EmployeeForm();
-		employeeForm.setEmployees(employeeDAO.getEmployees());
-		model.addAttribute("employeeForm",employeeForm);
-		model.addAttribute("menu","employee");
-		System.out.println("updated.......");
-		return "view_employees";
- 	}
-*/
+	//Update a record
 	@RequestMapping(value={"/updateemployee"}, method = RequestMethod.POST)
 	public String update_customer(ModelMap model, @ModelAttribute("Employee") @Valid Employee employee, BindingResult result)
 	{
@@ -151,6 +130,7 @@ public class EmployeeController
 		return "view_employees";
  	}
 
+	//Search operation 
 	@RequestMapping(value="/findemployee",method=RequestMethod.GET)		
 	public String findemployee(HttpServletRequest request,HttpSession session,@RequestParam("trainer") String trainer,@RequestParam("type_of_training") String type,@RequestParam("qualified_by") String qualifiedby,ModelMap model)
 	{
@@ -184,7 +164,7 @@ public class EmployeeController
 		}
 
 	
-// INTERNAL AUDITS REPORT list page	
+// Employee report list page	
 	
 	@RequestMapping(value = "list_employee", method = RequestMethod.GET)
 	public String list_employee(@RequestParam("id") String employee_id,
@@ -199,7 +179,7 @@ System.out.println("edit:"+employee_id);
 		return "list_employee";
 	}
 
-	
+	//report page request passing	
 	@RequestMapping(value = "/employee_report", method = RequestMethod.GET)
 	public String reportEmployee(ModelMap model) {
 		  model.addAttribute("menu","employees");
@@ -219,6 +199,7 @@ System.out.println("edit:"+employee_id);
 	
 	}
 	
+	//report generation
 	@RequestMapping(value = "/generate_employee_report", method = RequestMethod.POST)
 	public ModelAndView generateEmployee_Report(HttpServletRequest request,ModelMap model, HttpServletResponse response) {
 		System.out.println("report generating....");

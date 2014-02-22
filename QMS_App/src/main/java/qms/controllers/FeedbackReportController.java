@@ -5,17 +5,11 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
-
-import org.apache.http.HttpRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -31,7 +25,8 @@ public class FeedbackReportController {
 	
 	@Autowired
 	CustomerFeedbackDAO customerFeedbackDAO;
-	
+
+//report page request passing
 @RequestMapping(value = { "/feedback_report" }, method = RequestMethod.GET)
 	
 	public String addFeedbackreport(HttpSession session,ModelMap model, Principal principal) {
@@ -39,10 +34,7 @@ public class FeedbackReportController {
 		return "feedback_report";
 }
 
-
-
-
-
+//Customer feedback report generation
 @RequestMapping(value={"/feedback_report"}, method = RequestMethod.POST)
 public String view_feedbackreport(HttpSession session,HttpServletRequest request, ModelMap model, Principal principal,CustomerFeedback customerFeedback ) {
 	session.setAttribute("feedback", customerFeedback.getType_of_feedback());
@@ -62,6 +54,7 @@ public String view_feedbackreport(HttpSession session,HttpServletRequest request
 	return "feedback_report";
 }
 
+//report generation request passing
 @RequestMapping(value ={ "/feedbackexport" }, method = RequestMethod.GET)
 public ModelAndView getExcel_view() {
 java.util.List<CustomerFeedback> customerFeedbacks=new ArrayList<CustomerFeedback>();
@@ -73,6 +66,3 @@ return new ModelAndView("customerfeedbackDAO","customerFeedbacks",customerFeedba
 }
 
 }
-
-
-	
