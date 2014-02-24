@@ -38,7 +38,7 @@ public class MaintenanceDAO extends AbstractExcelView
 	}
 	
 	
-	
+	//Excel view format creation
 	@Override
 	protected void buildExcelDocument(Map model, HSSFWorkbook workbook ,
 			HttpServletRequest request, HttpServletResponse response)
@@ -236,6 +236,7 @@ public class MaintenanceDAO extends AbstractExcelView
 			
 	}
 	
+	//Insert operation
 	public boolean insert_maintenance(Maintenance maintenance) {
 		Connection con = null;
 		Statement statement = null;
@@ -265,6 +266,8 @@ public class MaintenanceDAO extends AbstractExcelView
 		return status;
 
 	}
+	
+	//Search operation for find a particular record
 	public List<Maintenance>  search_maintenance(String equipment_id,String equipment_name,String date_acquired) {
 		Connection con = null;
 		Statement statement = null;
@@ -323,6 +326,7 @@ public class MaintenanceDAO extends AbstractExcelView
 	}
 		
 		
+	//Request method
 	public List<Maintenance> getmaintenance() {
 		Connection con = null;
 		Statement statement = null;
@@ -375,6 +379,7 @@ public class MaintenanceDAO extends AbstractExcelView
 		return maintenance;
 	}
 
+	//Get request method
 	public List<Maintenance> getmaintenance(String equipment_id){
 		Connection con = null;
 		Statement statement = null;
@@ -428,6 +433,7 @@ public class MaintenanceDAO extends AbstractExcelView
 		
 	}
 	
+	//Edit operation
 	public List<Maintenance> edit_maintenance(String equipment_id) {
 		Connection con = null;
 		Statement statement = null;
@@ -480,7 +486,7 @@ public class MaintenanceDAO extends AbstractExcelView
 		return maintenance;
 	}
 
-	
+	//Update Operation
 	public boolean update_maintenance(Maintenance maintenance) {
 		Connection con = null;
 		Statement statement = null;
@@ -514,7 +520,7 @@ public class MaintenanceDAO extends AbstractExcelView
 	}
 	
 	
-	
+	//Delete Operation
 	public boolean delete_maintenance(String equipment_id) {
 		Connection con = null;
 		Statement statement = null;
@@ -546,6 +552,7 @@ public class MaintenanceDAO extends AbstractExcelView
 
 	}
 	
+	//report request passing
 	public List<Maintenance> getMaintenance_bytype(String type,int no_of_days)
 	{
 		Connection con = null;

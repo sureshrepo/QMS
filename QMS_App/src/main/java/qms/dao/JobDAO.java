@@ -23,6 +23,7 @@ public class JobDAO {
 	}
 	
 
+	//Insert operation
 	public boolean insert_job(String job_id,String job_title,String job_desc) {
 		Connection con = null;
 		Statement statement = null;
@@ -52,7 +53,7 @@ public class JobDAO {
 
 	}
 	
-	
+	//Getting unique id
 	public String get_maxid() {
 		Connection con = null;
 		Statement statement = null;
@@ -91,7 +92,7 @@ public class JobDAO {
 	
 	
 	
-	
+	//Request methods
 	public List<Job> getJobs(){
 		Connection con = null;
 		Statement statement = null;

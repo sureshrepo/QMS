@@ -203,14 +203,14 @@ public class CorrectiveAndPreventiveActionsController
 								System.out.println("File Size:::" + file.getSize());
 								return "/add_correctiveAndPreventiveActions";
 							}
-							orginal_fileName = "D:/QMS_App/"
+							orginal_fileName = "C:/QMS_App/"
 								+ file.getOriginalFilename();
 							duplicate_fileName = orginal_fileName;
 							File create_file = new File(orginal_fileName);
 							int i = 1;
 							while (create_file.exists())
 								{System.out.println("create");
-									duplicate_fileName = "D:/QMS_App/"
+									duplicate_fileName = "C:/QMS_App/"
 									+ file.getOriginalFilename().substring(
 											0,
 											file.getOriginalFilename().lastIndexOf(
@@ -263,11 +263,15 @@ public class CorrectiveAndPreventiveActionsController
 
 			if (flag == 1)
 			{
+				session.removeAttribute("correctiveAndPreventiveActions");
+				
+				
 				CorrectiveAndPreventiveActionsForm correctiveAndPreventiveActionsForm = new CorrectiveAndPreventiveActionsForm();
 
 				correctiveAndPreventiveActionsForm.setCorrectiveAndPreventiveActions(correctiveAndPreventiveActionsDAO.getCorrectiveAndPreventiveActions());
 
 				model.addAttribute("correctiveAndPreventiveActionsForm",correctiveAndPreventiveActionsForm);
+				
 				return "correctiveactions_list";
 			}
 			else

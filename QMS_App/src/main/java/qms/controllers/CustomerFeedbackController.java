@@ -139,13 +139,13 @@ public class CustomerFeedbackController
 					System.out.println("File Size:::" + file.getSize());
 					return "/login";
 				}				
-			    orginal_fileName ="D:/Projects/QMS_Upload/Feedbacks/"+file.getOriginalFilename();
+			    orginal_fileName ="E:/Projects/"+file.getOriginalFilename();
 			    duplicate_fileName=orginal_fileName;
 			    File create_file=new File(orginal_fileName);
 			    int i=1;			    
 			    while(create_file.exists())
 			    {
-			    	duplicate_fileName="D:/Projects/QMS_Upload/Feedbacks/"+file.getOriginalFilename().substring(0,file.getOriginalFilename().lastIndexOf('.'))+i+file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf('.'));
+			    	duplicate_fileName="E:/Projects/"+file.getOriginalFilename().substring(0,file.getOriginalFilename().lastIndexOf('.'))+i+file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf('.'));
 			    	create_file=new File(duplicate_fileName);
 			    	i++;
 			    }

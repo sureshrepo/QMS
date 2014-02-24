@@ -20,8 +20,6 @@ import org.springframework.web.servlet.view.document.AbstractExcelView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
-
-import qms.model.InternalAudits;
 import qms.model.SupplierPerformance;
 
 
@@ -85,11 +83,7 @@ public class SupplierPerformanceDAO extends AbstractExcelView {
 	//creating header records
 	public void setExcelHeader(HSSFSheet excelSheet,CellStyle style,String[] fields) {
 		HSSFRow excelHeader = excelSheet.createRow(0);	
-	//	String[] fields={"document_id","document_title","document_type","media_type","location","process","external","issuer","revision_level","date","approver1","approver2","approver3","status","comments"};
-		/*String[] fields={"supplier_id","supplier_name","category","address","city","state","postalcode","country",
-				"website","certified_to","contact_name","contact_title","phone","fax","email_address"};
-*/
-		int i=0;
+	int i=0;
 		for (String field : fields) {
 			
 			if(field.equals("supplier_id"))
@@ -276,6 +270,8 @@ public class SupplierPerformanceDAO extends AbstractExcelView {
 				
 		}
 	}
+	
+	//Getting unique id
 	public String get_maxid() {
 		Connection con = null;
 		Statement statement = null;
@@ -312,7 +308,7 @@ public class SupplierPerformanceDAO extends AbstractExcelView {
 	}
 
 	
-	
+	//Delete operation
 	public boolean delete_supplierperformance(String supplier_id){
 		Connection con = null;
 		Statement statement = null;
@@ -342,6 +338,7 @@ public class SupplierPerformanceDAO extends AbstractExcelView {
 		
 	}
 	
+	//request method
 	public List<SupplierPerformance> getsupplierperformance_byid(String supplier_id){
 		Connection con = null;
 		Statement statement = null;
@@ -372,7 +369,7 @@ public class SupplierPerformanceDAO extends AbstractExcelView {
 		
 	}
 	
-
+	//Update operation
 	public boolean update_supplierperformance(SupplierPerformance supplierPerformance)
 	{
 		Connection con = null;
@@ -402,7 +399,7 @@ public class SupplierPerformanceDAO extends AbstractExcelView {
 		    return status;
 	}
 	
-	
+	//Insert operation
 	public boolean insert_supplierperformance(SupplierPerformance supplierPerformance)
 	{
 		Connection con = null;
@@ -469,6 +466,7 @@ public class SupplierPerformanceDAO extends AbstractExcelView {
 		
 	}
 	
+	//getting the supplierperformance list details
 	public List<SupplierPerformance> list_supplierperformance(String supplier_id) {
 		Connection con = null;
 		Statement statement = null;
@@ -556,7 +554,7 @@ public class SupplierPerformanceDAO extends AbstractExcelView {
 	
 	
 	
-	
+	//Search operation for find a particular records
 	public List<SupplierPerformance> getSupplierPerformances(String suppliername,
 			String phone, String email) {
 		Connection con = null;

@@ -39,6 +39,7 @@ public class FormDAO extends AbstractExcelView{
 	}
 
 
+	//Getting unique id
 	public String get_formid()
 	{
 		 Connection con = null;
@@ -84,7 +85,7 @@ public class FormDAO extends AbstractExcelView{
 		 return Max_id;
 	}
 
-	
+	//Delete operation
 	public boolean delete_form(String auto_no)
 	{
 		Connection con = null;
@@ -123,6 +124,7 @@ public class FormDAO extends AbstractExcelView{
 		return status;
 	}
 	
+	//Request method
 	public List<Form> getform()
 	{
 		Connection con = null;
@@ -162,7 +164,7 @@ public class FormDAO extends AbstractExcelView{
 			return form;
 		}
 	
-	
+	//Update Operation
 	public boolean update_form(Form form)
 	{
 		Connection con = null;
@@ -201,6 +203,7 @@ public class FormDAO extends AbstractExcelView{
 		return status;
 	}
 	
+	//Insert Operation
 	public boolean insert_form(Form form)
 	{
 		Connection con = null;
@@ -241,7 +244,7 @@ public class FormDAO extends AbstractExcelView{
 	}
 	
 	
-	
+	//Request method by using auto_no
 	public List<Form> getform(String auto_no){
 		Connection con = null;
 		Statement statement = null;
@@ -273,6 +276,7 @@ public class FormDAO extends AbstractExcelView{
 		
 	}
 	
+	//Request method by using auto_number
 	public List<Form> list_form(String auto_number){
 		Connection con = null;
 		Statement statement = null;
@@ -343,6 +347,7 @@ public class FormDAO extends AbstractExcelView{
 
 	}*/
 	
+	//Search operation for find a particular record
 	public List<Form> search_form(String auto_number,String form_or_rec_id,String document_id) {
 		Connection con = null;
 		Statement statement = null;
@@ -399,6 +404,7 @@ public class FormDAO extends AbstractExcelView{
 		return form;
 	}
 	
+	//Request method for human resources
 	public List<Form> gethuman_resources(){
 		Connection con = null;
 		Statement statement = null;
@@ -430,6 +436,7 @@ public class FormDAO extends AbstractExcelView{
 		
 	}
 	
+	//
 	
 	public List<Form> getengineering(){
 		Connection con = null;

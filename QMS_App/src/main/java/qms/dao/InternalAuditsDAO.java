@@ -11,13 +11,9 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
-
-import org.apache.poi.hssf.usermodel.HSSFCell;
-import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.hssf.util.HSSFColor;
 import org.springframework.web.servlet.view.document.AbstractExcelView;
 
 import qms.model.InternalAudits;
@@ -39,6 +35,10 @@ import qms.model.InternalAudits;
 			this.dataSource = dataSource;
 		}
 
+		
+		/*
+		 * Excel Sheet Generation
+		 */
 		@Override
 		protected void buildExcelDocument(Map model, HSSFWorkbook workbook ,
 				HttpServletRequest request, HttpServletResponse response)
@@ -63,6 +63,7 @@ import qms.model.InternalAudits;
 		{
 			HSSFRow excelHeader = excelSheet.createRow(0);
 			int record = 0;
+			
 			
 				for(String field:fields)
 				{
@@ -231,7 +232,7 @@ import qms.model.InternalAudits;
 
 	}
 
-	
+	//Edit operation
 	public List<InternalAudits> edit_internalaudit(String id) {
 		Connection con = null;
 		Statement statement = null;
@@ -275,6 +276,7 @@ import qms.model.InternalAudits;
 		return internalAudits;
 	}
 	
+	//Update Operation
 	public boolean update_internalaudits(InternalAudits internalAudits) {
 		Connection con = null;
 		Statement statement = null;
@@ -305,10 +307,7 @@ import qms.model.InternalAudits;
 	
 	
 	//deletion
-	
-
-
-	public boolean delete_internalAudits(String id) {
+		public boolean delete_internalAudits(String id) {
 		Connection con = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
@@ -336,8 +335,7 @@ import qms.model.InternalAudits;
 
 	}
 
-	//to view Internal Audits records
-	
+	//To view Internal Audits records
 	public List<InternalAudits> get_internalaudits(){
 		Connection con = null;
 		Statement statement = null;
@@ -443,6 +441,7 @@ import qms.model.InternalAudits;
 		return internalAudits;
 	}
 	
+	//Search operation for find a particular record
 	public List<InternalAudits> search_internalaudit(String id,String process,String auditee_name) {
 		Connection con = null;
 		Statement statement = null;
