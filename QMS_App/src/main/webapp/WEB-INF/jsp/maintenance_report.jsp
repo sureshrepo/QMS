@@ -13,30 +13,28 @@
 			<div>
 				<ul class="horizmenu">
 <li  style=" float:left;margin-right:8px;text-transform:uppercase;">
-								<a href="addinternalaudits" class="<c:choose>
-								<c:when test="${menu==''}">select</c:when><c:otherwise>unselect</c:otherwise></c:choose>">
-									<span>Add Internal Audits</span>
-									
-								</a>
-							</li>
-							
+								
 							<li  style=" float:left;margin-right:8px;text-transform:uppercase;">
-								<a href="view_internalaudits" class="<c:choose>
+								<a href="add_maintenance" class="<c:choose>
 								<c:when test="${menu==''}">select</c:when><c:otherwise>unselect</c:otherwise></c:choose>">
-									<span>View Internal Audits </span>
+									<span>Add Maintenance</span>
 									
 								</a>
 							</li>
-						
-				         <li  style=" float:left;margin-right:8px;text-transform:uppercase;">
-								<a href="internalaudit_report" class="<c:choose>
-								<c:when test="${menu=='audits'}">select</c:when><c:otherwise>unselect</c:otherwise></c:choose>">
+						<li  style=" float:left;margin-right:8px;text-transform:uppercase;">
+								<a href="maintenance_list" class="<c:choose>
+								<c:when test="${menu==''}">select</c:when><c:otherwise>unselect</c:otherwise></c:choose>">
+									<span>View Maintenance</span>
+								</a>
+							</li>
+				           <li  style=" float:left;margin-right:8px;text-transform:uppercase;">
+								<a href="maintenance_report" class="<c:choose>
+								<c:when test="${menu=='maintenance'}">select</c:when><c:otherwise>unselect</c:otherwise></c:choose>">
 									<span>Reports</span>
-									
 								</a>
 							</li>
 							</ul>
-			</div></td>
+				            	</div></td>
 	</tr>
 	<tr>
 		<c:if test="${success==true}">
@@ -59,10 +57,10 @@
 	<tr>
 		<td valign="top" align="left">
 				<div class="headings altheading">
-					<h2>Internal Audit Report </h2>
+					<h2>Maintenance Report </h2>
 				</div>
 				<div class="contentbox">
-					<form method="post" action="internal_audit_report">
+					<form method="post" action="maintenances_report">
 						<table cellpadding="0" cellspacing="0" border="0" width="100%">
 							
 							<tr class="row1" id="report_type_table">
@@ -70,14 +68,32 @@
 								Type Of Report :
 								</td>
 								<td valign="middle" align="left" class="input_txt" width="100%">
-								<input type="radio" name="audit_report_type" value="0" id="id_type_pastduedate" checked/>Past Due Audits<br/>
-								<input type="radio" onchange="toggle4(this.value)" name="audit_report_type" value="1" id="id_type_auditnonconformance"/>Audits with NonConformance<br/>
+								<input type="radio" onchange="toggle4(this.value)" name="maintenance_report_type" value="0" id="id_type_duemaintenancenext" checked/>Due Maintenance for next 30 days<br/>
+								<input type="radio" onchange="toggle4(this.value)" name="maintenance_report_type" value="1" id="id_type_upcomingcalibration"/>Upcoming Calibration for next xx days<br/>
 								
-								<input type="radio"  name="audit_report_type" value="2" id="id_type_areaofimprovement"/>Area of Improvements<br/>
-								<input type="radio"  name="audit_report_type" value="3" id="id_type_pastduebyauditor"/>Past Due audits by Auditor<br/>
-								<input type="radio" name="audit_report_type" value="4" id="id_type_schedule"/>Audit Schedule<br/>
+								
+							
+						
+								
+							    <input type="radio" onchange="toggle4(this.value)" name="maintenance_report_type" value="2" id="id_type_pastduemaintenance"/>Past Due Maintenance<br/>
+								<input type="radio" onchange="toggle4(this.value)" name="maintenance_report_type" value="3" id="id_type_pastduecalibration"/>Past Due Calibration<br/>
+								
+							
+							
+							
+							
+							
+								
+							<tr class="row1" id="no_of_days" style="display:none;">
+								<td valign="middle" align="right" class="input_txt" width="30%">
+									Number Of Days:
+									</td>
+								<td valign="top" align="left" class="input_txt" width="100%">
+								
+									<input type="text" name="no_of_day" class="input_txtbx1"  style="width:40%;" value=""/>
 							</td>
-							</tr>
+								
+							</tr>	
 							<tr class="row2">
 								<td valign="middle" align="right" class="input_txt" width="30%">
 									Select Report Type:</td>
@@ -88,9 +104,7 @@
 								</td>
 								
 							</tr>
-						
 						</table>
-						
 						
 						<table cellpadding="0" cellspacing="0" border="0" width="100%">
 						
@@ -110,28 +124,32 @@
 								<td valign="top" align="left" class="input_txt" width="100%">
 								<table cellpadding="0" cellspacing="0" border="0" width="100%">
 								<tr>
-								
-								
-								<td><input type="checkbox" id="select_all"/>Select All</td>
-								</tr> 
-								<tr>
-								<td><input type="checkbox"  onclick="selectall(this.id)" name="report_field[]" value="report_id" id="id_report_id"/>ID</td>
-								<td><input type="checkbox"  onclick="selectall(this.id)" name="report_field[]" value="process" id="id_process"/>Process</td>
-								<td><input type="checkbox"  onclick="selectall(this.id)" name="report_field[]" value="auditee_name" id="id_auditee_name"/>Auditee Name</td>
+								<td><input type="checkbox" name="report_field[]" value="equipment_id" id="id_report_id"/>Equipment ID</td>
+								<td><input type="checkbox" name="report_field[]" value="equipment_name" id="id_process"/>Equipment Name</td>
+								<td><input type="checkbox" name="report_field[]" value="equipment_model" id="id_auditee_name"/>Equipment Model</td>
 					      		</tr>
 					      		<tr>
-								<td><input type="checkbox" onclick="selectall(this.id)"  name="report_field[]" value="audit_start_date" id="id_audit_start_date"/>Audit Start Date</td>
-								<td><input type="checkbox" onclick="selectall(this.id)"  name="report_field[]" value="audit_due_date" id="id_audit_due_date"/>Audit Start Date</td>
-								<td><input type="checkbox" onclick="selectall(this.id)"  name="report_field[]" value="auditor" id="id_auditor"/>Auditor</td>
+								<td><input type="checkbox" name="report_field[]" value="serial_number" id="id_audit_start_date"/>Serial Number</td>
+								<td><input type="checkbox" name="report_field[]" value="date_acquired" id="id_audit_due_date"/>Date Acquired</td>
+								<td><input type="checkbox" name="report_field[]" value="equipment_status" id="id_auditor"/>Equipment Status</td>
 					      		</tr>
 					      		<tr>
-								<td><input type="checkbox" onclick="selectall(this.id)"  name="report_field[]" value="audit_notes" id="id_audit_notes"/>Auditor Notes</td>
-								<td><input type="checkbox"  onclick="selectall(this.id)" name="report_field[]" value="finding" id="id_finding"/>Finding</td>
-								<td><input type="checkbox"  onclick="selectall(this.id)" name="report_field[]" value="completion_date" id="id_completion_date"/>Completion Date</td>
+								<td><input type="checkbox" name="report_field[]" value="frequency_maintenance" id="id_audit_notes"/>Frequency of Maintenance</td>
+								<td><input type="checkbox" name="report_field[]" value="calibration" id="id_finding"/>Calibration</td>
+								<td><input type="checkbox" name="report_field[]" value="type_of_maintenance" id="id_completion_date"/>Type of Maintenance </td>
 					      		</tr>
 					      		<tr>
-								<td><input type="checkbox"  onclick="selectall(this.id)"  name="report_field[]" value="auditors_initial" id="id_auditors_initial"/>Auditor's Initial</td>
-							
+								<td><input type="checkbox" name="report_field[]" value="maintenance_frequency" id="id_auditors_initial"/>Maintenance Frequency</td>
+							<td><input type="checkbox" name="report_field[]" value="reference" id="id_auditors_initial"/>Reference</td>
+							<td><input type="checkbox" name="report_field[]" value="instructions" id="id_auditors_initial"/>Instructions</td>
+							</tr>
+							<tr>
+							<td><input type="checkbox" name="report_field[]" value="due_date" id="id_auditors_initial"/>Due Date</td>
+							<td><input type="checkbox" name="report_field[]" value="completion_date" id="id_auditors_initial"/>Completion Date</td>
+							<td><input type="checkbox" name="report_field[]" value="completed_by" id="id_auditors_initial"/>Completed By</td>
+							</tr>
+							<tr>
+							<td><input type="checkbox" name="report_field[]" value="notes" id="id_auditors_initial"/>Notes</td>
 								</table>
 								
 								</td>
@@ -154,6 +172,8 @@
 					</div>
 				</td></tr>
 </table></td></tr></table>
+
+
 <script type="text/javascript">
 function toggle2(value){
     var e3=document.getElementById("report_type_table");
@@ -171,24 +191,6 @@ else
     }
     
 }
-function toggle4(value)
-{
-	var e3=document.getElementById("no_of_days");
-	if(value==1)
-    {
-	
-	e3.style.display="table-row";
-	
-    }
-if(value==0)
-    {
-	
-	e3.style.display="none";
-	
-  
-    }
-  
-	}
 function toggle3(value){
 	
     var e1=document.getElementById("userdefined_name");
@@ -210,42 +212,25 @@ if(value==0)
 }
 </script>
 
-<script>
-$('#select_all').change(function() {
-    var checkboxes = $(this).closest('form').find(':checkbox');
-
-    if($(this).is(':checked')) {
-        checkboxes.attr('checked','checked');
-    } else {
-        checkboxes.removeAttr('checked');
-    }
-   
-});
-
-</script>
-<script>
-		function selectall(id) 
-		{
-			// var checkboxes1 = $(id).closest('form').find(':checkbox').not($('#select_all'));
-		
- if(($('#id').is(':checked')))
-	//if(!$(id).closest('form').find(':checkbox').not($('#select_all').is(':checked')))
+ <script>
+ function toggle4(value)
+{
+	var e3=document.getElementById("no_of_days");
+	if(value==1)
+    {
 	
-	 {  $("#select_all").attr('checked','checked'); 
-		
-		//if(!$id.closest('form').find(':checkbox').not($("#select_all")))
-			
-			
-	     
-			
-	 }
-	 else 
-	 {$("#select_all").removeAttr('checked');
-		 
-	 }
-	 
-		}
-		
+	e3.style.display="table-row";
+	
+    }
+	else
+    {
+	
+	e3.style.display="none";
+	
+  
+    }
+  
+	}
 </script>
   <jsp:include page="footer.jsp"></jsp:include>
   

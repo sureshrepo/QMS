@@ -213,7 +213,7 @@ import qms.model.InternalAudits;
 			e1.printStackTrace();
 		}
 		try {
-			String cmd_insert = "insert into tb1_internalaudits(id,process,audit_start_date,audit_due_date,auditor,auditor_notes,finding,completion_date,auditors_initials,auditee_name)values ('"+internalAudits.getId()+"','"+internalAudits.getProcess()+"','"+internalAudits.getAudit_start_date()+"','"+internalAudits.getAudit_due_date()+"','"+internalAudits.getAuditor()+"','"+internalAudits.getAuditor_notes()+"','"+internalAudits.getFinding()+"','"+internalAudits.getCompletion_date()+"','"+internalAudits.getAuditors_initials()+"','"+internalAudits.getAuditee_name()+"')";;
+			String cmd_insert = "insert into tb1_internalaudits(process,id,audit_start_date,audit_due_date,auditor,auditor_notes,finding,completion_date,auditors_initials,auditee_name)values ('"+internalAudits.getProcess()+"','"+internalAudits.getId()+"','"+internalAudits.getAudit_start_date()+"','"+internalAudits.getAudit_due_date()+"','"+internalAudits.getAuditor()+"','"+internalAudits.getAuditor_notes()+"','"+internalAudits.getFinding()+"','"+internalAudits.getCompletion_date()+"','"+internalAudits.getAuditors_initials()+"','"+internalAudits.getAuditee_name()+"')";;
 			
 			//System.out.println(statement.execute(cmd_insert));
 			

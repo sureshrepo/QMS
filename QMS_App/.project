@@ -3,6 +3,7 @@
 	<name>QMS_App</name>
 	<comment></comment>
 	<projects>
+		<project>Servers</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

@@ -44,7 +44,10 @@
                <tr class="row2">
 
                   <td valign="middle" align="left" class="input_txt" width="20%">Equipment Id: </td>
-                  <td valign="top" align="left" class="input_txt" width="70%">${maintenance.equipment_id}<span class="err"></span></td>
+
+                  <td valign="middle" align="left" class="input_txt" width="20%">Equipment Id :</td>
+
+                  <td valign="top" align="left" class="input_txt" width="70%">${maintenance.equipment_id}</br><span class="err"></span></td>
                 </tr>
                  <tr class="row1">
                   <td valign="middle" align="left" class="input_txt" width="20%">Equipment Name :</td>

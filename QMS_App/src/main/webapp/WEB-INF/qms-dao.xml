@@ -51,9 +51,7 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 	
-	<bean id="ManagementReviewDAO" class="qms.dao.ManagementReviewDAO">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
+	
 	
  <bean id="filehandlingDAO" class="qms.dao.FileHandlingDAO">
 	</bean>

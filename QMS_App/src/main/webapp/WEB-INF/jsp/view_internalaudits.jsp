@@ -46,17 +46,14 @@
 <div style="border:#ccc 2px solid; padding:15px; margin-bottom:15px;">
 							<table width="100%" border="0" cellspacing="0" cellpadding="0">
 							  <tr>
-							    <td align="left" valign="middle" width="5%">ID:</td>
-							    <td align="left" valign="middle" width="10%"><input type="text" name="id" class="input_txtbx2" id="id"></td>
-							    <td align="left" valign="middle" width="13%">&nbsp;&nbsp;Process:</td>
-							    <td align="left" valign="middle" width="8%"><input type="text" name="process" class="input_txtbx2" id="process"></td>
-							    <td align="left" valign="middle" width="40%">&nbsp;Auditee name:</td>
-							    <td align="left" valign="middle" width="8%"><input type="text" name="auditee_name" id="auditee_name" class="input_txtbx2"></td>
+							    <td align="left" valign="middle" width="10%">Audit ID:</td>
+							    <td align="left" valign="middle" width="10%"><input type="text" name="id" class="input_txtbx1" id="id"></td>
+							    <td align="left" valign="middle" width="15%">&nbsp;Process:</td>
+							    <td align="left" valign="middle" width="10%"><input type="text" name="process" class="input_txtbx1" id="process"></td>
+							    <td align="left" valign="middle" width="15%">&nbsp;Auditee name:</td>
+							    <td align="left" valign="middle" width="10%"><input type="text" name="auditee_name" id="auditee_name" class="input_txtbx1"></td>
 							    <td align="center" valign="middle" width="38%">
-							  <input type="submit" class="submit_btn" name="Search" id="id_submit" onmouseover="showTooltip('tooltip_id','inp_id3');" value="Search"/></td>
-								<td align="center" valign="middle" width="38%">
-							  <input type="button" class="submit_btn" name="Clear" id="id_submit" onmouseover="showTooltip('tooltip_id','inp_id3');" VALUE="Clear" /></td>
-							 
+							  <input type="submit" class="submit_btn" name="search" id="id_submit" onmouseover="showTooltip('tooltip_id','inp_id3');" /></td>
 							  </tr>
 							</table>
 						</div>
@@ -65,6 +62,7 @@
 							<table cellpadding="0" cellspacing="0" border="0" width="100%">
 								<tr class="title">
 									<td valign="top" align="left" width="5%">Audit Id</td>
+									<td valign="top" align="left" width="10%">Process</td>
 									<td valign="top" align="left" width="15%">Audit Due Date</td>
 									<td valign="top" align="left" width="15%">Audit Start Date</td>
 									<td valign="top" align="left" width="10%">Auditor</td>									
@@ -83,6 +81,7 @@
 							       			i=1;%>
 							       		<tr class="row<%=i%>" onmouseover="mouse_event(this,"row_hover");" onmouseout="mouse_event(this,"row1");">
 								           	<td valign="top" align="left"  width="10%"><a href="list_internalaudit?id=${internalAudits.id}">${internalAudits.id}</a></td>
+											<td valign="top" align="left" width="10%">${internalAudits.process}</td>
 											<td valign="top" align="left" width="10%">${internalAudits.audit_due_date}</td>
 											<td valign="top" align="left" width="10%">${internalAudits.audit_start_date}</td>
 											<td valign="top" align="left" width="10%">${internalAudits.auditor}</td>
@@ -92,7 +91,7 @@
 											
 											<td valign="top" align="left" width="15%">
 											<a href="#" title="" ><img src="resources/images/icons/icon_edit.png" alt="Edit" /></a><a href="edit_internalaudit?id=<c:out value="${internalAudits.id}"/>">Edit</a>
-											<a href="#" title=""><img src="resources/images/icons/icon_delete.png" alt="Delete" /></a><a href="delete_internalaudit?id=<c:out value="${internalAudits.id}"/>" onclick="return confirmation()">Delete</a>
+											<a href="#" title=""><img src="resources/images/icons/icon_delete.png" alt="Delete" /></a><a href="<c:out value="delete_internalaudit?id=${internalAudits.id}"/>" onclick="return confirmation()">Delete</a>
 											
 											</td>
 										</tr>
@@ -126,14 +125,15 @@
 						
 						
 <script>
-function confirmation(val) {
-	var answer = confirm("Are you Sure You Want to Internal Audits ?")
+function confirmation() {
+	var answer = confirm("Are you Sure You Want to Delete Internal Audits Form ?")
 	if (answer){
-		window.location = "?do=deleteparticipant&id="+val;
+		return true;
 	}
 	else{
-		
+		return false;
 	}
 }
+
 </script>
 <jsp:include page="footer.jsp"></jsp:include>
