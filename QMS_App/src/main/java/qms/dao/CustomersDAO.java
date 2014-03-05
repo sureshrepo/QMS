@@ -279,6 +279,95 @@ public class CustomersDAO {
 	    return customers;
 		
 	}
+	public  List<Customers> getlimitedcustomerreport(int page) {
+		Connection con = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
+		
+		
+		try {
+			con = dataSource.getConnection();
+			statement = con.createStatement();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		List<Customers> customers = new ArrayList<Customers>();
+		try {
+
+			String cmd;
+			int offset = 5 * (page - 1);
+			int limit = 5;
+					cmd="select * from tbl_customer limit " + offset + ","+ limit+"" ;
+				
+				//	cmd = "select * from tbl_narrativereport order by pname asc limit " + offset + ","+ limit+"" ;
+
+			resultSet = statement.executeQuery(cmd);
+			while(resultSet.next()){
+				customers.add(new Customers(resultSet.getString("customer_id"), 
+						resultSet.getString("customer_name"),
+						resultSet.getString("address"),
+						resultSet.getString("city"),
+						resultSet.getString("state"),
+						resultSet.getString("country"),
+						resultSet.getString("zipcode"),
+						resultSet.getString("website"),
+						resultSet.getString("contact_name"), 
+						resultSet.getString("title_of_contact"), 
+						resultSet.getString("telephone"),
+						resultSet.getString("fax"),
+						resultSet.getString("email_address")));
+}
+			} catch (Exception e) {
+			/*logger.info(e.toString());*/
+				System.out.println(e.toString());
+			releaseResultSet(resultSet);
+			releaseStatement(statement);
+			releaseConnection(con);
+		} finally {
+			releaseResultSet(resultSet);
+			releaseStatement(statement);
+			releaseConnection(con);
+		}
+		return customers;
+
+	}
+	public int getnoofcustomerreport() {
+		Connection con = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
+		int noofRecords = 0;
+		
+		try {
+			con = dataSource.getConnection();
+			statement = con.createStatement();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		List<Customers> customers = new ArrayList<Customers>();	
+		try {
+
+			String cmd;
+			
+					cmd = "select count(*) as noofrecords from tbl_customer ";
+					System.out.println("command"+cmd);			
+			resultSet = statement.executeQuery(cmd);
+			if (resultSet.next())
+				noofRecords = resultSet.getInt("noofrecords");
+
+		} catch (Exception e) {
+			releaseResultSet(resultSet);
+			releaseStatement(statement);
+			releaseConnection(con);
+		} finally {
+			releaseResultSet(resultSet);
+			releaseStatement(statement);
+			releaseConnection(con);
+		}
+		return noofRecords;
+
+	}
+
+
 	
 	public void releaseConnection(Connection con){
 		try{if(con != null)

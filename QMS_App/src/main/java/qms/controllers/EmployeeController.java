@@ -79,12 +79,57 @@ public class EmployeeController
 	public String viewEmployees(ModelMap model,Principal principal,Employee employee)
 	{
 		EmployeeForm employeeForm=new EmployeeForm();
-		employeeForm.setEmployees(employeeDAO.getEmployees());
-		model.addAttribute("employeeForm",employeeForm);
 		model.addAttribute("menu","employee");
+		model.addAttribute("noofrows",5);
+		employeeForm.setEmployees(employeeDAO.getlimitedemployeereport(1));
+		model.addAttribute("noofpages",(int) Math.ceil(employeeDAO.getnoofemployeereport() * 1.0 / 5));	 
+        model.addAttribute("button","viewall");
+        model.addAttribute("success","false");
+        model.addAttribute("currentpage",1);
+        model.addAttribute("employeeForm",employeeForm);
+		
 		return "view_employees";
 	}
 	
+	
+
+
+
+	@RequestMapping(value="/viewemployeereport_page", method=RequestMethod.GET)
+	public String viewemployeereport_page(HttpServletRequest request,@RequestParam("page") int page,ModelMap model) {	
+		EmployeeForm employeeForm=new EmployeeForm();
+		employeeForm.setEmployees(employeeDAO.getlimitedemployeereport(page));
+	 	model.addAttribute("noofpages",(int) Math.ceil(employeeDAO.getnoofemployeereport() * 1.0 / 5));
+	 	model.addAttribute("employeeForm",employeeForm);	
+	  	model.addAttribute("noofrows",5);   
+	    model.addAttribute("currentpage",page);
+	    model.addAttribute("menu","employee");
+	    model.addAttribute("button","viewall");
+	    
+	    return "view_employees";
+	    
+		
+	}
+
+
+	@RequestMapping(value={"/viewallemployeereport"}, method = RequestMethod.GET)
+	public String viewallmanagementreport(HttpServletRequest request,ModelMap model, Principal principal ) {
+		EmployeeForm employeeForm=new EmployeeForm();
+		employeeForm.setEmployees(employeeDAO.getEmployees());
+		model.addAttribute("employeeForm",employeeForm);
+
+	  	model.addAttribute("noofrows",5);    
+	   //narrativereportForm.getNarrativereport().size()
+	    model.addAttribute("menu","employee");
+	    model.addAttribute("button","close");
+	      
+	    	model.addAttribute("menu","employee");
+	        model.addAttribute("success","false");
+	        model.addAttribute("button","close");
+	        return "view_employees";
+
+	}
+
 	//delete a record
 	@RequestMapping(value={"/deleteemployee"}, method = RequestMethod.GET)
 	public String delete_customer(@RequestParam("empid") String employee_id,ModelMap model, Principal principal )
@@ -143,7 +188,7 @@ public class EmployeeController
 		if(type=="" && qualifiedby=="" && trainer=="")
 		{
 			EmployeeForm employeeForm = new EmployeeForm();
-			employeeForm.setEmployees(employeeDAO.findEmployees(type, qualifiedby,trainer));
+			employeeForm.setEmployees(employeeDAO.findemployee(type, qualifiedby,trainer));
 
 			model.addAttribute("employeeForm",employeeForm);
 			model.addAttribute("menu", "employee");
@@ -154,7 +199,7 @@ public class EmployeeController
 		{
 			System.out.println("searching started.......");
 		EmployeeForm employeeForm = new EmployeeForm();
-		employeeForm.setEmployees(employeeDAO.findEmployees(type, qualifiedby,trainer));
+		employeeForm.setEmployees(employeeDAO.findemployee(type, qualifiedby,trainer));
         model.addAttribute("employeeForm", employeeForm);
         model.addAttribute("menu","employee");
         System.out.println("finding result");

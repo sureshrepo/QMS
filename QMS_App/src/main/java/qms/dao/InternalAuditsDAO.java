@@ -487,6 +487,94 @@ import qms.model.InternalAudits;
 		}
 		return internalAudits;
 	}
+	public  List<InternalAudits> getlimitedinternalreport(int page) {
+		Connection con = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
+		
+		
+		try {
+			con = dataSource.getConnection();
+			statement = con.createStatement();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		List<InternalAudits> internalAudits = new ArrayList<InternalAudits>();
+		try {
+
+			String cmd;
+			int offset = 5 * (page - 1);
+			int limit = 5;
+					cmd="select * from tb1_internalaudits limit " + offset + ","+ limit+"" ;
+				
+				//	cmd = "select * from tbl_narrativereport order by pname asc limit " + offset + ","+ limit+"" ;
+
+			resultSet = statement.executeQuery(cmd);
+			while (resultSet.next()) {
+				
+				
+				internalAudits.add(new InternalAudits(resultSet
+						.getString("id"), resultSet
+						.getString("process"), resultSet
+						.getString("audit_start_date"), resultSet
+						.getString("audit_due_date"), resultSet
+						.getString("auditor"), resultSet
+						.getString("auditor_notes"), resultSet
+						.getString("finding"), resultSet
+						.getString("completion_date"), resultSet
+						.getString("auditors_initials"), resultSet
+						.getString("auditee_name")));
+			}
+			} catch (Exception e) {
+			/*logger.info(e.toString());*/
+				System.out.println(e.toString());
+			releaseResultSet(resultSet);
+			releaseStatement(statement);
+			releaseConnection(con);
+		} finally {
+			releaseResultSet(resultSet);
+			releaseStatement(statement);
+			releaseConnection(con);
+		}
+		return internalAudits;
+
+	}
+	public int getnoofinternalreport() {
+		Connection con = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
+		int noofRecords = 0;
+		
+		try {
+			con = dataSource.getConnection();
+			statement = con.createStatement();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		List<InternalAudits> internalAudits = new ArrayList<InternalAudits>();
+		try {
+
+			String cmd;
+			
+					cmd = "select count(*) as noofrecords from tb1_internalaudits ";
+					System.out.println("command"+cmd);			
+			resultSet = statement.executeQuery(cmd);
+			if (resultSet.next())
+				noofRecords = resultSet.getInt("noofrecords");
+
+		} catch (Exception e) {
+			releaseResultSet(resultSet);
+			releaseStatement(statement);
+			releaseConnection(con);
+		} finally {
+			releaseResultSet(resultSet);
+			releaseStatement(statement);
+			releaseConnection(con);
+		}
+		return noofRecords;
+
+	}
+
 	
 	public void releaseConnection(Connection con){
 		try{if(con != null)

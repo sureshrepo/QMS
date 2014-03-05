@@ -98,14 +98,59 @@ return "maintenance_list";
 	//maintenance report list page
 	@RequestMapping(value="/maintenance_list", method=RequestMethod.GET)
 	public String maintenancelist(HttpServletRequest request,ModelMap model, Principal principal) {
-		 
-		model.addAttribute("success","false");
+		MaintenanceForm maintenanceForm= new MaintenanceForm(); 
+		model.addAttribute("menu","maintenance");
+	  	model.addAttribute("noofrows",5);
+		
+		
+		maintenanceForm.setMaintenance(maintenanceDAO.getlimitedmaintenancereport(1));
+		model.addAttribute("noofpages",(int) Math.ceil(maintenanceDAO.getnoofmaintenancereport() * 1.0 / 5));	 
+        model.addAttribute("button","viewall");
+        model.addAttribute("success","false");
+        model.addAttribute("currentpage",1);
+		model.addAttribute("maintenanceForm",maintenanceForm);
+		
+		return "maintenance_list";
+	}
+	
+	
+
+
+	@RequestMapping(value="/viewmaintenancereport_page", method=RequestMethod.GET)
+	public String viewmaintenancereport_page(HttpServletRequest request,@RequestParam("page") int page,ModelMap model) {	
+		MaintenanceForm maintenanceForm= new MaintenanceForm();
+		maintenanceForm.setMaintenance(maintenanceDAO.getlimitedmaintenancereport(page));
+		model.addAttribute("noofpages",(int) Math.ceil(maintenanceDAO.getnoofmaintenancereport() * 1.0 / 5));
+		model.addAttribute("maintenanceForm",maintenanceForm);	
+	  	model.addAttribute("noofrows",5);   
+	    model.addAttribute("currentpage",page);
+	    model.addAttribute("menu","maintenance");
+	    model.addAttribute("button","viewall");
+	    
+	    return "maintenance_list";
+		
+	}
+
+
+	@RequestMapping(value={"/viewallmaintenancereport"}, method = RequestMethod.GET)
+	public String viewallmaintenancereport(HttpServletRequest request,ModelMap model, Principal principal ) {
 		MaintenanceForm maintenanceForm= new MaintenanceForm();
 		maintenanceForm.setMaintenance(maintenanceDAO.getmaintenance());
 		model.addAttribute("maintenanceForm",maintenanceForm);
-		model.addAttribute("menu","maintenance");
-		return "maintenance_list";
+
+	  	model.addAttribute("noofrows",5);    
+	   //narrativereportForm.getNarrativereport().size()
+	    model.addAttribute("menu","maintenance");
+	    model.addAttribute("button","close");
+	      
+	    	model.addAttribute("menu","maintenance");
+	        model.addAttribute("success","false");
+	        model.addAttribute("button","close");
+	        return "maintenance_list";
+
 	}
+
+
 
 	//view records
 	@RequestMapping(value="/view_maintenance", method=RequestMethod.GET)

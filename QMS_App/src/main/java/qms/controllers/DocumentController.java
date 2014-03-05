@@ -340,12 +340,61 @@ public class DocumentController {
 	public String login(ModelMap model) {
 
 		DocumentMainForm documentMainForm = new DocumentMainForm();
-		documentMainForm.setDocumentMains(documentControlDAO.getDocuments());
-		model.addAttribute("documentMainForm", documentMainForm);
-		  model.addAttribute("menu","document");
+		//documentMainForm.setDocumentMains(documentControlDAO.getDocuments());
+		
+		model.addAttribute("menu","document");
+	  	model.addAttribute("noofrows",5);
+	  	//narrativereportForm.getNarrativereport().size());       
+	  	documentMainForm.setDocumentMains(documentControlDAO.getlimiteddocumentreport(1));
+	    model.addAttribute("noofpages",(int) Math.ceil(documentControlDAO.getnoofdocumentreport() * 1.0 / 5));	 
+        model.addAttribute("button","viewall");
+        model.addAttribute("success","false");
+        model.addAttribute("currentpage",1);
+        model.addAttribute("documentMainForm", documentMainForm);
 		return "view_documents";
 
 	}
+	
+	
+
+
+
+	@RequestMapping(value="/viewdocumentreport_page", method=RequestMethod.GET)
+	public String viewdocumentreport_page(HttpServletRequest request,@RequestParam("page") int page,ModelMap model) {	
+		DocumentMainForm documentMainForm = new DocumentMainForm();
+	  	documentMainForm.setDocumentMains(documentControlDAO.getlimiteddocumentreport(page));
+		model.addAttribute("noofpages",(int) Math.ceil(documentControlDAO.getnoofdocumentreport() * 1.0 / 5));
+	 	model.addAttribute("documentMainForm", documentMainForm);	
+	  	model.addAttribute("noofrows",5);   
+	    model.addAttribute("currentpage",page);
+	    model.addAttribute("menu","document");
+	    model.addAttribute("button","viewall");
+	    
+	    return "view_documents";
+		
+	}
+
+
+	@RequestMapping(value={"/viewalldocumentreport"}, method = RequestMethod.GET)
+	public String viewalldocumentreport(HttpServletRequest request,ModelMap model, Principal principal ) {
+		DocumentMainForm documentMainForm = new DocumentMainForm();
+		documentMainForm.setDocumentMains(documentControlDAO.getDocuments());
+		model.addAttribute("documentMainForm", documentMainForm);
+
+	  	model.addAttribute("noofrows",5);    
+	   //narrativereportForm.getNarrativereport().size()
+	    model.addAttribute("menu","document");
+	    model.addAttribute("button","close");
+	      
+	    	model.addAttribute("menu","document");
+	        model.addAttribute("success","false");
+	        model.addAttribute("button","close");
+	        return "view_documents";
+
+	}
+
+
+
 
 	//download the file
 	@RequestMapping(value = "/downloadMaindoc", method = RequestMethod.GET)

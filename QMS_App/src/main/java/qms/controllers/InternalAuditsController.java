@@ -193,14 +193,58 @@ public class InternalAuditsController {
 	//view records
 	@RequestMapping(value = { "/view_internalaudits" }, method = RequestMethod.GET)
 	public String showInternalAudits(ModelMap model, Principal principal) {
+	InternalAuditsForm internalAuditsForm = new InternalAuditsForm();
+	//internalAuditsForm.setInternalAudits(internalAuditsDAO.get_internalaudits());
+	model.addAttribute("menu","audits");
+	model.addAttribute("noofrows",5); 
+	
+	internalAuditsForm.setInternalAudits(internalAuditsDAO.getlimitedinternalreport(1));
+	 model.addAttribute("noofpages",(int) Math.ceil(internalAuditsDAO.getnoofinternalreport() * 1.0 / 5));	 
+	 model.addAttribute("button","viewall");
+     model.addAttribute("success","false");
+     model.addAttribute("currentpage",1);
+     model.addAttribute("internalAuditsForm", internalAuditsForm);
 
-		InternalAuditsForm internalAuditsForm = new InternalAuditsForm();
-
-		internalAuditsForm.setInternalAudits(internalAuditsDAO.get_internalaudits());
-
-		model.addAttribute("internalAuditsForm", internalAuditsForm);
-		model.addAttribute("menu","audits");
 		return "view_internalaudits";
+	}
+
+	
+
+
+
+	@RequestMapping(value="/viewinternalreport_page", method=RequestMethod.GET)
+	public String viewinternalreport_page(HttpServletRequest request,@RequestParam("page") int page,ModelMap model) {	
+		InternalAuditsForm internalAuditsForm = new InternalAuditsForm();
+		internalAuditsForm.setInternalAudits(internalAuditsDAO.getlimitedinternalreport(page));
+		model.addAttribute("noofpages",(int) Math.ceil(internalAuditsDAO.getnoofinternalreport() * 1.0 / 5));
+		 model.addAttribute("internalAuditsForm", internalAuditsForm);	
+	  	model.addAttribute("noofrows",5);   
+	    model.addAttribute("currentpage",page);
+	    model.addAttribute("menu","audits");
+	    model.addAttribute("button","viewall");
+	    
+	    return "view_internalaudits";
+	    
+		
+	}
+
+
+	@RequestMapping(value={"/", "/viewallinternalreport"}, method = RequestMethod.GET)
+	public String viewallinternalreport(HttpServletRequest request,ModelMap model, Principal principal ) {
+		InternalAuditsForm internalAuditsForm = new InternalAuditsForm();
+		internalAuditsForm.setInternalAudits(internalAuditsDAO.get_internalaudits());
+		model.addAttribute("internalAuditsForm", internalAuditsForm);
+
+	  	model.addAttribute("noofrows",5);    
+	   //narrativereportForm.getNarrativereport().size()
+	    model.addAttribute("menu","audits");
+	    model.addAttribute("button","close");
+	      
+	    	model.addAttribute("menu","audits");
+	        model.addAttribute("success","false");
+	        model.addAttribute("button","close");
+	        return "view_internalaudits";
+
 	}
 
 	

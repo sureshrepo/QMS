@@ -618,6 +618,100 @@ public class MaintenanceDAO extends AbstractExcelView
 	    return maintenance;
 		
 	}
+
+public  List<Maintenance> getlimitedmaintenancereport(int page) {
+		Connection con = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
+		
+		
+		try {
+			con = dataSource.getConnection();
+			statement = con.createStatement();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		List<Maintenance> maintenance = new ArrayList<Maintenance>();
+		  try {
+
+			String cmd;
+			int offset = 5 * (page - 1);
+			int limit = 5;
+					cmd="select * from tbl_maintenance limit " + offset + ","+ limit+"" ;
+				
+				//	cmd = "select * from tbl_narrativereport order by pname asc limit " + offset + ","+ limit+"" ;
+
+			resultSet = statement.executeQuery(cmd);
+			while(resultSet.next()){
+				maintenance.add(new Maintenance(resultSet
+						.getString("equipment_id"), resultSet
+						.getString("equipment_name"), resultSet
+						.getString("equipment_model"), resultSet
+						.getString("serial_number"), resultSet
+						.getString("date_acquired"), resultSet
+						.getString("equipment_status"), resultSet
+						.getString("frequency_maintenance"), resultSet
+						.getString("calibration"), resultSet
+						.getString("equipmentid"), resultSet
+						.getString("type_of_maintenance"), resultSet
+						.getString("maintenance_frequency"), resultSet
+						.getString("reference"), resultSet
+						.getString("instructions"), resultSet
+						.getString("due_date"), resultSet
+						.getString("completion_date"),resultSet
+						.getString("completed_by"),
+						resultSet.getString("notes")));
+			}
+			
+			} catch (Exception e) {
+			/*logger.info(e.toString());*/
+				System.out.println(e.toString());
+			releaseResultSet(resultSet);
+			releaseStatement(statement);
+			releaseConnection(con);
+		} finally {
+			releaseResultSet(resultSet);
+			releaseStatement(statement);
+			releaseConnection(con);
+		}
+		return maintenance;
+
+	}
+	public int getnoofmaintenancereport() {
+		Connection con = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
+		int noofRecords = 0;
+		
+		try {
+			con = dataSource.getConnection();
+			statement = con.createStatement();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		List<Maintenance> maintenance = new ArrayList<Maintenance>();
+		try {
+
+			String cmd;
+				cmd = "select count(*) as noofrecords from tbl_maintenance ";
+			System.out.println("command"+cmd);			
+			resultSet = statement.executeQuery(cmd);
+			if (resultSet.next())
+				noofRecords = resultSet.getInt("noofrecords");
+
+		} catch (Exception e) {
+			releaseResultSet(resultSet);
+			releaseStatement(statement);
+			releaseConnection(con);
+		} finally {
+			releaseResultSet(resultSet);
+			releaseStatement(statement);
+			releaseConnection(con);
+		}
+		return noofRecords;
+
+	}
+
 	
 	
 	public void releaseConnection(Connection con) {

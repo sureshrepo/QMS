@@ -122,7 +122,7 @@ function doAjaxPost() {
                 <tr class="row2">
                  <td valign="middle" align="left" class="input_txt" width="30%"><span class="err">*</span>ID:</td>
                   <td valign="top" align="left" class="input_txt" width="70%"><input type="hidden" name="employee_id" id="inp_id" value="<c:out value="${id }"/>"/><c:out value="${id }"/><br/><span class="err"><form:errors path="Employee.employee_id"></form:errors></span></td>
-                 <td valign="middle" align="left" class="input_txt" width="30%"><span class="err">*</span>Qualifiedby</td>
+                 
                  
                  <td valign="top" align="left" class="input_txt"><select	name="qualified_by" class="input_cmbbx1">
                   											<option value="">--Select--</option>
@@ -141,7 +141,7 @@ function doAjaxPost() {
                 </tr>
                 <tr class="row1">
                   <td valign="middle" align="left" class="input_txt" width="30%"><span class="err">*</span>Name :</td>
-                  <td valign="top" align="left" class="input_txt" width="70%"><input type="text" name="name" class="input_txtbx1" id="inp_name" onmouseover="showTooltip('tooltip_id','inp_id3');" onmouseout="hideTooltip('tooltip_id');" value="${Employee.name}" /><br/><span class="err"><form:errors path="Employee.name"></form:errors></span></td>
+                  <td valign="top" align="left" class="input_txt" width="70%"><input type="text" name="name" class="input_txtbx1" id="inp_name" onmouseover="showTooltip('tooltip_id','inp_id3');" onmouseout="hideTooltip('tooltip_id');" value="${Employee.name}" /><td valign="middle" align="left" class="input_txt" width="30%"><span class="err">*</span>Qualifiedby</td><br/><span class="err"><form:errors path="Employee.name"></form:errors></span></td>
                   <td valign="middle" align="left" class="input_txt" width="30%"><span class="err">*</span>Type :</td>
                  <%--  <td valign="top" align="left" class="input_txt" width="70%"><input type="text" name="type_of_training" class="input_txtbx" id="inp_contact_name" onmouseover="showTooltip('tooltip_id','inp_id3');" onmouseout="hideTooltip('tooltip_id');" value="" /><br><span class="err"><form:errors path="Employee.type_of_training"></form:errors></span></td>
                  --%><td valign="top" align="left" class="input_txt"><select	name="type_of_training" class="input_cmbbx1">

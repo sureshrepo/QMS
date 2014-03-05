@@ -34,11 +34,57 @@ public class CustomersController
 	public String show_customers(ModelMap model, Principal principal )
 	{
     CustomersForm customersForm=new CustomersForm();
-    customersForm.setCustomers(customersDAO.getCustomers());
-    model.addAttribute("customerForm",customersForm);
     model.addAttribute("menu","customer");
+    model.addAttribute("noofrows",5); 
+    customersForm.setCustomers(customersDAO.getlimitedcustomerreport(1));
+    model.addAttribute("noofpages",(int) Math.ceil(customersDAO.getnoofcustomerreport() * 1.0 / 5));
+    model.addAttribute("button","viewall");
+    model.addAttribute("success","false");
+    model.addAttribute("currentpage",1);
+    model.addAttribute("customerForm",customersForm);
+    
 	return "view_customers";
  	}
+	
+	
+
+
+
+	@RequestMapping(value="/viewcustomerreport_page", method=RequestMethod.GET)
+	public String viewcustomerreport_page(HttpServletRequest request,@RequestParam("page") int page,ModelMap model) {	
+		CustomersForm customersForm=new CustomersForm();
+		customersForm.setCustomers(customersDAO.getlimitedcustomerreport(page));
+	 	model.addAttribute("noofpages",(int) Math.ceil(customersDAO.getnoofcustomerreport() * 1.0 / 5));
+	 	model.addAttribute("customerForm",customersForm);	
+	  	model.addAttribute("noofrows",5);   
+	    model.addAttribute("currentpage",page);
+	    model.addAttribute("menu","customer");
+	    model.addAttribute("button","viewall");
+	    
+	    return "view_customers";
+	    
+		
+	}
+
+
+	@RequestMapping(value={"/", "/viewallcustomerreport"}, method = RequestMethod.GET)
+	public String viewallcustomerreport(HttpServletRequest request,ModelMap model, Principal principal ) {
+		CustomersForm customersForm=new CustomersForm();
+		customersForm.setCustomers(customersDAO.getCustomers());
+		model.addAttribute("customerForm",customersForm);
+
+	  	model.addAttribute("noofrows",5);    
+	   //narrativereportForm.getNarrativereport().size()
+	    model.addAttribute("menu","customer");
+	    model.addAttribute("button","close");
+	      
+	    	model.addAttribute("menu","customer");
+	        model.addAttribute("success","false");
+	        model.addAttribute("button","close");
+	        return "view_customers";
+
+	}
+
 	
 	//getting unique id
 	@RequestMapping(value={"/addcustomer"}, method = RequestMethod.GET)
