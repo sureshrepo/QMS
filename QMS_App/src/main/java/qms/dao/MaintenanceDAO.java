@@ -637,7 +637,7 @@ public  List<Maintenance> getlimitedmaintenancereport(int page) {
 			String cmd;
 			int offset = 5 * (page - 1);
 			int limit = 5;
-					cmd="select * from tbl_maintenance limit " + offset + ","+ limit+"" ;
+					cmd="select * from tbl_maintenancechild as t1 join tbl_maintenance as t2 on t1.equipmentid=t2.equipment_id limit " + offset + ","+ limit+"" ;
 				
 				//	cmd = "select * from tbl_narrativereport order by pname asc limit " + offset + ","+ limit+"" ;
 
@@ -693,7 +693,7 @@ public  List<Maintenance> getlimitedmaintenancereport(int page) {
 		try {
 
 			String cmd;
-				cmd = "select count(*) as noofrecords from tbl_maintenance ";
+				cmd = "select count(*) as noofrecords from tbl_maintenancechild as t1 join tbl_maintenance as t2 on t1.equipmentid=t2.equipment_id ";
 			System.out.println("command"+cmd);			
 			resultSet = statement.executeQuery(cmd);
 			if (resultSet.next())

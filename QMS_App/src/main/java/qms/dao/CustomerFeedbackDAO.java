@@ -317,6 +317,89 @@ public class CustomerFeedbackDAO extends AbstractExcelView
 		return customerFeedbacks;
 
 	}
+	public  List<CustomerFeedback> getlimitedfeedbackreport(int page) {
+		Connection con = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
+		
+		
+		try {
+			con = dataSource.getConnection();
+			statement = con.createStatement();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		List<CustomerFeedback> customerFeedbacks = new ArrayList<CustomerFeedback>();
+		
+		  try {
+
+			String cmd;
+			int offset = 5 * (page - 1);
+			int limit = 5;
+					cmd="select * from tbl_customerfeedback limit " + offset + ","+ limit+"" ;
+				
+				//	cmd = "select * from tbl_narrativereport order by pname asc limit " + offset + ","+ limit+"" ;
+
+			resultSet = statement.executeQuery(cmd);
+			while(resultSet.next()){
+		     customerFeedbacks.add(new CustomerFeedback(resultSet.getString("feedback_id"),
+		    		 resultSet.getString("date_of_feedback"),
+		    		 resultSet.getString("type_of_feedback"),
+		    		 resultSet.getString("feedback_recorded_by"),
+		    		 resultSet.getString("feedback_details"),
+		    		 resultSet.getString("attachment_name"),
+		    		 resultSet.getString("attachement_type"),
+		    		 resultSet.getString("attachment_referrence")));
+           	}
+			
+			} catch (Exception e) {
+			/*logger.info(e.toString());*/
+				System.out.println(e.toString());
+			releaseResultSet(resultSet);
+			releaseStatement(statement);
+			releaseConnection(con);
+		} finally {
+			releaseResultSet(resultSet);
+			releaseStatement(statement);
+			releaseConnection(con);
+		}
+		return customerFeedbacks;
+
+	}
+	public int getnooffeedbackreport() {
+		Connection con = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
+		int noofRecords = 0;
+		
+		try {
+			con = dataSource.getConnection();
+			statement = con.createStatement();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		List<CustomerFeedback> customerFeedbacks = new ArrayList<CustomerFeedback>();
+		try {
+
+			String cmd;
+				cmd = "select count(*) as noofrecords from tbl_customerfeedback ";
+			System.out.println("command"+cmd);			
+			resultSet = statement.executeQuery(cmd);
+			if (resultSet.next())
+				noofRecords = resultSet.getInt("noofrecords");
+
+		} catch (Exception e) {
+			releaseResultSet(resultSet);
+			releaseStatement(statement);
+			releaseConnection(con);
+		} finally {
+			releaseResultSet(resultSet);
+			releaseStatement(statement);
+			releaseConnection(con);
+		}
+		return noofRecords;
+
+	}
 	
 	
 	public DataSource getDataSource() {

@@ -22,6 +22,7 @@ import org.springframework.ui.ModelMap;
 import qms.dao.FileHandlingDAO;
 import qms.dao.NonConformanceDAO;
 import qms.forms.CorrectiveAndPreventiveActionsForm;
+
 import qms.forms.NonConformanceForm;
 import qms.model.*;
 
@@ -42,13 +43,60 @@ public class NonConformanceController {
 	// Request Method for view page
 	@RequestMapping(value = { "/view_nonconformance" }, method = RequestMethod.GET)
 	public String showNonconformance(ModelMap model, Principal principal) {
-		model.addAttribute("success","false");
+		NonConformanceForm nonConformanceForm = new NonConformanceForm();
+		model.addAttribute("menu","nonconformance");
+		model.addAttribute("noofrows",5);
+		nonConformanceForm.setNonconformance(nonConformanceDAO.getlimitednonconformancereport(1));
+		model.addAttribute("noofpages",(int) Math.ceil(nonConformanceDAO.getnoofnonconformancereport() * 1.0 / 5));
+		model.addAttribute("button","viewall");
+	    model.addAttribute("success","false");
+	    model.addAttribute("currentpage",1);
+	 	model.addAttribute("nonConformanceForm", nonConformanceForm);
+		//model.addAttribute("menu","nonconformance");
+		return "view_nonconformance";
+	}
+	
+	
+
+	
+	
+
+
+	@RequestMapping(value="/viewnonconformancereport_page", method=RequestMethod.GET)
+	public String viewnonconformancereport_page(HttpServletRequest request,@RequestParam("page") int page,ModelMap model) {	
+		NonConformanceForm nonConformanceForm = new NonConformanceForm();
+		nonConformanceForm.setNonconformance(nonConformanceDAO.getlimitednonconformancereport(page));
+		model.addAttribute("noofpages",(int) Math.ceil(nonConformanceDAO.getnoofnonconformancereport() * 1.0 / 5));
+		model.addAttribute("nonConformanceForm", nonConformanceForm);	
+	  	model.addAttribute("noofrows",5);   
+	    model.addAttribute("currentpage",page);
+	    model.addAttribute("menu","nonconformance");
+	    model.addAttribute("button","viewall");
+	    
+	    return "view_nonconformance";
+		
+	}
+
+
+	@RequestMapping(value={"/viewallnonconformancereport"}, method = RequestMethod.GET)
+	public String viewallnonconformanceport(HttpServletRequest request,ModelMap model, Principal principal ) {
 		NonConformanceForm nonConformanceForm = new NonConformanceForm();
 		nonConformanceForm.setNonconformance(nonConformanceDAO.get_nonconformance());
 		model.addAttribute("nonConformanceForm", nonConformanceForm);
-		model.addAttribute("menu","nonconformance");
-		return "view_nonconformance";
+
+	  	model.addAttribute("noofrows",5);    
+	   //narrativereportForm.getNarrativereport().size()
+	    model.addAttribute("menu","maintenance");
+	    model.addAttribute("button","close");
+	      
+	    	model.addAttribute("menu","nonconformance");
+	        model.addAttribute("success","false");
+	        model.addAttribute("button","close");
+	        return "view_nonconformance";
+
 	}
+
+
 
 	//Request Method for Insert Operation
 	@RequestMapping(value = { "/add_nonconformance" }, method = RequestMethod.GET)

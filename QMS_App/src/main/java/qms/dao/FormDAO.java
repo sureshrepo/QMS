@@ -21,9 +21,9 @@ import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Font;
 import org.springframework.web.servlet.view.document.AbstractExcelView;
 
-import qms.model.DocumentMain;
+
 import qms.model.Form;
-import qms.model.InternalAudits;
+
 
 public class FormDAO extends AbstractExcelView{
 	private DataSource datasource;
@@ -772,6 +772,100 @@ public class FormDAO extends AbstractExcelView{
 				
 				
 		}
+	}
+	
+	public  List<Form> getlimitedformreport(int page) {
+		Connection con = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
+		
+		
+		try {
+			con = datasource.getConnection();
+			statement = con.createStatement();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		List<Form> form = new ArrayList<Form>();
+		  try {
+
+			String cmd;
+			int offset = 5 * (page - 1);
+			int limit = 5;
+					cmd="select t1.*,t2.* from tbl_form as t1 join tbl_form_child as t2 on t1.auto_number=t2.auto_no limit " + offset + ","+ limit+"" ;
+				
+				//	cmd = "select * from tbl_narrativereport order by pname asc limit " + offset + ","+ limit+"" ;
+
+			resultSet = statement.executeQuery(cmd);
+			while(resultSet.next()){
+				form.add(new Form(resultSet.getString("auto_number"), 
+						resultSet.getString("location"), 
+						resultSet.getString("form_or_rec_id"),
+						resultSet.getString("responsibility"),
+						resultSet.getString("form_or_rec_title"),
+						resultSet.getString("process"), 
+						resultSet.getString("media_type"),
+						resultSet.getString("retention_time"),
+						resultSet.getString("form"),
+						resultSet.getString("attachment_name"),
+						resultSet.getString("attachment_type"),
+						resultSet.getString("attachment_referrence"),
+						resultSet.getString("auto_no"),
+						resultSet.getString("effective_date"),
+						resultSet.getString("document_id"),
+						resultSet.getString("approver1"),
+						resultSet.getString("issuer"),
+						resultSet.getString("comments")));
+			}
+			
+			} catch (Exception e) {
+			/*logger.info(e.toString());*/
+				System.out.println(e.toString());
+			releaseResultSet(resultSet);
+			releaseStatement(statement);
+			releaseConnection(con);
+		} finally {
+			releaseResultSet(resultSet);
+			releaseStatement(statement);
+			releaseConnection(con);
+		}
+		return form;
+
+	}
+	public int getnoofformreport() {
+		Connection con = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
+		int noofRecords = 0;
+		
+
+		try {
+			con = datasource.getConnection();
+			statement = con.createStatement();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		List<Form> form = new ArrayList<Form>();
+		try {
+
+			String cmd;
+				cmd = "select count(*) as noofrecords from tbl_form as t1 join tbl_form_child as t2 on t1.auto_number=t2.auto_no limit ";
+			System.out.println("command"+cmd);			
+			resultSet = statement.executeQuery(cmd);
+			if (resultSet.next())
+				noofRecords = resultSet.getInt("noofrecords");
+
+		} catch (Exception e) {
+			releaseResultSet(resultSet);
+			releaseStatement(statement);
+			releaseConnection(con);
+		} finally {
+			releaseResultSet(resultSet);
+			releaseStatement(statement);
+			releaseConnection(con);
+		}
+		return noofRecords;
+
 	}
 
 	public void releaseConnection(Connection con){

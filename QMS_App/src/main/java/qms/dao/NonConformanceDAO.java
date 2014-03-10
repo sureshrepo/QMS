@@ -20,6 +20,8 @@ import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Font;
 import org.springframework.web.servlet.view.document.AbstractExcelView;
+
+
 import qms.model.NonConformance;
 import qms.model.CorrectiveAndPreventiveActions;
 
@@ -857,7 +859,101 @@ public class NonConformanceDAO extends AbstractExcelView {
 		return status1;
 
 	}
-	
+	public  List<NonConformance> getlimitednonconformancereport(int page) {
+		Connection con = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
+		
+		
+		try {
+			con = dataSource.getConnection();
+			statement = con.createStatement();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		List<NonConformance> nonConformances = new ArrayList<NonConformance>();
+		try {
+
+			String cmd;
+			int offset = 5 * (page - 1);
+			int limit = 5;
+					cmd="select * select * from tbl_nonconformance limit " + offset + ","+ limit+"" ;
+				
+				//	cmd = "select * from tbl_narrativereport order by pname asc limit " + offset + ","+ limit+"" ;
+
+			resultSet = statement.executeQuery(cmd);
+			while (resultSet.next()) {
+				System.out.println("came");
+				nonConformances.add(new NonConformance(resultSet
+						.getString("id"), resultSet
+						.getString("source_of_nonconformance"), resultSet
+						.getString("external_id"), resultSet
+						.getString("type_of_nonconformance"), resultSet
+						.getString("product_id"), resultSet
+						.getString("quantity_suspect"), resultSet
+						.getString("nature_of_nonconformance"), resultSet
+						.getString("date_found"), resultSet
+						.getString("reported_by"), resultSet
+						.getString("temporary_action"), resultSet
+						.getString("corrective_action_required"), resultSet
+						.getString("disposition_required"), resultSet
+						.getString("disposition"), resultSet
+						.getString("disposition_complete_date"), resultSet
+						.getString("name_of_disposition_responsibility"),
+						resultSet.getString("cost_of_nonconformance")));
+
+			}
+
+			} catch (Exception e) {
+			/*logger.info(e.toString());*/
+				System.out.println(e.toString());
+			releaseResultSet(resultSet);
+			releaseStatement(statement);
+			releaseConnection(con);
+		} finally {
+			releaseResultSet(resultSet);
+			releaseStatement(statement);
+			releaseConnection(con);
+		}
+		return nonConformances;
+
+	}
+	public int getnoofnonconformancereport() {
+		Connection con = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
+		int noofRecords = 0;
+		
+		try {
+			con = dataSource.getConnection();
+			statement = con.createStatement();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		List<NonConformance> nonConformances = new ArrayList<NonConformance>();
+		try {
+
+			String cmd;
+				cmd = "select count(*) as noofrecords from tbl_nonconformance ";
+			System.out.println("command"+cmd);			
+			resultSet = statement.executeQuery(cmd);
+			if (resultSet.next())
+				noofRecords = resultSet.getInt("noofrecords");
+
+		} catch (Exception e) {
+			releaseResultSet(resultSet);
+			releaseStatement(statement);
+			releaseConnection(con);
+		} finally {
+			releaseResultSet(resultSet);
+			releaseStatement(statement);
+			releaseConnection(con);
+		}
+		return noofRecords;
+
+	}
+
+
 
 
 	public void releaseConnection(Connection con) {

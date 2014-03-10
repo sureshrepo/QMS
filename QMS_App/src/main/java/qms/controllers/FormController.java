@@ -32,6 +32,7 @@ import qms.model.Employee;
 import qms.model.Form;
 import qms.forms.EmployeeForm;
 import qms.forms.FormForm;
+
 import qms.forms.ProcessForm;
 
 @Controller
@@ -355,11 +356,57 @@ public class FormController
 	public String viewEmployees(ModelMap model,Principal principal,Employee employee)
 	{
 		FormForm formForm=new FormForm();
-	    formForm.setForm(formDAO.getform());
+		model.addAttribute("menu","document");
+	  	model.addAttribute("noofrows",5);
+	  	
+	    formForm.setForm(formDAO.getlimitedformreport(1));
+	    model.addAttribute("noofpages",(int) Math.ceil(formDAO.getnoofformreport() * 1.0 / 5));	 
+        model.addAttribute("button","viewall");
+        model.addAttribute("success","false");
+        model.addAttribute("currentpage",1);
+	    
 	    model.addAttribute("formForm",formForm);
-	    model.addAttribute("menu","document");
+	    
 		return "view_form";
 	}
+	
+	
+
+	@RequestMapping(value="/viewformreport_page", method=RequestMethod.GET)
+	public String viewformreport_page(HttpServletRequest request,@RequestParam("page") int page,ModelMap model) {	
+		FormForm formForm=new FormForm();
+		formForm.setForm(formDAO.getlimitedformreport(page));
+		model.addAttribute("noofpages",(int) Math.ceil(formDAO.getnoofformreport() * 1.0 / 5));	
+		model.addAttribute("formForm",formForm);
+	  	model.addAttribute("noofrows",5);   
+	    model.addAttribute("currentpage",page);
+	    model.addAttribute("menu","document");
+	    model.addAttribute("button","viewall");
+	    
+	    return "view_form";
+		
+	}
+
+
+	@RequestMapping(value={"/viewallformreport"}, method = RequestMethod.GET)
+	public String viewallformreport(HttpServletRequest request,ModelMap model, Principal principal ) {
+		FormForm formForm=new FormForm();
+		formForm.setForm(formDAO.getform());
+		model.addAttribute("formForm",formForm);
+
+	  	model.addAttribute("noofrows",5);    
+	   //narrativereportForm.getNarrativereport().size()
+	    model.addAttribute("menu","maintenance");
+	    model.addAttribute("button","close");
+	      
+	    model.addAttribute("menu","document");
+	    model.addAttribute("success","false");
+	    model.addAttribute("button","close");
+	        return "view_form";
+
+	}
+
+	
 	
 	//edit a record
 	@RequestMapping(value={"/edit_form"}, method = RequestMethod.GET)

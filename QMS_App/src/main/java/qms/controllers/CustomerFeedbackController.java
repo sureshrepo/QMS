@@ -31,6 +31,7 @@ import org.springframework.web.multipart.MultipartFile;
 import qms.dao.CustomerFeedbackDAO;
 import qms.model.CustomerFeedback;
 import qms.forms.CustomerFeedbackForm;
+
 import qms.dao.FileHandlingDAO;
 
 @Controller
@@ -99,10 +100,55 @@ public class CustomerFeedbackController
 	public String view_customerfeedback(ModelMap model, Principal principal ) {
 		
 		CustomerFeedbackForm customerFeedbackForm=new CustomerFeedbackForm();
-		customerFeedbackForm.setCustomerFeedbacks(customerFeedbackDAO.getCustomersfeedbacks());
-		model.addAttribute("customerFeedbackForm",customerFeedbackForm);
 		model.addAttribute("menu","customer");
+		model.addAttribute("noofrows",5);
+		customerFeedbackForm.setCustomerFeedbacks(customerFeedbackDAO.getlimitedfeedbackreport(1));
+		model.addAttribute("noofpages",(int) Math.ceil(customerFeedbackDAO.getnooffeedbackreport() * 1.0 / 5));	 
+        model.addAttribute("button","viewall");
+        model.addAttribute("success","false");
+        model.addAttribute("currentpage",1);
+        
+		model.addAttribute("customerFeedbackForm",customerFeedbackForm);
+		//model.addAttribute("menu","customer");
 		return "view_customerfeedback";
+	}
+	
+
+	
+
+
+	@RequestMapping(value="/viewfeedbackreport_page", method=RequestMethod.GET)
+	public String viewfeedbackreport_page(HttpServletRequest request,@RequestParam("page") int page,ModelMap model) {	
+		CustomerFeedbackForm customerFeedbackForm=new CustomerFeedbackForm();
+		customerFeedbackForm.setCustomerFeedbacks(customerFeedbackDAO.getlimitedfeedbackreport(page));
+		model.addAttribute("noofpages",(int) Math.ceil(customerFeedbackDAO.getnooffeedbackreport() * 1.0 / 5));
+		model.addAttribute("customerFeedbackForm",customerFeedbackForm);	
+	  	model.addAttribute("noofrows",5);   
+	    model.addAttribute("currentpage",page);
+	    model.addAttribute("menu","customer");
+	    model.addAttribute("button","viewall");
+	    
+	    return "view_customerfeedback";
+		
+	}
+
+
+	@RequestMapping(value={"/viewallfeedbackreport"}, method = RequestMethod.GET)
+	public String viewallfeedbackreport(HttpServletRequest request,ModelMap model, Principal principal ) {
+		CustomerFeedbackForm customerFeedbackForm=new CustomerFeedbackForm();
+		customerFeedbackForm.setCustomerFeedbacks(customerFeedbackDAO.getCustomersfeedbacks());
+		model.addAttribute("customerFeedbackForm",customerFeedbackForm);	
+
+	  	model.addAttribute("noofrows",5);    
+	   //narrativereportForm.getNarrativereport().size()
+	    model.addAttribute("menu","customer");
+	    model.addAttribute("button","close");
+	      
+	    	model.addAttribute("menu","customer");
+	        model.addAttribute("success","false");
+	        model.addAttribute("button","close");
+	        return "view_customerfeedback";
+
 	}
 	
 	//downloading the attachment
