@@ -67,11 +67,20 @@
               <h2>&nbsp;&nbsp;Add Document</h2>
             </div>
             <div class="contentbox">
-            
+                    
               <table cellpadding="0" cellspacing="0" border="0" width="100%">
+              <td colspan="3">
+            <!--  <div id="child_table" style="display:none;"> -->
+<br>
+              
+             <div style="border:#993300  2px solid; padding:15px; margin-bottom:15px;">
+             <table cellpadding="0" cellspacing="0" border="0" width="100%" >
+    		<label> Document Details </label>
+    
+    
              <tr class="row1">
              
-               <td valign="middle" align="right" class="input_txt" width="15%"><span class="err">*</span>Document ID:<input type="hidden" name="document_id_hidden" id="generated_id" class="input_txtbx1" style="width:200px;" value=""/></td>
+               <td valign="middle" align="right" class="input_txt" width="15%"><span class="err">Document ID:<input type="hidden" name="document_id_hidden" id="generated_id" class="input_txtbx1" style="width:200px;" value=""/></td>
               
                <td valign="top" align="left" class="input_txt1" width="15%" id="lable_td" style="display:none;">
                <label id="document_id_full_lbl"></label><a href="#" style="text-decoration: none;" onclick="show_edit()">&nbsp;&nbsp;Change</a>            
@@ -85,7 +94,7 @@
                </c:forEach>
                </select>
                <input type="text" value="" id="document_id" class="input_txtbx145" style="height:22px;background-color:lightgrey;width:50px;border:none;" name="document_id" onblur="change_to_label();"/>
-               <a href="#" style="text-decoration: none;" onclick="show_userdefined()">&nbsp;&nbsp;User defined</a><br/><span class="err"></span>
+               <!-- <a href="#" style="text-decoration: none;" onclick="show_userdefined()">&nbsp;&nbsp;User defined</a><br/><span class="err"></span>
                </td>
               
               <td valign="top" align="left" class="input_txt1" width="15%" id="user_defined_td" style="display:none;">
@@ -93,13 +102,14 @@
                <a href="#" style="text-decoration: none;" onclick="hide_userdefined()">&nbsp;&nbsp;Cancel</a>           
                <br/>
                </td> 
+               -->
               
-              
-               <td valign="middle" align="right" class="input_txt" width="20%"><span class="err">*</span>Media Type:</td>
+               <td valign="middle" align="right" class="input_txt" width="20%"><span class="err">Media Type:</td>
                <td valign="top" align="left" class="input_txt" width="20%">
                
                 <input type="radio" name="media_type" onchange="toggle2(this.value);" value="0"   id="id_hardcopy" <c:if test="${documentMain.media_type==0}"><c:out value="checked" /></c:if>/>Hard Copy&nbsp;&nbsp;&nbsp;
                 <input type="radio" name="media_type" onchange="toggle2(this.value);" value="1"  id="id_electronic" onchange="toggle2(this.value);" <c:if test="${documentMain.media_type==1}"><c:out value="checked" /></c:if>/>Electronic&nbsp;&nbsp;&nbsp;<br/><span class="err"></span>
+                <input type="radio" name="media_type" onchange="toggle2(this.value);" value="2"  id="id_both" onchange="toggle2(this.value);" <c:if test="${documentMain.media_type==2}"><c:out value="checked" /></c:if>/>Both&nbsp;&nbsp;&nbsp;<br/><span class="err"></span>
                     
                </td>
            <td valign="top" align="left" class="input_txt" width="20%"></td>
@@ -113,10 +123,10 @@
               
               <tr class="row2">
               
-               <td valign="middle" align="right" class="input_txt" width="25%"><span class="err">*</span>Document Title:</td>
+               <td valign="middle" align="right" class="input_txt" width="25%"><span class="err">Document Title:</td>
                <td valign="top" align="left" class="input_txt" width="20%"><input type="text" name="document_title" class="input_txtbx1"  style="width:200px;" value="${documentMain.document_title}"/><br/><span class="err"><form:errors path="DocumentMain.document_title"></form:errors></span></td>
               
-               <td valign="middle" id="id_location_lbl" align="right" class="input_txt" width="20%"><label id="location_label" ><span class="err">*</span> Location:</label><label id="file_upload_label" style="display:none;"><span class="err">*</span> Upload File:</label></td>
+               <td valign="middle" id="id_location_lbl" align="right" class="input_txt" width="20%"><label id="location_label" ><span class="err"> Location:</label><label id="file_upload_label" style="display:none;"><span class="err"> Upload File:</label></td>
                <td valign="top" align="left" id="id_location_txt" class="input_txt" width="25%">
                
                <select id="location_text" name="location" class="input_cmbbx1" style="width:200px;">
@@ -129,7 +139,7 @@
               <span class="err"><form:errors path="DocumentMain.location"></form:errors></span>
                </td>
           
-           <td valign="middle" id="softcopy_file_label" style="display:none;" align="right" class="input_txt" width="20%"><span class="err">*</span></td>
+           <td valign="middle" id="softcopy_file_label" style="display:none;" align="right" class="input_txt" width="20%"><span class="err"></td>
                <td valign="top" id="softcopy_file_upload" style="display:none;" align="left" class="input_txt" width="25%"><div ><br/><span class="err"></span></div></td>
      
           
@@ -138,7 +148,7 @@
              </tr> 
              <tr class="row1">
               
-               <td valign="middle" align="right" class="input_txt" width="25%"><span class="err">*</span>Document Type:</td>
+               <td valign="middle" align="right" class="input_txt" width="25%"><span class="err">Document Type:</td>
                <td valign="top" align="left" class="input_txt" width="20%">
                <select name="document_type" class="input_cmbbx1" style="width:200px;">
                <option value="">--Select--</option>
@@ -151,7 +161,7 @@
                </select><br/>
                <span class="err"><form:errors path="DocumentMain.document_type"></form:errors></span>
                </td>
-               <td valign="middle" align="right" class="input_txt" width="20%"><span class="err">*</span>Process:</td>
+               <td valign="middle" align="right" class="input_txt" width="20%"><span class="err">Process:</td>
                <td valign="top" align="left" class="input_txt" width="25%">
                
                <select name="process" id="id_inpprocess" onchange="doAjaxPost_for_process();" class="input_cmbbx1" style="width:200px;">
@@ -173,7 +183,7 @@
               
                <td valign="middle" align="right" class="input_txt" width="25%">
                <td valign="top" align="left" class="input_txt" width="20%">
-               <td valign="middle" align="right" class="input_txt" width="20%"><span class="err">*</span>External Document(Y/N):</td>
+               <td valign="middle" align="right" class="input_txt" width="20%"><span class="err">External Document(Y/N):</td>
                <td valign="top" align="left" class="input_txt" width="25%">
                
               <input type="radio" name="external" value="1"  id="id_yesforexternal">Yes&nbsp;&nbsp;&nbsp;<input type="radio" name="external" value="0" id="id_noforexternal"  checked>No&nbsp;&nbsp;&nbsp;<br/><span class="err"></span>
@@ -181,11 +191,30 @@
                </td>
             <td valign="top" align="left" class="input_txt" width="20%"><span class="err"></span></td>
               
-             </tr>  
-             
-		      <tr class="row1" style="border:none;">
+             </tr>
+               
+             <li>
+             </li>
+             <li>
+             </li>
+            </table>
            
-            <td valign="middle" align="right" class="input_txt" width="25%"><span class="err">*</span>Issuer:</td>
+            </td>
+           
+            </table>
+          
+      </td>
+      </tr>
+              <td colspan="1">
+            <!--  <div id="child_table" style="display:none;"> -->
+<br>
+                <div class="contentbox">
+             <div style="border:#993300  2px solid; padding:15px; margin-bottom:15px;">
+             <table cellpadding="0" cellspacing="0" border="0" width="100%" >
+    		<label> Revision details </label>
+             <tr class="row1" style="border:none;">
+           
+            <td valign="middle" align="right" class="input_txt" width="25%"><span class="err">Issuer:</td>
                <td valign="top" align="left" class="input_txt" width="20%">
                <select name="filter" id="filter_value" class="input_cmbbx1" onchange="doAjaxPost();" style="width:80px;">
                <option value="">--Select--</option>
@@ -223,10 +252,10 @@
                
                
                </span>
-           <a href="#" style="text-decoration: none;" onclick="show_filter()">&nbsp;&nbsp;Change</a>
+           <%-- <a href="#" style="text-decoration: none;" onclick="show_filter()">&nbsp;&nbsp;Change</a>
                <br/><span class="err"><form:errors path="DocumentMain.issuer"></form:errors></span></td>
-            
-                <td valign="middle" align="right" class="input_txt" width="20%"><span class="err">*</span>Approver 1(Process Owner):</td>
+            --%> 
+                <td valign="middle" align="right" class="input_txt" width="20%"><span class="err">Approver 1(Process Owner):</td>
                <td valign="top" align="left" class="input_txt" width="25%">
                <span id="process_owner_id"></span>
                            
@@ -238,10 +267,10 @@
                  </tr>  
               <tr class="row2" style="border:none;">
               
-                <td valign="middle" align="right" class="input_txt" width="25%"><span class="err">*</span>Revision Level:</td>
+                <td valign="middle" align="right" class="input_txt" width="25%"><span class="err">Revision Level:</td>
                <td valign="top" align="left" class="input_txt" width="20%"><input type="text" id="revision_level" name="revision_level" class="input_txtbx1" style="width:200px;" value="${documentMain.revision_level }"/><br/>
               <span class="err"><form:errors path="DocumentMain.revision_level"></form:errors></span>
-               <td valign="middle" align="right" class="input_txt" width="20%"><span class="err">*</span>Approver 2(Doc Control):</td>
+               <td valign="middle" align="right" class="input_txt" width="20%"><span class="err">Approver 2(Doc Control):</td>
                <td valign="top" align="left" class="input_txt" width="25%">
                
  			<!-- 	<select name="approver2" class="input_cmbbx1" id="approver2" style="width:200px;">
@@ -265,14 +294,14 @@
              </tr>
              <tr class="row1" style="border:none;">
               
-               <td valign="middle" align="right" class="input_txt" width="25%"><span class="err">*</span>Date:</td>
+               <td valign="middle" align="right" class="input_txt" width="25%"><span class="err">Date:</td>
                <td valign="top" align="left" class="input_txt" width="20%"><input type="text" id="datepicker123" name="date" class="input_txtbx1" style="width:200px;" value="${documentMain.date}"/><br/><span class="err"><form:errors path="DocumentMain.date"></form:errors></span></td>
               
                 <td valign="middle" align="right" class="input_txt" width="20%">
                
                
                
-               <span class="err">*</span>Approver 3(Mgmt Report):</td>
+               <span class="err">Approver 3(Mgmt Report):</td>
                <td valign="top" align="left" class="input_txt" width="25%">
                
               <!--  <select name="approver3" id="approver3" class="input_cmbbx1" style="width:200px;">
@@ -295,11 +324,12 @@
            <td valign="top" align="left" class="input_txt" width="20%"><span class="err"></span></td>
              </tr>  
               <tr class="row2" style="border:none;">
-                 <td valign="middle" align="right" class="input_txt"><span class="err">*</span>Comments:</td>
+                 <td valign="middle" align="right" class="input_txt"><span class="err">Comments:</td>
                <td valign="top" align="left"><textarea class="input_txtbx1" id="comments"  name="comments"  style="width:100%; height: 89px;" >${documentMain.comments}</textarea><br/><span class="err"></span></td>
          
-               <td valign="top" align="right" class="input_txt" width="20%"><span class="err">*</span>Status:</td>
+               <td valign="top" align="right" class="input_txt" width="20%"><span class="err">Status:</td>
                <td valign="top" align="left" class="input_txt" width="25%">
+              
                
               <select name="status" id="status" class="input_cmbbx1" style="width:200px;">
               <option value="">--Select--</option>
@@ -312,22 +342,15 @@
             <td valign="top" align="left" class="input_txt" width="20%"><span class="err"></span></td>
              </tr>
              
-             
+             </table></div>
+             </div>
              <tr class="row1" >
              <td colspan="2" align="right">
              <input type="submit" id="submit"  name="submit" value="Submit" class="submit_btn1"></td>
              <td colspan="3">
             <input type="reset" id="reset_export" name="reset_export" value="Reset" class="submit_btn1"></td>
             
-             </tr>
-            
-                     
-              </table>
-           
-           
-      </div></td></tr></table></div>
-      
-</form>
+</tr></table></div></form>
 <script type="text/javascript">
 function toggle2(value){
   

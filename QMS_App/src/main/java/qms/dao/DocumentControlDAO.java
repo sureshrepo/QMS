@@ -365,13 +365,13 @@ public class DocumentControlDAO extends AbstractExcelView
 		List<DocumentMain> documentMains=new ArrayList<DocumentMain>();
 		
 	    try{
-	    	System.out.println("Edit:"+document_id);
+	    	System.out.println("sucess:"+document_id);
 			resultSet = statement.executeQuery("SELECT t1.*,t2.* FROM tbl_doccontrol_main  as t1 join tbl_doccontrol_external as t2 on t1.document_id=t2.document_id where t1.document_id='"+document_id+"'");
 			while(resultSet.next())
 			{
 				documentMains.add(new DocumentMain(resultSet.getString("document_id"),resultSet.getString("document_title"),resultSet.getString("document_type"),resultSet.getString("media_type"),resultSet.getString("location"),resultSet.getString("process"),resultSet.getString("issuer"),resultSet.getString("revision_level"),resultSet.getString("date"),resultSet.getString("approver1"),resultSet.getString("approver2"),resultSet.getString("approver3"),resultSet.getString("comments"),resultSet.getString("status"),resultSet.getString("external"),resultSet.getString("attachment_name"),resultSet.getString("attachment_type"),resultSet.getString("attachment_referrence")));
-				System.out.println("Got It!!!!");
 				
+					
 		    }
 	    }catch(Exception e){
 	    	System.out.println(e.toString());
@@ -400,8 +400,7 @@ public class DocumentControlDAO extends AbstractExcelView
 		List<String> prefix = new ArrayList<String>();
 		//int i=0;
 	    try{
-	    	//System.out.println("Edit:"+document_id);
-			resultSet = statement.executeQuery("select * from tbl_document_type_prefix");
+	    	resultSet = statement.executeQuery("select * from tbl_document_type_prefix");
 			while(resultSet.next())
 			{
 		
@@ -656,7 +655,7 @@ public class DocumentControlDAO extends AbstractExcelView
 		
 	}
 	
-	public List<DocumentMain> findDocuments(String search_document_id,String search_document_title,String search_process){
+	public List<DocumentMain> findDocuments(String search_document_type,String search_process){
 		Connection con = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
@@ -668,7 +667,7 @@ public class DocumentControlDAO extends AbstractExcelView
 		}
 		List<DocumentMain> documentMains = new ArrayList<DocumentMain>();
 	    try{
-			resultSet = statement.executeQuery("select * from tbl_doccontrol_main where document_id='"+search_document_id+"' or document_title='"+search_document_title+"' or process='"+search_process+"'");
+			resultSet = statement.executeQuery("select * from tbl_doccontrol_main where document_id='"+search_document_type+"' or process='"+search_process+"'");
 			System.out.println("came");
 			while(resultSet.next()){
 				System.out.println("count");

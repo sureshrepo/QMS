@@ -6,27 +6,25 @@ import java.util.ArrayList;
 
 	import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-	import javax.servlet.http.HttpSession;
-	import javax.validation.Valid;
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 
 
 	import org.springframework.beans.factory.annotation.Autowired;
-	import org.springframework.stereotype.Controller;
-	import org.springframework.ui.ModelMap;
-	import org.springframework.validation.BindingResult;
-	import org.springframework.web.bind.annotation.ModelAttribute;
-	import org.springframework.web.bind.annotation.RequestMapping;
-	import org.springframework.web.bind.annotation.RequestMethod;
-	import org.springframework.web.bind.annotation.RequestParam;
-	import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 	import qms.dao.SupplierPerformanceDAO;
-	import qms.model.SupplierPerformance;
-import qms.forms.EmployeeForm;
-import qms.forms.InternalAuditsForm;
-import qms.forms.MaintenanceForm;
+import qms.model.SupplierPerformance;
+
 import qms.forms.SupplierPerformanceForm;;
 
 	@Controller
@@ -42,11 +40,65 @@ import qms.forms.SupplierPerformanceForm;;
 		public String show_supplierperformance(HttpSession session,HttpServletRequest request, ModelMap model, Principal principal )
 		{
 	    SupplierPerformanceForm supplierPerformanceForm=new SupplierPerformanceForm();
-	    supplierPerformanceForm.setSupplierperformance(supplierPerformanceDAO.getsupplierperformance());
-	    model.addAttribute("supplierPerformanceForm",supplierPerformanceForm);
 	    model.addAttribute("menu","supplier");
+	    model.addAttribute("noofrows",5); 
+	    
+	    supplierPerformanceForm.setSupplierperformance(supplierPerformanceDAO.getlimitedsupplierreport(1));
+	    
+	    model.addAttribute("noofpages",(int) Math.ceil(supplierPerformanceDAO.getnoofsupplierreport() * 1.0 / 5));
+	    model.addAttribute("button","viewall");
+        model.addAttribute("success","false");
+        model.addAttribute("currentpage",1);
+        
+	    model.addAttribute("supplierPerformanceForm",supplierPerformanceForm);
+	    
 		return "view_supplierperformance";
 	 	}
+		
+		
+
+
+
+		@RequestMapping(value="/viewsupplierreport_page", method=RequestMethod.GET)
+		public String viewsupplierreport_page(HttpServletRequest request,@RequestParam("page") int page,ModelMap model) {	
+			 SupplierPerformanceForm supplierPerformanceForm=new SupplierPerformanceForm();
+			 supplierPerformanceForm.setSupplierperformance(supplierPerformanceDAO.getlimitedsupplierreport(page));
+			 
+		 	model.addAttribute("noofpages",(int) Math.ceil(supplierPerformanceDAO.getnoofsupplierreport() * 1.0 / 5));
+		 	model.addAttribute("supplierPerformanceForm",supplierPerformanceForm);
+		  	model.addAttribute("noofrows",5);   
+		    model.addAttribute("currentpage",page);
+		    model.addAttribute("menu","supplier");
+		    model.addAttribute("button","viewall");
+		    
+		    return "view_supplierperformance";
+		    
+			
+		}
+
+
+		@RequestMapping(value={ "/viewallsupplierreport"}, method = RequestMethod.GET)
+		public String viewallsupplierreport(HttpServletRequest request,ModelMap model, Principal principal )
+		{
+			SupplierPerformanceForm supplierPerformanceForm=new SupplierPerformanceForm();
+			supplierPerformanceForm.setSupplierperformance(supplierPerformanceDAO.getsupplierperformance());
+			model.addAttribute("supplierPerformanceForm",supplierPerformanceForm);
+
+		  	model.addAttribute("noofrows",5);    
+		   //narrativereportForm.getNarrativereport().size()
+		    model.addAttribute("menu","supplier");
+		    model.addAttribute("button","close");
+		      
+		    	model.addAttribute("menu","supplier");
+		        model.addAttribute("success","false");
+		        model.addAttribute("button","close");
+		        return "view_supplierperformance";
+		        
+		}
+
+	
+		
+		
 		
 		//Request Get Method for insert operation
 		@RequestMapping(value={"/add_supplierperformance"}, method = RequestMethod.GET)

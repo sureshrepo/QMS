@@ -348,7 +348,7 @@ public class FormDAO extends AbstractExcelView{
 	}*/
 	
 	//Search operation for find a particular record
-	public List<Form> search_form(String auto_number,String form_or_rec_id,String document_id) {
+	public List<Form> search_form(String process) {
 		Connection con = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
@@ -363,7 +363,7 @@ public class FormDAO extends AbstractExcelView{
 			e1.printStackTrace();
 		}
 		try {
-			resultSet = statement.executeQuery("select t1.*,t2.* from tbl_form as t1 join tbl_form_child as t2 on t1.auto_number=t2.auto_no where t1.auto_number='"+auto_number+"'or t1.form_or_rec_id='"+form_or_rec_id+"' or t2.document_id='"+document_id+"'");
+			resultSet = statement.executeQuery("select t1.*,t2.* from tbl_form as t1 join tbl_form_child as t2 on t1.auto_number=t2.auto_no where t1.process='"+process+"'");
 
 		//	String cmd_select = "select * from tb1_internalaudits";
 			//resultSet = statement.executeQuery(cmd_select);

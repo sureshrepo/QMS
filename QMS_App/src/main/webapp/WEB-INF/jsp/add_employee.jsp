@@ -4,6 +4,7 @@
 <link rel="stylesheet" href="resources/css/jquery-ui.css" type="text/css" />
 <script src="resources/js/jquery.min.js"></script>
  <script src="resources/js/jquery-ui.js"></script>
+ 
 
 <!-- Modal -->
 
@@ -11,7 +12,7 @@
 <script src="resources/js/popover.js"></script>
 <script src="resources/js/transition.js"></script>
 <script src="resources/js/jquery-1.7.2.min.js"></script>
-<link rel="stylesheet" url="resources/js/jquery.js" />
+
 
 
 <!-- Modal Ends -->
@@ -271,32 +272,33 @@ function doAjaxPost() {
    				</div>
    				   
 </form>
-   <script>
-   $(function() {
-		 //var format="yy-mm-dd";
-	           $( "#datepicker" ).datepicker();
-	           
-	         });
-   </script>
-	 <script>
-	 $(function() {
-		 var format="yy-mm-dd";
-	           $( "#datepicker1" ).datepicker();
-	         });
-	 </script>
-	 <script>
-	 $(function() {
-		 var format="yy-mm-dd";
-         $( "#datepicker2" ).datepicker();
-       });
-	 </script>
-	 <script>
-	 $(function() {
-		 var format="yy-mm-dd";
-         $( "#datepicker3" ).datepicker();
-       });
-</script>
+<script>
+ $(function() {
+	 $( "#datepicker" ).datepicker({dateFormat: 'yy-mm-dd'});
+        });
  
+</script>
+  <script>
+ $(function() {
+	 $( "#datepicker1" ).datepicker({dateFormat: 'yy-mm-dd'});
+        });
+ 
+</script>
+   <script>
+ $(function() {
+           $( "#datepicker3" ).datepicker({dateFormat: 'yy-mm-dd'});
+         });
+ 
+</script>
+
+   <script>
+ $(function() {
+	 $( "#datepicker2" ).datepicker({dateFormat: 'yy-mm-dd'});
+     
+         });
+ 
+</script>
+ <!-- 
  function toggle2(sender){
 
 	    var e3=document.getElementById("process_name");
@@ -306,8 +308,7 @@ function doAjaxPost() {
 	e3.style.display=sender.checked?'inline':'none';
 	e4.style.display=sender.checked?'inline':'none';
 	    
-	}
-</script>
+	} --> 
             
       <jsp:include page="footer.jsp"></jsp:include>
   

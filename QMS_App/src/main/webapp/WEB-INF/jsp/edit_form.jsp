@@ -168,6 +168,7 @@
                  
                  <input type="radio" name="media_type" value="0" id="id_hardcopy" class="input_txt"   <c:if test="${form.media_type=='0'}"><c:out value="Checked=checked"/></c:if>>Hardcopy&nbsp;&nbsp;&nbsp;
 				  <input type="radio" name="media_type" value="1" id="id_electronic" class="input_txt"  <c:if test="${form.media_type=='1'}"><c:out value="Checked=checked"/></c:if>>Electronic&nbsp;&nbsp;&nbsp;
+				  <input type="radio" name="media_type" value="2" id="id_both" class="input_txt"  <c:if test="${form.media_type=='2'}"><c:out value="Checked=checked"/></c:if>>Both&nbsp;&nbsp;&nbsp;
 				  
                     
                </td>

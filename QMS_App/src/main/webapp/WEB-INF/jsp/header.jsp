@@ -124,12 +124,7 @@
 						<!-- <ul class="menu"> -->
 						<div>
 						  <ul class="menu">
-						  <li >
-								<a href="welcome" class="<c:choose>
-								<c:when test="${menu=='dashboard'}">select</c:when><c:otherwise>unselect</c:otherwise></c:choose>">
-									<span><img src="<c:url value="/resources/images/icon_01.png" />" alt="" style="padding:5px 5px 0 0;" />Dashboard</span>
-								</a>
-							</li>
+						  		
 							<hr width="95%"/>
 							<li>
 								<a href="add_maintenance" class="<c:choose>
@@ -159,14 +154,23 @@
 									<span><img src="<c:url value="/resources/images/emploee.png" />" alt="" style="padding:5px 5px 0 0;" />Employees</span>
 								</a>
 							</li>
-				            <hr width="95%"/>
+							<hr width="95%"/>
+				            <li>
+								<a href="documententry" class="<c:choose>
+								<c:when test="${menu=='document'}">select</c:when><c:otherwise>unselect</c:otherwise></c:choose>">
+									<span><img src="<c:url value="/resources/images/document.png" />" alt="" style="padding:5px 5px 0 0;" />Document Control</span>
+								</a>
+							</li>
+				             
+							
+				            <%-- <hr width="95%"/>
 				            <li>
 								<a href="adddocument" class="<c:choose>
 								<c:when test="${menu=='document'}">select</c:when><c:otherwise>unselect</c:otherwise></c:choose>">
 									<span><img src="<c:url value="/resources/images/document.png" />" alt="" style="padding:5px 5px 0 0;" />Document Control</span>
 								</a>
 							</li>
-				           
+							 --%>
 				            <hr width="95%"/>
 				            <li>
 								<a href="addinternalaudits" class="<c:choose>

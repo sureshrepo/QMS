@@ -76,36 +76,24 @@
               <h2>&nbsp;&nbsp;Add Document</h2>
             </div>
             <div class="contentbox">
-            
-	<table cellpadding="0" cellspacing="0" border="0" width="100%">
-														<tr>
-															<td align="left" valign="top" width="50%"
-																style="padding-right: 25px;">
-																<!-- <h2 class="quck-txt">Quick Info</h2> -->
-            
+                    
               <table cellpadding="0" cellspacing="0" border="0" width="100%">
-              <tr class="row1">
-             <td valign="middle" align="left" class="input_txt" ><span class="err">*</span>Auto Number:</td>
-                  <td valign="top" align="left" class="input_txt" ><input type="hidden" name="auto_number" value="<c:out value="${id }"/>"/><c:out value="${id }"/><br/><span class="err"></span></td>
-			
-			<td valign="middle" id="id_location_lbl" align="left" class="input_txt" ><label id="location_label" ><span class="err">*</span> Location:</label><label id="file_upload_label" style="display:none;"><span class="err">*</span> Upload File:</label></td>
-               <td valign="top" align="left" id="id_location_txt" class="input_txt" >
-               
-               <select id="location_text" name="location" class="input_cmbbx1" style="width:200px;">
-              <option value="">--Select--</option>
-               <option value="Lab" <c:if test="${form.location=='Lab'}"><c:out value="Selected"/></c:if>>Lab</option>
-               <option value="Shop Floor" <c:if test="${form.location=='Shop Floor'}"><c:out value="Selected"/></c:if>>Shop Floor</option>
-               <option value="Office" <c:if test="${form.location=='Office'}"><c:out value="Selected"/></c:if>>Office</option>
-               </select>
-				 <input name="attachments" style="display:none;" id="id_file" type="file" />														<td valign="top" align="left" class="input_txt">																	
-																		</td>
-																		<td valign="top" align="left" class="input_txt">																	
-																		</td>
-																		</tr>
-               
+              <td colspan="1">
+            <!--  <div id="child_table" style="display:none;"> -->
+
               
-              <tr class="row2">
-                           <td valign="middle" align="left" class="input_txt" ><span class="err">*</span>Form/Rec Id:</td>
+             <div style="border:#993300  2px solid; padding:15px; margin-bottom:0.5px;">
+             <table cellpadding="0" cellspacing="0" border="0" width="100%" >
+    		<label><u> Document Details </u></label>
+    		<%-- <tr></td><td>
+    		</td>
+    		<td valign="middle" align="left" class="input_txt" ><span class="err"></span>Auto Number:</td>
+                  <td valign="top" align="left" class="input_txt" ><input type="hidden" name="auto_number" value="<c:out value="${id }"/>"/><c:out value="${id }"/><br/><span class="err"></span></td>
+			</tr>
+			 --%><br>
+    		<br>
+    		          <tr class="row1">
+    		          <td valign="middle" align="left" class="input_txt" ><span class="err"></span>Form/Rec Id:</td>
               
                <td valign="top" align="left" class="input_txt1"  id="lable_td" style="display:none;">
                <label id="document_id_full_lbl"></label><a href="#" style="text-decoration: none;" onclick="show_edit()">&nbsp;&nbsp;Change</a>            
@@ -124,17 +112,69 @@
                
               <input type="hidden" name="document_id_hidden" id="generated_id" class="input_txtbx1" style="width:200px;" value=""/> 
               <input type="text" value="" id="form_or_rec_id" class="input_txtbx145" style="height:22px;background-color:lightgrey;width:50px;border:none;" name="form_or_rec_id" onblur="change_to_label();"/>
-               <a href="#" style="text-decoration: none;" onclick="show_userdefined()">&nbsp;&nbsp;User defined</a><br/><span class="err"></span>
+              
+             <%-- <td valign="middle" align="left" class="input_txt" ><span class="err"></span>Auto Number:</td>
+                  <td valign="top" align="left" class="input_txt" ><input type="hidden" name="auto_number" value="<c:out value="${id }"/>"/><c:out value="${id }"/><br/><span class="err"></span></td>
+			 --%>
+			<td valign="middle" id="id_location_lbl" align="left" class="input_txt" ><label id="location_label" ><span class="err"></span> Location:</label><label id="file_upload_label" style="display:none;"><span class="err"></span> Upload File:</label></td>
+               <td valign="top" align="left" id="id_location_txt" class="input_txt" >
+               
+               <select id="location_text" name="location" class="input_cmbbx1" style="width:200px;">
+              <option value="">--Select--</option>
+               <option value="Lab" <c:if test="${form.location=='Lab'}"><c:out value="Selected"/></c:if>>Lab</option>
+               <option value="Shop Floor" <c:if test="${form.location=='Shop Floor'}"><c:out value="Selected"/></c:if>>Shop Floor</option>
+               <option value="Office" <c:if test="${form.location=='Office'}"><c:out value="Selected"/></c:if>>Office</option>
+               </select>
+				 <input name="attachments" style="display:none;" id="id_file" type="file" />														<td valign="top" align="left" class="input_txt">																	
+																		</td>
+																		<td valign="top" align="left" class="input_txt">																	
+																		</td>
+																		</tr>
+               
+              
+              <tr class="row2">
+                           <%-- <td valign="middle" align="left" class="input_txt" ><span class="err"></span>Form/Rec Id:</td>
+              
+               <td valign="top" align="left" class="input_txt1"  id="lable_td" style="display:none;">
+               <label id="document_id_full_lbl"></label><a href="#" style="text-decoration: none;" onclick="show_edit()">&nbsp;&nbsp;Change</a>            
+               <br/>
+               </td>          
+              
+               <td valign="top" align="left" id="edit_td" class="input_txt1" width="15%">
+               <select name="document_type_id" id="document_type_id" class="input_cmbbx1" style="width:57px;border:none;background-color:lightgrey;">
+               <!-- <option value="FHR">FHR</option>
+               <option value="FEN">FEN</option> -->
+               <c:forEach items="${prefix}" var="prefix" varStatus="true">
+               <option value="<c:out value="${prefix}"/>"><c:out value="${prefix}"/></option>
+               </c:forEach>
+              
+               </select>
+               
+              <input type="hidden" name="document_id_hidden" id="generated_id" class="input_txtbx1" style="width:200px;" value=""/> 
+              <input type="text" value="" id="form_or_rec_id" class="input_txtbx145" style="height:22px;background-color:lightgrey;width:50px;border:none;" name="form_or_rec_id" onblur="change_to_label();"/>
+               --%><!--  <a href="#" style="text-decoration: none;" onclick="show_userdefined()">&nbsp;&nbsp;User defined</a><br/><span class="err"></span>
                </td>
               
               <td valign="top" align="left" class="input_txt1" width="15%" id="user_defined_td" style="display:none;">
-               <!-- <input type="text" id="user_def_document_id" class="input_txtbx1" value="" style="width:150px;" onblur="show_lable();"/> -->
+               <input type="text" id="user_def_document_id" class="input_txtbx1" value="" style="width:150px;" onblur="show_lable();"/>
                <input type="text" id="user_def_document_id" class="input_txtbx1" value="" style="width:70px;"/>-<input type="text" id="user_def_document_id1" class="input_txtbx1" value="" style="width:70px;" onblur="show_lable();"/>
                <a href="#" style="text-decoration: none;" onclick="hide_userdefined()">&nbsp;&nbsp;Cancel</a>           
                <br/>
                </td>
-																		              <td valign="middle" align="left" class="input_txt"><span
-																			class="err">*</span>Responsibility :</td>
+				 -->	
+				  <td valign="middle" align="left" class="input_txt"><span
+																			class="err"></span>Form/Rec Title :</td>
+																		<td valign="top" align="left" class="input_txt"><input
+																			type="text" class="input_txtbx1" id="inp_external_id"
+																			onmouseover="showTooltip('tooltip_id','inp_id3');"
+																			onmouseout="hideTooltip('tooltip_id');"
+																			name="form_or_rec_title"
+																			value="${docform.form_or_rec_title }" /><br/><span class="err"><form:errors path="Form.form_or_rec_title"></form:errors></span>
+																		
+																		</td>
+				
+				 													              <td valign="middle" align="left" class="input_txt"><span
+																			class="err"></span>Responsibility:</td>
 																		<td valign="top" align="left" class="input_txt"><input
 																			type="text" class="input_txtbx1" id="inp_external_id"
 																			onmouseover="showTooltip('tooltip_id','inp_id3');"
@@ -152,8 +192,8 @@
              </tr>
               
               <tr class="row1">
-               <td valign="middle" align="left" class="input_txt"><span
-																			class="err">*</span>Form/Rec Title :</td>
+              <%--  <td valign="middle" align="left" class="input_txt"><span
+																			class="err"></span>Form/Rec Title :</td>
 																		<td valign="top" align="left" class="input_txt"><input
 																			type="text" class="input_txtbx1" id="inp_external_id"
 																			onmouseover="showTooltip('tooltip_id','inp_id3');"
@@ -162,7 +202,7 @@
 																			value="${docform.form_or_rec_title }" /><br/><span class="err"><form:errors path="Form.form_or_rec_title"></form:errors></span>
 																		
 																		</td>
-				<td valign="middle" align="left" class="input_txt" width="20%"><span class="err">*</span>Process:</td>
+				 --%><%-- <td valign="middle" align="left" class="input_txt" width="20%"><span class="err"></span>Process:</td>
                <td valign="top" align="left" class="input_txt" >
                
                <select name="process" id="id_inpprocess" class="input_cmbbx1" style="width:200px;">
@@ -180,15 +220,38 @@
 																		<td valign="top" align="left" class="input_txt">																	
 																		</td>              </tr>
               
-              <tr class="row2">
-               <td valign="middle" align="left" class="input_txt" ><span class="err">*</span>Media Type:</td>
+               --%><tr class="row2">
+               <td valign="middle" align="left" class="input_txt" ><span class="err"></span>Media Type:</td>
                <td valign="top" align="left" class="input_txt">
                
                 <input type="radio" name="media_type" onchange="toggle2(this.value);" value="0"   id="id_hardcopy"  checked/>Hard Copy&nbsp;&nbsp;&nbsp;<input type="radio" name="media_type" onchange="toggle2(this.value);" value="1"  id="id_electronic" onchange="toggle2(this.value);" />Electronic&nbsp;&nbsp;&nbsp;<br/><span class="err"></span>
-                    
+                   <input type="radio" name="media_type" onchange="toggle2(this.value);" value="2"  id="id_both" onchange="toggle2(this.value);" <c:if test="${documentMain.media_type==2}"><c:out value="checked" /></c:if>/>Both&nbsp;&nbsp;&nbsp;<br/><span class="err"></span>
+                  
                </td>
+               <td valign="middle" align="left" class="input_txt" width="20%"><span class="err"></span>Process:</td>
+               <td valign="top" align="left" class="input_txt" >
+               
+               <select name="process" id="id_inpprocess" class="input_cmbbx1" style="width:200px;">
+               <option value="">--Select--</option>
+             <c:forEach items="${processForm.processes}" var="processes" varStatus="true">
+               <option value="<c:out value="${processes.process_name}"/>"><c:out value="${processes.process_name}"/></option>
+               </c:forEach>
+                
+               
+               </select>
+               
+																		
+																		<td valign="top" align="left" class="input_txt">																	
+																		</td>
+																		<td valign="top" align="left" class="input_txt">																	
+																		</td>              </tr>
+              
+              
+               </tr>
+               <tr class="row2">
+               
 																		              <td valign="middle" align="left" class="input_txt"><span
-																			class="err">*</span>Retention Time :</td>
+																			class="err"></span>Retention Time :</td>
 																		<td valign="top" align="left" class="input_txt">
 																		<%-- <input type="text" class="input_txtbx1" id="inp_external_id"
 																			onmouseover="showTooltip('tooltip_id','inp_id3');"
@@ -205,31 +268,42 @@
                </select>
 																		
 																		</td>
-																		<td></td><td></td>
-																		</tr>
-																		<tr class="row1">
-																		<td valign="middle" align="left" class="input_txt">Form:</td>
+																		
+																		<td valign="middle" align="left" class="input_txt">Is this a Form?</td>
 														<td valign="top" align="left" class="input_txt"><input
 															type="radio" name="form" value="1"
 															class="input_txt" checked >Yes&nbsp;&nbsp;&nbsp;<input
 															type="radio" name="form" value="0"
 															class="input_txt" >No
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            </tr>
                             
+                           </tr>
+                    
+                           </table>
+           
+            </td>
+           
+            </table>
+          
+      </td>
+      </tr>
+            
               
               <td colspan="4">
             <!--  <div id="child_table" style="display:none;"> -->
 <br>
+                <div class="contentbox">
               
              <div style="border:#993300  2px solid; padding:15px; margin-bottom:15px;">
              <table cellpadding="0" cellspacing="0" border="0" width="100%" >
+             <label> <u>Revision Details </u></label>
+             <li>
+             </li>
+             <li>
+             </li>
+             <br>
              
               <tr class="row1">
-                             <td valign="middle" align="left" class="input_txt" ><span class="err">*</span>Auto Number:</td>
+                             <td valign="middle" align="left" class="input_txt" ><span class="err"></span>Auto Number:</td>
                   <td valign="top" align="left" class="input_txt" ><input type="hidden" name="auto_no" value="<c:out value="${id }"/>"/><c:out value="${id }"/><br/><span class="err"></span></td>
               
 																		             
@@ -238,7 +312,7 @@
 																		             
 																		             
 																		              <td valign="middle" align="left" class="input_txt"><span
-																			class="err">*</span>Effective Date :</td>
+																			class="err"></span>Effective Date :</td>
 																		<td valign="top" align="left" class="input_txt"><input
 																			type="text" class="input_txtbx1" id="datepicker123"
 																				name="effective_date"
@@ -253,7 +327,7 @@
               
               <tr class="row2">
                             <td valign="middle" align="left" class="input_txt"><span
-																			class="err">*</span>Document ID :</td>
+																			class="err"></span>Document ID :</td>
 																		<td valign="top" align="left" class="input_txt"><input
 																			type="text" class="input_txtbx1" id="inp_external_id"
 																			onmouseover="showTooltip('tooltip_id','inp_id3');"
@@ -262,7 +336,7 @@
 																			value="${docform.document_id}" /><br/><span class="err"><form:errors path="Form.document_id"></form:errors></span>
 																		</td>
 																		              <td valign="middle" align="left" class="input_txt"><span
-																			class="err">*</span>Approver1(Process Owner) :</td>
+																			class="err"></span>Approver1(Process Owner) :</td>
 																		<td valign="top" align="left" class="input_txt"><input
 																			type="text" class="input_txtbx1" id="inp_external_id"
 																			onmouseover="showTooltip('tooltip_id','inp_id3');"
@@ -277,7 +351,7 @@
               
               <tr class="row1">
                             <td valign="middle" align="left" class="input_txt"><span
-																			class="err">*</span>Issuer :</td>
+																			class="err"></span>Issuer :</td>
 																		<td valign="top" align="left" class="input_txt"><input
 																			type="text" class="input_txtbx1" id="inp_external_id"
 																			onmouseover="showTooltip('tooltip_id','inp_id3');"
@@ -286,7 +360,7 @@
 																			value="${docform.issuer }" /><br/><span class="err"><form:errors path="Form.issuer"></form:errors></span>
 																		</td>
 																		   <td valign="middle" align="left" class="input_txt"><span
-																			class="err">*</span>Comments :</td>
+																			class="err"></span>Comments :</td>
 																		<td valign="top" align="left" class="input_txt"><textarea class="input_txtbx1"  name="comments"  style="width:75%; height: 50px;" >${docform.comments}</textarea><br/><span class="err"><form:errors path="Form.comments"></form:errors></span></td>
 																		
 																		<td valign="top" align="left" class="input_txt">																	
@@ -302,24 +376,19 @@
               
               </table>
               </div>
-              </td>
-
+      
+            
+            </div>
               
               <tr class="row1">
-              <td colspan="2" align="right">
+              <td colspan="1" align="right">
              <input type="submit" id="export"  name="export" value="Submit" class="submit_btn1"></td>
-             <td colspan="3">
+             <td colspan="1">
             <input type="reset" id="reset_export" name="reset_export" value="Reset" class="submit_btn1"></td>
-             </tr>
-            </table>
-            </td>
-            </tr>
-            </table>
-            </div>
-            </td>
-            </tr>
-            </table>
-            </div>
+     </tr>
+     </table>
+     </div>
+     
             </form>
            
         

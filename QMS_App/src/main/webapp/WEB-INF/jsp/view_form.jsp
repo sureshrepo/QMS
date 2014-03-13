@@ -66,12 +66,8 @@
 <div style="border:#993300 2px solid; padding:15px; margin-bottom:15px;">
 							<table width="100%" border="0" cellspacing="0" cellpadding="0">
 							  <tr>
-							    <td align="left" valign="middle" width="20%">Auto Number:</td>
-							    <td align="left" valign="middle" width="10%"><input type="text" name="auto_number" class="input_txtbx2" id="recordtitle"></td>
-							    <td align="left" valign="middle" width="15%">&nbsp;Form Id:</td>
-							    <td align="left" valign="middle" width="10%"><input type="text" name="form_or_rec_id" class="input_txtbx2" id="mediatype"></td>
-							    <td align="left" valign="middle" width="18%">&nbsp;Document Id:</td>
-							    <td align="left" valign="middle" width="10%"><input type="text" name="document_id" id="retentiontime" class="input_txtbx2"></td>
+							    <td align="left" valign="middle" width="20%">Process:</td>
+							    <td align="left" valign="middle" width="10%"><input type="text" name="process" class="input_txtbx2" id="recordtitle"></td>
 							    <td align="center" valign="middle" width="38%">
 							  <input type="submit" value="Find" class="submit_btn" name="search" id="id_submit" onmouseover="showTooltip('tooltip_id','inp_id3');" /></td>
 							  <td align="center" valign="middle" width="38%"><input type="submit" value="Clear" class="submit_btn" ></td>
@@ -122,7 +118,7 @@
 											
 											 --%>
 											<a href="#" title="" ><img src="resources/images/icons/icon_edit.png" alt="Edit" /></a><a href="<c:out value="edit_form?auto_no=${form.auto_no}"/>" style="padding-right:10px;">Edit</a>
-											<a href="#" title=""><img src="resources/images/icons/icon_delete.png" alt="Delete" /></a><a href="<c:out value="deleteform?auto_no=${form.auto_no}"/>" onclick="return confirmation()">Remove</a>
+											
 											
 											</td>
 										</tr>

@@ -20,12 +20,14 @@ import org.springframework.web.servlet.view.document.AbstractExcelView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
+
+import qms.model.ManagementReview;
 import qms.model.SupplierPerformance;
 
 
 public class SupplierPerformanceDAO extends AbstractExcelView {
 	private DataSource dataSource;
-	
+
 	/* 
 	 * Excel Sheet Generation
 	 */
@@ -674,6 +676,102 @@ public class SupplierPerformanceDAO extends AbstractExcelView {
 	}
 
 
+
+	
+	public  List<SupplierPerformance> getlimitedsupplierreport(int page) {
+		Connection con = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
+		
+		
+		try {
+			con = dataSource.getConnection();
+			statement = con.createStatement();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		List<SupplierPerformance> supplierPerformances = new ArrayList<SupplierPerformance>();
+
+		try {
+
+			String cmd;
+			int offset = 5 * (page - 1);
+			int limit = 5;
+					cmd="select * from tbl_supplierperformance limit " + offset + ","+ limit+"" ;
+				
+				//	cmd = "select * from tbl_narrativereport order by pname asc limit " + offset + ","+ limit+"" ;
+
+			resultSet = statement.executeQuery(cmd);
+			while (resultSet.next()) {
+				System.out.println(" type result");
+				supplierPerformances.add(new SupplierPerformance(
+						resultSet.getString("supplier_id"), 
+						resultSet.getString("supplier_name"), 
+						resultSet.getString("category"), 
+						resultSet.getString("address"), 
+						resultSet.getString("city"), 
+						resultSet.getString("state"), 
+						resultSet.getString("postalcode"), 
+						resultSet.getString("country"), 
+						resultSet.getString("website"), 
+						resultSet.getString("certified_to"), 
+						resultSet.getString("contact_name"), 
+						resultSet.getString("contact_title"), 
+						resultSet.getString("phone"), 
+						resultSet.getString("fax"), 
+						resultSet.getString("email_address")));
+				
+
+			}
+			} catch (Exception e) {
+			/*logger.info(e.toString());*/
+				System.out.println(e.toString());
+			releaseResultSet(resultSet);
+			releaseStatement(statement);
+			releaseConnection(con);
+		} finally {
+			releaseResultSet(resultSet);
+			releaseStatement(statement);
+			releaseConnection(con);
+		}
+		return supplierPerformances;
+
+	}
+	public int getnoofsupplierreport() {
+		Connection con = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
+		int noofRecords = 0;
+		
+		try {
+			con = dataSource.getConnection();
+			statement = con.createStatement();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		List<SupplierPerformance> supplierPerformances = new ArrayList<SupplierPerformance>();
+		try {
+
+			String cmd;
+			
+					cmd = "select count(*) as noofrecords from tbl_supplierperformance ";
+					System.out.println("command"+cmd);			
+			resultSet = statement.executeQuery(cmd);
+			if (resultSet.next())
+				noofRecords = resultSet.getInt("noofrecords");
+
+		} catch (Exception e) {
+			releaseResultSet(resultSet);
+			releaseStatement(statement);
+			releaseConnection(con);
+		} finally {
+			releaseResultSet(resultSet);
+			releaseStatement(statement);
+			releaseConnection(con);
+		}
+		return noofRecords;
+
+	}
 
 
 }

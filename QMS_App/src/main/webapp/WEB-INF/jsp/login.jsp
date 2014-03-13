@@ -41,32 +41,39 @@
 		    <ul class="login-list">
 		   <li>
 <BR/>
-		        <p><font color="#993300">Enter Your Email-Id</font></p>
+	 <table cellpadding="0" cellspacing="0" border="0" width="300"%>
+	 <td>
+	
+		        <p><font color="#993300">Email-Id&nbsp;&nbsp;&nbsp;:</font></p>
+		     </td>
 		     
-		      </li>
-		      
-		      <li> 
-		      <table cellpadding="0" cellspacing="0" border="0" width="300"%>
-		       <td valign="top" align="center"> <input type="text" class="inputbx1" style="border:solid 1px brown;" name="j_username" value=''>
+		       <td valign="top" align="left"> <input type="text" class="inputbx1" style="border:solid 1px brown;" name="j_username" value=''>
+		       
 				<p><font color="#993300"></font></p></td>
 		      </table>
 		      </li>
 		      <li>
-		        <p><font color="#993300">Enter Your Password</font></p>
-		      </li>
-		      <li>
 		      <table cellpadding="0" cellspacing="0" border="0" width="300">
-		      <td valign="top" align="center"><input type="password"  class="inputbx1" style="border:solid 1px brown;" name="j_password">
+		      <td>
+		        <p><font color="#993300">Password :</font></p>
+		        </td>
+		      
+		      
+		      <td valign="top" align="left"><input type="password"  class="inputbx1" style="border:solid 1px brown;" name="j_password">
 					
 		      </td>
 		      </table>
 		      </li>
 		      <li>
+		      </li>
+		      <li>
 		      <table cellpadding="0" cellspacing="0" border="0" width="300">
-		      <td valign="top" align="center">
+		      <td valign="top" align="left">
 		      <a href="#">
-		        <input type="submit" value="Submit" style="width:100px;height:30px;" name="submit">
-		        </a></td></table></li>
+		        <input type="submit" value="Submit" style="width:70px;height:30px;" name="submit">
+		        </a>
+		           <a href="reset" align="left"><font color="#993300">&nbsp;&nbsp;&nbsp;&nbsp;Reset</font></a></li>
+		   </td></table></li>
 		      
 		      
 		      <li>
@@ -77,9 +84,7 @@
 		      </table>
 		    
 		    <li>
-		    <table cellpadding="0" cellspacing="0" border="0" width="300">
-		    <td valign="top" align="center"><input type="reset" align="left" name="reset" style="width:75px;height:25px;" ></td></table></li>
-		    		
+		    	
 		      <li>
 		      <table cellpadding="0" cellspacing="0" width="100%">
 		      <td valign="top" align="middle"> <a href="createuser"><font color="#993300">Register</font></a></td></table></li>

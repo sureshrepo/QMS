@@ -29,8 +29,10 @@ import org.springframework.web.servlet.ModelAndView;
 import qms.dao.DocumentControlDAO;
 import qms.dao.FileHandlingDAO;
 import qms.model.DocumentMain;
+import qms.model.ManagementReview;
 import qms.dao.ProcessDAO;
 import qms.forms.EmployeeForm;
+import qms.forms.ManagementReviewForm;
 import qms.forms.ProcessForm;
 import qms.dao.EmployeeDAO;
 import qms.forms.DocumentMainForm;
@@ -54,7 +56,7 @@ public class DocumentController {
 
 
 	//getting a unique id
-	@RequestMapping(value = { "/adddocument" }, method = RequestMethod.GET)
+	/*@RequestMapping(value = { "/adddocument" }, method = RequestMethod.GET)
 	public String add_document(HttpSession session, ModelMap model,
 			Principal principal) {
 
@@ -63,6 +65,30 @@ public class DocumentController {
 		  model.addAttribute("menu","document");
 		return "add_documents";
 	}
+*/
+	
+	@RequestMapping(value = { "/documententry" }, method = RequestMethod.GET)
+	public String add_document1(HttpSession session, ModelMap model,
+			Principal principal) {
+
+		session.removeAttribute("documentMain");
+		load_document_page_dropdowns(model);
+		  model.addAttribute("menu","document");
+		return "documententry";
+	}
+ 
+	@RequestMapping(value = { "/documententry" }, method = RequestMethod.POST)
+	public String add_document2(HttpSession session, ModelMap model,
+			Principal principal) {
+
+		session.removeAttribute("documentMain");
+	//	load_document_page_dropdowns(model);
+		  model.addAttribute("menu","document");
+		return "documententry";
+	}
+
+	
+	
 
 	//delete a record
 	@RequestMapping(value = { "/deletedocument" }, method = RequestMethod.GET)
@@ -78,6 +104,22 @@ public class DocumentController {
 		
 	}
 	
+	
+	@RequestMapping(value = { "/revisionhistory" }, method = RequestMethod.GET)
+	public String revisionhistory(@RequestParam("doc_id") String document_id,HttpSession session ,ModelMap model,Principal principal)
+	{
+		  System.out.println("inside history");
+		load_document_page_dropdowns(model);
+		DocumentMainForm documentMainForm=new DocumentMainForm();
+		documentMainForm.setDocumentMains(documentControlDAO.getDocument_byid(document_id));
+		model.addAttribute("documentMainForm",documentMainForm);
+		
+		  model.addAttribute("menu","document");
+		
+		return "revisionhistory";
+	}
+	
+	
 	//edit a record
 	@RequestMapping(value = { "/edit_document" }, method = RequestMethod.GET)
 	public String edit_document(@RequestParam("doc_id") String document_id,HttpSession session, ModelMap model,Principal principal) {
@@ -89,7 +131,7 @@ public class DocumentController {
 		model.addAttribute("documentMainForm",documentMainForm);
 		
 		  model.addAttribute("menu","document");
-		documentControlDAO.getDocument_byid(document_id);
+		//documentControlDAO.getDocument_byid(document_id);
 		
 		return "edit_documents";
 	}
@@ -419,14 +461,14 @@ public class DocumentController {
 	//search a record
 	@RequestMapping(value = "/findDocument", method = RequestMethod.GET)
 	public String findDocument(
-			@RequestParam("search_document_id") String search_document_id,
-			@RequestParam("search_document_title") String search_document_title,
+			@RequestParam("search_document_type") String search_document_type,
+		//	@RequestParam("search_document_title") String search_document_title,
 			@RequestParam("search_process") String search_process,
 			ModelMap model) {
 
 		DocumentMainForm documentMainForm = new DocumentMainForm();
 		documentMainForm.setDocumentMains(documentControlDAO.findDocuments(
-				search_document_id, search_document_title, search_process));
+				search_document_type,search_process));
 		model.addAttribute("documentMainForm", documentMainForm);
 		return "view_documents";
 

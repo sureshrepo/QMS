@@ -87,12 +87,11 @@
 							
 							<table width="100%" border="0" cellspacing="0" cellpadding="0">
 							  <tr>
-							    <td align="left" valign="middle" width="5%"> ID:</td>
-							    <td align="left" valign="middle" width="8%"><input type="text" name="search_document_id" class="input_txtbx2" id="moblie"></td>
-							    <td align="left" valign="middle" width="26%">&nbsp;&nbsp;Document Title:</td>
-							    <td align="left" valign="middle" width="8%"><input type="text" name="search_document_title" class="input_txtbx2" id="moblie"></td>
+							    <td align="left" valign="middle" width="20%"> Document type : &nbsp; &nbsp;</td>
+							    <td align="left" valign="middle" width="8%"><input type="text" name="search_document_type" class="input_txtbx2" id="moblie"></td>
 							    <td align="left" valign="middle" width="8%">&nbsp;&nbsp;Process:</td>
 							    <td align="left" valign="middle" width="10%"><input type="text" name="search_process" id="search_process" class="input_txtbx2"></td>
+							   
 							    <td align="center" valign="middle" width="38%"><input type="submit" value="Find" class="submit_btn1"  onclick="findpart()"></td>
 							    <td align="center" valign="middle" width="38%"><input type="button" value="Clear" class="submit_btn1"></td>
 							  </tr>
@@ -125,7 +124,6 @@
 							       			i=1;%>
 							       		<tr class="row<%=i%>" ">
 								           	<td valign="top" align="left"  width="10%"><a href="list_document?id=${documentMains.document_id}">${documentMains.document_id}</a></td>
-											<td valign="top" align="left" width="15%">${documentMains.document_title}</td>
 											<td valign="top" align="left" width="15%">${documentMains.document_type}</td>
 											<td valign="top" align="left" width="10%">${documentMains.process}</td>
 											
@@ -133,7 +131,7 @@
 											<c:when test="${documentMains.location=='Nil'}">
 											<td valign="top" align="center" width="10%"><a href="<c:out value="downloadMaindoc?id=${documentMains.document_id}"></c:out>">Download</a></td>
 										</c:when>
-										<c:otherwise><td valign="top" align="center" width="10%">No Document</td>
+										<c:otherwise><td valign="top" align="center" width="10%">Hard Copy </td>
 										</c:otherwise>
 										</c:choose>	
 											<td valign="top" align="center" width="15%">
@@ -149,7 +147,8 @@
 											<td valign="top" align="left" width="15%">
 											
 											<a href="#" title="" ><img src="resources/images/icons/icon_edit.png" alt="Edit" /></a><a href="<c:out value="edit_document?doc_id=${documentMains.document_id}"></c:out>" style="padding-right:10px;">Edit</a>
-											<a href="#" title=""><img src="resources/images/icons/icon_delete.png" alt="Delete" /></a><a href="<c:out value="deletedocument?doc_id=${documentMains.document_id}"></c:out>">Remove</a>
+											<a href="#" title="" ><img src="resources/images/icons/icon_edit.png" alt="Edit" /></a><a href="<c:out value="reviewhistory?doc_id=${documentMains.document_id}"></c:out>" style="padding-right:10px;">Review History</a>
+													
 											</td>
 										</tr>
 							    	</c:forEach>

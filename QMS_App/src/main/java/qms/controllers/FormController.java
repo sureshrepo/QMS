@@ -478,14 +478,18 @@ public class FormController
 	//search a record
 	 @RequestMapping(value={"/search_form"}, method = RequestMethod.GET)
 		
-		public String search_form(@RequestParam("auto_number") String auto_number,@RequestParam("form_or_rec_id") String form_or_rec_id,@RequestParam("document_id") String document_id,ModelMap model, Principal principal)
+		public String search_form(@RequestParam("process") String process,ModelMap model, Principal principal)
 	{
-		System.out.println(auto_number);
 		
-		FormForm formForm=new FormForm();
+		 FormForm formForm = new FormForm();
+		 
 		
-		formForm.setForm(formDAO.search_form(auto_number,form_or_rec_id,document_id));
+		formForm.setForm(formDAO.search_form(process));
 		
+		
+		model.addAttribute("formForm", formForm);
+        model.addAttribute("menu","form");
+        
 		 model.addAttribute("formForm",formForm);
 		
 	    return "view_form";
